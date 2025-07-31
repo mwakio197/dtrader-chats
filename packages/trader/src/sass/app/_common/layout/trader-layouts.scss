@@ -78,7 +78,6 @@ $FLOATING_HEADER_HEIGHT: 41px;
 /** @define trade-container; weak */
 .trade-container {
     position: relative;
-    padding: 0.8em 1.2em;
     display: flex;
     min-height: calc(100vh - 84px);
     overflow: hidden;
@@ -448,11 +447,8 @@ $FLOATING_HEADER_HEIGHT: 41px;
     position: relative;
 
     &__wrapper {
-        position: fixed;
-        top: calc(#{$HEADER_HEIGHT} + 2px);
-        // charts width is 100% - sidebar width - sidebar margin - .trade-container padding
-        width: calc(100% - 240px - 1.6rem - 2.4rem);
-        height: calc(100svh - #{$HEADER_HEIGHT} - #{$FOOTER_HEIGHT});
+        width: 100%;
+        height: 100%;
 
         .trade-container--accumulators & {
             .sc-navigation-widget {
@@ -602,7 +598,9 @@ $FLOATING_HEADER_HEIGHT: 41px;
             }
         }
         .cq-chart-controls {
-            transition: max-width 0.25s ease, transform 0.25s ease;
+            transition:
+                max-width 0.25s ease,
+                transform 0.25s ease;
         }
         .sc-navigation-widget,
         .stx-panel-control {
@@ -667,7 +665,7 @@ $FLOATING_HEADER_HEIGHT: 41px;
 .sidebar {
     &__container {
         position: relative;
-        margin: 0.8rem 0 0.8rem 1.6rem;
+        margin: 1.6rem;
         width: $SIDEBAR_WIDTH;
         z-index: 5;
     }
