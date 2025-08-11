@@ -2,7 +2,6 @@ export * from './services';
 export * from './utils/array';
 export * from './utils/brand';
 export * from './utils/browser';
-export * from './utils/cfd';
 export * from './utils/config';
 export * from './utils/constants';
 export * from './utils/contract';

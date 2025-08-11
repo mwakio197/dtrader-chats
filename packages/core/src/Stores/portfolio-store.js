@@ -335,7 +335,7 @@ export default class PortfolioStore extends BaseStore {
                         // Temporary switching off old snackbar for DTrader-V2
                         this.root_store.ui.is_mobile // V2 for mobile, V1 for desktop
                     );
-                } else if (window.location.pathname !== routes.trade || !this.root_store.ui.is_mobile) {
+                } else if (window.location.pathname !== routes.index || !this.root_store.ui.is_mobile) {
                     this.root_store.notifications.addNotificationMessage(contractCancelled());
                 }
             });
@@ -410,7 +410,7 @@ export default class PortfolioStore extends BaseStore {
             };
 
             this.root_store.contract_trade.clearAccumulatorBarriersData(false, true);
-            if (window.location.pathname !== routes.trade || !this.root_store.ui.is_mobile) {
+            if (window.location.pathname !== routes.index || !this.root_store.ui.is_mobile) {
                 this.root_store.notifications.addNotificationMessage(
                     contractSold(this.root_store.client.currency, response.sell.sold_for, Money)
                 );
@@ -481,7 +481,7 @@ export default class PortfolioStore extends BaseStore {
         if (this.root_store.ui.is_mobile && getEndTime(contract_response)) {
             const contract_info = this.positions[i].contract_info;
 
-            if (window.location.pathname === routes.trade)
+            if (window.location.pathname === routes.index)
                 this.root_store.notifications.addTradeNotification(contract_info);
 
             const { contract_id, contract_type: trade_type, currency, profit, shortcode, status } = contract_info;

@@ -47,7 +47,7 @@ const App = ({ passthrough }: Apptypes) => {
     }, []);
 
     React.useEffect(() => {
-        if (window.location.pathname === routes.trade) {
+        if (window.location.pathname === routes.index) {
             sendDtraderV2OpenToAnalytics();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

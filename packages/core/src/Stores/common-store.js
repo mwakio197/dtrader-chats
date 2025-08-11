@@ -314,6 +314,6 @@ export default class CommonStore extends BaseStore {
     isCurrentLanguage = lang => lang === this.current_language;
 
     routeBackInApp(history) {
-        history.push(routes.trade);
+        history.push(routes.index);
     }
 }

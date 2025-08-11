@@ -38,15 +38,10 @@ const OSRedirect = () => {
         params.delete('redirect_to');
 
         const routes_list = [
-            { pattern: /proof-of-address/i, route: routes.proof_of_address },
-            { pattern: /proof-of-identity/i, route: routes.proof_of_identity },
-            { pattern: /personal-details/i, route: routes.personal_details },
-            { pattern: /financial-assessment/i, route: routes.financial_assessment },
-            { pattern: /trading-assessment/i, route: routes.trading_assessment },
-            { pattern: /accumulator/i, route: routes.trade, type: 'accumulator' },
-            { pattern: /turbos/i, route: routes.trade, type: 'turboslong' },
-            { pattern: /vanilla/i, route: routes.trade, type: 'vanillalongcall' },
-            { pattern: /multiplier/i, route: routes.trade, type: 'multiplier' },
+            { pattern: /accumulator/i, route: routes.index, type: 'accumulator' },
+            { pattern: /turbos/i, route: routes.index, type: 'turboslong' },
+            { pattern: /vanilla/i, route: routes.index, type: 'vanillalongcall' },
+            { pattern: /multiplier/i, route: routes.index, type: 'multiplier' },
         ];
         const route = routes_list.find(({ pattern }) => pattern.test(url_query_string));
         route?.type && params.set('trade_type', route.type);
@@ -61,7 +56,6 @@ const OSRedirect = () => {
         if (is_logged_in && route) {
             return history.push({
                 pathname: route?.route,
-                // @ts-expect-error need to update react-router-dom types
                 search: params.toString(),
             });
         }

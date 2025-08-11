@@ -37,7 +37,7 @@ export const AccountSwitcherWalletMobile = observer(({ is_visible, toggle, login
             return;
         }
         closeAccountsDialog();
-        history.push(routes.trade);
+        history.push(routes.index);
     };
 
     const handleManageFundsRedirect = () => {

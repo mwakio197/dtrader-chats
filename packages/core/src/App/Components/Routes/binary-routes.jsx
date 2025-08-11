@@ -28,7 +28,7 @@ const RemovedRoutesRedirect = () => {
 
     // Redirect to trade page if accessing a removed route
     if (is_removed_route) {
-        return <Redirect to={routes.trade} />;
+        return <Redirect to={routes.index} />;
     }
 
     return null;

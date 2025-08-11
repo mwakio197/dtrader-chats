@@ -33,7 +33,7 @@ const BottomNav = observer(({ children, className, onScroll }: BottomNavProps) =
             icon: <StandaloneChartAreaRegularIcon iconSize='sm' />,
             activeIcon: <StandaloneChartAreaFillIcon iconSize='sm' />,
             label: <Localize i18n_default_text='Trade' />,
-            path: routes.trade,
+            path: routes.index,
         },
         {
             icon:

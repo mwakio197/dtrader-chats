@@ -61,7 +61,7 @@ describe('BinaryRoutes', () => {
     });
 
     it('should render trade route', async () => {
-        history.push(routes.trade);
+        history.push(routes.index);
         renderMockBinaryRoutes();
         await waitFor(() => {
             expect(screen.getByText('Trader')).toBeInTheDocument();

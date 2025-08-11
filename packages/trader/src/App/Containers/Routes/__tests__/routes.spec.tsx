@@ -54,13 +54,13 @@ describe('checkRoutingMatch', () => {
         expect(checkRoutingMatch(routeList, routes.contract)).toBeTruthy();
     });
     it('should return false if the route does not match', () => {
-        expect(checkRoutingMatch(routeList, routes.trade)).toBeFalsy();
+        expect(checkRoutingMatch(routeList, routes.index)).toBeFalsy();
     });
-    it('should return false if the path is not provided and routes.trade is missing from the route list', () => {
+    it('should return false if the path is not provided and routes.index is missing from the route list', () => {
         expect(checkRoutingMatch(routeList)).toBeFalsy();
     });
-    it('should return true if the path is not provided and routes.trade is on the route list', () => {
-        expect(checkRoutingMatch([routes.trade, routes.contract])).toBeTruthy();
+    it('should return true if the path is not provided and routes.index is on the route list', () => {
+        expect(checkRoutingMatch([routes.index, routes.contract])).toBeTruthy();
     });
 });
 
@@ -70,8 +70,8 @@ describe('tradePageMountingMiddleware', () => {
         POP: 'POP',
     };
     const pathTo = routes.contract;
-    const pathFrom = routes.trade;
-    const matchPatterns = [{ from: [routes.trade], to: [routes.contract] }];
+    const pathFrom = routes.index;
+    const matchPatterns = [{ from: [routes.index], to: [routes.contract] }];
     it('should call the callback with true when has a match and action is PUSH', () => {
         const callback = jest.fn();
         expect(

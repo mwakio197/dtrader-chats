@@ -82,14 +82,13 @@ describe('<InsufficientBalanceModal />', () => {
         await userEvent.click(button);
         expect(mocked_props.toggleModal).toHaveBeenCalled();
     });
-    it('button text should be "Deposit now" if is_virtual is false and should navigate to wallets overlay deposit tab if client has CRW account and click on the button', async () => {
+    // TODO: Remove if this test is not needed
+    it('button text should be "Deposit now" if is_virtual is false', async () => {
         mocked_props.is_virtual = false;
         mock_store.client.has_wallet = true;
         render(<InsufficientBalanceModal {...mocked_props} />, { wrapper });
         const button = screen.getByText(/deposit now/i);
         expect(button).toBeInTheDocument();
-        await userEvent.click(button);
-        // expect(history.location.pathname).toBe(routes.wallets_deposit);
     });
     it('should return null when is_visible is false', () => {
         mocked_props.is_visible = false;

@@ -9,12 +9,8 @@ const Footer = () => {
     const { isDesktop, isTablet } = useDevice();
     const { pathname } = useLocation();
     const is_hidden_landscape_blocker = isDisabledLandscapeBlockerRoute(pathname);
-    const is_dtrader_route = pathname === routes.trade;
+    const is_dtrader_route = pathname === routes.index;
     const show_in_tablet_routes = [routes.contract];
-
-    if (pathname === routes.onboarding) {
-        return null;
-    }
 
     if (is_hidden_landscape_blocker || is_dtrader_route) {
         if (isDesktop) return <TradingHubFooter />;

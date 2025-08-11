@@ -32,7 +32,7 @@ const initRoutesConfig = () => {
             getTitle: () => localize('Contract Details'),
             is_authenticated: true,
         },
-        { path: routes.trade, component: Trade, getTitle: () => localize('Trader'), exact: true },
+        { path: routes.index, component: Trade, getTitle: () => localize('Trader'), exact: true },
     ];
 };
 

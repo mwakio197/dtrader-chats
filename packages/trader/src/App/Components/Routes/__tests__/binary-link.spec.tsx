@@ -21,19 +21,19 @@ const MockBinaryLink = ({ to }: TMockBinaryLink) => (
 
 describe('BinaryLink component', () => {
     it('should render "children" when passed in', () => {
-        render(<MockBinaryLink to={routes.trade} />);
+        render(<MockBinaryLink to={routes.index} />);
         expect(screen.getByTestId('dt_child')).toBeInTheDocument();
     });
 
     it('should have "active_class" when passed in', async () => {
-        render(<MockBinaryLink to={routes.trade} />);
+        render(<MockBinaryLink to={routes.index} />);
         await userEvent.click(screen.getByTestId('dt_binary_link'));
         const link = screen.getByTestId('dt_binary_link');
         expect(link).toHaveClass('active_class');
     });
 
     it('should render "NavLink" when valid "to" property is passed', () => {
-        render(<MockBinaryLink to={routes.trade} />);
+        render(<MockBinaryLink to={routes.index} />);
         expect(screen.getByTestId('dt_binary_link')).toBeInTheDocument();
     });
 

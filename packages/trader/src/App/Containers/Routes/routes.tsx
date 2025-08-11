@@ -7,7 +7,6 @@ import { routes } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 
 import BinaryRoutes from 'App/Components/Routes';
-import getRoutesConfig from 'App/Constants/routes-config';
 import { useTraderStore } from 'Stores/useTraderStores';
 
 type TMatchPattern = { from: Array<string | undefined>; to: Array<string> };
@@ -66,35 +65,12 @@ const Routes = observer(({ history, passthrough }: TRoutesProps) => {
     React.useEffect(() => {
         if (setPromptHandler) {
             setPromptHandler(true, (route_to: RouteComponentProps['location'], action: string) => {
-                // clears portfolio when we navigate to mt5 dashboard
-                tradePageMountingMiddleware({
-                    path_from: history.location.pathname,
-                    path_to: route_to.pathname,
-                    match_patterns: [
-                        {
-                            from: getRoutesConfig().flatMap(route => {
-                                if (route.routes) {
-                                    return route.routes.map(subroute => subroute.path);
-                                }
-                                return [route.path];
-                            }),
-                            to: ['/mt5', '/derivx'], // Using string literals instead of routes
-                        },
-                    ],
-                    action,
-                    callback: (has_match: boolean) => {
-                        if (has_match) {
-                            onUnmountPortfolio();
-                        }
-                    },
-                });
-
                 return tradePageMountingMiddleware({
                     path_from: history.location.pathname,
                     path_to: route_to.pathname,
                     match_patterns: [
-                        { from: [routes.contract], to: [routes.trade] },
-                        { from: [routes.trade], to: [routes.contract] },
+                        { from: [routes.contract], to: [routes.index] },
+                        { from: [routes.index], to: [routes.contract] },
                     ],
                     action,
                     callback: setTradeMountingPolicy,

@@ -24,6 +24,6 @@ describe('Page404', () => {
         const returnToTradeButoon = screen.getByText('Return to trade');
         expect(returnToTradeButoon).toBeInTheDocument();
         returnToTradeButoon.click();
-        expect(history.location.pathname).toBe(routes.trade);
+        expect(history.location.pathname).toBe(routes.index);
     });
 });
