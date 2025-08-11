@@ -12,7 +12,7 @@
     .theme--light {
         // Surface Colors
         --color-surface-primary: var(--brand-white); // Main backgrounds, cards
-        --color-surface-overlay: var(--brand-white); // Modal/dialog backgrounds
+        --color-surface-overlay: #{transparentize($color-white, 0.04)}; // Modal/dialog overlays
         --color-surface-contrast: var(--brand-white); // High contrast backgrounds for text
         --color-surface-section: #{mix($color-black, $color-white, 5%)}; // Section backgrounds (light grey)
         --color-surface-border: #{mix($color-black, $color-white, 6%)}; // Border color for surfaces and containers
@@ -31,7 +31,7 @@
         // Interactive States
         --color-interactive-default: #{transparentize($color-black, 0.8)}; // Default borders, dividers
         --color-interactive-hover: #{lighten($color-neutral, 30%)}; // Hover states (derived from brand-neutral)
-        --color-interactive-active: #{lighten($color-neutral, 25%)}; // Active/selected states (derived from brand-neutral)
+        --color-interactive-active: #{lighten($color-neutral, 15%)}; // Active/selected states (derived from brand-neutral)
         --color-interactive-disabled: #{transparentize($color-black, 0.9)}; // Disabled states
         --color-interactive-focus: var(--brand-info); // Focus states
 
@@ -50,12 +50,16 @@
         --color-shadow-subtle: #{transparentize($color-black, 0.92)}; // Light shadows
         --color-shadow-medium: #{transparentize($color-black, 0.84)}; // Medium shadows
         --color-shadow-strong: #{transparentize($color-black, 0.16)}; // Strong shadows
+
+        // Gradient Colors
+        --color-gradient-success: linear-gradient(to top, #{$color-white}, #{transparentize($color-success, 0.84)});
+        --color-gradient-danger: linear-gradient(to top, #{$color-white}, #{transparentize($color-danger, 0.84)});
     }
 
     .theme--dark {
         // Surface Colors
         --color-surface-primary: var(--brand-black); // Main backgrounds, cards
-        --color-surface-overlay: #{lighten($color-black, 8%)}; // Modal/dialog backgrounds
+        --color-surface-overlay: #{transparentize($color-black, 0.04)}; // Modal/dialog overlays
         --color-surface-contrast: var(--brand-white); // High contrast backgrounds for text
         --color-surface-section: #{mix($color-white, $color-black, 3%)}; // Section backgrounds (derived from brand colors to get #151717)
         --color-surface-border: #{mix($color-white, $color-black, 8%)}; // Border color for surfaces and containers (dark theme)
@@ -93,5 +97,9 @@
         --color-shadow-subtle: #{transparentize($color-black, 0.36)}; // Light shadows
         --color-shadow-medium: #{transparentize($color-black, 0.16)}; // Medium shadows
         --color-shadow-strong: #{transparentize($color-black, 0.28)}; // Strong shadows
+
+        // Gradient Colors
+        --color-gradient-success: linear-gradient(to top, #{$color-black}, #{transparentize($color-success, 0.84)});
+        --color-gradient-danger: linear-gradient(to top, #{$color-black}, #{transparentize($color-danger, 0.84)});
     }
 }

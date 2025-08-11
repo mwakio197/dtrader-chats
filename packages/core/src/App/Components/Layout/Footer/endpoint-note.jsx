@@ -1,17 +1,18 @@
 import React from 'react';
+import { Text } from '@deriv/components';
 import { routes } from '@deriv/shared';
 import { BinaryLink } from '../../Routes';
 
 const EndpointNote = () => {
     const server_url = localStorage.getItem('config.server_url');
     return server_url ? (
-        <span style={{ fontSize: 'var(--text-size-xs)', color: 'var(--brand-red-coral)' }}>
+        <Text size='xs'>
             The server{' '}
-            <BinaryLink className='account-settings-toggle' to={routes.endpoint}>
-                endpoint
-            </BinaryLink>{' '}
+            <Text color='link' size='xs'>
+                <BinaryLink to={routes.endpoint}>endpoint</BinaryLink>{' '}
+            </Text>
             is: {server_url}
-        </span>
+        </Text>
     ) : null;
 };
 
