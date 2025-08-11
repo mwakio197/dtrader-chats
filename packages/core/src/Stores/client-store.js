@@ -1815,6 +1815,9 @@ export default class ClientStore extends BaseStore {
 
                 sessionToken = sessionResponse.get_session_token.token;
                 this.storeSessionToken(sessionToken);
+
+                // Remove the one-time token from URL after successful exchange
+                this.removeTokenFromUrl();
             } else if (!sessionToken) {
                 return {
                     error: {
@@ -1886,6 +1889,14 @@ export default class ClientStore extends BaseStore {
 
     clearSessionToken() {
         localStorage.removeItem('session_token');
+    }
+
+    removeTokenFromUrl() {
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('token')) {
+            url.searchParams.delete('token');
+            window.history.replaceState({}, document.title, url.toString());
+        }
     }
 
     async canStoreClientAccounts(obj_params, account_list) {
