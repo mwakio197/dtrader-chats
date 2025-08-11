@@ -14,7 +14,7 @@ const mock_props = {
 
 describe('MarketUnavailableModal', () => {
     it('should render modal component', () => {
-        const mock_root_store = mockStore({ ui: { has_only_forward_starting_contracts: true } });
+        const mock_root_store = mockStore({ ui: {} });
 
         (ReactDOM.createPortal as jest.Mock) = jest.fn(component => {
             return component;

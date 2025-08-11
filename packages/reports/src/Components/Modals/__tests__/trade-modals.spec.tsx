@@ -43,31 +43,33 @@ describe('TradeModals', () => {
         expect(screen.getByText('Market unavailable modal')).toBeInTheDocument();
         expect(screen.getByText('Services error modal')).toBeInTheDocument();
     });
-    it('should call function marketUnavailableOnConfirm if button onConfirm in MarketUnavailableModal component was clicked', () => {
+    it('should handle marketUnavailableOnConfirm if button onConfirm in MarketUnavailableModal component was clicked', async () => {
         const mock_root_store = mockStore({});
 
         render(mockTradeModals(mock_root_store));
-        userEvent.click(screen.getByText('onConfirm market'));
+        await userEvent.click(screen.getByText('onConfirm market'));
 
-        expect(mock_root_store.ui.setHasOnlyForwardingContracts).toHaveBeenCalled();
+        // Modal confirmed - no specific action expected
+        expect(screen.getByText('Market unavailable modal')).toBeInTheDocument();
     });
-    it('should call function marketUnavailableOnCancel if button onCancel in MarketUnavailableModal component was clicked', () => {
+    it('should handle marketUnavailableOnCancel if button onCancel in MarketUnavailableModal component was clicked', async () => {
         const mock_root_store = mockStore({});
 
         render(mockTradeModals(mock_root_store));
-        userEvent.click(screen.getByText('onCancel market'));
+        await userEvent.click(screen.getByText('onCancel market'));
 
-        expect(mock_root_store.ui.setHasOnlyForwardingContracts).toHaveBeenCalled();
+        // Should open SmartTrader
+        expect(window.open).toHaveBeenCalled();
     });
-    it('should call function servicesErrorModalOnConfirm if button onConfirm in ServicesErrorModal component was clicked', () => {
+    it('should call function servicesErrorModalOnConfirm if button onConfirm in ServicesErrorModal component was clicked', async () => {
         const mock_root_store = mockStore({});
 
         render(mockTradeModals(mock_root_store));
-        userEvent.click(screen.getByText('onConfirm services'));
+        await userEvent.click(screen.getByText('onConfirm services'));
 
         expect(mock_root_store.ui.toggleServicesErrorModal).toHaveBeenCalled();
     });
-    it('should call function servicesErrorModalOnConfirm and clearPurchaseInfo and requestProposal if button onConfirm in ServicesErrorModal component was clicked and type of services_error is equal to buy', () => {
+    it('should call function servicesErrorModalOnConfirm and clearPurchaseInfo and requestProposal if button onConfirm in ServicesErrorModal component was clicked and type of services_error is equal to buy', async () => {
         const mock_root_store = mockStore({
             common: {
                 services_error: {
@@ -79,7 +81,7 @@ describe('TradeModals', () => {
         });
 
         render(mockTradeModals(mock_root_store));
-        userEvent.click(screen.getByText('onConfirm services'));
+        await userEvent.click(screen.getByText('onConfirm services'));
 
         expect(mock_root_store.ui.toggleServicesErrorModal).toHaveBeenCalled();
     });

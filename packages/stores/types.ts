@@ -740,7 +740,6 @@ type TUiStore = {
     duration_t: number;
     enableApp: () => void;
     getDurationFromUnit: (unit: string) => number;
-    has_only_forward_starting_contracts: boolean;
     has_real_account_signup_ended: boolean;
     header_extension: JSX.Element | null;
     is_account_switcher_disabled: boolean;
@@ -805,7 +804,6 @@ type TUiStore = {
     setIsForcedToExitPnv: (value: boolean) => void;
     setIsPhoneVerificationCompleted: (value: boolean) => void;
     setRedirectFromEmail: (value: boolean) => void;
-    setHasOnlyForwardingContracts: (has_only_forward_starting_contracts?: boolean) => void;
     setMobileLanguageMenuOpen: (is_mobile_language_menu_open: boolean) => void;
     setReportsTabIndex: (value: number) => void;
     setIsClosingCreateRealAccountModal: (value: boolean) => void;
@@ -1218,7 +1216,6 @@ type TContractReplay = {
     error_message?: string;
     has_error: boolean;
     is_chart_loading: boolean;
-    is_forward_starting: boolean;
     is_market_closed: boolean;
     is_sell_requested: boolean;
     margin?: number;

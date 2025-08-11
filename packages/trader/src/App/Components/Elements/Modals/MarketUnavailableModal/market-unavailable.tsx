@@ -13,7 +13,8 @@ type TMarketUnavailableModalProps = {
 
 const MarketUnavailableModal = observer(({ is_loading, onCancel, onConfirm }: TMarketUnavailableModalProps) => {
     const { ui } = useStore();
-    const { disableApp, enableApp, has_only_forward_starting_contracts: is_visible } = ui;
+    const { disableApp, enableApp } = ui;
+    const is_visible = false; // Forward starting contracts are no longer supported
 
     return (
         <Dialog

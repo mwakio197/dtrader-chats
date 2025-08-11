@@ -842,9 +842,7 @@ export default class TradeStore extends BaseStore {
     async processContractsForV2() {
         const contract_categories = ContractType.getContractCategories();
         this.processNewValuesAsync({
-            ...(contract_categories as Pick<TradeStore, 'contract_types_list'> & {
-                has_only_forward_starting_contracts: boolean;
-            }),
+            ...(contract_categories as Pick<TradeStore, 'contract_types_list'>),
         });
         this.processNewValuesAsync(ContractType.getContractValues(this));
     }
@@ -868,9 +866,7 @@ export default class TradeStore extends BaseStore {
                     this.root_store.ui.toggleUrlUnavailableModal(true);
                 }
                 this.processNewValuesAsync({
-                    ...(contract_categories as Pick<TradeStore, 'contract_types_list'> & {
-                        has_only_forward_starting_contracts: boolean;
-                    }),
+                    ...(contract_categories as Pick<TradeStore, 'contract_types_list'>),
                     ...ContractType.getContractType(
                         contract_categories.contract_types_list,
                         contractType ?? this.contract_type
@@ -1359,8 +1355,6 @@ export default class TradeStore extends BaseStore {
             this.currency = obj_new_values.currency ?? '';
         }
 
-        let has_only_forward_starting_contracts;
-
         if (Object.keys(obj_new_values).includes('symbol')) {
             this.setPreviousSymbol(this.symbol);
             await Symbol.onChangeSymbolAsync(obj_new_values.symbol ?? '');
@@ -1372,9 +1366,6 @@ export default class TradeStore extends BaseStore {
                 // Reset market status to false when no symbol is available
                 this.setMarketStatus(false);
             }
-
-            has_only_forward_starting_contracts =
-                ContractType.getContractCategories().has_only_forward_starting_contracts;
         }
 
         // Set stake to default one (from contracts_for) on symbol or contract type switch.
@@ -1396,11 +1387,6 @@ export default class TradeStore extends BaseStore {
                 obj_new_values.take_profit = '';
             }
         }
-
-        // TODO: remove all traces of setHasOnlyForwardingContracts and has_only_forward_starting_contracts in app
-        //  once future contracts are implemented
-        this.root_store.ui.setHasOnlyForwardingContracts(has_only_forward_starting_contracts);
-        if (has_only_forward_starting_contracts) return;
 
         const new_state = this.updateStore(cloneObject(obj_new_values));
 

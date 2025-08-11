@@ -4,7 +4,6 @@ import { Localize } from '@deriv/translations';
 import { unique } from '../object';
 import { capitalizeFirstLetter } from '../string/string_util';
 import { TContractInfo, TContractStore, TDigitsInfo, TLimitOrder, TTickItem } from './contract-types';
-import { isForwardStarting } from '../shortcode';
 
 type TGetAccuBarriersDTraderTimeout = (params: {
     barriers_update_timestamp: number;
@@ -386,6 +385,3 @@ export const getSortedTradeTypes = (array: string[] = []) => {
     }
     return array;
 };
-
-export const isForwardStartingBuyTransaction = (transactionType: string, shortcode: string, transactionTime: number) =>
-    transactionType === 'buy' && !!isForwardStarting(shortcode, transactionTime);

@@ -5,7 +5,6 @@ import { Loading } from '@deriv/components';
 import {
     hasContractEntered,
     isAccumulatorContract,
-    isForwardStarting,
     isMultiplierContract,
     isOpen,
     isValidToCancel,
@@ -21,7 +20,6 @@ import ContractDetailsFooter from 'AppV2/Components/ContractDetailsFooter';
 import ContractDetailsHeader from 'AppV2/Components/ContractDetailsHeader';
 import DealCancellation from 'AppV2/Components/DealCancellation/deal-cancellation';
 import EntryExitDetails from 'AppV2/Components/EntryExitDetails';
-import ForwardStartingBanner from 'AppV2/Components/ForwardStartingBanner';
 import OrderDetails from 'AppV2/Components/OrderDetails';
 import PayoutInfo from 'AppV2/Components/PayoutInfo';
 import StopLoss from 'AppV2/Components/StopLoss/stop-loss';
@@ -66,10 +64,7 @@ const ContractDetails = observer(() => {
     const isMultiplier = isMultiplierContract(contract_info.contract_type);
 
     const canCancel = isValidToCancel(contract_info);
-    const shouldShowSell =
-        (hasContractEntered(contract_info) ||
-            isForwardStarting(contract_info?.shortcode ?? '', contract_info.purchase_time)) &&
-        isOpen(contract_info);
+    const shouldShowSell = hasContractEntered(contract_info) && isOpen(contract_info);
     const { isTpHistoryVisible, isDealCancellationVisible } = getContractDetailsConfig(
         contract_info.contract_type ?? ''
     );
@@ -89,7 +84,6 @@ const ContractDetails = observer(() => {
                     'contract-details--one-button': shouldShowSell && !showCancelButton,
                 })}
             >
-                <ForwardStartingBanner contract_info={contract_info} server_time={server_time} />
                 <ContractCard contractInfo={contract_info} serverTime={server_time} currency={currency} />
                 <ContractDetailsChart />
                 <DealCancellation />

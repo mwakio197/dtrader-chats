@@ -73,7 +73,6 @@ describe('<ContractReplay>', () => {
             onMount: jest.fn(),
             onUnmount: jest.fn(),
             is_chart_loading: false,
-            is_forward_starting: false,
         },
         ui: { notification_messages_ui: 'div' },
     });

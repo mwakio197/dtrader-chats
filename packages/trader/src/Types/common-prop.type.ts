@@ -21,12 +21,7 @@ import {
     UpdateContractRequest,
     UpdateContractResponse,
 } from '@deriv/api-types';
-import {
-    buildBarriersConfig,
-    buildDurationConfig,
-    buildForwardStartingConfig,
-    getContractTypesConfig,
-} from '@deriv/shared';
+import { buildBarriersConfig, buildDurationConfig, getContractTypesConfig } from '@deriv/shared';
 import { TCoreStores } from '@deriv/stores/types';
 
 import ModulesStore from 'Stores/Modules';
@@ -162,7 +157,6 @@ export type TConfig = ReturnType<typeof getContractTypesConfig>[string]['config'
     trade_types?: { [key: string]: string };
     barrier_category?: string;
     barriers?: ReturnType<typeof buildBarriersConfig>;
-    forward_starting_dates?: ReturnType<typeof buildForwardStartingConfig>;
     growth_rate_range?: number[];
     multiplier_range?: number[];
     cancellation_range?: string[];
