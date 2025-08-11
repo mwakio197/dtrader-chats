@@ -90,13 +90,3 @@ export const getStartTime = (shortcode: string) => {
     if (shortcode_info?.multiplier) return false;
     return shortcode_info?.start_time || '';
 };
-
-export const isForwardStarting = (shortcode: string, purchase_time?: number | string) => {
-    const start_time = getStartTime(shortcode);
-    return start_time && purchase_time && /f$/gi.test(start_time);
-};
-
-export const hasForwardContractStarted = (shortcode: string) => {
-    const start_time = getStartTime(shortcode);
-    return start_time && Date.now() / 1000 > Number(start_time.slice(0, -1));
-};

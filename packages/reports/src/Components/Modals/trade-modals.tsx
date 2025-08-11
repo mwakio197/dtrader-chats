@@ -13,21 +13,16 @@ const TradeModals = observer(() => {
     const {
         is_mf_verification_pending_modal_visible,
         is_services_error_visible,
-        setHasOnlyForwardingContracts,
         setIsMFVericationPendingModal,
         toggleServicesErrorModal,
     } = ui;
-    const resetToPreviousMarket = () => {
-        setHasOnlyForwardingContracts(false);
-    };
 
     const marketUnavailableOnConfirm = () => {
-        resetToPreviousMarket();
+        // Modal confirmed - no additional action needed
     };
 
     const marketUnavailableOnCancel = () => {
         window.open(getUrlSmartTrader());
-        resetToPreviousMarket();
     };
 
     const servicesErrorModalOnConfirm = () => {

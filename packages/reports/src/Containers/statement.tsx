@@ -8,8 +8,6 @@ import {
     formatDate,
     getContractPath,
     getUnsupportedContracts,
-    isForwardStarting,
-    hasForwardContractStarted,
 } from '@deriv/shared';
 import { localize, Localize } from '@deriv/translations';
 import { Analytics } from '@deriv-com/analytics';
@@ -88,11 +86,6 @@ export const getRowAction = (row_obj: TSource | TRow): TAction => {
     if (id && ['buy', 'sell'].includes(action_type)) {
         const contract_type = extractInfoFromShortcode(shortcode)?.category?.toUpperCase();
         const unsupportedContractConfig = getUnsupportedContracts()[contract_type as TUnsupportedContractType];
-        const shouldShowForwardStartingNotification =
-            isForwardStarting(shortcode, purchase_time || transaction_time) &&
-            !hasForwardContractStarted(shortcode) &&
-            action_type !== 'sell' &&
-            !is_sold;
         action = unsupportedContractConfig
             ? {
                   message: '',
@@ -106,11 +99,6 @@ export const getRowAction = (row_obj: TSource | TRow): TAction => {
                   ),
               }
             : getContractPath(id);
-        if (shouldShowForwardStartingNotification)
-            action = {
-                message: '',
-                component: <Localize i18n_default_text="You'll see these details once the contract starts." />,
-            };
     } else if (action_type === 'withdrawal') {
         if (withdrawal_details && longcode) {
             action = {
@@ -202,10 +190,13 @@ const Statement = observer(({ component_icon }: TStatement) => {
     if (error) return <p>{error}</p>;
 
     const columns: TGetStatementTableColumnsTemplate = getStatementTableColumnsTemplate(currency, isDesktop);
-    const columns_map = columns.reduce((map, item) => {
-        map[item.col_index as TColIndex] = item;
-        return map;
-    }, {} as Record<TColIndex, typeof columns[number]>);
+    const columns_map = columns.reduce(
+        (map, item) => {
+            map[item.col_index as TColIndex] = item;
+            return map;
+        },
+        {} as Record<TColIndex, (typeof columns)[number]>
+    );
 
     const mobileRowRenderer = ({
         row,

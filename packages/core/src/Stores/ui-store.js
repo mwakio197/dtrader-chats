@@ -30,8 +30,6 @@ export default class UIStore extends BaseStore {
     is_language_settings_modal_on = false;
     is_mobile_language_menu_open = false;
 
-    has_only_forward_starting_contracts = false;
-
     // Purchase Controls
     // @observable is_purchase_confirm_on    = false;
     is_services_error_visible = false;
@@ -193,7 +191,6 @@ export default class UIStore extends BaseStore {
 
         makeObservable(this, {
             account_needed_modal_props: observable,
-            has_only_forward_starting_contracts: observable,
             is_services_error_visible: observable,
             is_link_expired_modal_visible: observable,
             is_reset_password_modal_visible: observable,
@@ -316,7 +313,6 @@ export default class UIStore extends BaseStore {
             setChartLayout: action.bound,
             setCurrentFocus: action.bound,
             setDarkMode: action.bound,
-            setHasOnlyForwardingContracts: action.bound,
             setHashedValue: action.bound,
             setIsForcedToExitPnv: action.bound,
             setIsPhoneVerificationCompleted: action.bound,
@@ -637,10 +633,6 @@ export default class UIStore extends BaseStore {
 
     setPWAPromptEvent(e) {
         this.pwa_prompt_event = e;
-    }
-
-    setHasOnlyForwardingContracts(has_only_forward_starting_contracts) {
-        this.has_only_forward_starting_contracts = has_only_forward_starting_contracts;
     }
 
     toggleCancellationWarning(state_change = !this.should_show_cancellation_warning) {

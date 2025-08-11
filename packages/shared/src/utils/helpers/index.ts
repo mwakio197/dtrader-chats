@@ -11,5 +11,4 @@ export * from './limit-orders';
 export * from './logic';
 export * from './market-underlying';
 export * from './portfolio-notifications';
-export * from './start-date';
 export * from './validation-rules';
