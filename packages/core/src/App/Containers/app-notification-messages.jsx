@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import { isMobile, routes } from '@deriv/shared';
+import { isMobile } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 
 import {
@@ -32,15 +30,8 @@ const NotificationsContent = ({
     removeNotificationMessage,
     show_trade_notifications,
 }) => {
-    const { pathname } = useLocation();
-
     return (
-        <div
-            className={classNames('notification-messages', {
-                'notification-messages--traders-hub': pathname === routes.trade,
-            })}
-            style={style}
-        >
+        <div className={'notification-messages'} style={style}>
             <TransitionGroup component='div'>
                 {notifications.map(notification => (
                     <CSSTransition
@@ -94,48 +85,9 @@ const AppNotificationMessages = observer(
         const notifications_msg = notification_messages.filter(message => {
             const is_not_marked_notification = !marked_notifications.includes(message.key);
             const is_non_hidden_notification = isMobile()
-                ? [
-                      ...maintenance_notifications,
-                      'account_currency_closure',
-                      'authenticate',
-                      'deriv_go',
-                      'document_needs_action',
-                      'contract_sold',
-                      'has_changed_two_fa',
-                      'identity',
-                      'install_pwa',
-                      'need_fa',
-                      'needs_poinc',
-                      'notify_financial_assessment',
-                      'phone_number_verification',
-                      'poi_name_mismatch',
-                      'poa_address_mismatch_failure',
-                      'poa_address_mismatch_success',
-                      'poa_address_mismatch_warning',
-                      'poa_expired',
-                      'poa_failed',
-                      'poa_rejected_for_mt5',
-                      'poa_verified',
-                      'poi_expired',
-                      'poi_failed',
-                      'poi_verified',
-                      'poinc_upload_limited',
-                      'reaccept_tnc',
-                      'resticted_mt5_with_failed_poa',
-                      'resticted_mt5_with_pending_poa',
-                      'svg_needs_poa',
-                      'svg_needs_poi',
-                      'svg_needs_poi_poa',
-                      'svg_poi_expired',
-                      'wallets_migrated',
-                      'wallets_failed',
-                      'tnc',
-                      'trustpilot',
-                      'unwelcome',
-                      'update_fa_required',
-                      'additional_kyc_info',
-                      'notify_account_is_to_be_closed_by_residence',
-                  ].includes(message.key)
+                ? [...maintenance_notifications, 'deriv_go', 'contract_sold', 'install_pwa', 'trustpilot'].includes(
+                      message.key
+                  )
                 : true;
 
             const is_maintenance_notifications = maintenance_notifications.includes(message.key);

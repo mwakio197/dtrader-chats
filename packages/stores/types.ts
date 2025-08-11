@@ -1047,10 +1047,6 @@ type TNotificationStore = {
     is_notifications_empty: boolean;
     is_notifications_visible: boolean;
     filterNotificationMessages: () => void;
-    handleCurrencyRemovalNotification: (
-        account_currency_closure_status: Record<string, unknown>,
-        currency: string
-    ) => void;
     notifications: TNotificationMessage[];
     refreshNotifications: () => void;
     removeAllNotificationMessages: (should_close_persistent: boolean) => void;
@@ -1059,8 +1055,6 @@ type TNotificationStore = {
     removeNotificationMessage: ({ key, should_show_again }: { key: string; should_show_again?: boolean }) => void;
     removeNotificationMessageByKey: ({ key }: { key: string }) => void;
     removeTradeNotifications: (id?: string) => void;
-    showPOAAddressMismatchSuccessNotification: () => void;
-    showPOAAddressMismatchFailureNotification: () => void;
     showAccountSwitchToRealNotification: (loginid: string, currency: string) => void;
     setShouldShowPopups: (should_show_popups: boolean) => void;
     toggleNotificationsModal: () => void;
