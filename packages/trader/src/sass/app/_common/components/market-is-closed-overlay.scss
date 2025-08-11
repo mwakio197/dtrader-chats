@@ -10,7 +10,7 @@
     justify-content: center;
     flex-direction: column;
     padding: 0;
-    background-color: var(--overlay-inside-dialog);
+    background-color: var(--color-surface-overlay);
     z-index: 1000;
 
     &--loading {

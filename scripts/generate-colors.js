@@ -78,7 +78,7 @@ function generateConstants(config) {
     let content = `/*------------------------------------*
  *  # Color Constants (Auto-Generated)
  *------------------------------------*/
- 
+
 /* 
  * This file is auto-generated from brand.config.json
  * Do not edit manually - run 'npm run generate:colors' instead
@@ -120,7 +120,6 @@ $color-warning-light: ${adjustColor(colors.warning, lightenPercent, true)};
 $color-warning-dark: ${adjustColor(colors.warning, darkenPercent, false)};
 $color-info-light: ${adjustColor(colors.info, lightenPercent, true)};
 $color-info-dark: ${adjustColor(colors.info, darkenPercent, false)};
-
 `;
     }
 
@@ -177,8 +176,8 @@ function generateBrandTokens(config) {
     }
 
     content += `  // Brand Assets
-  --brand-white: #{$color-white};           // Pure white for contrast
-  --brand-black: #{$color-black};           // Pure black for contrast
+  --brand-white: #{$color-white};               // Pure white for contrast
+  --brand-black: #{$color-black};               // Pure black for contrast
 }
 `;
 
@@ -200,29 +199,29 @@ function generateSemanticTokens() {
 :root {
   .theme--light {
     // Surface Colors
-    --color-surface-primary: var(--brand-white);      // Main backgrounds, cards
-    --color-surface-overlay: var(--brand-white);      // Modal/dialog backgrounds
-    --color-surface-contrast: var(--brand-white);     // High contrast backgrounds for text
-    --color-surface-section: #{mix($color-black, $color-white, 5%)}; // Section backgrounds (light grey)
-    --color-surface-border: #{mix($color-black, $color-white, 6%)}; // Border color for surfaces and containers
+    --color-surface-primary: var(--brand-white);                        // Main backgrounds, cards
+    --color-surface-overlay: #{transparentize($color-white, 0.04)};     // Modal/dialog overlays
+    --color-surface-contrast: var(--brand-white);                       // High contrast backgrounds for text
+    --color-surface-section: #{mix($color-black, $color-white, 5%)};    // Section backgrounds (light grey)
+    --color-surface-border: #{mix($color-black, $color-white, 6%)};     // Border color for surfaces and containers
 
     // Text Colors
-    --color-text-primary: var(--brand-black);       // Primary text (headings, important text)
-    --color-text-secondary: #{transparentize($color-black, 0.3)}; // Secondary text (body text)
-    --color-text-disabled: #{transparentize($color-black, 0.6)};  // Disabled text
-    --color-text-inverse: var(--brand-white);         // Text on dark backgrounds
-    --color-text-success: var(--brand-success);     // Success messages, profit text
-    --color-text-danger: var(--brand-danger);         // Error messages, loss text
-    --color-text-warning: var(--brand-warning);       // Warning messages
-    --color-text-info: var(--brand-info);             // Info messages
-    --color-text-link: #{lighten($color-primary, 5%)};   // Link text color (derived from brand-info to match #2196f3)
+    --color-text-primary: var(--brand-black);                           // Primary text (headings, important text)
+    --color-text-secondary: #{transparentize($color-black, 0.3)};       // Secondary text (body text)
+    --color-text-disabled: #{transparentize($color-black, 0.6)};        // Disabled text
+    --color-text-inverse: var(--brand-white);                           // Text on dark backgrounds
+    --color-text-success: var(--brand-success);                         // Success messages, profit text
+    --color-text-danger: var(--brand-danger);                           // Error messages, loss text
+    --color-text-warning: var(--brand-warning);                         // Warning messages
+    --color-text-info: var(--brand-info);                               // Info messages
+    --color-text-link: #{lighten($color-primary, 5%)};                  // Link text color (derived from brand-info to match #2196f3)
 
     // Interactive States
-    --color-interactive-default: #{transparentize($color-black, 0.8)}; // Default borders, dividers
-    --color-interactive-hover: #{lighten($color-neutral, 30%)}; // Hover states (derived from brand-neutral)
-    --color-interactive-active: #{lighten($color-neutral, 25%)}; // Active/selected states (derived from brand-neutral)
+    --color-interactive-default: #{transparentize($color-black, 0.8)};  // Default borders, dividers
+    --color-interactive-hover: #{lighten($color-neutral, 30%)};         // Hover states (derived from brand-neutral)
+    --color-interactive-active: #{lighten($color-neutral, 15%)};        // Active/selected states (derived from brand-neutral)
     --color-interactive-disabled: #{transparentize($color-black, 0.9)}; // Disabled states
-    --color-interactive-focus: var(--brand-info);     // Focus states
+    --color-interactive-focus: var(--brand-info);                       // Focus states
 
     // Status Colors
     --color-status-success: var(--brand-success);
@@ -236,36 +235,40 @@ function generateSemanticTokens() {
     --color-status-neutral: var(--brand-neutral);
 
     // Shadow Colors
-    --color-shadow-subtle: #{transparentize($color-black, 0.92)};   // Light shadows
-    --color-shadow-medium: #{transparentize($color-black, 0.84)};   // Medium shadows
-    --color-shadow-strong: #{transparentize($color-black, 0.16)};   // Strong shadows
+    --color-shadow-subtle: #{transparentize($color-black, 0.92)};       // Light shadows
+    --color-shadow-medium: #{transparentize($color-black, 0.84)};       // Medium shadows
+    --color-shadow-strong: #{transparentize($color-black, 0.16)};       // Strong shadows
+
+    // Gradient Colors
+    --color-gradient-success: linear-gradient(to top, #{$color-white}, #{transparentize($color-success, 0.84)});
+    --color-gradient-danger: linear-gradient(to top, #{$color-white}, #{transparentize($color-danger, 0.84)});
   }
 
   .theme--dark {
     // Surface Colors
-    --color-surface-primary: var(--brand-black);      // Main backgrounds, cards
-    --color-surface-overlay: #{lighten($color-black, 8%)}; // Modal/dialog backgrounds
-    --color-surface-contrast: var(--brand-white);     // High contrast backgrounds for text
-    --color-surface-section: #{mix($color-white, $color-black, 3%)}; // Section backgrounds (derived from brand colors to get #151717)
-    --color-surface-border: #{mix($color-white, $color-black, 8%)}; // Border color for surfaces and containers (dark theme)
+    --color-surface-primary: var(--brand-black);                        // Main backgrounds, cards
+    --color-surface-overlay: #{transparentize($color-black, 0.04)};     // Modal/dialog overlays
+    --color-surface-contrast: var(--brand-white);                       // High contrast backgrounds for text
+    --color-surface-section: #{mix($color-white, $color-black, 3%)};    // Section backgrounds (derived from brand colors to get #151717)
+    --color-surface-border: #{mix($color-white, $color-black, 8%)};     // Border color for surfaces and containers (dark theme)
 
     // Text Colors
-    --color-text-primary: var(--brand-white);       // Primary text (headings, important text)
-    --color-text-secondary: #{transparentize($color-white, 0.2)}; // Secondary text (body text)
-    --color-text-disabled: #{transparentize($color-white, 0.6)};  // Disabled text
-    --color-text-inverse: var(--brand-white);         // Text on dark backgrounds
-    --color-text-success: var(--brand-success);     // Success messages, profit text
-    --color-text-danger: var(--brand-danger);         // Error messages, loss text
-    --color-text-warning: var(--brand-warning);       // Warning messages
-    --color-text-info: var(--brand-info);             // Info messages
-    --color-text-link: #{lighten($color-primary, 5%)};   // Link text color (derived from brand-info to match #2196f3)
+    --color-text-primary: var(--brand-white);                           // Primary text (headings, important text)
+    --color-text-secondary: #{transparentize($color-white, 0.2)};       // Secondary text (body text)
+    --color-text-disabled: #{transparentize($color-white, 0.6)};        // Disabled text
+    --color-text-inverse: var(--brand-white);                           // Text on dark backgrounds
+    --color-text-success: var(--brand-success);                         // Success messages, profit text
+    --color-text-danger: var(--brand-danger);                           // Error messages, loss text
+    --color-text-warning: var(--brand-warning);                         // Warning messages
+    --color-text-info: var(--brand-info);                               // Info messages
+    --color-text-link: #{lighten($color-primary, 5%)};                  // Link text color (derived from brand-info to match #2196f3)
 
     // Interactive States
-    --color-interactive-default: #{lighten($color-black, 20%)}; // Default borders, dividers
-    --color-interactive-hover: #{lighten($color-black, 8%)}; // Hover states (derived from brand-black to get #242828)
-    --color-interactive-active: #{lighten($color-black, 15%)}; // Active/selected states (derived from brand-black to get #323738)
-    --color-interactive-disabled: #{lighten($color-black, 12%)}; // Disabled states
-    --color-interactive-focus: var(--brand-info);     // Focus states
+    --color-interactive-default: #{lighten($color-black, 20%)};         // Default borders, dividers
+    --color-interactive-hover: #{lighten($color-black, 8%)};            // Hover states (derived from brand-black to get #242828)
+    --color-interactive-active: #{lighten($color-black, 15%)};          // Active/selected states (derived from brand-black to get #323738)
+    --color-interactive-disabled: #{lighten($color-black, 12%)};        // Disabled states
+    --color-interactive-focus: var(--brand-info);                       // Focus states
 
     // Status Colors
     --color-status-success: var(--brand-success);
@@ -279,9 +282,13 @@ function generateSemanticTokens() {
     --color-status-neutral: var(--brand-neutral);
 
     // Shadow Colors
-    --color-shadow-subtle: #{transparentize($color-black, 0.36)};   // Light shadows
-    --color-shadow-medium: #{transparentize($color-black, 0.16)};   // Medium shadows
-    --color-shadow-strong: #{transparentize($color-black, 0.28)};   // Strong shadows
+    --color-shadow-subtle: #{transparentize($color-black, 0.36)};       // Light shadows
+    --color-shadow-medium: #{transparentize($color-black, 0.16)};       // Medium shadows
+    --color-shadow-strong: #{transparentize($color-black, 0.28)};       // Strong shadows
+
+    // Gradient Colors
+    --color-gradient-success: linear-gradient(to top, #{$color-black}, #{transparentize($color-success, 0.84)});
+    --color-gradient-danger: linear-gradient(to top, #{$color-black}, #{transparentize($color-danger, 0.84)});
   }
 }
 `;
@@ -307,7 +314,7 @@ function generateComponentTokens() {
     --color-button-primary-hover: var(--brand-primary-dark);
     
     --color-button-secondary-bg: transparent;
-    --color-button-secondary-border: var(--brand-black);
+    --color-button-secondary-border: var(--color-interactive-active);
     --color-button-secondary-text: var(--brand-black);
     --color-button-secondary-hover: var(--color-interactive-hover);
     
@@ -319,10 +326,10 @@ function generateComponentTokens() {
     --color-button-disabled-text: var(--color-text-disabled);
 
     // Trading/Purchase Colors (exact legacy match for light theme)
-    --color-trade-buy: #{$color-success};                 // Buy/Higher/Rise trades
-    --color-trade-buy-bg: #{darken($color-success, 10%)};              // Buy background (derived from brand-secondary to get #3d9494)
-    --color-trade-sell: #{$color-danger};                   // Sell/Lower/Fall trades
-    --color-trade-sell-bg: #{darken($color-danger, 10%)};                // Sell background (derived from brand-danger)
+    --color-trade-buy: #{$color-success};                               // Buy/Higher/Rise trades
+    --color-trade-buy-bg: #{darken($color-success, 10%)};               // Buy background (derived from brand-secondary to get #3d9494)
+    --color-trade-sell: #{$color-danger};                               // Sell/Lower/Fall trades
+    --color-trade-sell-bg: #{darken($color-danger, 10%)};               // Sell background (derived from brand-danger)
     --color-trade-disabled: var(--color-interactive-disabled);
 
     // Form Colors
@@ -401,8 +408,8 @@ function generateComponentTokens() {
     --color-button-primary-hover: var(--brand-primary-dark);
     
     --color-button-secondary-bg: transparent;
-    --color-button-secondary-border: var(--brand-primary);
-    --color-button-secondary-text: var(--brand-primary);
+    --color-button-secondary-border: var(--color-interactive-active);
+    --color-button-secondary-text: var(--brand-white);
     --color-button-secondary-hover: #{transparentize($color-white, 0.92)};
     
     --color-button-tertiary-bg: transparent;
@@ -413,9 +420,9 @@ function generateComponentTokens() {
     --color-button-disabled-text: var(--color-text-disabled);
 
     // Trading/Purchase Colors (dark theme variants)
-    --color-trade-buy: #{$color-success};                 // Buy/Higher/Rise trades (dark)
-    --color-trade-buy-bg: #{darken($color-success, 10%)};              // Buy background (derived from brand-secondary to get #3d9494)
-    --color-trade-sell: #{$color-danger};                  // Sell/Lower/Fall trades (dark)
+    --color-trade-buy: #{$color-success};                               // Buy/Higher/Rise trades (dark)
+    --color-trade-buy-bg: #{darken($color-success, 10%)};               // Buy background (derived from brand-secondary to get #3d9494)
+    --color-trade-sell: #{$color-danger};                               // Sell/Lower/Fall trades (dark)
     --color-trade-sell-bg: #{darken($color-danger, 10%)};               // Sell background (derived from brand-danger)
     --color-trade-disabled: var(--color-interactive-disabled);
 

@@ -9,7 +9,7 @@
     bottom: 0;
     width: calc(100% - 4px);
     height: 100%;
-    background: var(--overlay-inside-dialog);
+    background: var(--color-surface-overlay);
 
     &__loading {
         position: absolute;

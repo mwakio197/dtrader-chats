@@ -16,7 +16,7 @@
         --color-button-primary-hover: var(--brand-primary-dark);
 
         --color-button-secondary-bg: transparent;
-        --color-button-secondary-border: var(--brand-black);
+        --color-button-secondary-border: var(--color-interactive-active);
         --color-button-secondary-text: var(--brand-black);
         --color-button-secondary-hover: var(--color-interactive-hover);
 
@@ -110,8 +110,8 @@
         --color-button-primary-hover: var(--brand-primary-dark);
 
         --color-button-secondary-bg: transparent;
-        --color-button-secondary-border: var(--brand-primary);
-        --color-button-secondary-text: var(--brand-primary);
+        --color-button-secondary-border: var(--color-interactive-active);
+        --color-button-secondary-text: var(--brand-white);
         --color-button-secondary-hover: #{transparentize($color-white, 0.92)};
 
         --color-button-tertiary-bg: transparent;
