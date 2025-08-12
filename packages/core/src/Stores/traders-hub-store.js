@@ -7,16 +7,12 @@ export default class TradersHubStore extends BaseStore {
     available_platforms = [];
     selected_account_type;
     selected_region;
-    is_onboarding_visited = false;
-    is_first_time_visit = true;
-    selected_platform_type = 'options';
     modal_data = {
         active_modal: '',
         data: {},
     };
     selected_jurisdiction_kyc_status = {};
     selected_account = {};
-    active_modal_wallet_id;
 
     constructor(root_store) {
         const local_storage_properties = ['available_platforms', 'selected_region'];
@@ -26,26 +22,18 @@ export default class TradersHubStore extends BaseStore {
         makeObservable(this, {
             available_platforms: observable,
             modal_data: observable,
-            is_onboarding_visited: observable,
-            is_first_time_visit: observable,
             selected_account: observable,
             selected_jurisdiction_kyc_status: observable,
             selected_account_type: observable,
-            selected_platform_type: observable,
-            active_modal_wallet_id: observable,
             selected_region: observable,
             closeModal: action.bound,
             content_flag: computed,
             getAccount: action.bound,
             has_any_real_account: computed,
             is_demo: computed,
-            is_eu_selected: computed,
             is_real: computed,
             openModal: action.bound,
-            selectRegion: action.bound,
-            setTogglePlatformType: action.bound,
             show_eu_related_content: computed,
-            setIsOnboardingVisited: action.bound,
             cleanup: action.bound,
         });
 
@@ -65,10 +53,6 @@ export default class TradersHubStore extends BaseStore {
                 this.selected_region = default_region();
             }
         );
-    }
-
-    selectRegion(region) {
-        this.selected_region = region;
     }
 
     get content_flag() {
@@ -113,20 +97,8 @@ export default class TradersHubStore extends BaseStore {
         return eu_related.includes(this.content_flag);
     }
 
-    setIsOnboardingVisited(is_visited) {
-        this.is_onboarding_visited = is_visited;
-    }
-
-    get is_eu_selected() {
-        return this.selected_region === 'EU';
-    }
-
     get has_any_real_account() {
         return this.selected_account_type === 'real' && this.root_store.client.has_active_real_account;
-    }
-
-    setTogglePlatformType(platform_type) {
-        this.selected_platform_type = platform_type;
     }
 
     get is_demo() {
