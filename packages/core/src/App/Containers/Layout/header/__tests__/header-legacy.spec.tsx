@@ -1,8 +1,8 @@
+import React from 'react';
 import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { StoreProvider, mockStore } from '@deriv/stores';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { useDevice } from '@deriv-com/ui';
 import HeaderLegacy from '../header-legacy';
 
@@ -19,81 +19,45 @@ jest.mock('@deriv-com/ui', () => ({
     useDevice: jest.fn(() => ({ isDesktop: true })),
 }));
 
-jest.mock('@deriv/shared', () => ({
-    ...jest.requireActual('@deriv/shared'),
-    getDecimalPlaces: jest.fn(() => 2),
-    platforms: { mt5: 'mt5' },
-    routes: {
-        cashier_deposit: '/cashier/deposit',
-        traders_hub: '/traders-hub',
-        account: '/account',
-        settings: '/settings',
-        wallets_compare_accounts: '/wallets/compare-accounts',
-        compare_cfds: '/compare-cfds',
-        mt5: '/mt5',
-        dxtrade: '/dxtrade',
-        bot: '/bot',
-        smarttrader: 'https://smarttrader.deriv.com',
-    },
+jest.mock('App/Components/Layout/Header', () => ({
+    MenuLinks: jest.fn(() => <div data-testid='dt_menu_links'>Menu Links</div>),
 }));
 
 jest.mock('App/Components/Layout/Header/Components/Preloader', () => ({
-    AccountsInfoLoader: jest.fn(() => <div>Mocked Accounts Info Loader</div>),
+    AccountsInfoLoader: jest.fn(() => <div data-testid='dt_accounts_info_loader'>Accounts Info Loader</div>),
 }));
 
-jest.mock('App/Containers/RealAccountSignup', () => jest.fn(() => <div>Mocked Real Account SignUp</div>));
-
-jest.mock('App/Containers/SetAccountCurrencyModal', () => jest.fn(() => <div>Mocked Set Account Currency Modal</div>));
-
-jest.mock('App/Containers/new-version-notification.jsx', () =>
-    jest.fn(() => <div>Mocked New Version Notification</div>)
-);
-
 jest.mock('App/Components/Layout/Header/toggle-menu-drawer.jsx', () =>
-    jest.fn(() => <div data-testid='dt_toggle_menu_drawer'>Mocked Toggle Menu Drawer</div>)
+    jest.fn(() => <div data-testid='dt_toggle_menu_drawer'>Toggle Menu Drawer</div>)
 );
 
-jest.mock('App/Components/Layout/Header/toggle-menu-drawer-accounts-os.jsx', () =>
-    jest.fn(() => <div data-testid='dt_toggle_menu_drawer_os'>Mocked Toggle Menu Drawer OS</div>)
+jest.mock('App/Containers/new-version-notification', () =>
+    jest.fn(() => <div data-testid='dt_new_version_notification'>New Version Notification</div>)
 );
+
+jest.mock('../brand-short-logo', () => jest.fn(() => <div data-testid='dt_brand_short_logo'>Brand Short Logo</div>));
 
 jest.mock('../header-account-actions', () =>
-    jest.fn(({ onClickDeposit }) => (
-        <div data-testid='dt_header_account_actions' onClick={onClickDeposit}>
-            Mocked Header Account Action
-        </div>
-    ))
+    jest.fn(() => <div data-testid='dt_header_account_actions'>Header Account Actions</div>)
 );
 
-jest.mock('../traders-hub-home-button', () => jest.fn(() => <div>Mocked Traders Home Button</div>));
+jest.mock('../hub-button', () => jest.fn(() => <div data-testid='dt_hub_button'>Hub Button</div>));
 
 describe('HeaderLegacy', () => {
     const history = createBrowserHistory();
-    const default_mock = {
+
+    const default_mock_store = {
         client: {
             currency: 'USD',
-            has_any_real_account: true,
-            has_wallet: false,
-            is_bot_allowed: true,
-            is_client_store_initialized: true,
-            is_dxtrade_allowed: true,
             is_logged_in: true,
             is_logging_in: false,
             is_single_logging_in: false,
-            is_mt5_allowed: true,
-            is_virtual: false,
             is_switching: false,
-        },
-        common: {
-            platform: '' as '' | 'dxtrade' | 'mt5' | 'ctrader',
-            is_from_tradershub_os: false,
         },
         ui: {
             header_extension: null,
             is_app_disabled: false,
             is_route_modal_on: false,
-            toggleReadyToDepositModal: jest.fn(),
-            is_real_acc_signup_on: true,
         },
         notifications: {
             addNotificationMessage: jest.fn(),
@@ -109,166 +73,207 @@ describe('HeaderLegacy', () => {
         },
     };
 
-    const mock_store = mockStore(default_mock);
-
-    const renderComponent = (modified_store = mock_store) =>
-        render(
+    const renderComponent = (store_override = {}) => {
+        const mock_store_instance = mockStore({ ...default_mock_store, ...store_override });
+        return render(
             <Router history={history}>
-                <StoreProvider store={modified_store}>
+                <StoreProvider store={mock_store_instance}>
                     <HeaderLegacy />
                 </StoreProvider>
             </Router>
         );
+    };
 
-    it('should render Toggle Menu Drawer OS when is_from_tradershub_os is true in mobile view', () => {
-        (useDevice as jest.Mock).mockImplementationOnce(() => ({ isDesktop: false }));
-        renderComponent(
-            mockStore({
-                ...default_mock,
-                common: {
-                    ...default_mock.common,
-                    is_from_tradershub_os: true,
-                },
-            })
-        );
-
-        expect(screen.getByTestId('dt_toggle_menu_drawer_os')).toBeInTheDocument();
-        expect(screen.queryByTestId('dt_toggle_menu_drawer')).not.toBeInTheDocument();
+    beforeEach(() => {
+        jest.clearAllMocks();
+        (useDevice as jest.Mock).mockReturnValue({ isDesktop: true });
     });
 
-    it('should render AccountsInfoLoader when is_logging_in is true', () => {
-        renderComponent(
-            mockStore({
-                ...default_mock,
-                client: {
-                    ...default_mock.client,
-                    is_logging_in: true,
-                },
-            })
-        );
+    describe('Basic Rendering', () => {
+        it('should render header with basic components', () => {
+            renderComponent();
 
-        expect(screen.getByText('Mocked Accounts Info Loader')).toBeInTheDocument();
-    });
-
-    it('should render AccountsInfoLoader when is_single_logging_in is true', () => {
-        renderComponent(
-            mockStore({
-                ...default_mock,
-                client: {
-                    ...default_mock.client,
-                    is_single_logging_in: true,
-                },
-            })
-        );
-
-        expect(screen.getByText('Mocked Accounts Info Loader')).toBeInTheDocument();
-    });
-
-    it('should render AccountsInfoLoader when is_switching is true', () => {
-        renderComponent(
-            mockStore({
-                ...default_mock,
-                client: {
-                    ...default_mock.client,
-                    is_switching: true,
-                },
-            })
-        );
-
-        expect(screen.getByText('Mocked Accounts Info Loader')).toBeInTheDocument();
-    });
-
-    it('should not render HeaderAccountActions when is_from_tradershub_os is true', () => {
-        renderComponent(
-            mockStore({
-                ...default_mock,
-                common: {
-                    ...default_mock.common,
-                    is_from_tradershub_os: true,
-                },
-            })
-        );
-
-        expect(screen.queryByTestId('dt_header_account_actions')).not.toBeInTheDocument();
-    });
-
-    it('should call toggleReadyToDepositModal when clicking on deposit and has_any_real_account is false and is_virtual is true', async () => {
-        const modified_store = mockStore({
-            ...default_mock,
-            client: {
-                ...default_mock.client,
-                has_any_real_account: false,
-                is_virtual: true,
-            },
+            expect(screen.getByRole('banner')).toBeInTheDocument();
+            expect(screen.getByTestId('dt_brand_short_logo')).toBeInTheDocument();
+            expect(screen.getByTestId('dt_menu_links')).toBeInTheDocument();
+            expect(screen.getByTestId('dt_new_version_notification')).toBeInTheDocument();
         });
 
-        renderComponent(modified_store);
+        it('should render header with correct CSS classes', () => {
+            renderComponent();
 
-        const header_account_actions = screen.getByTestId('dt_header_account_actions');
-        await userEvent.click(header_account_actions);
-
-        expect(modified_store.ui.toggleReadyToDepositModal).toHaveBeenCalled();
+            const header = screen.getByRole('banner');
+            expect(header).toHaveClass('header');
+            expect(header).not.toHaveClass('header--is-disabled');
+        });
     });
 
-    it('should add header--is-disabled class when is_app_disabled is true', () => {
-        renderComponent(
-            mockStore({
-                ...default_mock,
+    describe('Desktop Layout', () => {
+        beforeEach(() => {
+            (useDevice as jest.Mock).mockReturnValue({ isDesktop: true });
+        });
+
+        it('should render Hub button when logged in', () => {
+            renderComponent();
+
+            expect(screen.getByTestId('dt_hub_button')).toBeInTheDocument();
+            expect(screen.queryByTestId('dt_toggle_menu_drawer')).not.toBeInTheDocument();
+        });
+
+        it('should not render Hub button when not logged in', () => {
+            renderComponent({
+                client: {
+                    ...default_mock_store.client,
+                    is_logged_in: false,
+                },
+            });
+
+            expect(screen.queryByTestId('dt_hub_button')).not.toBeInTheDocument();
+        });
+    });
+
+    describe('Mobile Layout', () => {
+        beforeEach(() => {
+            (useDevice as jest.Mock).mockReturnValue({ isDesktop: false });
+        });
+
+        it('should render ToggleMenuDrawer on mobile', () => {
+            renderComponent();
+
+            expect(screen.getByTestId('dt_toggle_menu_drawer')).toBeInTheDocument();
+            expect(screen.queryByTestId('dt_hub_button')).not.toBeInTheDocument();
+        });
+
+        it('should render header extension when logged in and extension exists', () => {
+            const header_extension = <div data-testid='dt_header_extension'>Header Extension</div>;
+
+            renderComponent({
                 ui: {
-                    ...default_mock.ui,
+                    ...default_mock_store.ui,
+                    header_extension,
+                },
+            });
+
+            expect(screen.getByTestId('dt_header_extension')).toBeInTheDocument();
+        });
+
+        it('should not render header extension when not logged in', () => {
+            const header_extension = <div data-testid='dt_header_extension'>Header Extension</div>;
+
+            renderComponent({
+                client: {
+                    ...default_mock_store.client,
+                    is_logged_in: false,
+                },
+                ui: {
+                    ...default_mock_store.ui,
+                    header_extension,
+                },
+            });
+
+            expect(screen.queryByTestId('dt_header_extension')).not.toBeInTheDocument();
+        });
+    });
+
+    describe('Loading States', () => {
+        it('should render AccountsInfoLoader when is_logging_in is true', () => {
+            renderComponent({
+                client: {
+                    ...default_mock_store.client,
+                    is_logging_in: true,
+                },
+            });
+
+            expect(screen.getByTestId('dt_accounts_info_loader')).toBeInTheDocument();
+            expect(screen.queryByTestId('dt_header_account_actions')).not.toBeInTheDocument();
+        });
+
+        it('should render AccountsInfoLoader when is_single_logging_in is true', () => {
+            renderComponent({
+                client: {
+                    ...default_mock_store.client,
+                    is_single_logging_in: true,
+                },
+            });
+
+            expect(screen.getByTestId('dt_accounts_info_loader')).toBeInTheDocument();
+            expect(screen.queryByTestId('dt_header_account_actions')).not.toBeInTheDocument();
+        });
+
+        it('should render AccountsInfoLoader when is_switching is true', () => {
+            renderComponent({
+                client: {
+                    ...default_mock_store.client,
+                    is_switching: true,
+                },
+            });
+
+            expect(screen.getByTestId('dt_accounts_info_loader')).toBeInTheDocument();
+            expect(screen.queryByTestId('dt_header_account_actions')).not.toBeInTheDocument();
+        });
+
+        it('should render HeaderAccountActions when not in loading states', () => {
+            renderComponent();
+
+            expect(screen.getByTestId('dt_header_account_actions')).toBeInTheDocument();
+            expect(screen.queryByTestId('dt_accounts_info_loader')).not.toBeInTheDocument();
+        });
+    });
+
+    describe('CSS Classes and Styling', () => {
+        it('should add header--is-disabled class when is_app_disabled is true', () => {
+            renderComponent({
+                ui: {
+                    ...default_mock_store.ui,
                     is_app_disabled: true,
                 },
-            })
-        );
+            });
 
-        const header = screen.getByRole('banner');
-        expect(header).toHaveClass('header--is-disabled');
-    });
+            const header = screen.getByRole('banner');
+            expect(header).toHaveClass('header--is-disabled');
+        });
 
-    it('should add header--is-disabled class when is_route_modal_on is true', () => {
-        renderComponent(
-            mockStore({
-                ...default_mock,
+        it('should add header--is-disabled class when is_route_modal_on is true', () => {
+            renderComponent({
                 ui: {
-                    ...default_mock.ui,
+                    ...default_mock_store.ui,
                     is_route_modal_on: true,
                 },
-            })
-        );
+            });
 
-        const header = screen.getByRole('banner');
-        expect(header).toHaveClass('header--is-disabled');
+            const header = screen.getByRole('banner');
+            expect(header).toHaveClass('header--is-disabled');
+        });
+
+        it('should add header--is-disabled class when both flags are true', () => {
+            renderComponent({
+                ui: {
+                    ...default_mock_store.ui,
+                    is_app_disabled: true,
+                    is_route_modal_on: true,
+                },
+            });
+
+            const header = screen.getByRole('banner');
+            expect(header).toHaveClass('header--is-disabled');
+        });
     });
 
-    it('should add header--tradershub_os_mobile class when is_logged_in, is_from_tradershub_os are true and isDesktop is false', () => {
-        (useDevice as jest.Mock).mockImplementationOnce(() => ({ isDesktop: false }));
+    describe('Event Handlers', () => {
+        it('should add and remove IgnorePWAUpdate event listener', () => {
+            const addEventListenerSpy = jest.spyOn(document, 'addEventListener');
+            const removeEventListenerSpy = jest.spyOn(document, 'removeEventListener');
 
-        renderComponent(
-            mockStore({
-                ...default_mock,
-                common: {
-                    ...default_mock.common,
-                    is_from_tradershub_os: true,
-                },
-            })
-        );
+            const { unmount } = renderComponent();
 
-        const header = screen.getByRole('banner');
-        expect(header).toHaveClass('header--tradershub_os_mobile');
-    });
+            expect(addEventListenerSpy).toHaveBeenCalledWith('IgnorePWAUpdate', expect.any(Function));
 
-    it('should add header--tradershub_os_desktop class when is_logged_in, is_from_tradershub_os and isDesktop are true', () => {
-        renderComponent(
-            mockStore({
-                ...default_mock,
-                common: {
-                    ...default_mock.common,
-                    is_from_tradershub_os: true,
-                },
-            })
-        );
+            unmount();
 
-        const header = screen.getByRole('banner');
-        expect(header).toHaveClass('header--tradershub_os_desktop');
+            expect(removeEventListenerSpy).toHaveBeenCalledWith('IgnorePWAUpdate', expect.any(Function));
+
+            addEventListenerSpy.mockRestore();
+            removeEventListenerSpy.mockRestore();
+        });
     });
 });

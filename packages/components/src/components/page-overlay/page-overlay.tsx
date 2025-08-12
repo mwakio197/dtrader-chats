@@ -16,7 +16,6 @@ type TPageOverlay = {
     header_classname?: string;
     has_return_icon?: boolean;
     onReturn?: () => void;
-    is_from_tradershub_os?: boolean;
 };
 
 const PageOverlay = ({
@@ -30,23 +29,14 @@ const PageOverlay = ({
     header_classname,
     has_return_icon,
     onReturn,
-    is_from_tradershub_os = false,
 }: React.PropsWithChildren<TPageOverlay>) => {
     const page_overlay_ref = React.useRef<HTMLDivElement>(null);
-
-    const onClickTraderHub = () => {
-        window.location.href = platforms.tradershub_os.url ?? '';
-    };
 
     const RedirectionComponent = () => (
         <div
             data-testid='dt_page_overlay_header_close'
             className='dc-page-overlay__header-close'
-            onClick={
-                is_from_tradershub_os
-                    ? onClickTraderHub
-                    : (onClickClose as unknown as MouseEventHandler<HTMLDivElement>) || window.history.back
-            }
+            onClick={(onClickClose as unknown as MouseEventHandler<HTMLDivElement>) || window.history.back}
         >
             <Icon icon='IcCross' />
         </div>
@@ -64,7 +54,6 @@ const PageOverlay = ({
                 <div
                     className={classNames('dc-page-overlay__header', {
                         'dc-page-app__header': is_from_app,
-                        'dc-page-overlay__header-tradershub': is_from_tradershub_os,
                     })}
                 >
                     <div className='dc-page-overlay__header-wrapper'>
