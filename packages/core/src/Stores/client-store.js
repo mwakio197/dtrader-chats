@@ -3,7 +3,6 @@ import { action, computed, makeObservable, observable, reaction, runInAction, wh
 import moment from 'moment';
 
 import {
-    // CFD_PLATFORMS import removed for simplified authentication
     deriv_urls,
     excludeParamsFromUrlQuery,
     filterUrlQuery,
@@ -22,7 +21,6 @@ import {
     routes,
     SessionStore,
     setCurrencies,
-    // sortApiData removed - was only used by CFD methods
     urlForLanguage,
 } from '@deriv/shared';
 import { getLanguage, getRedirectionLanguage, localize } from '@deriv/translations';
@@ -343,7 +341,6 @@ export default class ClientStore extends BaseStore {
     }
 
     get can_change_fiat_currency() {
-        // Simplified for single account - no CFD platforms to check
         return !this.is_virtual && this.current_currency_type === 'fiat';
     }
 
@@ -457,8 +454,6 @@ export default class ClientStore extends BaseStore {
             .filter(account => !(account.title === CURRENCY_CONSTANTS.UST && account.is_disabled));
     }
 
-    // CFD login getters removed for simplified authentication
-
     get active_accounts() {
         // Multi-account logic
         return this.accounts instanceof Object
@@ -537,8 +532,6 @@ export default class ClientStore extends BaseStore {
     get is_social_signup() {
         return this.account_status?.status?.includes('social_signup');
     }
-
-    // CFD password status getters removed for simplified authentication
 
     get is_financial_information_incomplete() {
         return this.account_status?.status?.some(status => status === 'financial_information_not_complete');
@@ -1505,8 +1498,6 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-    // CFD account details update method removed for simplified authentication
-
     setInitialized(is_initialized) {
         this.initialized_broadcast = is_initialized;
     }
@@ -1531,7 +1522,6 @@ export default class ClientStore extends BaseStore {
         this.user_id = null;
         this.upgrade_info = undefined;
         this.accounts = {};
-        // CFD account lists removed for simplified authentication
         this.landing_companies = {};
         LocalStore.set('marked_notifications', JSON.stringify([]));
         localStorage.setItem('active_loginid', this.loginid);
@@ -1964,21 +1954,11 @@ export default class ClientStore extends BaseStore {
         return !!this.accounts[this.loginid]?.residence;
     }
 
-    // CFD balance computed properties removed for simplified authentication
-
     get is_proof_of_ownership_enabled() {
         if (!this.account_status?.authentication) return false;
         const { ownership, needs_verification } = this.account_status.authentication;
         return needs_verification?.includes('ownership') || ownership?.status === 'verified';
     }
-
-    // Two-factor authentication removed for simplified authentication
-
-    // CFD status update methods removed for simplified authentication
-
-    // Passkey and phone verification methods removed for simplified authentication
-
-    // Exchange rate subscription methods removed for simplified authentication
 
     get is_cr_account() {
         return this.loginid?.startsWith('CR');
