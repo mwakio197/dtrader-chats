@@ -344,7 +344,7 @@ const AccountSwitcher = observer(({ history, is_mobile, is_visible }) => {
                 }
                 toggleAccountsDialog(false);
                 localStorage.setItem('redirect_to_th_os', 'home');
-                history.push(routes.trade);
+                history.push(routes.index);
                 setTogglePlatformType('cfd');
             };
 

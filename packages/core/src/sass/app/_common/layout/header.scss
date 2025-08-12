@@ -302,25 +302,14 @@
         cursor: pointer;
 
         &-text {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
             @include typeface(--title-left-normal-black);
             padding: 0.5em 0;
             position: relative;
             color: var(--color-text-secondary);
             @include colorIcon(var(--color-text-secondary), none, var(--color-text-secondary));
-
-            &:before {
-                position: absolute;
-                top: 1.4em;
-                left: 1.2em;
-            }
-            &:after {
-                display: block;
-                content: attr(title);
-                font-weight: 400;
-                height: 0;
-                overflow: hidden;
-                visibility: hidden;
-            }
         }
         &:hover:not(&--active) {
             background-color: var(--color-interactive-hover);
@@ -372,7 +361,6 @@
         color: var(--color-text-primary);
     }
     &__icon {
-        margin-right: 0.8rem;
         vertical-align: middle;
     }
     @include mobile-or-tablet-screen {

@@ -12,7 +12,7 @@ const ErrorComponent = ({
     redirectOnClick = null,
     should_clear_error_on_click,
     setError,
-    redirect_to = routes.trade,
+    redirect_to = routes.index,
     should_show_refresh = true,
     should_redirect = true,
 }) => {

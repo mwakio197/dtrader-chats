@@ -1198,7 +1198,7 @@ export default class TradeStore extends BaseStore {
                                 )} ${currency}`;
                                 const trade_type = extracted_info_from_shortcode.category;
 
-                                if (window.location.pathname === routes.trade)
+                                if (window.location.pathname === routes.index)
                                     callback?.(
                                         {
                                             message: getTradeNotificationMessage(shortcode),

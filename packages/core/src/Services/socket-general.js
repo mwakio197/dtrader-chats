@@ -263,13 +263,10 @@ const BinarySocketGeneral = (() => {
                 if (active_platform === 'DBot') return;
 
                 client_store.logout().then(() => {
-                    let redirect_to = routes.trade;
+                    const redirect_to = routes.index;
                     const action = getActionFromUrl();
                     if (action === 'system_email_change') {
                         return;
-                    }
-                    if (active_platform === 'Deriv MT5') {
-                        redirect_to = routes.mt5;
                     }
                     common_store.routeTo(redirect_to);
                 });

@@ -2,12 +2,13 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { useAccountSettingsRedirect, useIsHubRedirectionEnabled, /* useOauth2, */ useRemoteConfig } from '@deriv/api';
+import { /* useOauth2, */ useRemoteConfig } from '@deriv/api';
 import { Div100vhContainer, Icon, MobileDrawer, ToggleSwitch } from '@deriv/components';
 // eslint-disable-next-line no-unused-vars -- getDomainUrl kept for future handleTradershubRedirect restoration
-import { getDomainUrl, getOSNameWithUAParser, getStaticUrl, routes } from '@deriv/shared';
+import { getStaticUrl, routes } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { localize } from '@deriv/translations';
+// eslint-disable-next-line no-unused-vars, import/no-unresolved -- Kept for future restoration of Analytics functionality
 import { Analytics } from '@deriv-com/analytics';
 
 // eslint-disable-next-line no-unused-vars, import/no-unresolved -- Kept for future restoration of LiveChat functionality
@@ -39,23 +40,14 @@ const ToggleMenuDrawer = observer(() => {
         is_virtual,
         logout: logoutClient,
         should_allow_authentication,
-        should_allow_poinc_authentication,
-        landing_company_shortcode: active_account_landing_company,
-        is_proof_of_ownership_enabled,
         is_eu,
         is_passkey_supported,
     } = client;
     const { show_eu_related_content } = traders_hub;
-    const { mobile_redirect_url } = useAccountSettingsRedirect();
 
     const { pathname: route } = useLocation();
 
-    const is_trading_hub_category = route === routes.trade || route.startsWith(routes.account);
-
     const should_show_regulatory_information = is_eu && show_eu_related_content && !is_virtual;
-    const is_traders_hub_route = route === routes.trade;
-
-    const is_wallet_route = route.startsWith(routes.wallets) || route.startsWith(routes.wallets_compare_accounts);
 
     const { data } = useRemoteConfig(true);
     // eslint-disable-next-line no-unused-vars -- Variables kept for future LiveChat/WhatsApp restoration
@@ -67,8 +59,6 @@ const ToggleMenuDrawer = observer(() => {
     const [, expandSubMenu] = React.useState(false);
 
     const timeout = React.useRef();
-    // eslint-disable-next-line no-unused-vars -- Variable kept for future handleTradershubRedirect restoration
-    const { isHubRedirectionEnabled } = useIsHubRedirectionEnabled();
 
     // Cleanup timeout on unmount or route change
     React.useEffect(() => {
@@ -84,12 +74,7 @@ const ToggleMenuDrawer = observer(() => {
     React.useEffect(() => {
         const processRoutes = () => {
             const routes_config = getRoutesConfig();
-            let primary_routes = [];
-
-            if (is_trading_hub_category) {
-                primary_routes = has_wallet ? [routes.reports, routes.account] : [routes.account];
-            }
-            setPrimaryRoutesConfig(getFilteredRoutesConfig(routes_config, primary_routes));
+            setPrimaryRoutesConfig(getFilteredRoutesConfig(routes_config, []));
         };
 
         if (account_status || should_allow_authentication) {
@@ -97,14 +82,7 @@ const ToggleMenuDrawer = observer(() => {
         }
 
         return () => clearTimeout(timeout.current);
-    }, [
-        account_status,
-        should_allow_authentication,
-        has_wallet,
-        is_trading_hub_category,
-        is_mobile,
-        is_passkey_supported,
-    ]);
+    }, [account_status, should_allow_authentication, has_wallet, is_mobile, is_passkey_supported]);
 
     const toggleDrawer = React.useCallback(() => {
         if (is_mobile_language_menu_open) setMobileLanguageMenuOpen(false);
@@ -119,20 +97,13 @@ const ToggleMenuDrawer = observer(() => {
         expandSubMenu(false);
     }, [expandSubMenu, is_open, is_mobile_language_menu_open, setMobileLanguageMenuOpen]);
 
-    // TODO: Commented out legacy logout handling, remove if no longer needed
+    // TODO: Remove if no longer needed
     // const handleLogout = React.useCallback(async () => {
     //     setIsLoggingOut(true);
     //     toggleDrawer();
-    //     if (window.location.pathname.startsWith(routes.phone_verification)) {
-    //         setIsForcedToExitPnv(true);
-    //         // Add a small delay to ensure state is updated before navigation
-    //         await new Promise(resolve => {
-    //             setTimeout(resolve, 0);
-    //         });
-    //     }
-    //     history.push(routes.trade);
+    //     history.push(routes.index);
     //     await logoutClient();
-    // }, [history, logoutClient, toggleDrawer, setIsForcedToExitPnv, setIsLoggingOut]);
+    // }, [history, logoutClient, toggleDrawer, setIsLoggingOut]);
 
     // Simple logout handler that closes drawer and calls logout
     const handleLogout = React.useCallback(async () => {
@@ -141,14 +112,6 @@ const ToggleMenuDrawer = observer(() => {
     }, [logoutClient, toggleDrawer]);
 
     // const { oAuthLogout } = useOauth2({ handleLogout });
-
-    const passkeysMenuOpenActionEventTrack = React.useCallback(() => {
-        Analytics.trackEvent('ce_passkey_account_settings_form', {
-            action: 'open',
-            form_name: 'ce_passkey_account_settings_form',
-            operating_system: getOSNameWithUAParser(),
-        });
-    }, []);
 
     const getFilteredRoutesConfig = (all_routes_config, routes_to_filter) => {
         const subroutes_config = all_routes_config.flatMap(i => i.routes || []);
@@ -161,19 +124,6 @@ const ToggleMenuDrawer = observer(() => {
     const getRoutesWithSubMenu = (route_config, idx) => {
         const has_access = route_config.is_authenticated ? is_logged_in : true;
         if (!has_access) return null;
-
-        if (route_config.path === routes.account && mobile_redirect_url !== routes.account) {
-            return (
-                <MobileDrawer.Item key={idx}>
-                    <MenuLink
-                        link_to={mobile_redirect_url}
-                        icon={route_config.icon_component}
-                        text={route_config.getTitle()}
-                        onClickLink={toggleDrawer}
-                    />
-                </MobileDrawer.Item>
-            );
-        }
 
         if (!route_config.routes) {
             return (
@@ -189,31 +139,6 @@ const ToggleMenuDrawer = observer(() => {
         }
 
         const has_subroutes = route_config.routes.some(route => route.subroutes);
-        const should_hide_passkeys_route = !is_mobile || !is_passkey_supported;
-
-        const disableRoute = route_path => {
-            if (/financial-assessment/.test(route_path)) {
-                return is_virtual;
-            } else if (/trading-assessment/.test(route_path)) {
-                return is_virtual || active_account_landing_company !== 'maltainvest';
-            } else if (/proof-of-address/.test(route_path) || /proof-of-identity/.test(route_path)) {
-                return !should_allow_authentication;
-            } else if (/proof-of-income/.test(route_path)) {
-                return !should_allow_poinc_authentication;
-            } else if (/proof-of-ownership/.test(route_path)) {
-                return is_virtual || !is_proof_of_ownership_enabled;
-            }
-            return false;
-        };
-
-        const hideRoute = route_path => {
-            if (/passkeys/.test(route_path)) {
-                return should_hide_passkeys_route;
-            } else if (/languages/.test(route_path)) {
-                return has_wallet;
-            }
-            return false;
-        };
 
         return (
             <MobileDrawer.SubMenu
@@ -236,16 +161,12 @@ const ToggleMenuDrawer = observer(() => {
                                 {route.subroutes.map((subroute, subindex) => (
                                     <MenuLink
                                         key={subindex}
-                                        is_disabled={disableRoute(subroute.path) || subroute.is_disabled}
+                                        is_disabled={subroute.is_disabled}
                                         link_to={subroute.path}
                                         text={subroute.getTitle()}
                                         onClickLink={() => {
                                             toggleDrawer();
-                                            if (subroute.path === routes.passkeys) {
-                                                passkeysMenuOpenActionEventTrack();
-                                            }
                                         }}
-                                        is_hidden={hideRoute(subroute.path)}
                                     />
                                 ))}
                             </MobileDrawer.SubMenuSection>
@@ -299,7 +220,7 @@ const ToggleMenuDrawer = observer(() => {
                 <Div100vhContainer height_offset='40px'>
                     <div className='header__menu-mobile-body-wrapper'>
                         <React.Fragment>
-                            <MobileDrawer.Body className={is_traders_hub_route || is_wallet_route ? 'no-padding' : ''}>
+                            <MobileDrawer.Body>
                                 <MobileDrawer.Item>
                                     <MenuLink
                                         link_to={getStaticUrl('/')}
@@ -308,14 +229,14 @@ const ToggleMenuDrawer = observer(() => {
                                         onClickLink={toggleDrawer}
                                     />
                                 </MobileDrawer.Item>
-                                {route !== routes.trade && (
+                                {route !== routes.index && (
                                     <MobileDrawer.Item>
                                         <MenuLink
-                                            link_to={routes.trade}
+                                            link_to={routes.index}
                                             icon='IcTrade'
                                             text={localize('Trade')}
                                             onClickLink={toggleDrawer}
-                                            is_active={route === routes.trade}
+                                            is_active={route === routes.index}
                                         />
                                     </MobileDrawer.Item>
                                 )}

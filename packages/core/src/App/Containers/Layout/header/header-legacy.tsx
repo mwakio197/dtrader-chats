@@ -20,12 +20,10 @@ const HeaderLegacy = observer(() => {
     const { client, common, ui, notifications } = useStore();
     const {
         currency,
-        has_any_real_account,
         has_wallet,
         is_logged_in,
         is_logging_in,
         is_single_logging_in,
-        is_virtual,
         is_switching,
         is_client_store_initialized,
     } = client;
@@ -47,14 +45,8 @@ const HeaderLegacy = observer(() => {
         return () => document.removeEventListener('IgnorePWAUpdate', removeUpdateNotification);
     }, [removeUpdateNotification]);
 
-    const handleClickCashier = () => {
-        if (!has_any_real_account && is_virtual) {
-            toggleReadyToDepositModal();
-        }
-    };
-
     const excludedRoutes = [
-        routes.trade,
+        routes.index,
         routes.trader_positions,
         routes.endpoint,
         routes.redirect,
@@ -125,7 +117,7 @@ const HeaderLegacy = observer(() => {
                             <AccountsInfoLoader is_logged_in={is_logged_in} is_desktop={isDesktop} speed={3} />
                         </div>
                     ) : (
-                        !is_from_tradershub_os && <HeaderAccountActions onClickDeposit={handleClickCashier} />
+                        !is_from_tradershub_os && <HeaderAccountActions />
                     )}
                 </div>
             </div>

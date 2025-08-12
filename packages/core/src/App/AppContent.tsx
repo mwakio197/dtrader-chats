@@ -32,21 +32,19 @@ import Devtools from './Devtools';
 const AppContent: React.FC<{ passthrough: any }> = observer(({ passthrough }) => {
     const store = useStore();
     const {
-        has_wallet,
         is_logged_in,
         loginid,
         is_client_store_initialized,
         landing_company_shortcode,
         currency,
         residence,
-        logout,
         email,
         setIsPasskeySupported,
         account_settings,
         accounts,
     } = store.client;
-    const { current_language, changeSelectedLanguage } = store.common;
-    const { is_dark_mode_on, setDarkMode } = store.ui;
+    const { current_language } = store.common;
+    const { is_dark_mode_on } = store.ui;
 
     const { isMobile } = useDevice();
     const { switchLanguage } = useTranslations();
@@ -124,15 +122,6 @@ const AppContent: React.FC<{ passthrough: any }> = observer(({ passthrough }) =>
     React.useEffect(() => {
         if (is_client_store_initialized) initHotjar(store.client);
     }, [store.client, is_client_store_initialized]);
-
-    // intentionally switch the user with wallets to light mode and EN language
-    React.useLayoutEffect(() => {
-        if (has_wallet) {
-            if (is_dark_mode_on) {
-                setDarkMode(false);
-            }
-        }
-    }, [has_wallet, current_language, changeSelectedLanguage, is_dark_mode_on, setDarkMode]);
 
     const isCallBackPage = window.location.pathname.includes('callback');
 

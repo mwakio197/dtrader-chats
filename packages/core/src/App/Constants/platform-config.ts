@@ -17,7 +17,7 @@ const platform_config: TPlatformConfig[] = [
         title: () => getPlatformName(),
         name: getPlatformName(),
         description: () => localize('A whole new trading experience on a powerful yet easy to use platform.'),
-        link_to: routes.trade,
+        link_to: routes.index,
     },
 ];
 

@@ -14,7 +14,7 @@ const Notifications = observer(() => {
 
     React.useEffect(() => {
         if (banners.length > 1) removeBanner(banners[0].id);
-        if (pathname === routes.trade) return;
+        if (pathname === routes.index) return;
         banners.forEach(({ type, id }) => {
             if (!type) {
                 // Sell notifications have type and Purchase ones do not.

@@ -1066,8 +1066,8 @@ export default class ClientStore extends BaseStore {
         ];
 
         // redirect to the DTrader of there is needed query params
-        if (!window.location.pathname.endsWith(routes.trade) && /chart_type|interval|symbol|trade_type/.test(search)) {
-            window.history.replaceState({}, document.title, routes.trade + search);
+        if (!window.location.pathname.endsWith(routes.index) && /chart_type|interval|symbol|trade_type/.test(search)) {
+            window.history.replaceState({}, document.title, routes.index + search);
         }
 
         // Check for V2 authentication (one-time token in URL or existing session token)
@@ -1453,17 +1453,6 @@ export default class ClientStore extends BaseStore {
                 this.root_store.notifications.resetVirtualBalanceNotification(loginid);
             }
 
-            // Temporary workaround to sync this.loginid with selected wallet loginid
-            if (window.location.pathname.includes(routes.wallets)) {
-                this.resetLocalStorageValues(
-                    window.sessionStorage.getItem('active_loginid') ??
-                        localStorage.getItem('active_loginid') ??
-                        sessionStorage.getItem('active_wallet_loginid') ??
-                        this.loginid
-                );
-                return;
-            }
-
             this.resetLocalStorageValues(window.sessionStorage.getItem('active_loginid') ?? this.loginid);
         }
     }
@@ -1742,12 +1731,10 @@ export default class ClientStore extends BaseStore {
 
             const redirect_url = sessionStorage.getItem('redirect_url');
 
-            const target_url = routes.trade;
+            const target_url = routes.index;
 
             if (
-                (redirect_url?.endsWith(routes.trade) ||
-                    redirect_url?.endsWith(routes.bot) ||
-                    /chart_type|interval|symbol|trade_type/.test(redirect_url)) &&
+                (redirect_url?.endsWith(routes.index) || /chart_type|interval|symbol|trade_type/.test(redirect_url)) &&
                 (isTestLink() || isProduction() || isLocal() || isStaging() || isTestDerivApp())
             ) {
                 window.history.replaceState({}, document.title, target_url);

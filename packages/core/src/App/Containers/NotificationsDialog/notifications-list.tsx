@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Button, Icon, Text } from '@deriv/components';
-import { isEmptyObject, toTitleCase, TRoute } from '@deriv/shared';
+import { isEmptyObject, toTitleCase } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { Analytics } from '@deriv-com/analytics';
 import { BinaryLink } from 'App/Components/Routes';
@@ -21,7 +21,6 @@ const NotificationsList = observer(() => {
         if (['contract_sold', 'info', 'news', 'promotions'].includes(type)) {
             return 'IcAlertInfo';
         }
-        // P2P functionality has been removed
         return `IcAlert${toTitleCase(type)}`;
     };
 

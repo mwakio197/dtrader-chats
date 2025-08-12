@@ -17,12 +17,6 @@ export const platform_name = Object.freeze({
     DTrader: getPlatformName(),
 });
 
-export const CFD_PLATFORMS = Object.freeze({
-    MT5: 'mt5',
-    DXTRADE: 'dxtrade',
-    CTRADER: 'ctrader',
-});
-
 export const getPathname = () => {
     switch (window.location.pathname.split('/')[1]) {
         case '':
@@ -48,7 +42,7 @@ export const getActivePlatform = (routing_history: TRoutingHistory) => {
 };
 
 export const getPlatformRedirect = () => {
-    return { name: platform_name.DTrader, route: routes.trade };
+    return { name: platform_name.DTrader, route: routes.index };
 };
 
 export const isNavigationFromPlatform = (
@@ -78,7 +72,7 @@ export const isNavigationFromPlatform = (
                 // Return false when path matches a platform parent path, but don't return anything
                 // when a non-platform path was seen. i.e. navigating between /cashier and /reports
                 // should not affect navigating back to platform when clicking cross.
-                const platform_parent_paths = [routes.trade].map(route => getParentPath(route));
+                const platform_parent_paths = [routes.index].map(route => getParentPath(route));
                 const is_other_platform_path = platform_parent_paths.includes(history_item_parent_path);
 
                 if (is_other_platform_path) {
@@ -98,7 +92,7 @@ export const isNavigationFromExternalPlatform = (routing_history: TRoutingHistor
      */
 
     const platform_index = routing_history.findIndex(history_item => history_item.pathname === platform_route);
-    const dtrader_index = routing_history.findIndex(history_item => history_item.pathname === routes.trade);
+    const dtrader_index = routing_history.findIndex(history_item => history_item.pathname === routes.index);
     const has_visited_platform = platform_index !== -1;
     const has_visited_dtrader = dtrader_index !== -1;
 

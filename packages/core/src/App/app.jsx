@@ -5,13 +5,7 @@ import PropTypes from 'prop-types';
 
 import { APIProvider } from '@deriv/api';
 import { Loading } from '@deriv/components';
-import {
-    initFormErrorMessages,
-    setSharedCFDText,
-    setUrlLanguage,
-    setWebsocket,
-    useOnLoadTranslation,
-} from '@deriv/shared';
+import { initFormErrorMessages, setUrlLanguage, setWebsocket, useOnLoadTranslation } from '@deriv/shared';
 import { StoreProvider } from '@deriv/stores';
 import { getLanguage, initializeTranslations } from '@deriv/translations';
 import { Analytics } from '@deriv-com/analytics';
@@ -20,7 +14,6 @@ import { getInitialLanguage, initializeI18n, TranslationProvider } from '@deriv-
 
 import WS from 'Services/ws-methods';
 
-import { CFD_TEXT } from '../Constants/cfd-text';
 import { FORM_ERROR_MESSAGES } from '../Constants/form-error-messages';
 
 import AppContent from './AppContent';
@@ -96,7 +89,6 @@ const AppWithoutTranslation = ({ root_store }) => {
         // TODO: [translation-to-shared]: add translation implemnentation in shared
         setUrlLanguage(getLanguage());
         initFormErrorMessages(FORM_ERROR_MESSAGES);
-        setSharedCFDText(CFD_TEXT);
         root_store.common.setPlatform();
         loadSmartchartsStyles();
 

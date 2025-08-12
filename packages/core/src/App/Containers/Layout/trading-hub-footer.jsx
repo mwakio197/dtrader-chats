@@ -122,7 +122,7 @@ const TradingHubFooter = observer(() => {
                 )}
                 <FooterIconSeparator />
                 <HelpCentre showPopover={showPopover} />
-                {location === routes.trade && (
+                {location === routes.index && (
                     <ToggleSettings
                         is_settings_visible={is_settings_modal_on}
                         toggleSettings={toggleSettingsModal}
