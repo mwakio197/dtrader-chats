@@ -138,9 +138,8 @@
     }
     &__wrapper {
         margin: 0 1em;
-        min-width: 218px;
-        max-width: 238px;
-        width: min-content;
+        max-width: 218px;
+        width: 100%;
         border-radius: $BORDER_RADIUS;
         transition:
             transform 0.25s ease,
