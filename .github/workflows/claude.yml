@@ -20,27 +20,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
-      issues: write
+      pull-requests: read
+      issues: read
       id-token: write
-      actions: read
     steps:
-      - name: Get PR information
-        id: pr-info
-        if: github.event_name == 'issue_comment' && github.event.issue.pull_request
-        run: |
-          PR_NUMBER=${{ github.event.issue.number }}
-          PR_DATA=$(gh pr view $PR_NUMBER --json headRefName,headRepository --repo ${{ github.repository }})
-          echo "head_ref=$(echo "$PR_DATA" | jq -r '.headRefName')" >> $GITHUB_OUTPUT
-          echo "head_repo=$(echo "$PR_DATA" | jq -r '.headRepository.nameWithOwner')" >> $GITHUB_OUTPUT
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          repository: ${{ steps.pr-info.outputs.head_repo || github.event.pull_request.head.repo.full_name || github.repository }}
-          ref: ${{ steps.pr-info.outputs.head_ref || github.event.pull_request.head.ref || github.ref }}
           fetch-depth: 1
 
       - name: Run Claude PR Action
