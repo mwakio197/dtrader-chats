@@ -10,8 +10,8 @@ const ReportsTableRowLoader = ({ speed }: TReportsTableRowLoader) => (
         height={64}
         width={992}
         speed={speed}
-        backgroundColor={'var(--general-hover)'}
-        foregroundColor={'var(--general-active)'}
+        backgroundColor={'var(--color-interactive-hover)'}
+        foregroundColor={'var(--color-interactive-active)'}
     >
         <rect x='16' y='16' rx='4' ry='4' width='32' height='32' />
         <rect x='52' y='16' rx='4' ry='4' width='32' height='32' />

@@ -6,8 +6,8 @@ import { DesktopWrapper, MobileWrapper } from '@deriv/components';
 const HeaderItemsLoader = ({ speed }) => (
     <ContentLoader
         speed={speed}
-        backgroundColor={'var(--general-section-1)'}
-        foregroundColor={'var(--general-hover)'}
+        backgroundColor={'var(--color-surface-section)'}
+        foregroundColor={'var(--color-interactive-hover)'}
         style={{ width: '150px', height: '48px' }}
     >
         <DesktopWrapper>

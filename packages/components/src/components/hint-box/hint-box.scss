@@ -26,7 +26,7 @@
         background-color: var(--transparent-info);
     }
     &--warn {
-        background-color: var(--status-warning-transparent);
+        background-color: var(--color-status-warning-bg);
     }
     &--danger {
         background-color: var(--transparent-danger);
@@ -35,7 +35,7 @@
         margin-right: 8px;
     }
     &__message {
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
     }
 }
 

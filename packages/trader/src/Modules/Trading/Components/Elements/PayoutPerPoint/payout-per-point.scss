@@ -14,9 +14,9 @@
             display: flex;
             .barrier-value {
                 margin-bottom: 0.8rem;
-                background-color: var(--general-section-1);
+                background-color: var(--color-surface-primary);
                 border: none;
-                border-bottom: 1px dotted var(--text-general);
+                border-bottom: 1px dotted var(--color-text-secondary);
                 padding: 0;
                 display: flex;
                 cursor: pointer;
@@ -30,7 +30,7 @@
 }
 
 .payout-per-point-mobile {
-    background: var(--general-section-1);
+    background: var(--color-surface-primary);
     width: 100%;
     border-radius: 0.4rem;
     display: flex;
@@ -63,9 +63,9 @@
             &__value {
                 margin-top: 0.5rem;
                 margin-inline-start: 0.4rem;
-                background-color: var(--general-section-1);
+                background-color: var(--color-surface-primary);
                 border: none;
-                border-bottom: 1px dotted var(--text-general);
+                border-bottom: 1px dotted var(--color-text-secondary);
                 padding: 0;
                 display: flex;
                 cursor: pointer;
@@ -78,8 +78,8 @@
 
     .save-button {
         width: 100%;
-        border: 1px solid var(--text-less-prominent);
-        color: var(--text-prominent);
+        border: 1px solid var(--color-text-secondary);
+        color: var(--color-text-primary);
         padding: 0.8px 1.6rem;
         font-weight: bold;
         margin-top: auto;

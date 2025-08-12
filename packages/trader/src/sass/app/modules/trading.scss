@@ -9,13 +9,18 @@
 
 .loader {
     overflow: hidden;
-    background-color: rgba(var(--general-main-1), 0.16);
+    background-color: rgba(var(--color-surface-primary), 0.16);
 
     &--loading {
         width: inherit;
         height: inherit;
         animation: slide 1s cubic-bezier(1, 0, 0.5, 0) infinite;
-        background-image: linear-gradient(to left, rgba(255, 255, 255, 0), $color-white 10%, rgba(255, 255, 255, 0));
+        background-image: linear-gradient(
+            to left,
+            rgba(255, 255, 255, 0),
+            var(--brand-white) 10%,
+            rgba(255, 255, 255, 0)
+        );
         opacity: 0.32;
     }
 }
@@ -53,16 +58,16 @@
 
 /** @define trade-container; weak */
 .trade-container {
-    background: var(--general-main-1);
+    background: var(--color-surface-primary);
     direction: ltr;
 
     &__fieldset {
         border-radius: $BORDER_RADIUS;
         padding: 0.8rem;
         margin-bottom: 0.4rem;
-        background-color: var(--general-section-1);
-        border-color: var(--general-section-1);
-        color: var(--text-general);
+        background-color: var(--color-surface-section);
+        border-color: var(--color-surface-section);
+        color: var(--color-text-secondary);
         @include mobile-screen {
             padding: 0;
             margin-bottom: 0.8rem;
@@ -86,7 +91,7 @@
         }
         &-info {
             @include typeface(--paragraph-left-normal-black);
-            color: var(--text-general);
+            color: var(--color-text-secondary);
             margin: auto;
 
             &--left {
@@ -151,13 +156,13 @@
                 }
                 .dc-popover__target {
                     height: 1.8rem;
-                    border-bottom: 1px dotted var(--text-general);
+                    border-bottom: 1px dotted var(--color-text-secondary);
                 }
             }
         }
         .dc-datepicker {
             .dc-input {
-                background-color: var(--general-main-1);
+                background-color: var(--color-surface-primary);
                 border-radius: $BORDER_RADIUS;
                 margin-bottom: 0;
 
@@ -168,7 +173,7 @@
                     border: none;
 
                     &:hover:not(.dc-input--disabled) {
-                        border: 1px solid var(--border-hover);
+                        border: 1px solid var(--color-interactive-hover);
                     }
                     &:focus-within {
                         border: 1px solid var(--brand-secondary);
@@ -192,16 +197,16 @@
         appearance: none;
         box-sizing: border-box;
         border-radius: $BORDER_RADIUS;
-        background: var(--fill-normal);
-        color: var(--text-general);
-        border: 1px solid var(--fill-normal);
+        background: var(--color-surface-primary);
+        color: var(--color-text-primary);
+        border: 1px solid var(--color-surface-primary);
 
         &:hover {
-            border-color: var(--border-hover);
+            border-color: var(--color-interactive-hover);
         }
         &:active,
         &:focus {
-            border-color: var(--border-active);
+            border-color: var(--color-interactive-active);
         }
     }
     &__error {
@@ -213,10 +218,10 @@
             @include typeface(--small-left-light-black, none);
             @include toEm(padding, 5px 5px 5px 8px, 1.2em);
             @include toEm(margin-bottom, 10px, 1.2em);
-            color: var(--text-general);
-            background-color: rgba($color-red, 0.16);
+            color: var(--color-text-secondary);
+            background-color: rgba(var(--brand-danger), 0.16);
             display: block;
-            border: 1px solid var(--brand-red-coral);
+            border: 1px solid var(--brand-primary);
             border-radius: $BORDER_RADIUS;
         }
     }
@@ -260,7 +265,7 @@
         display: flex;
         justify-content: space-between;
         position: relative;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
 
         &-info {
             display: flex;
@@ -268,7 +273,7 @@
             align-items: center;
 
             @include mobile-screen {
-                color: var(--text-colored-background);
+                color: var(--color-surface-contrast);
                 width: 100%;
                 justify-content: space-between;
                 align-items: center;
@@ -319,22 +324,22 @@
                 text-align: left;
                 line-height: 1.25;
                 margin-left: 0.1rem;
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
                 opacity: 1;
                 transition: 0.3s;
 
                 @include mobile-screen {
-                    color: var(--text-colored-background);
+                    color: var(--color-surface-contrast);
                 }
             }
             &-basis {
                 margin-left: 0;
                 font-weight: normal;
                 @include typeface(--paragraph-left-normal-black);
-                color: var(--text-less-prominent);
+                color: var(--color-text-secondary);
                 @include mobile-screen {
                     @include typeface(--xsmall-left-normal-black);
-                    color: var(--text-colored-background);
+                    color: var(--color-surface-contrast);
                 }
             }
             &-currency {
@@ -394,7 +399,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 0.4rem;
-            background: var(--fill-normal);
+            background: var(--color-surface-primary);
             border-radius: 0.4rem;
             width: 100%;
             height: 3.2rem;
@@ -466,11 +471,11 @@
             flex-direction: row;
             align-items: center;
             padding: 0 1rem;
-            border-bottom: 0.1rem solid var(--general-hover);
+            border-bottom: 0.1rem solid var(--color-interactive-hover);
             @include mobile {
                 height: 4.5rem;
                 padding: 0 1.6rem;
-                border-bottom: 0.1rem solid var(--general-section-1);
+                border-bottom: 0.1rem solid var(--color-surface-border);
             }
             &-wrapper {
                 display: flex;
@@ -508,13 +513,13 @@
             cursor: pointer;
 
             &:hover:not(&--selected) {
-                background-color: var(--general-hover);
+                background-color: var(--color-interactive-hover);
                 font-weight: var(--text-weight-bold);
             }
             &--selected,
             &:active,
             &:focus {
-                background-color: var(--general-active);
+                background-color: var(--color-interactive-active);
                 font-weight: var(--text-weight-bold);
             }
             @include mobile {
@@ -528,7 +533,7 @@
     &__allow-equals {
         /* postcss-bem-linter: ignore */
         &__label {
-            color: var(--text-general);
+            color: var(--color-text-secondary);
         }
     }
     &__currency-options {
@@ -562,7 +567,7 @@
     }
     &__amount {
         .trade-container__input:disabled {
-            color: var(--text-general);
+            color: var(--color-text-secondary);
             opacity: 0.5;
         }
         &--multipliers {
@@ -576,17 +581,17 @@
             }
             & .dc-input-wrapper {
                 direction: ltr;
-                border: 1px solid var(--status-danger);
+                border: 1px solid var(--color-status-danger);
 
                 &:hover {
-                    border-color: var(--status-danger);
+                    border-color: var(--color-status-danger);
                 }
             }
         }
         & .dc-input-wrapper {
             border-radius: $BORDER_RADIUS;
-            background: var(--fill-normal);
-            border: 1px solid var(--fill-normal);
+            background: var(--color-surface-primary);
+            border: 1px solid var(--color-surface-border);
             height: 3.2rem;
             box-sizing: border-box;
 
@@ -603,11 +608,11 @@
                 }
             }
             &:hover {
-                border-color: var(--border-hover);
+                border-color: var(--color-interactive-hover);
             }
             &:active,
             &:focus-within {
-                border-color: var(--border-active);
+                border-color: var(--color-interactive-active);
             }
         }
         & .trade-container__input {
@@ -652,9 +657,9 @@
         &-type-tabs {
             border-radius: $BORDER_RADIUS;
             padding: 0.8rem;
-            background-color: var(--general-section-1);
-            border-color: var(--general-section-1);
-            color: var(--text-general);
+            background-color: var(--color-surface-section);
+            border-color: var(--color-surface-border);
+            color: var(--color-text-secondary);
             @include mobile-screen {
                 width: 45%;
                 padding: 0;
@@ -705,10 +710,10 @@
             margin-bottom: 0.4rem;
 
             .trade-container__price-info-basis {
-                color: var(--text-general);
+                color: var(--color-text-secondary);
             }
             .trade-container__price-info-value {
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
                 font-size: 1rem;
             }
             .trade-container__price-info-currency {
@@ -731,7 +736,7 @@
             text-align: right;
 
             span {
-                border-bottom: 1px dotted var(--text-general);
+                border-bottom: 1px dotted var(--color-text-secondary);
             }
         }
     }
@@ -789,7 +794,7 @@
     }
     /* postcss-bem-linter: ignore */
     .symbols.disabled {
-        color: var(--text-disabled);
+        color: var(--color-text-disabled);
     }
     .dc-dropdown--left {
         .dc-dropdown__display-text {
@@ -809,7 +814,7 @@
     }
     &--has-error {
         .dc-input {
-            border: 1px solid $COLOR_RED !important;
+            border: 1px solid var(--brand-primary) !important;
         }
     }
 }

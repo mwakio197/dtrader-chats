@@ -67,7 +67,6 @@ describe('TradeModals', () => {
         render(mockTradeModals(mock_root_store));
         await userEvent.click(screen.getByText('onConfirm market'));
 
-        expect(mock_root_store.ui.setHasOnlyForwardingContracts).toHaveBeenCalled();
         expect(mock_root_store.modules.trade.resetPreviousSymbol).toHaveBeenCalled();
     });
     it('should call function marketUnavailableOnCancel if button onCancel in MarketUnavailableModal component was clicked', async () => {
@@ -84,7 +83,7 @@ describe('TradeModals', () => {
         render(mockTradeModals(mock_root_store));
         await userEvent.click(screen.getByText('onCancel market'));
 
-        expect(mock_root_store.ui.setHasOnlyForwardingContracts).toHaveBeenCalled();
+        expect(window.open).toHaveBeenCalled();
         expect(mock_root_store.modules.trade.resetPreviousSymbol).toHaveBeenCalled();
     });
     it('should call function servicesErrorModalOnConfirm if button onConfirm in ServicesErrorModal component was clicked', async () => {

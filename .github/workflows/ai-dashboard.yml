@@ -19,7 +19,9 @@ permissions:
 
 jobs:
   call-dashboard-update:
-    uses: prince-deriv/shared-actions/.github/workflows/ai-dashboard.yml@master
-    with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      shiftai_token: ${{ secrets.SHIFTAI_TOKEN }} 
+    # [AI]  This is generated code by AI
+    uses: deriv-com/shared-actions/.github/workflows/ai-dashboard.yml@v4
+    # [/AI] 
+    secrets:
+      SHIFTAI_TOKEN: ${{ secrets.SHIFTAI_TOKEN }} 
+

@@ -41,7 +41,7 @@ describe('getTradeURLParams', () => {
             enumerable: true,
             value: {
                 hostname: 'https://localhost:8443/',
-                pathname: routes.trade,
+                pathname: routes.index,
             },
         });
     });
@@ -134,7 +134,7 @@ describe('setTradeURLParams', () => {
         expect(spyHistoryReplaceState).toBeCalledWith(
             {},
             document.title,
-            `${routes.trade}?interval=${oneTickInterval}`
+            `${routes.index}?interval=${oneTickInterval}`
         );
     });
     it('should set chart_type query param into URL based on the received chart_type value', () => {
@@ -145,7 +145,7 @@ describe('setTradeURLParams', () => {
         expect(spyHistoryReplaceState).toBeCalledWith(
             {},
             document.title,
-            `${routes.trade}?chart_type=${areaChartType.text}`
+            `${routes.index}?chart_type=${areaChartType.text}`
         );
     });
     it('should set symbol query param into URL based on the received symbol value', () => {
@@ -153,7 +153,7 @@ describe('setTradeURLParams', () => {
         setTradeURLParams({
             symbol,
         });
-        expect(spyHistoryReplaceState).toBeCalledWith({}, document.title, `${routes.trade}?symbol=${symbol}`);
+        expect(spyHistoryReplaceState).toBeCalledWith({}, document.title, `${routes.index}?symbol=${symbol}`);
     });
     it('should set trade_type query param into URL based on the received contract_type value', () => {
         const spyHistoryReplaceState = jest.spyOn(window.history, 'replaceState');
@@ -163,7 +163,7 @@ describe('setTradeURLParams', () => {
         expect(spyHistoryReplaceState).toBeCalledWith(
             {},
             document.title,
-            `${routes.trade}?trade_type=${TRADE_TYPES.ACCUMULATOR}`
+            `${routes.index}?trade_type=${TRADE_TYPES.ACCUMULATOR}`
         );
     });
     it('should not set any query params into URL when called with empty object', () => {
@@ -171,7 +171,7 @@ describe('setTradeURLParams', () => {
         setTradeURLParams({});
         expect(spyHistoryReplaceState).not.toBeCalled();
     });
-    it('should not set any query params into URL when location.pathname is not routes.trade', () => {
+    it('should not set any query params into URL when location.pathname is not routes.index', () => {
         location.pathname = routes.positions;
         const spyHistoryReplaceState = jest.spyOn(window.history, 'replaceState');
         setTradeURLParams({

@@ -29,8 +29,6 @@ const useActiveSymbols = () => {
     } = useTraderStore();
     const [activeSymbols, setActiveSymbols] = useState<ActiveSymbols | []>(symbols_from_store);
 
-    const { available_contract_types, is_fetching_ref: is_contracts_loading_ref } = useContractsForCompany();
-
     const trade_types_with_barrier_category = [
         TRADE_TYPES.RISE_FALL,
         TRADE_TYPES.RISE_FALL_EQUAL,
@@ -43,13 +41,14 @@ const useActiveSymbols = () => {
         return getContractTypesConfig()[contract_type]?.trade_types ?? [];
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { barrier_category } = (available_contract_types?.[contract_type]?.config || {}) as any;
-
     const isQueryEnabled = useCallback(() => {
-        if (!available_contract_types || is_contracts_loading_ref.current || is_switching) return false;
+        // Remove dependency on available_contract_types to break circular dependency
+        // Active symbols should load independently to provide data for other hooks
+        if (is_switching) {
+            return false;
+        }
         return true;
-    }, [available_contract_types, is_switching, is_contracts_loading_ref]);
+    }, [is_switching]);
 
     const getContractType = () => {
         if (isTurbosContract(contract_type)) {
@@ -60,19 +59,23 @@ const useActiveSymbols = () => {
         return contract_type;
     };
 
-    const { data: response } = useDtraderQuery<ActiveSymbolsResponse>(
+    const { data: response, error: queryError } = useDtraderQuery<ActiveSymbolsResponse>(
         ['active_symbols', loginid ?? '', getContractType(), current_language],
         {
             active_symbols: 'brief',
             contract_type: getContractTypesList(),
-            ...(trade_types_with_barrier_category.includes(contract_type) && barrier_category
-                ? { barrier_category: [barrier_category] }
-                : {}),
         },
         {
             enabled: isQueryEnabled(),
         }
     );
+
+    // Handle query errors
+    useEffect(() => {
+        if (queryError) {
+            showError({ message: localize('Failed to load market data. Please refresh the page.') });
+        }
+    }, [queryError, showError]);
 
     useEffect(
         () => {

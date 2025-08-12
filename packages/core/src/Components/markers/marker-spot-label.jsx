@@ -57,7 +57,7 @@ const MarkerSpotLabel = ({
                                         width={10}
                                         className='chart-spot-label__time-icon'
                                     />
-                                    <Text as='p' color='prominent' size='xxxs'>
+                                    <Text as='p' color='primary' size='xxxs'>
                                         {toMoment(+spot_epoch).format('HH:mm:ss')}
                                     </Text>
                                 </div>

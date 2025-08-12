@@ -21,38 +21,38 @@
     /* TODO: change all :after to normal background color once styleguide ready */
     &--general {
         &--default {
-            color: var(--status-default);
+            color: var(--color-status-neutral);
 
             &:after {
-                background-color: var(--status-default);
+                background-color: var(--color-status-neutral);
             }
         }
         &--adjustment {
-            color: var(--status-adjustment);
+            color: var(--color-status-neutral);
 
             &:after {
-                background-color: var(--status-adjustment);
+                background-color: var(--color-status-neutral);
             }
         }
         &--danger {
-            color: var(--status-danger);
+            color: var(--color-status-danger);
 
             &:after {
-                background-color: var(--status-danger);
+                background-color: var(--color-status-danger);
             }
         }
         &--warn {
-            color: var(--status-warning);
+            color: var(--color-status-warning);
 
             &:after {
-                background-color: var(--status-warning);
+                background-color: var(--color-status-warning);
             }
         }
         &--success {
-            color: var(--status-success);
+            color: var(--color-status-success);
 
             &:after {
-                background-color: var(--status-success);
+                background-color: var(--color-status-success);
             }
         }
         &--transfer {
@@ -63,25 +63,25 @@
             }
         }
         &--default-invert {
-            color: var(--status-less-prominent);
+            color: var(--color-text-secondary);
 
             &:after {
-                background-color: var(--status-less-prominent);
+                background-color: var(--color-text-secondary);
             }
         }
         &--success-invert {
-            color: var(--text-colored-background);
-            background-color: var(--status-success);
+            color: var(--color-surface-contrast);
+            background-color: var(--color-status-success);
         }
         &--warn-invert {
-            color: var(--text-colored-background);
-            background-color: var(--status-warning);
+            color: var(--color-surface-contrast);
+            background-color: var(--color-status-warning);
         }
         &--info {
-            color: var(--status-info);
+            color: var(--color-status-info);
 
             &:after {
-                background-color: var(--status-info);
+                background-color: var(--color-status-info);
             }
         }
     }

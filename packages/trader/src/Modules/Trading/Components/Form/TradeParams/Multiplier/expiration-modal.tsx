@@ -19,7 +19,7 @@ const MultipliersExpirationModal = ({ is_open, toggleModal }: TMultipliersExpira
         title={<Localize i18n_default_text='Expiration' />}
     >
         <Div100vhContainer className='mobile-widget-dialog__wrapper' max_autoheight_offset='48px'>
-            <Text size='xs' color='general' as='div' className='dc-modal-body__expiration'>
+            <Text size='xs' color='secondary' as='div' className='dc-modal-body__expiration'>
                 <Localize
                     i18n_default_text='Your contract will be closed automatically at the next available asset price on <0></0>.'
                     components={[<Expiration key={0} is_text_only text_size='xs' />]}

@@ -1,19 +1,19 @@
 .dc-table {
-    color: var(--text-general);
+    color: var(--color-text-secondary);
     background: inherit;
 
     &__row {
         display: grid;
-        border-bottom: 1px solid var(--general-section-1);
+        border-bottom: 1px solid var(--color-surface-border);
         height: 100%;
 
         &--hover:hover {
-            background-color: var(--general-section-1);
+            background-color: var(--color-surface-primary);
             cursor: pointer;
         }
     }
     &__header {
-        border-bottom: 2px solid var(--general-section-1);
+        border-bottom: 2px solid var(--color-surface-border);
         height: 52px;
     }
     &__cell,

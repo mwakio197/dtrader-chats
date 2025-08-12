@@ -66,7 +66,7 @@ const Clipboard = ({
             ) : (
                 <Icon
                     icon={icon || 'IcClipboard'}
-                    custom_color='var(--text-less-prominent)'
+                    custom_color='var(--color-text-secondary)'
                     className={classNames('dc-clipboard', className)}
                     onClick={onClick}
                     size={size}

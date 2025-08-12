@@ -53,7 +53,7 @@ const DealCancellationWarningDialog = observer(
                 enableApp={enableApp}
                 portal_element_id='modal_root'
             >
-                <Text size='xxxs' color='general'>
+                <Text size='xxxs' color='secondary'>
                     <Localize i18n_default_text='Take profit and/or stop loss are not available while deal cancellation is active.' />
                 </Text>
                 <Checkbox

@@ -69,7 +69,7 @@ const PayoutPerPointMobileInput = ({
             <div className='payout-per-point-mobile'>
                 <Fieldset className='payout-per-point-mobile__header'>
                     <div className='payout-per-point-mobile__header__title'>
-                        <Text size='xs' weight='bold' color='prominent' as='h1'>
+                        <Text size='xs' weight='bold' color='primary' as='h1'>
                             <Localize i18n_default_text='Payout per Point' />
                         </Text>
                         <Popover
@@ -99,7 +99,7 @@ const PayoutPerPointMobileInput = ({
                     <Text
                         size='xxs'
                         line_height='l'
-                        color='prominent'
+                        color='primary'
                         align='center'
                         as='p'
                         className='distance-to-current-spot'
@@ -116,20 +116,20 @@ const PayoutPerPointMobileInput = ({
                         message={distance_tooltip_text}
                     >
                         <div className='distance-to-current-spot__value'>
-                            <Text size='xxs' line_height='xs' color='prominent' align='center' as='p'>
+                            <Text size='xxs' line_height='xs' color='primary' align='center' as='p'>
                                 {selectedBarrier}
                             </Text>
                             {Number(selectedBarrier) < 0 ? (
                                 <LabelPairedChevronsDownCaptionRegularIcon
                                     width={12}
                                     height={12}
-                                    stroke='var(--text-prominent)'
+                                    stroke='var(--color-text-primary)'
                                     className='indicator-icon'
                                 />
                             ) : (
                                 <LabelPairedChevronsUpCaptionRegularIcon
                                     width={12}
-                                    stroke='var(--text-prominent)'
+                                    stroke='var(--color-text-primary)'
                                     height={12}
                                     className='indicator-icon'
                                 />

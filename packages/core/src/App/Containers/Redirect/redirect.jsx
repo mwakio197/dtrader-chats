@@ -88,7 +88,7 @@ const Redirect = observer(() => {
     const ext_platform_url = url_params.get('ext_platform_url');
 
     const redirectToExternalPlatform = url => {
-        history.push(`${routes.trade}?ext_platform_url=${url}`);
+        history.push(`${routes.index}?ext_platform_url=${url}`);
         redirected_to_route = true;
     };
     setVerificationCode(code_param, action_param);
@@ -170,20 +170,20 @@ const Redirect = observer(() => {
                 switch (redirect_to) {
                     case '1':
                     case '2':
-                        pathname = routes.trade;
+                        pathname = routes.index;
                         break;
                     case '10':
                     case '20':
-                        pathname = routes.trade;
+                        pathname = routes.index;
                         hash = 'real';
                         break;
                     case '11':
                     case '21':
-                        pathname = routes.trade;
+                        pathname = routes.index;
                         hash = 'demo';
                         break;
                     case '3':
-                        pathname = routes.trade;
+                        pathname = routes.index;
                         break;
                     default:
                         break;
@@ -274,7 +274,7 @@ const Redirect = observer(() => {
             break;
         }
         case 'verification': {
-            history.push(routes.trade);
+            history.push(routes.index);
             redirected_to_route = true;
             break;
         }
@@ -283,11 +283,11 @@ const Redirect = observer(() => {
             const is_demo = localStorage.getItem('cfd_reset_password_intent')?.includes('demo');
             if (has_wallet) {
                 history.push({
-                    pathname: routes.trade,
+                    pathname: routes.index,
                     search: url_query_string,
                 });
             } else {
-                history.push(`${routes.trade}#${is_demo ? 'demo' : 'real'}#reset-password`);
+                history.push(`${routes.index}#${is_demo ? 'demo' : 'real'}#reset-password`);
             }
             redirected_to_route = true;
             break;
@@ -319,24 +319,20 @@ const Redirect = observer(() => {
         const checkTmbAndRedirect = async () => {
             const is_tmb_enabled = await isTmbEnabled();
             const account_currency = queryCurrency;
-            if (!redirected_to_route && history.location.pathname !== routes.trade && is_client_store_initialized) {
+            if (!redirected_to_route && history.location.pathname !== routes.index && is_client_store_initialized) {
                 const client_account_lists = JSON.parse(localStorage.getItem('client.accounts') || '{}');
 
                 const length_of_authorize_accounts_list = authorize_accounts_list.length;
                 const length_of_client_account_lists = Object.keys(client_account_lists).length;
                 const should_retrigger_oidc = length_of_authorize_accounts_list !== length_of_client_account_lists;
                 const route_mappings = [
-                    { pattern: /accumulator/i, route: routes.trade, type: 'accumulator' },
-                    { pattern: /turbos/i, route: routes.trade, type: 'turboslong' },
-                    { pattern: /vanilla/i, route: routes.trade, type: 'vanillalongcall' },
-                    { pattern: /multiplier/i, route: routes.trade, type: 'multiplier' },
-                    { pattern: /proof-of-address/i, route: routes.proof_of_address },
-                    { pattern: /proof-of-identity/i, route: routes.proof_of_identity },
-                    { pattern: /personal-details/i, route: routes.personal_details },
-                    { pattern: /dbot/i, route: routes.bot },
+                    { pattern: /accumulator/i, route: routes.index, type: 'accumulator' },
+                    { pattern: /turbos/i, route: routes.index, type: 'turboslong' },
+                    { pattern: /vanilla/i, route: routes.index, type: 'vanillalongcall' },
+                    { pattern: /multiplier/i, route: routes.index, type: 'multiplier' },
                 ];
 
-                const default_route = routes.trade;
+                const default_route = routes.index;
 
                 const matched_route = route_mappings.find(({ pattern }) =>
                     pattern.test(url_query_string || history.location.search)

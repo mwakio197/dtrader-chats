@@ -5,7 +5,7 @@
 
     &__label {
         @include typeface(--paragraph-left-normal-black);
-        color: var(--text-general);
+        color: var(--color-text-secondary);
         margin-bottom: 0.2rem;
         display: inline-block;
         text-align: center;
@@ -58,7 +58,7 @@ button.dc-input-wrapper {
             left: 2px;
         }
         &:hover {
-            background: var(--state-hover);
+            background: var(--color-interactive-hover);
             cursor: pointer;
 
             & ~ .dc-input-wrapper__input {
@@ -75,7 +75,7 @@ button.dc-input-wrapper {
     }
     &--disabled {
         pointer-events: none;
-        color: var(--text-disabled);
+        color: var(--color-text-disabled);
     }
     &--inline {
         display: flex;
@@ -95,9 +95,9 @@ button.dc-input-wrapper {
     padding-left: 0.8rem;
     border-radius: $BORDER_RADIUS;
     transition: transform 0.3s;
-    background-color: var(--fill-normal);
-    border: 1px solid var(--fill-normal);
-    color: var(--text-prominent);
+    background-color: var(--color-surface-primary);
+    border: 1px solid var(--color-surface-border);
+    color: var(--color-text-primary);
 
     &[type='checkbox'] {
         font-size: 1.2rem;
@@ -108,38 +108,38 @@ button.dc-input-wrapper {
         height: 16px;
         border-radius: 0;
         padding: 0;
-        background-color: var(--general-section-1);
-        border: 1px solid var(--text-less-prominent);
+        background-color: var(--color-surface-primary);
+        border: 1px solid var(--color-text-secondary);
 
         &:active {
             border-radius: 0;
             box-shadow: none;
-            border-color: var(--brand-red-coral);
+            border-color: var(--brand-primary);
         }
         &:hover {
-            border-color: var(--border-hover);
+            border-color: var(--color-interactive-hover);
         }
         &:focus {
             border-radius: 0;
             box-shadow: none;
-            border-color: var(--border-active);
+            border-color: var(--color-interactive-active);
         }
         &:checked {
-            background: var(--brand-red-coral);
-            border-color: var(--brand-red-coral);
+            background: var(--brand-primary);
+            border-color: var(--brand-primary);
 
             &:after {
                 display: inline-block;
             }
             &:hover {
-                border-color: var(--brand-red-coral);
+                border-color: var(--brand-primary);
             }
         }
         &::-ms-check {
             // IE/EDGE support
             background: transparent;
             border-color: transparent;
-            color: $COLOR_WHITE;
+            color: var(--brand-white);
         }
         &:after {
             @include typeface(--small-left-normal-active);
@@ -158,28 +158,28 @@ button.dc-input-wrapper {
         cursor: pointer;
     }
     &::placeholder {
-        border-color: var(--border-normal);
+        border-color: var(--color-interactive-default);
     }
     &:hover,
     &-hover {
-        border-color: var(--border-hover);
+        border-color: var(--color-interactive-hover);
     }
     &:active,
     &:focus {
         outline: 0;
         border-radius: $BORDER_RADIUS;
-        border-color: var(--border-active);
-        color: var(--text-prominent);
+        border-color: var(--color-interactive-active);
+        color: var(--color-text-primary);
     }
     &--has-inline-prefix {
         padding-right: 40px !important;
         border-radius: $BORDER_RADIUS !important;
     }
     &--error {
-        color: $COLOR_RED;
-        border: 1px solid $COLOR_RED !important;
+        color: var(--brand-primary);
+        border: 1px solid var(--brand-primary) !important;
     }
     &:disabled {
-        color: var(--text-disabled);
+        color: var(--color-text-disabled);
     }
 }

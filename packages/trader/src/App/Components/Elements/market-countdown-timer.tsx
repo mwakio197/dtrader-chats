@@ -163,7 +163,7 @@ const MarketCountdownTimer = observer(
                     as='p'
                     className='market-is-closed-overlay__open-date'
                     line_height='m'
-                    color='prominent'
+                    color='primary'
                     size={is_main_page ? 's' : 'xs'}
                     weight='bold'
                 >
@@ -212,7 +212,7 @@ const MarketCountdownTimer = observer(
                         'market-is-closed-overlay__timer--main-page': is_main_page,
                     })}
                     line_height='m'
-                    color='prominent'
+                    color='primary'
                     size={is_main_page ? 's' : 'xs'}
                     weight='bold'
                 >

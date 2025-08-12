@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect as RouterRedirect } from 'react-router-dom';
 
 import { routes } from '@deriv/shared';
 import { localize } from '@deriv/translations';
@@ -48,7 +47,7 @@ const getModules = () => {
             ],
         },
         {
-            path: routes.trade,
+            path: routes.index,
             component: Trader,
             getTitle: () => localize('Trader'),
         },
@@ -72,7 +71,6 @@ const getModules = () => {
 // Order matters
 // TODO: search tag: test-route-parent-info -> Enable test for getting route parent info when there are nested routes
 const initRoutesConfig = () => [
-    { path: routes.index, component: RouterRedirect, getTitle: () => '', to: routes.trade },
     { path: routes.endpoint, component: Endpoint, getTitle: () => 'Endpoint' }, // doesn't need localization as it's for internal use
     { path: routes.os_redirect, component: OSRedirect, getTitle: () => localize('Redirect') },
     { path: routes.redirect, component: Redirect, getTitle: () => localize('Redirect') },

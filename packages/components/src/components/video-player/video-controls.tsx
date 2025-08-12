@@ -106,7 +106,7 @@ const VideoControls = ({
                     </div>
                     <div className='controls__left--v2'>
                         <div className='player__controls__time-wrapper--v2'>
-                            <Text size='xxxs' line_height='s' color='colored-background'>
+                            <Text size='xxxs' line_height='s' color='inverse'>
                                 {formatDurationTime(current_time)}
                                 {' / '}
                                 {formatDurationTime(video_duration)}
@@ -157,13 +157,13 @@ const VideoControls = ({
                         <button onClick={togglePlay} className='player__controls__button'>
                             <Icon
                                 icon={is_playing ? 'IcPause' : 'IcPlay'}
-                                custom_color='var(--text-colored-background)'
+                                custom_color='var(--color-surface-contrast)'
                                 height={18}
                                 width={15}
                             />
                         </button>
                         <div className='player__controls__time-wrapper'>
-                            <Text size='xxxs' line_height='s' color='colored-background'>
+                            <Text size='xxxs' line_height='s' color='inverse'>
                                 {formatDurationTime(current_time)}
                                 {' / '}
                                 {formatDurationTime(video_duration)}

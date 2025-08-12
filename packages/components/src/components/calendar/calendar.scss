@@ -5,8 +5,8 @@
     z-index: 999;
     box-sizing: border-box;
     font-size: 1rem;
-    background: var(--general-main-2);
-    box-shadow: 0 2px 8px 0 var(--shadow-menu);
+    background: var(--color-surface-primary);
+    box-shadow: 0 2px 8px 0 var(--color-shadow-medium);
 
     &__header,
     &__footer {
@@ -28,8 +28,8 @@
         }
     }
     &__body {
-        border-top: 0.1rem solid var(--general-section-2);
-        border-bottom: 0.1rem solid var(--general-section-2);
+        border-top: 0.1rem solid var(--color-surface-border);
+        border-bottom: 0.1rem solid var(--color-surface-border);
 
         &--date,
         &--month,
@@ -65,8 +65,9 @@
                 width: 5.6rem;
                 height: 3.2rem;
 
-                &--other:not(.dc-calendar__cell--today):not(.dc-calendar__cell--active):not(.dc-calendar__cell--disabled) {
-                    color: var(--text-general);
+                &--other:not(.dc-calendar__cell--today):not(.dc-calendar__cell--active):not(
+                        .dc-calendar__cell--disabled) {
+                    color: var(--color-text-secondary);
                 }
             }
         }
@@ -106,7 +107,7 @@
         }
         &--select {
             @include typeface(--paragraph-left-bold-black);
-            color: var(--text-prominent);
+            color: var(--color-text-primary);
         }
         &--prev-year,
         &--next-year,
@@ -135,12 +136,12 @@
         justify-self: center;
         position: relative;
         cursor: pointer;
-        color: var(--text-general);
+        color: var(--color-text-secondary);
         box-sizing: border-box;
 
         &--hover {
-            color: var(--text-general);
-            background: var(--state-hover);
+            color: var(--color-text-secondary);
+            background: var(--color-interactive-hover);
         }
         &:nth-child(7n) {
             &:before {
@@ -159,11 +160,11 @@
         }
         &--bold {
             @include typeface(--paragraph-left-bold-black);
-            color: var(--text-prominent);
+            color: var(--color-text-primary);
         }
         &--disabled:not(.dc-calendar__cell--today):not(.dc-calendar__cell--between),
         &--other:not(.dc-calendar__cell--today):not(.dc-calendar__cell--active):not(.dc-calendar__cell--between) {
-            color: var(--text-disabled);
+            color: var(--color-text-disabled);
             transition: none;
             cursor: default;
         }
@@ -172,23 +173,23 @@
         }
         &--today {
             font-weight: bold;
-            color: var(--text-prominent);
-            border: 1px solid var(--state-active);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-interactive-active);
 
             &-duration {
-                background: var(--state-active);
+                background: var(--color-interactive-active);
             }
         }
         &--active {
             font-weight: bold;
-            color: var(--text-prominent);
-            background: var(--state-active);
+            color: var(--color-text-primary);
+            background: var(--color-interactive-active);
 
             &:hover {
-                background: var(--state-active);
+                background: var(--color-interactive-active);
             }
             &-duration {
-                background: var(--state-active);
+                background: var(--color-interactive-active);
 
                 &:after {
                     position: absolute;
@@ -199,14 +200,14 @@
                     z-index: -1;
                     height: 100%;
                     padding-left: 1rem;
-                    background: var(--state-active);
+                    background: var(--color-interactive-active);
                 }
             }
         }
         &--between {
             font-weight: bold;
-            color: var(--text-prominent);
-            background: var(--state-active);
+            color: var(--color-text-primary);
+            background: var(--color-interactive-active);
 
             &-hover {
                 &:before {
@@ -216,11 +217,11 @@
                     z-index: -2;
                     height: 100%;
                     padding-left: 3.2rem;
-                    background: var(--state-hover);
+                    background: var(--color-interactive-hover);
                 }
             }
             &:hover {
-                background: var(--state-active);
+                background: var(--color-interactive-active);
             }
             &:before {
                 position: absolute;
@@ -229,7 +230,7 @@
                 z-index: -1;
                 height: 100%;
                 padding-left: 3.2rem;
-                background: var(--state-active);
+                background: var(--color-interactive-active);
             }
         }
         &-tooltip {

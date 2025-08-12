@@ -54,7 +54,7 @@ html,
     font-size: inherit;
     font-style: inherit;
     padding: 2px 3px;
-    border: 1px solid var(--border-normal);
+    border: 1px solid var(--color-interactive-default);
     border-radius: $BORDER_RADIUS;
 }
 
@@ -63,37 +63,37 @@ html,
     font-family: inherit;
     font-style: inherit;
     padding: 2px 3px;
-    color: var(--text-general);
+    color: var(--color-text-secondary);
 }
 
 // Placeholders
 ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
-    color: var(--text-general);
+    color: var(--color-text-secondary);
 }
 
 ::-moz-placeholder {
     /* Firefox 19+ */
-    color: var(--text-general);
+    color: var(--color-text-secondary);
 }
 
 :-ms-input-placeholder {
     /* IE 10+ */
-    color: var(--text-general);
+    color: var(--color-text-secondary);
 }
 
 :-moz-placeholder {
     /* Firefox 18- */
-    color: var(--text-general);
+    color: var(--color-text-secondary);
 }
 
 /** @define theme */
 .theme {
     &--light {
-        background: $color-white;
+        background: var(--brand-white);
     }
     &--dark {
-        background: $color-black;
+        background: var(--brand-black);
     }
 }
 
@@ -122,7 +122,7 @@ html,
 
 /** @define link */
 .link {
-    color: var(--brand-red-coral);
+    color: var(--brand-primary);
     font-weight: bold;
     text-decoration: none;
 
@@ -131,13 +131,13 @@ html,
         cursor: pointer;
     }
     &--white {
-        color: $color-white;
+        color: var(--brand-white);
     }
     &--right {
         float: right;
     }
     &--prominent {
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
     }
     &--no-underline {
         &:hover {
@@ -147,7 +147,7 @@ html,
 }
 
 .link--no-bold {
-    color: var(--text-red);
+    color: var(--color-text-danger);
     text-decoration: none;
 }
 
@@ -173,7 +173,7 @@ html,
 
 /** @define hr */
 .hr {
-    border-top: var(--general-section-1);
+    border-top: var(--color-surface-border);
     display: block;
     height: 1px;
     border: 0;

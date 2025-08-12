@@ -166,7 +166,7 @@ const WheelPickerMobile: React.FC<WheelPickerMobileProps> = ({
                     <Text
                         size='l'
                         weight='bolder'
-                        color='prominent'
+                        color='primary'
                         align='center'
                         as='h1'
                         className='currency-label'

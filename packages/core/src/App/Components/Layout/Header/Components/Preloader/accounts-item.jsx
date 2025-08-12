@@ -7,8 +7,8 @@ const AccountsItemLoader = ({ speed }) => (
         height={24}
         width={246}
         speed={speed}
-        backgroundColor={'var(--general-section-1)'}
-        foregroundColor={'var(--general-hover)'}
+        backgroundColor={'var(--color-surface-section)'}
+        foregroundColor={'var(--color-interactive-hover)'}
     >
         <circle cx='18' cy='13' r='10' />
         <rect x='36' y='3' rx='4' ry='4' width='108' height='20' />

@@ -8,6 +8,7 @@ import { observer } from '@deriv/stores';
 import { Localize } from '@deriv/translations';
 import { Tag, Text, useSnackbar } from '@deriv-com/quill-ui';
 
+import useActiveSymbols from 'AppV2/Hooks/useActiveSymbols';
 import { useModulesStore } from 'Stores/useModulesStores';
 import { useTraderStore } from 'Stores/useTraderStores';
 
@@ -23,6 +24,7 @@ type TMarketCategoryItem = {
 const MarketCategoryItem = forwardRef(
     ({ item, selectedSymbol, setSelectedSymbol, setIsOpen }: TMarketCategoryItem, ref: Ref<HTMLDivElement>) => {
         const [isFavorite, setIsFavorite] = useState(false);
+        const { activeSymbols } = useActiveSymbols();
         const { onChange: onSymbolChange } = useTraderStore();
         const { markets } = useModulesStore();
         const { favoriteSymbols, setFavoriteSymbols, removeFavoriteSymbol } = markets;
@@ -92,7 +94,9 @@ const MarketCategoryItem = forwardRef(
                                 selectedSymbol === ((item as any).underlying_symbol || item.symbol),
                         })}
                     >
-                        <span>{getSymbolDisplayName([], (item as any).underlying_symbol || item.symbol)}</span>
+                        <span>
+                            {getSymbolDisplayName(activeSymbols, (item as any).underlying_symbol || item.symbol)}
+                        </span>
                     </Text>
                     {!item.exchange_is_open && (
                         <Tag

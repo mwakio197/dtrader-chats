@@ -7,7 +7,7 @@
         height: 100%;
 
         &--active {
-            border: 2px solid var(--text-red);
+            border: 2px solid var(--color-interactive-active);
         }
 
         &--small {
@@ -47,7 +47,7 @@
         mix-blend-mode: overlay;
         opacity: 0.16;
         border-top-right-radius: $BORDER_RADIUS_2;
-        background-color: $color-white;
+        background-color: var(--brand-white);
     }
 
     &__content {
@@ -127,9 +127,9 @@
     }
 
     &__wallet-button {
-        background: $color-white;
+        background: var(--brand-white);
         &-text {
-            color: $color-black-1;
+            color: var(--brand-black)-1;
         }
 
         &--added {

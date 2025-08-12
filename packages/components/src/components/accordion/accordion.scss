@@ -9,9 +9,9 @@
         }
     }
     &__item {
-        border: 1px solid var(--general-section-1);
+        border: 1px solid var(--color-surface-border);
         border-bottom-width: 0;
-        color: var(--text-general);
+        color: var(--color-text-secondary);
         font-size: 1.4rem;
 
         &--first {
@@ -20,7 +20,7 @@
         }
         &--open {
             .dc-accordion__item-header {
-                border-bottom: 1px solid var(--general-section-1);
+                border-bottom: 1px solid var(--color-surface-border);
             }
             .dc-accordion__item-content {
                 display: block;
@@ -46,7 +46,7 @@
                 /* postcss-bem-linter: ignore */
                 path,
                 rect {
-                    fill: var(--text-general);
+                    fill: var(--color-text-secondary);
                 }
             }
         }

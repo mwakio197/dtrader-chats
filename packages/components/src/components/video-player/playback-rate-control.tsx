@@ -40,7 +40,7 @@ const PlaybackRateControl = ({
             ) : (
                 <Icon
                     icon='IcPlaybackRate'
-                    custom_color='var(--text-colored-background)'
+                    custom_color='var(--color-surface-contrast)'
                     size={20}
                     className='playback-rate__icon'
                 />

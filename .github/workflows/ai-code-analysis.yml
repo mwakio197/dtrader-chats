@@ -1,5 +1,6 @@
 name: AI Code Analysis Report
 
+
 on:
   # Use pull_request_target to allow comments on forked PRs
   pull_request_target:
@@ -12,7 +13,8 @@ permissions:
 
 jobs:
   call-ai-analysis:
-    uses: prince-deriv/shared-actions/.github/workflows/ai-code-analysis.yml@master
-    with:
-      personal_access_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      github_token: ${{ secrets.GITHUB_TOKEN }} 
+    # [AI]  This is generated code by AI
+    uses: deriv-com/shared-actions/.github/workflows/ai-code-analysis.yml@v4
+    # [/AI] 
+    secrets:
+      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

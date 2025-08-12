@@ -1,4 +1,5 @@
 import { getContractDurationType, getMarketInformation, getMarketName, getTradeTypeName } from '../market-underlying';
+import { getSymbolDisplayName } from '../active-symbols';
 import { CONTRACT_TYPES, TRADE_TYPES } from '../../contract';
 
 describe('market-underlying', () => {
@@ -45,6 +46,67 @@ describe('market-underlying', () => {
         });
         it('should return an object with empty values when shortcode is not provided', () => {
             expect(getMarketInformation('')).toMatchObject({ category: '', underlying: '' });
+        });
+        it('should correctly extract Jump index symbols from shortcodes', () => {
+            // Test various Jump index shortcode formats
+            expect(getMarketInformation('CALL_JD100_19.53_1695913929_5T_S0P_0')).toMatchObject({
+                category: 'call',
+                underlying: 'JD100',
+            });
+            expect(getMarketInformation('PUT_JD10_19.53_1695913929_5T_S0P_0')).toMatchObject({
+                category: 'put',
+                underlying: 'JD10',
+            });
+            expect(getMarketInformation('CALL_JD25_19.53_1695913929_5T_S0P_0')).toMatchObject({
+                category: 'call',
+                underlying: 'JD25',
+            });
+            expect(getMarketInformation('PUT_JD50_19.53_1695913929_5T_S0P_0')).toMatchObject({
+                category: 'put',
+                underlying: 'JD50',
+            });
+            expect(getMarketInformation('CALL_JD75_19.53_1695913929_5T_S0P_0')).toMatchObject({
+                category: 'call',
+                underlying: 'JD75',
+            });
+            expect(getMarketInformation('PUT_JD150_19.53_1695913929_5T_S0P_0')).toMatchObject({
+                category: 'put',
+                underlying: 'JD150',
+            });
+            expect(getMarketInformation('CALL_JD200_19.53_1695913929_5T_S0P_0')).toMatchObject({
+                category: 'call',
+                underlying: 'JD200',
+            });
+        });
+    });
+
+    describe('getSymbolDisplayName integration with getMarketInformation', () => {
+        it('should correctly resolve Jump index display names from shortcodes', () => {
+            // Test the complete flow: shortcode -> getMarketInformation -> getSymbolDisplayName
+            const { underlying } = getMarketInformation('CALL_JD100_19.53_1695913929_5T_S0P_0');
+            expect(underlying).toBe('JD100');
+
+            // Test the complete flow with getSymbolDisplayName
+            const displayName = getSymbolDisplayName([], underlying);
+            expect(displayName).toBe('Jump 100 Index');
+        });
+
+        it('should correctly resolve all Jump index variants', () => {
+            const testCases = [
+                { shortcode: 'CALL_JD10_19.53_1695913929_5T_S0P_0', expected: 'Jump 10 Index' },
+                { shortcode: 'CALL_JD25_19.53_1695913929_5T_S0P_0', expected: 'Jump 25 Index' },
+                { shortcode: 'CALL_JD50_19.53_1695913929_5T_S0P_0', expected: 'Jump 50 Index' },
+                { shortcode: 'CALL_JD75_19.53_1695913929_5T_S0P_0', expected: 'Jump 75 Index' },
+                { shortcode: 'CALL_JD100_19.53_1695913929_5T_S0P_0', expected: 'Jump 100 Index' },
+                { shortcode: 'CALL_JD150_19.53_1695913929_5T_S0P_0', expected: 'Jump 150 Index' },
+                { shortcode: 'CALL_JD200_19.53_1695913929_5T_S0P_0', expected: 'Jump 200 Index' },
+            ];
+
+            testCases.forEach(({ shortcode, expected }) => {
+                const { underlying } = getMarketInformation(shortcode);
+                const displayName = getSymbolDisplayName([], underlying);
+                expect(displayName).toBe(expected);
+            });
         });
     });
     describe('getMarketName', () => {

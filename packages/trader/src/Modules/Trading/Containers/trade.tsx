@@ -66,11 +66,7 @@ const Trade = observer(() => {
         show_digits_stats,
         symbol,
     } = useTraderStore();
-    const {
-        has_only_forward_starting_contracts: is_market_unavailable_visible,
-        is_dark_mode_on: is_dark_theme,
-        notification_messages_ui: NotificationMessages,
-    } = ui;
+    const { is_dark_mode_on: is_dark_theme, notification_messages_ui: NotificationMessages } = ui;
     const { is_eu, is_logged_in, is_single_logging_in } = client;
     const { network_status } = common;
     const { isDesktop, isMobile, isTabletPortrait } = useDevice();
@@ -268,7 +264,7 @@ const Trade = observer(() => {
             </Div100vhContainer>
             {!shouldShowPortraitLoader && (
                 <div className={form_wrapper_class}>
-                    {is_market_closed && !is_market_unavailable_visible && (
+                    {is_market_closed && (
                         <MarketIsClosedOverlay
                             is_eu={is_eu}
                             is_synthetics_trading_market_available={is_synthetics_trading_market_available}

@@ -24,34 +24,41 @@ const getDateTimeFromEpoch = (epoch: number) => {
 
 const EntryExitDetails = ({ contract_info }: { contract_info: TContractInfo }) => {
     const {
-        entry_tick_time,
+        //@ts-expect-error contract_info is not typed correctly this will not be an issue after the types are fixed
+        entry_spot_time,
         entry_spot_display_value,
         entry_spot,
-        exit_tick_time,
+        // @ts-expect-error contract_info is not typed correctly this will not be an issue after the types are fixed
+        exit_spot_time,
+        // @ts-expect-error contract_info is not typed correctly this will not be an issue after the types are fixed
+        exit_spot,
         date_start,
         exit_tick_display_value,
         exit_tick,
     } = contract_info;
 
+    // [AI]
+    // Backward compatibility: fallback to old field names
+    const actual_entry_spot = entry_spot ?? entry_spot_display_value;
+    const actual_exit_spot = exit_spot ?? exit_tick;
+    const actual_exit_spot_display_value = exit_spot ?? exit_tick_display_value;
+    // [/AI]
+
     const dateTimes = useMemo(
         () => ({
-            entry: entry_tick_time ? getDateTimeFromEpoch(entry_tick_time) : undefined,
-            exit: exit_tick_time ? getDateTimeFromEpoch(exit_tick_time) : undefined,
+            entry: entry_spot_time ? getDateTimeFromEpoch(entry_spot_time) : undefined,
+            exit: exit_spot_time ? getDateTimeFromEpoch(exit_spot_time) : undefined,
             start: date_start ? getDateTimeFromEpoch(date_start) : undefined,
             end: getEndTime(contract_info) ? getDateTimeFromEpoch(getEndTime(contract_info) ?? 0) : undefined,
         }),
         [contract_info]
     );
 
-    const entryValue = entry_spot_display_value
-        ? addComma(entry_spot_display_value)
-        : entry_spot
-          ? addComma(entry_spot.toString())
-          : null;
-    const exitValue = exit_tick_display_value
-        ? addComma(exit_tick_display_value)
-        : exit_tick
-          ? addComma(exit_tick.toString())
+    const entryValue = actual_entry_spot ? addComma(actual_entry_spot.toString()) : null;
+    const exitValue = actual_exit_spot_display_value
+        ? addComma(actual_exit_spot_display_value)
+        : actual_exit_spot
+          ? addComma(actual_exit_spot.toString())
           : null;
 
     return (

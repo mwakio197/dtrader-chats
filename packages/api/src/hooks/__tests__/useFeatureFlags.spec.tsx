@@ -5,7 +5,6 @@ import useFeatureFlags from '../useFeatureFlags';
 
 describe('useFeatureFlags', () => {
     test('should return false for the test flag', async () => {
-        // @ts-expect-error Using a test flag key for testing purposes.
         const mock = mockStore({ feature_flags: { data: { test_flag: false } } });
 
         const wrapper = ({ children }: { children: JSX.Element }) => (
@@ -19,7 +18,6 @@ describe('useFeatureFlags', () => {
     });
 
     test('should return true for the test flag', async () => {
-        // @ts-expect-error Using a test flag key for testing purposes.
         const mock = mockStore({ feature_flags: { data: { test_flag: true } } });
 
         const wrapper = ({ children }: { children: JSX.Element }) => (

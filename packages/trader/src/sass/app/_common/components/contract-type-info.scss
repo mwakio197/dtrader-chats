@@ -79,7 +79,7 @@
             }
         }
         &-definition {
-            color: var(--brand-red-coral);
+            color: var(--brand-primary);
 
             &:hover {
                 text-decoration: underline;
@@ -89,14 +89,14 @@
         h2 {
             @include typeface(--paragraph-left-bold-black, none);
             margin-bottom: 0.8rem;
-            color: var(--text-prominent);
+            color: var(--color-text-primary);
         }
         /* postcss-bem-linter: ignore */
         p,
         ul li {
             @include typeface(--paragraph-left-normal-black, none);
             margin-bottom: 1.6rem;
-            color: var(--text-general);
+            color: var(--color-text-secondary);
         }
         /* postcss-bem-linter: ignore */
         ul {
@@ -146,7 +146,7 @@
 
         @include mobile {
             height: 16.4rem;
-            background-color: var(--general-section-1);
+            background-color: var(--color-surface-primary);
             svg {
                 height: 100%;
             }
@@ -202,7 +202,7 @@
     &__trade-type-btn-wrapper {
         display: flex;
         justify-content: center;
-        border-top: 2px solid var(--general-section-1);
+        border-top: 2px solid var(--color-surface-border);
         padding: 1.6rem 2.4rem;
         margin-top: 1.6rem;
 
@@ -222,7 +222,7 @@
         }
     }
     &__button-wrapper {
-        background: var(--general-section-1);
+        background: var(--color-surface-section);
         padding: 0.4rem;
         margin: 1.6rem;
         border-radius: $BORDER_RADIUS * 1.5;
@@ -234,16 +234,16 @@
         }
 
         .dc-button-menu__button {
-            background-color: var(--general-section-1) !important;
+            background-color: var(--color-surface-section) !important;
 
             .dc-btn__text {
-                color: var(--text-less-prominent) !important;
+                color: var(--color-text-secondary) !important;
             }
             &--active {
-                background-color: var(--button-toggle-alternate) !important;
+                background-color: var(--color-surface-primary) !important;
 
                 .dc-btn__text {
-                    color: var(--text-prominent) !important;
+                    color: var(--color-text-primary) !important;
                 }
             }
         }

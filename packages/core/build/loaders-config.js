@@ -5,7 +5,6 @@ const IS_RELEASE =
     process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'test';
 
 const js_loaders = [
-    '@deriv/shared/src/loaders/deriv-account-loader.js',
     {
         loader: 'babel-loader',
         options: {

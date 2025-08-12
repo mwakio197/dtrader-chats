@@ -5,7 +5,7 @@
     position: relative;
     scroll-behavior: smooth;
     /* Firefox only */
-    scrollbar-color: var(--state-active) var(--general-main-1);
+    scrollbar-color: var(--color-interactive-active) var(--color-surface-primary);
     scrollbar-width: thin;
 
     &__autohide {
@@ -66,6 +66,6 @@
     }
     &::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background-color: var(--state-active);
+        background-color: var(--color-interactive-active);
     }
 }

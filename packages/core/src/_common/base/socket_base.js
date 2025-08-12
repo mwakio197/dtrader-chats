@@ -397,6 +397,11 @@ const BinarySocketBase = (() => {
         });
     };
 
+    const getSessionToken = oneTimeToken =>
+        deriv_api.send({
+            get_session_token: oneTimeToken,
+        });
+
     const changeEmail = api_request => deriv_api.send(api_request);
 
     const getWalletMigrationState = () =>
@@ -499,6 +504,7 @@ const BinarySocketBase = (() => {
         tradingPlatformNewAccount,
         triggerMt5DryRun,
         getServiceToken,
+        getSessionToken,
         changeEmail,
         getWalletMigrationState,
         startWalletMigration,

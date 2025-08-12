@@ -5,7 +5,7 @@
     width: 100%;
 
     .color1-fill {
-        fill: var(--brand-red-coral);
+        fill: var(--brand-primary);
     }
     .color2-fill {
         fill: var(--brand-secondary);
@@ -16,7 +16,7 @@
         justify-content: flex-start;
         align-items: center;
         @include typeface(--paragraph-left-bold-active);
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
     }
     &-name {
         width: 3.2rem;
@@ -29,7 +29,7 @@
         }
     }
     &__multiplier {
-        color: var(--text-less-prominent);
+        color: var(--color-text-secondary);
         font-size: 1rem;
         display: flex;
         align-items: flex-end;

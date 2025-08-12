@@ -35,7 +35,7 @@ const Loading = ({ className, id, is_fullscreen = true, is_slow_loading, status,
             </div>
             {is_slow_loading &&
                 status?.map((text, inx) => (
-                    <Text as='h3' color='prominent' size='xs' align='center' key={inx}>
+                    <Text as='h3' color='primary' size='xs' align='center' key={inx}>
                         {text}
                     </Text>
                 ))}

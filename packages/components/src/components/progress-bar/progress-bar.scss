@@ -11,13 +11,13 @@
         overflow: hidden;
     }
     &--danger {
-        background-color: var(--status-danger);
+        background-color: var(--color-status-danger);
     }
     &--warning {
-        background-color: var(--status-warning);
+        background-color: var(--color-status-warning);
     }
     &--normal {
-        background-color: var(--status-success);
+        background-color: var(--color-status-success);
     }
     &__bar {
         height: 100%;

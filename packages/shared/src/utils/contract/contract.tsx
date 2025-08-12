@@ -4,7 +4,6 @@ import { Localize } from '@deriv/translations';
 import { unique } from '../object';
 import { capitalizeFirstLetter } from '../string/string_util';
 import { TContractInfo, TContractStore, TDigitsInfo, TLimitOrder, TTickItem } from './contract-types';
-import { isForwardStarting } from '../shortcode';
 
 type TGetAccuBarriersDTraderTimeout = (params: {
     barriers_update_timestamp: number;
@@ -106,14 +105,18 @@ export const TRADE_TYPES = {
         FX: 'vanilla_fx',
     },
 } as const;
+export const getContractStatus = (contract_info: TContractInfo) => {
+    // Backward compatibility: handle both old and new field names
+    // @ts-expect-error - exit_spot_time exists in runtime but not in type definition
+    const exit_spot_time = contract_info.exit_spot_time || contract_info.exit_tick_time;
+    const { contract_type, profit, status } = contract_info;
 
-export const getContractStatus = ({ contract_type, exit_tick_time, profit, status }: TContractInfo) => {
-    const closed_contract_status = profit && profit < 0 && exit_tick_time ? 'lost' : 'won';
+    const closed_contract_status = profit && profit < 0 && exit_spot_time ? 'lost' : 'won';
     const is_accumulator = isAccumulatorContract(contract_type);
 
     let result;
     if (is_accumulator) {
-        result = (status === 'open' && !exit_tick_time && 'open') || closed_contract_status;
+        result = (status === 'open' && !exit_spot_time && 'open') || closed_contract_status;
     } else {
         result = status;
     }
@@ -382,6 +385,3 @@ export const getSortedTradeTypes = (array: string[] = []) => {
     }
     return array;
 };
-
-export const isForwardStartingBuyTransaction = (transactionType: string, shortcode: string, transactionTime: number) =>
-    transactionType === 'buy' && !!isForwardStarting(shortcode, transactionTime);

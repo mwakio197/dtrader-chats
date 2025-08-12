@@ -20,7 +20,10 @@ const useDefaultSymbol = () => {
 
             return active_symbols.some(symbol_info => {
                 const exchange_open_check = has_initialized ? true : symbol_info.exchange_is_open === 1;
-                return symbol_info.symbol === symbol_from_store && exchange_open_check;
+                return (
+                    ((symbol_info as any).underlying_symbol || symbol_info.symbol) === symbol_from_store &&
+                    exchange_open_check
+                );
             });
         },
         [symbol_from_store]

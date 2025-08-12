@@ -103,7 +103,7 @@ const ContractInfo = ({
                         {isMobile && (
                             <div className='trade-container__price-info-wrapper'>
                                 <div className='btn-purchase__text_wrapper'>
-                                    <Text size='xs' weight='bold' color='colored-background'>
+                                    <Text size='xs' weight='bold' color='inverse'>
                                         {!is_accumulator ? (
                                             <Money amount={stake} currency={currency} show_currency />
                                         ) : (

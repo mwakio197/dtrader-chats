@@ -27,13 +27,13 @@
             border-radius: 50%;
             display: block;
             width: 24px;
-            background-color: var(--text-less-prominent);
-            border: 1px solid var(--text-less-prominent);
+            background-color: var(--color-text-secondary);
+            border: 1px solid var(--color-text-secondary);
             margin-top: 4px;
 
             &--active {
-                background-color: var(--brand-red-coral) !important;
-                border: 1px solid var(--brand-red-coral) !important;
+                background-color: var(--brand-primary) !important;
+                border: 1px solid var(--brand-primary) !important;
             }
         }
     }
@@ -52,10 +52,10 @@
             position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
             right: 0;
             top: 1.7rem;
-            border-top: 2px solid var(--text-less-prominent);
+            border-top: 2px solid var(--color-text-secondary);
         }
         &--after {
-            border-top: 2px solid var(--brand-red-coral);
+            border-top: 2px solid var(--brand-primary);
             transition: width 0.3s ease;
             @include desktop-screen {
                 bottom: 0;

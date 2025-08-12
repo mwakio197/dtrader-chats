@@ -6,9 +6,11 @@
         position: relative;
         overflow: hidden;
         border-radius: 8px;
-        transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.1, 0.25), opacity 0.25s cubic-bezier(0.25, 0.1, 0.1, 0.25);
-        background-color: var(--general-main-2);
-        box-shadow: 0 4px 6px 0 var(--shadow-menu);
+        transition:
+            transform 0.25s cubic-bezier(0.25, 0.1, 0.1, 0.25),
+            opacity 0.25s cubic-bezier(0.25, 0.1, 0.1, 0.25);
+        background-color: var(--color-modal-bg);
+        box-shadow: 0 4px 6px 0 var(--color-shadow-medium);
 
         &--is-vertical-centered {
             position: absolute;
@@ -102,7 +104,7 @@
         align-items: center;
 
         &__border-bottom {
-            border-bottom: 2px solid var(--general-section-5) !important;
+            border-bottom: 2px solid var(--color-surface-border) !important;
         }
 
         &__icon {
@@ -183,7 +185,7 @@
         padding: 2.4rem;
         font-size: 1.4rem;
         line-height: 1.43;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
 
         &__expiration {
             min-height: 12rem;
@@ -210,7 +212,7 @@
             }
         }
         &--separator {
-            border-top: 2px solid var(--general-section-1);
+            border-top: 2px solid var(--color-surface-border);
         }
     }
 }

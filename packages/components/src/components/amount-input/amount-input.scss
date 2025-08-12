@@ -10,19 +10,19 @@
     height: 2.8rem;
 
     .dc-input__field {
-        color: var(--text-general);
+        color: var(--color-text-secondary);
     }
 
     &--error {
         .dc-input__field {
-            color: var(--text-loss-danger);
-            -webkit-text-fill-color: var(--text-loss-danger);
+            color: var(--color-text-danger);
+            -webkit-text-fill-color: var(--color-text-danger);
         }
     }
 
     &--disabled {
         .dc-input__field {
-            color: var(--text-disabled-1);
+            color: var(--color-text-disabled);
         }
     }
 

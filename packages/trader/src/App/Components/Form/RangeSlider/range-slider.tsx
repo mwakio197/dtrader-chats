@@ -102,7 +102,7 @@ const RangeSlider = ({ className, name, value, min_value, max_value, onChange }:
             </label>
             <div className='range-slider__caption'>
                 {!!display_value && (
-                    <Text align='center' weight='bold' size='xs' color='prominent' id='dt_range_slider_label'>
+                    <Text align='center' weight='bold' size='xs' color='primary' id='dt_range_slider_label'>
                         {display_value === 1 && localize('{{display_value}} Tick', { display_value })}
                         {display_value > 1 && localize('{{display_value}} Ticks', { display_value })}
                     </Text>

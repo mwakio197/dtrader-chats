@@ -8,7 +8,7 @@
         padding: 16px;
 
         &--icon {
-            @include colorIcon(var(--text-general));
+            @include colorIcon(var(--color-text-secondary));
         }
         &-wrapper {
             cursor: pointer;
@@ -17,7 +17,7 @@
             margin-left: auto;
 
             &:hover {
-                background: var(--general-hover);
+                background: var(--color-interactive-hover);
             }
         }
     }

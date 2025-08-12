@@ -17,7 +17,6 @@ export { default as useIntercom, useIsIntercomAvailable } from './useIntercom';
 export { default as useIsLiveChatWidgetAvailable } from './useIsLiveChatWidgetAvailable';
 export { default as useLocalStorageData } from './useLocalStorageData';
 export { default as useMFAccountStatus } from './useMFAccountStatus';
-export { default as useNeedAuthentication } from './useNeedAuthentication';
 export { default as useIsTNCNeeded } from './useIsTNCNeeded';
 export { default as useNotificationEvent } from './useNotificationEvent';
 export { default as usePlatformAccounts } from './usePlatformAccounts';

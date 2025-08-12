@@ -3,19 +3,19 @@
     min-height: 4.8rem;
     border-radius: $BORDER_RADIUS;
     padding: 0.8rem;
-    background-color: $color-grey-5;
+    background-color: var(--color-interactive-default);
     display: flex;
     justify-content: space-between;
     text-decoration: none;
 
     * {
-        color: $color-black-1; // text color is unchanged for both themes
+        color: var(--brand-black)-1; // text color is unchanged for both themes
     }
     &--failure {
-        background-color: $color-red-11;
+        background-color: var(--brand-danger)-11;
     }
     &--success {
-        background-color: $color-green-8;
+        background-color: var(--brand-secondary)-8;
     }
     &-content {
         align-self: center;

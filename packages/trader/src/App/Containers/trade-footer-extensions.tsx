@@ -25,7 +25,7 @@ const TradeFooterExtensions = observer((props: RouteComponentProps) => {
     );
 
     const populateFooter = () => {
-        const show_positions_toggle = location.pathname === routes.trade;
+        const show_positions_toggle = location.pathname === routes.index;
 
         if (is_logged_in && show_positions_toggle) {
             populateFooterExtensions([

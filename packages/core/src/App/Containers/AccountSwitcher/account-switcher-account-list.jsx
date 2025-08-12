@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Icon, Money, Button, Text } from '@deriv/components';
-import { formatMoney, getCurrencyName, getCurrencyDisplayCode, isBot } from '@deriv/shared';
+import { formatMoney, getCurrencyName, getCurrencyDisplayCode } from '@deriv/shared';
 import { Localize, localize } from '@deriv/translations';
 
 const AccountList = ({
@@ -12,21 +12,12 @@ const AccountList = ({
     has_balance,
     has_error,
     has_reset_balance,
-    is_dark_mode_on,
     is_disabled,
     is_virtual,
-    is_eu,
-    product,
     loginid,
-    market_type,
     redirectAccount,
     onClickResetVirtualBalance,
     selected_loginid,
-    server,
-    shortcode,
-    sub_account_type,
-    platform,
-    should_show_server_name,
 }) => {
     const currency_badge = currency ? currency_icon : 'IcCurrencyUnknown';
     return (
@@ -48,21 +39,8 @@ const AccountList = ({
                         size={24}
                     />
                     <span>
-                        {display_type === 'currency' ? (
+                        {display_type === 'currency' && (
                             <CurrencyDisplay currency={currency} loginid={loginid} is_virtual={is_virtual} />
-                        ) : (
-                            <AccountDisplay
-                                is_eu={is_eu}
-                                market_type={market_type}
-                                server={server}
-                                sub_account_type={sub_account_type}
-                                has_error={has_error}
-                                platform={platform}
-                                product={product}
-                                is_dark_mode_on={is_dark_mode_on}
-                                shortcode={shortcode}
-                                should_show_server_name={should_show_server_name}
-                            />
                         )}
                         <div
                             className={classNames('acc-switcher__loginid-text', {
@@ -89,7 +67,7 @@ const AccountList = ({
                         has_balance && (
                             <Text
                                 size='xs'
-                                color='prominent'
+                                color='primary'
                                 styles={{ fontWeight: 'inherit' }}
                                 className='acc-switcher__balance'
                             >
@@ -126,69 +104,6 @@ const CurrencyDisplay = ({ currency, loginid, is_virtual }) => {
     }
 
     return getCurrencyName(currency);
-};
-
-const AccountDisplay = ({
-    has_error,
-    market_type,
-    platform,
-    server,
-    is_dark_mode_on,
-    shortcode,
-    should_show_server_name,
-}) => {
-    // Simple account title based on market_type
-    const account_title = market_type === 'synthetic' ? localize('Synthetic') : localize('Financial');
-    // TODO: Remove once account with error has market_type and sub_account_type in details response
-    const getServerName = React.useCallback(account => {
-        if (account) {
-            const server_region = account.server_info?.geolocation?.region;
-            if (server_region) {
-                return `${server_region} ${
-                    account?.server_info?.geolocation?.sequence === 1 ? '' : account?.server_info?.geolocation?.sequence
-                }`;
-            }
-        }
-        return '';
-    }, []);
-    if (has_error)
-        return (
-            <div>
-                <Text color='disabled' size='xs'>
-                    <Localize i18n_default_text='Unavailable' />
-                </Text>
-                {server?.server_info?.geolocation &&
-                    should_show_server_name &&
-                    market_type === 'synthetic' &&
-                    shortcode === 'svg' && (
-                        <Text color='less-prominent' size='xxs' className='badge-server badge-server--disabled'>
-                            {getServerName(server)}
-                        </Text>
-                    )}
-            </div>
-        );
-
-    const is_bot = isBot();
-    return (
-        <div>
-            {/* TODO: Remove below condition once deriv x changes are completed */}
-            {platform === 'dxtrade' && account_title === localize('Derived') ? localize('Synthetic') : account_title}
-            {server?.server_info?.geolocation &&
-                should_show_server_name &&
-                market_type === 'synthetic' &&
-                shortcode === 'svg' && (
-                    <Text
-                        color={is_dark_mode_on ? 'general' : 'colored-background'}
-                        size='xxs'
-                        className={classNames('badge-server', {
-                            'badge-server-bot': is_bot,
-                        })}
-                    >
-                        {getServerName(server)}
-                    </Text>
-                )}
-        </div>
-    );
 };
 
 export default AccountList;

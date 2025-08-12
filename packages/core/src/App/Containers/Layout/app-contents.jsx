@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { ThemedScrollbars } from '@deriv/components';
 import { useGrowthbookGetFeatureValue } from '@deriv/api';
-import { CookieStorage, platforms, redirectToLogin, routes, TRACKING_STATUS_KEY, WS } from '@deriv/shared';
+import { CookieStorage, platforms, redirectToLogin, TRACKING_STATUS_KEY, WS } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { getLanguage } from '@deriv/translations';
 import { Analytics } from '@deriv-com/analytics';
@@ -134,27 +134,21 @@ const AppContents = observer(({ children }) => {
                 'app-contents--is-hidden':
                     (isDuplicateLoginEnabled && has_access_denied_error) ||
                     (platforms[platform] && !(is_from_tradershub_os && isMobile)),
-                'app-contents--is-onboarding': window.location.pathname === routes.onboarding,
                 'app-contents--is-dtrader-v2': isMobile,
             })}
             ref={scroll_ref}
         >
             {isMobile && children}
-            {!isMobile &&
+            {!isMobile && (
                 /* Calculate height of user screen and offset height of header and footer */
-                (window.location.pathname === routes.onboarding ? (
-                    <ThemedScrollbars style={{ maxHeight: '', height: '100%' }} refSetter={child_ref}>
-                        {children}
-                    </ThemedScrollbars>
-                ) : (
-                    <ThemedScrollbars
-                        height={isDesktop ? 'calc(100vh - 84px)' : undefined}
-                        has_horizontal
-                        refSetter={child_ref}
-                    >
-                        {children}
-                    </ThemedScrollbars>
-                ))}
+                <ThemedScrollbars
+                    height={isDesktop ? 'calc(100vh - 84px)' : undefined}
+                    has_horizontal
+                    refSetter={child_ref}
+                >
+                    {children}
+                </ThemedScrollbars>
+            )}
             {show_cookie_banner && (
                 <CookieBanner
                     onAccept={onAccept}

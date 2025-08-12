@@ -62,10 +62,10 @@
         flex-direction: column;
         position: relative;
         overflow: hidden;
-        background-color: var(--general-main-2);
+        background-color: var(--color-surface-primary);
         box-shadow:
-            0 16px 16px 0 var(--shadow-menu),
-            0 0 16px 0 var(--shadow-menu);
+            0 16px 16px 0 var(--color-shadow-medium),
+            0 0 16px 0 var(--color-shadow-medium);
     }
 
     &-header {
@@ -82,7 +82,7 @@
         z-index: 4;
         line-height: 24px;
         align-items: center;
-        border-bottom: 1px solid var(--general-section-2);
+        border-bottom: 1px solid var(--color-surface-border);
 
         &--right {
             flex-direction: row-reverse;
@@ -93,7 +93,7 @@
             width: 100%;
             display: flex;
             align-items: center;
-            border-left: 1px solid var(--general-section-2);
+            border-left: 1px solid var(--color-surface-border);
         }
         &-section {
             flex-grow: 1;
@@ -122,13 +122,13 @@
         display: flex;
         height: 72px;
         min-height: 72px;
-        border-bottom: 1px solid var(--general-section-2);
+        border-bottom: 1px solid var(--color-surface-border);
         justify-content: center;
         align-items: center;
         margin-bottom: 1.8rem;
         position: absolute;
         width: 100%;
-        background: var(--general-main-2);
+        background: var(--color-surface-primary);
         z-index: 1;
 
         &--hidden {
@@ -172,7 +172,7 @@
             }
         }
         &-list {
-            background: var(--general-main-2);
+            background: var(--color-surface-primary);
             position: absolute;
             z-index: 2;
             transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.1, 0.25);
@@ -235,9 +235,8 @@
     &__body {
         font-size: 1.4rem;
         height: 100%;
-        padding-top: 8.8rem;
         line-height: 1.5;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
         overflow-y: auto;
         overflow-x: hidden;
 
@@ -254,7 +253,7 @@
         font-size: 1.4rem;
         line-height: 1.5;
         height: 5.6rem;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -263,7 +262,7 @@
         display: flex;
         height: 36px;
         z-index: 4;
-        border-top: 1px solid var(--general-section-2);
+        border-top: 1px solid var(--color-surface-border);
         justify-content: flex-start;
         align-items: center;
         padding: 1.6rem;
@@ -271,12 +270,12 @@
         &--servertime {
             justify-content: center;
             align-items: center;
-            border-top: 1px solid var(--general-section-2);
+            border-top: 1px solid var(--color-surface-border);
         }
     }
     &__overlay {
         z-index: 9999 !important;
-        background-color: var(--overlay-outside-dialog) !important;
+        background-color: var(--color-modal-backdrop) !important;
     }
     &.exit {
         animation: closeDrawer 0.3s;

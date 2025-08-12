@@ -25,7 +25,7 @@
 .dc-collapsible {
     padding: 0.8rem;
     border-radius: 0.4rem;
-    background-color: var(--general-section-1);
+    background-color: var(--color-surface-primary);
 
     &--has-collapsible-btn {
         padding-top: 0;
@@ -52,7 +52,7 @@
             height: 0.4rem;
             margin-top: 0.8rem;
             border-radius: 0.2rem;
-            background-color: var(--general-active);
+            background-color: var(--color-interactive-active);
         }
 
         &--top {

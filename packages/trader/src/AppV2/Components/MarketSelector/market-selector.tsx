@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { LabelPairedChevronDownMdRegularIcon } from '@deriv/quill-icons';
 import { getMarketNamesMap, getSymbolDisplayName } from '@deriv/shared';
@@ -21,7 +21,9 @@ const MarketSelector = observer(() => {
     const { addSnackbar } = useSnackbar();
     const { trade_types } = useContractsForCompany();
 
-    const currentSymbol = activeSymbols.find(({ symbol }) => symbol === storeSymbol);
+    const currentSymbol = activeSymbols.find(
+        symbol_info => ((symbol_info as any).underlying_symbol || symbol_info.symbol) === storeSymbol
+    );
 
     const contract_name = trade_types?.find((item: TContractType) => item.value === contract_type)?.text;
 
@@ -67,9 +69,86 @@ const MarketSelector = observer(() => {
         <Skeleton.Square height={18} width={64} rounded />
     );
 
-    // For closed markets exchange_is_open === 0
-    if (typeof currentSymbol?.exchange_is_open === 'undefined')
+    // Add timeout mechanism to prevent infinite skeleton loading
+    const [showFallback, setShowFallback] = useState(false);
+    const [hasError, setHasError] = useState(false);
+    const timeoutRef = useRef<NodeJS.Timeout>();
+
+    // Error handling for symbol data
+    useEffect(() => {
+        if (activeSymbols?.length > 0 && !currentSymbol && storeSymbol) {
+            setHasError(true);
+        } else if (hasError && currentSymbol) {
+            setHasError(false);
+        }
+    }, [activeSymbols, currentSymbol, storeSymbol, hasError]);
+
+    useEffect(() => {
+        // If exchange_is_open is undefined, start a timeout
+        if (typeof currentSymbol?.exchange_is_open === 'undefined' && !hasError) {
+            timeoutRef.current = setTimeout(() => {
+                setShowFallback(true);
+            }, 5000); // 5 second timeout
+        } else {
+            // Clear timeout if data becomes available
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+                timeoutRef.current = undefined;
+            }
+            if (!hasError) {
+                setShowFallback(false);
+            }
+        }
+
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, [currentSymbol?.exchange_is_open, hasError]);
+
+    // Show error state if there's a critical error
+    if (hasError && activeSymbols?.length > 0) {
+        return (
+            <div className='market-selector__error' style={{ padding: '8px', textAlign: 'center' }}>
+                <Text size='sm' color='error'>
+                    <Localize i18n_default_text='Symbol not available. Please select another market.' />
+                </Text>
+            </div>
+        );
+    }
+
+    // Show skeleton loader for a reasonable time, then fallback to basic UI
+    if (typeof currentSymbol?.exchange_is_open === 'undefined' && !showFallback) {
         return <Skeleton.Square height={42} width={240} rounded />;
+    }
+
+    // Fallback UI when data is not available after timeout
+    if (showFallback && typeof currentSymbol?.exchange_is_open === 'undefined') {
+        return (
+            <React.Fragment>
+                <div className='market-selector__container' onClick={() => setIsOpen(true)}>
+                    <div className='market-selector'>
+                        <SymbolIconsMapper symbol={storeSymbol} />
+                        <div className='market-selector-info'>
+                            <div className='market-selector-info__label'>
+                                <Text bold>{getSymbolDisplayName(activeSymbols, storeSymbol)}</Text>
+                                <Tag
+                                    label={<Localize key='loading' i18n_default_text='LOADING' />}
+                                    color='warning'
+                                    variant='fill'
+                                    showIcon={false}
+                                    size='sm'
+                                />
+                                <LabelPairedChevronDownMdRegularIcon fill='var(--component-textIcon-normal-default' />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ActiveSymbolsList isOpen={isOpen} setIsOpen={setIsOpen} />
+            </React.Fragment>
+        );
+    }
 
     return (
         <React.Fragment>
@@ -80,7 +159,7 @@ const MarketSelector = observer(() => {
                         <div className='market-selector-info__label'>
                             <Text bold>
                                 {getSymbolDisplayName(
-                                    [],
+                                    activeSymbols,
                                     (currentSymbol as any)?.underlying_symbol || currentSymbol?.symbol || ''
                                 )}
                             </Text>
@@ -95,11 +174,11 @@ const MarketSelector = observer(() => {
                             )}
                             <LabelPairedChevronDownMdRegularIcon fill='var(--component-textIcon-normal-default' />
                         </div>
-                        {/* {current_spot ? (
+                        {current_spot ? (
                             <CaptionText className='market-selector-info__price'>{current_spot}</CaptionText>
                         ) : (
                             current_spot_replacement
-                        )} */}
+                        )}
                     </div>
                 </div>
             </div>

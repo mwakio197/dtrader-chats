@@ -35,7 +35,9 @@ const AccountVerificationRequiredModal = observer(
                         <Button
                             has_effect
                             text={localize('Submit Proof')}
-                            onClick={() => history.push(routes.proof_of_identity)}
+                            onClick={() => {
+                                // TODO: Either redirect to POI or remove this modal completely
+                            }}
                             primary
                         />
                     </Modal.Footer>

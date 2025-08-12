@@ -47,6 +47,11 @@ const TurbosCardBody = ({
         limit_order = {},
         sell_price,
     } = contract_info;
+
+    // [AI]
+    // Backward compatibility: fallback to old field name
+    const actual_entry_spot = entry_spot ?? entry_spot_display_value;
+    // [/AI]
     const { take_profit } = getLimitOrderAmount(contract_update || limit_order);
     const is_valid_to_sell = isValidToSell(contract_info);
     const contract_value = is_sold ? sell_price : bid_price;
@@ -83,11 +88,7 @@ const TurbosCardBody = ({
                     is_crypto={isCryptocurrency(currency)}
                     className='dc-contract-card__entry-spot'
                 >
-                    {entry_spot_display_value
-                        ? addComma(entry_spot_display_value)
-                        : entry_spot
-                          ? addComma(entry_spot.toString())
-                          : '-'}
+                    {actual_entry_spot ? addComma(actual_entry_spot.toString()) : '-'}
                 </ContractCardItem>
 
                 <div className='dc-contract-card__limit-order-info'>

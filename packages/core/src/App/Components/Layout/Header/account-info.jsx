@@ -62,6 +62,7 @@ const AccountInfo = ({ acc_switcher_disabled_message, balance, currency, is_virt
                     </div>
                 </div>
             </AccountInfoWrapper>
+            {isDesktop && <div className='acc-info__separator' />}
         </div>
     );
 };

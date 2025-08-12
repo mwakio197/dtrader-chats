@@ -18,12 +18,10 @@ const TradeModals = observer(() => {
     const {
         is_services_error_visible,
         is_mf_verification_pending_modal_visible,
-        setHasOnlyForwardingContracts,
         toggleServicesErrorModal,
         setIsMFVericationPendingModal,
     } = ui;
     const resetToPreviousMarket = () => {
-        setHasOnlyForwardingContracts(false);
         resetPreviousSymbol();
     };
 

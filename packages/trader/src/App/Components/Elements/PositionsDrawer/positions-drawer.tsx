@@ -196,7 +196,7 @@ const PositionsDrawer = observer(({ ...props }) => {
                 })}
             >
                 <div className='positions-drawer__header'>
-                    <Text color='prominent' weight='bold' size='xs'>
+                    <Text color='primary' weight='bold' size='xs'>
                         {localize('Open positions')}
                     </Text>
                     <div

@@ -16,9 +16,6 @@ module.exports = {
     }),
     getLocalStorage: jest.fn(key => localStorage.getItem(key)),
 
-    // Wallet and currency functions
-    getWalletCurrencyIcon: jest.fn(() => 'mock-icon'),
-
     // Token functions
     getToken: jest.fn(() => 'mock_token'),
     getTmbToken: jest.fn(() => Promise.resolve('mock_token')),

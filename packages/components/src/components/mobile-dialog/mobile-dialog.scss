@@ -11,7 +11,7 @@
     transition: opacity 0.2s;
     opacity: 0;
     pointer-events: none;
-    background: var(--fill-normal);
+    background: var(--color-surface-primary);
     // transform here would break fixed header
 
     &--enter,
@@ -43,7 +43,7 @@
         position: relative;
         padding-top: 3.6rem;
         z-index: 1;
-        background: var(--fill-normal);
+        background: var(--color-surface-primary);
         transition: all 0.2s ease-out;
 
         &--is-full-height {
@@ -65,10 +65,10 @@
         padding: 1rem;
         height: $MOBILE_HEADER_HEIGHT;
         z-index: 4;
-        background: var(--fill-normal);
+        background: var(--color-surface-primary);
         transition: all 0.2s ease-out;
         transition-delay: 0.2s;
-        border-bottom: 1px solid var(--border-disabled);
+        border-bottom: 1px solid var(--color-interactive-disabled);
     }
     &__container {
         &--has-scroll {
@@ -87,7 +87,7 @@
                         position: sticky;
                         top: 0;
                         z-index: 4;
-                        background: var(--fill-normal);
+                        background: var(--color-surface-primary);
                         width: 100%;
                         // transparent border ensures children's margins contribute to height:
                         border-bottom: 0.01rem solid transparent;
@@ -105,7 +105,7 @@
                             justify-content: space-between;
                             align-items: center;
                             border: none;
-                            background-color: var(--general-section-1);
+                            background-color: var(--color-surface-primary);
                             cursor: pointer;
                             border-radius: $BORDER_RADIUS;
                         }
@@ -133,6 +133,6 @@
         width: 1.6rem;
         height: 1.6rem;
         /* postcss-bem-linter: ignore */
-        --fill-color1: var(--text-prominent) !important;
+        --fill-color1: var(--color-text-primary) !important;
     }
 }

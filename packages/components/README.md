@@ -2,13 +2,10 @@
 
 Reusable UI components for Deriv.
 
-[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](@)
-
 **In this document**
 
--   [Commands](#commands)
--   [Storybook](#storybook)
--   [Usage](#usage)
+- [Commands](#commands)
+- [Usage](#usage)
 
 ## Commands
 
@@ -53,32 +50,6 @@ The `eslint .` command is used to run eslint on the components package. It shoul
 
 ```sh
 eslint .
-```
-
-## Storybook
-
--   [`Storybook`](https://github.com/deriv-com/deriv-app/blob/master/storybook/README.md)
-
-The `npm run storybook` command is used to start storybook within the components package
-
-```shell script
-npm run storybook
-```
-
-The `npm run storybook:build` command is used to build storybook within the components package
-
-storybook:build:
-
-```sh
-npm run storybook:build
-```
-
-The `npm run storybook:deploy br_storybook` command is used to deploy storybook within the components package to the specified branch. In this case, br_storybook
-
-storybook:deploy:
-
-```sh
-npm run storybook:deploy br_storybook
 ```
 
 ## Usage

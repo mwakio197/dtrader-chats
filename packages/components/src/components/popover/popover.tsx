@@ -157,7 +157,9 @@ const Popover = ({
                                 position={position}
                                 childRect={childRect}
                                 popoverRect={popoverRect}
-                                arrowColor={has_error ? 'var(--status-danger)' : 'var(--general-active)'}
+                                arrowColor={
+                                    has_error ? 'var(--color-status-danger)' : 'var(--color-interactive-active)'
+                                }
                                 arrowSize={5}
                                 arrowStyle={
                                     relative_render
@@ -165,7 +167,9 @@ const Popover = ({
                                               borderTop: '10px solid transparent',
                                               borderLeft: '10px solid transparent',
                                               borderRight: `10px solid ${
-                                                  has_error ? 'var(--status-danger)' : 'var(--general-active)'
+                                                  has_error
+                                                      ? 'var(--color-status-danger)'
+                                                      : 'var(--color-interactive-active)'
                                               }`,
                                               transform: 'rotate(315deg)',
                                               right: '0px',
@@ -194,7 +198,7 @@ const Popover = ({
                                         </i>
                                     )}
                                     {(has_error && (
-                                        <Text size='xxs' color='colored-background'>
+                                        <Text size='xxs' color='inverse'>
                                             {message}
                                         </Text>
                                     )) || (

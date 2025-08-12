@@ -31,7 +31,7 @@ const BarriersList = ({ className, header, onClickCross, show_table, ...props }:
             >
                 <Fieldset className={classNames('trade-container__fieldset', className)}>
                     <div className={`${className}__header`}>
-                        <Text color='prominent' weight='bold' size='xs'>
+                        <Text color='primary' weight='bold' size='xs'>
                             {header}
                         </Text>
                         <div className={`${className}__icon-close`} onClick={onClickCross}>

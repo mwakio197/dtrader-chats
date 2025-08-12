@@ -20,10 +20,10 @@
                 }
             }
             .color1-fill {
-                fill: var(--text-general);
+                fill: var(--color-text-secondary);
             }
             .color1-stroke {
-                stroke: var(--text-general);
+                stroke: var(--color-text-secondary);
             }
         }
         &__step {
@@ -48,9 +48,9 @@
         position: fixed;
         width: 264px;
         height: 525px;
-        background: var(--general-main-2);
+        background: var(--color-surface-primary);
         border-radius: $BORDER_RADIUS;
-        box-shadow: 0 4px 8px 2px var(--shadow-menu);
+        box-shadow: 0 4px 8px 2px var(--color-shadow-medium);
         transition:
             transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
             opacity 0.25s linear;
@@ -79,7 +79,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 1px solid var(--border-normal);
+            border-bottom: 1px solid var(--color-surface-border);
 
             &-text {
                 margin: 1rem 0;
@@ -94,8 +94,8 @@
             display: flex;
             justify-content: end;
             padding-left: 1.3rem;
-            background: var(--general-main-2);
-            box-shadow: 0 4px 8px 2px var(--shadow-menu);
+            background: var(--color-surface-primary);
+            box-shadow: 0 4px 8px 2px var(--color-shadow-medium);
             transition:
                 transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
                 opacity 0.25s linear;
@@ -103,10 +103,10 @@
             border-bottom-left-radius: 0.5rem;
         }
         &__separator {
-            border-bottom: 1px solid var(--general-section-1);
+            border-bottom: 1px solid var(--color-notification-info-border);
         }
         &__clear {
-            border: 1px solid var(--shadow-box);
+            border: 1px solid var(--color-notification-info-border);
             height: 2.4rem;
             width: auto;
             bottom: 0.6rem;
@@ -114,7 +114,7 @@
             padding: 0.7rem;
 
             &:hover {
-                background: var(--button-secondary-hover);
+                background: var(--color-button-secondary-hover);
             }
         }
         &__content {
@@ -169,7 +169,7 @@
             margin-bottom: 8px;
 
             .color1-fill {
-                fill: var(--text-less-prominent);
+                fill: var(--color-text-secondary);
             }
         }
         &__header {
@@ -190,7 +190,7 @@
             left: -3.2rem;
             width: calc(100% + 4rem);
             height: 1px;
-            background: var(--border-disabled);
+            background: var(--color-interactive-disabled);
         }
         &__cta-button {
             padding: 0.3rem 0.8rem;
@@ -222,13 +222,13 @@
         }
         &__message {
             font-size: 1.2rem;
-            color: var(--text-prominent);
+            color: var(--color-text-primary);
             line-height: 1.5;
 
             a {
                 text-decoration: none;
                 font-weight: bold;
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
             }
         }
         &__action {

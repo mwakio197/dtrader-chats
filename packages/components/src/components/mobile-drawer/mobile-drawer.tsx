@@ -71,7 +71,7 @@ const MobileDrawer = ({
                                 {title && (
                                     <Text
                                         as='h3'
-                                        color='prominent'
+                                        color='primary'
                                         weight='bold'
                                         className={classNames('dc-mobile-drawer__header-title', {
                                             [`dc-mobile-drawer-header__title--${className}`]: className,

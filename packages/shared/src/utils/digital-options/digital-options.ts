@@ -37,7 +37,7 @@ export const showDigitalOptionsUnavailableError = (
         redirect_label: link,
         redirectOnClick,
         should_show_refresh: false,
-        redirect_to: routes.trade,
+        redirect_to: routes.index,
         should_clear_error_on_click,
         should_redirect,
     });

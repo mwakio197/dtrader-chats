@@ -3,10 +3,12 @@
     position: relative;
     z-index: 2;
     border-radius: 4px;
-    transition: transform 0.3s, opacity 0.3s;
-    color: var(--text-prominent);
-    background: var(--fill-normal);
-    border: 1px solid var(--fill-normal);
+    transition:
+        transform 0.3s,
+        opacity 0.3s;
+    color: var(--color-text-primary);
+    background: var(--color-surface-primary);
+    border: 1px solid var(--color-surface-border);
 
     &__display {
         cursor: pointer;
@@ -23,7 +25,7 @@
         /* postcss-bem-linter: ignore */
         span[data-name='contract_type'] {
             @include typeface(--paragraph-left-normal-black);
-            color: var(--text-prominent);
+            color: var(--color-text-primary);
             font-weight: bold;
             vertical-align: middle;
             padding-left: 0.4em;
@@ -31,11 +33,11 @@
         }
         &:hover,
         &:focus {
-            border-color: var(--border-hover);
+            border-color: var(--color-interactive-hover);
             outline: none;
         }
         &--clicked {
-            border-color: var(--border-active);
+            border-color: var(--color-interactive-active);
 
             .contract-type-widget__select-arrow {
                 transform: rotate(-90deg);
@@ -57,7 +59,7 @@
         transition: transform 0.25s ease;
         transform: rotate(90deg);
         transform-origin: 45% 45;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
         @extend %inline-icon;
 
         &--right {
@@ -78,17 +80,17 @@
         /* postcss-bem-linter: ignore */
         .category-wrapper {
             margin: 0 0.2em;
-            background-color: var(--general-section-1);
+            background-color: var(--color-surface-section);
 
             /* postcss-bem-linter: ignore */
             .category-type {
                 /* postcss-bem-linter: ignore */
                 .transparent {
-                    fill: var(--general-section-1);
+                    fill: var(--color-surface-primary);
                 }
                 /* postcss-bem-linter: ignore */
                 .color1-fill {
-                    fill: var(--brand-red-coral);
+                    fill: var(--brand-primary);
                 }
                 /* postcss-bem-linter: ignore */
                 .color2-fill {
@@ -98,14 +100,14 @@
         }
     }
     &:hover {
-        border-color: var(--border-hover);
+        border-color: var(--color-interactive-hover);
     }
     &:active,
     &:focus,
     &--show {
         outline: none;
         border-radius: 4px;
-        border-color: var(--border-active);
+        border-color: var(--color-interactive-active);
     }
     @include mobile-screen {
         margin-bottom: 0.8rem;
@@ -128,9 +130,8 @@
 
 .learn-more_title {
     margin-bottom: 0.8rem;
-    background-color: var(--general-section-1);
     border: none;
-    border-bottom: 1px dotted var(--text-general);
+    border-bottom: 1px dotted var(--color-text-secondary);
     padding: 0;
     cursor: pointer;
 

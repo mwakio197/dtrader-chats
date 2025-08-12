@@ -24,7 +24,7 @@ const IconArrow = ({ className }: { className?: string }) => (
 
 const IconArrowWithTitle = ({ title, ...props }: TIconArrowWithTitle) => (
     <React.Fragment>
-        <Text size='xs' weight='bold' color='prominent' className='dc-collapsible__title'>
+        <Text size='xs' weight='bold' color='primary' className='dc-collapsible__title'>
             {title}
         </Text>
         <Icon icon='IcChevronDown' {...props} />

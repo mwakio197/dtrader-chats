@@ -9,7 +9,7 @@
     text-decoration: none;
     position: relative;
     padding: 0.8rem;
-    color: var(--text-general);
+    color: var(--color-text-secondary);
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
@@ -35,10 +35,10 @@
         gap: 0.4rem;
 
         &--won {
-            color: var(--text-profit-success);
+            color: var(--color-text-success);
         }
         &--lost {
-            color: var(--text-loss-danger);
+            color: var(--color-text-danger);
         }
         &-wrapper {
             cursor: pointer;
@@ -57,22 +57,24 @@
         justify-content: center;
         align-items: center;
         font-size: 1.4rem;
-        border-top: 1px solid var(--general-section-1);
+        border-top: 1px solid var(--color-surface-border);
         padding-top: 0.8rem;
     }
     &__wrapper {
         margin: 0.8rem;
         border-radius: $BORDER_RADIUS;
-        transition: transform 0.25s ease, opacity 0.25s linear;
+        transition:
+            transform 0.25s ease,
+            opacity 0.25s linear;
         position: relative;
-        background: var(--general-main-1);
-        border: 1px solid var(--border-disabled);
+        background: var(--color-surface-primary);
+        border: 1px solid var(--color-interactive-disabled);
     }
     &__grid {
         display: grid;
 
         &-header {
-            border-bottom: 1px solid var(--general-section-1);
+            border-bottom: 1px solid var(--color-surface-border);
             grid-template-columns: 1fr 1fr 1fr;
             padding-bottom: 1rem;
             margin-bottom: 0.8rem;
@@ -140,7 +142,7 @@
         /* postcss-bem-linter: ignore */
         .category-type {
             .color1-fill {
-                fill: var(--brand-red-coral);
+                fill: var(--brand-primary);
             }
             .color2-fill {
                 fill: var(--brand-secondary);
@@ -160,7 +162,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        color: var(--text-general);
+        color: var(--color-text-secondary);
 
         &-label {
             font-size: 1rem;
@@ -168,7 +170,7 @@
             margin-bottom: 4px;
             white-space: nowrap;
             max-width: 90px;
-            color: var(--text-general);
+            color: var(--color-text-secondary);
         }
         &--movement {
             margin-left: 2px;
@@ -187,7 +189,7 @@
     }
     &__remaining-time {
         font-size: 1.2em;
-        color: var(--text-general);
+        color: var(--color-text-secondary);
     }
     &__timer {
         margin: 0.2rem auto;
@@ -205,7 +207,7 @@
             font-weight: normal;
             white-space: normal;
             max-width: 90px;
-            color: var(--text-general);
+            color: var(--color-text-secondary);
             /* iPhone SE screen height fixes due to UI space restrictions */
             @media only screen and (max-height: 480px) {
                 font-size: 0.8rem;
@@ -215,7 +217,7 @@
             margin-left: -6px;
         }
         &--negative {
-            color: var(--text-loss-danger);
+            color: var(--color-text-danger);
 
             &:before {
                 content: '-';
@@ -223,7 +225,7 @@
             }
         }
         &--positive {
-            color: var(--text-profit-success);
+            color: var(--color-text-success);
 
             &:before {
                 content: '+';

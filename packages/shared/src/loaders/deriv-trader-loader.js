@@ -1,12 +1,7 @@
 const resolve = require('path').resolve;
 const existsSync = require('fs').existsSync;
 /* Using this loader you can import components from @deriv/trader without having to manually
-import the corresponding stylesheet. The deriv-account-loader will automatically import
-stylesheets.
-
-    import { CFDStore } from '@deriv/trader';
-    ↓ ↓ ↓
-    import CFDStore from '@deriv/trader/dist/js/CFDStore';
+import the corresponding stylesheet.
 */
 
 function checkExists(component) {

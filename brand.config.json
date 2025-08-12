@@ -1,0 +1,26 @@
+{
+    "brand_name": "Deriv",
+    "brand_domain": "deriv.com",
+    "brand_logo": "IcBrandShortLogo",
+    "colors": {
+        "primary": "#ff444f",
+        "secondary": "#85acb0",
+        "tertiary": "#ff6b35",
+        "success": "#4bb4b3",
+        "danger": "#ec3f3f",
+        "warning": "#ffad3a",
+        "info": "#00d0ff",
+        "neutral": "#999999",
+        "black": "#0e0e0e",
+        "white": "#ffffff"
+    },
+    "color_variants": {
+        "auto_generate": true,
+        "lighten_percentage": 10,
+        "darken_percentage": 10
+    },
+    "platform": {
+            "name": "Deriv Trader",
+            "icon": "IcRebrandingDerivTrader"
+    }
+}

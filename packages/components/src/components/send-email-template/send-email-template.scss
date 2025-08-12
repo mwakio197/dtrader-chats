@@ -35,7 +35,7 @@
         grid-row-gap: 1.6rem;
         max-width: 40rem;
         margin: 2.4rem auto 0;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
         font-size: var(--text-size-xxs);
         line-height: 1.5;
         .sent-email__content {
@@ -63,7 +63,7 @@
     &__footer {
         margin-top: 2.6rem;
         &-live-chat {
-            color: var(--text-red);
+            color: var(--color-text-danger);
             cursor: pointer;
         }
     }

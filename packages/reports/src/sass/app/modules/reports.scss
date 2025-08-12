@@ -78,7 +78,7 @@ $side-padding: 1.2em;
     }
     .unknown-icon {
         margin-left: 8px;
-        fill: var(--text-general);
+        fill: var(--color-text-secondary);
         border-radius: $BORDER_RADIUS;
     }
     /* postcss-bem-linter: ignore */
@@ -100,7 +100,7 @@ $side-padding: 1.2em;
         align-items: center;
         padding: 0;
         justify-content: center;
-        background-color: var(--general-section-1);
+        background-color: var(--color-surface-primary);
 
         /* postcss-bem-linter: ignore */
         &-text {
@@ -205,10 +205,10 @@ $side-padding: 1.2em;
         font-weight: bold;
 
         &--profit {
-            color: var(--text-profit-success);
+            color: var(--color-text-success);
         }
         &--loss {
-            color: var(--text-loss-danger);
+            color: var(--color-text-danger);
         }
     }
     .market-symbol-icon {
@@ -220,12 +220,12 @@ $side-padding: 1.2em;
         MOBILE CARDS
     */
     &--card-view {
-        background: var(--general-main-2);
+        background: var(--color-surface-primary);
         overflow: hidden;
 
         .statement__filter {
             padding: 0 $side-padding;
-            border-bottom: 1px solid var(--general-section-1);
+            border-bottom: 1px solid var(--color-surface-border);
 
             &-content {
                 padding: 0;
@@ -255,7 +255,7 @@ $side-padding: 1.2em;
         justify-content: flex-end;
     }
     &__account-statistics {
-        background-color: var(--general-section-1);
+        background-color: var(--color-surface-primary);
         @include desktop-screen {
             margin: 1.6rem 0;
             width: 100%;
@@ -333,13 +333,13 @@ $side-padding: 1.2em;
     &__header {
         font-size: 1em;
         padding: 0.5em;
-        border-bottom: 1px solid var(--general-section-1);
+        border-bottom: 1px solid var(--color-surface-border);
         display: flex;
         justify-content: space-between;
     }
     /* postcss-bem-linter: ignore */
     &__refid a {
-        color: $COLOR_SKY_BLUE;
+        color: var(--color-text-link);
         text-decoration: none;
     }
     &__body {
@@ -360,11 +360,11 @@ $side-padding: 1.2em;
     &__amount {
         &--sell,
         &--deposit {
-            color: var(--text-profit-success);
+            color: var(--color-text-success);
         }
         &--buy,
         &--withdrawal {
-            color: var(--text-loss-danger);
+            color: var(--color-text-danger);
         }
     }
     &__icon {
@@ -445,7 +445,7 @@ $side-padding: 1.2em;
 
             .data-list__row__content {
                 font-size: 1.2rem;
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
             }
             .data-list__row {
                 padding: 0;
@@ -506,10 +506,10 @@ $side-padding: 1.2em;
         }
         .amount {
             &--profit {
-                color: var(--text-profit-success);
+                color: var(--color-text-success);
             }
             &--loss {
-                color: var(--text-loss-danger);
+                color: var(--color-text-danger);
             }
         }
     }
@@ -537,38 +537,38 @@ $side-padding: 1.2em;
             border-radius: 16px;
         }
         &__ticks {
-            color: $color-yellow;
+            color: var(--brand-warning);
 
             &__background {
-                background: $color-yellow;
+                background: var(--brand-warning);
             }
         }
         &__seconds {
-            color: $color-green-1;
+            color: var(--brand-secondary)-1;
 
             &__background {
-                background: $color-green-1;
+                background: var(--brand-secondary)-1;
             }
         }
         &__minutes {
-            color: $color-blue-1;
+            color: var(--brand-info)-1;
 
             &__background {
-                background: $color-blue-1;
+                background: var(--brand-info)-1;
             }
         }
         &__hours {
-            color: $COLOR_BLUE;
+            color: var(--brand-info);
 
             &__background {
-                background: $COLOR_BLUE;
+                background: var(--brand-info);
             }
         }
         &__days {
-            color: $color-purple;
+            color: var(--brand-info);
 
             &__background {
-                background: $color-purple;
+                background: var(--brand-info);
             }
         }
     }
@@ -586,9 +586,9 @@ $side-padding: 1.2em;
         &-accumulator {
             /* postcss-bem-linter: ignore */
             & .data-list__item {
-                background-color: var(--general-section-1);
+                background-color: var(--color-surface-primary);
                 border-radius: $BORDER_RADIUS;
-                border: 1px solid var(--border-disabled);
+                border: 1px solid var(--color-interactive-disabled);
                 padding: 0 !important;
 
                 /* postcss-bem-linter: ignore */
@@ -597,21 +597,21 @@ $side-padding: 1.2em;
                 }
                 /* postcss-bem-linter: ignore */
                 & .dc-contract-card {
-                    background-color: var(--general-main-2);
+                    background-color: var(--color-surface-primary);
                     /* postcss-bem-linter: ignore */
                     &__wrapper {
-                        background-color: var(--general-main-2);
+                        background-color: var(--color-surface-primary);
                         max-width: unset;
                         margin: 0;
                     }
                     /* postcss-bem-linter: ignore */
                     &-item__footer {
-                        background-color: var(--general-main-2);
+                        background-color: var(--color-surface-primary);
                         border-radius: $BORDER_RADIUS;
                     }
                     /* postcss-bem-linter: ignore */
                     &__grid-underlying-trade {
-                        border-bottom: 1px solid var(--border-disabled);
+                        border-bottom: 1px solid var(--color-interactive-disabled);
                         margin-bottom: 5px;
                     }
                     /* postcss-bem-linter: ignore */
@@ -622,13 +622,13 @@ $side-padding: 1.2em;
                     }
                     /* postcss-bem-linter: ignore */
                     &__sell-button {
-                        border-top: 1px solid var(--border-disabled);
+                        border-top: 1px solid var(--color-interactive-disabled);
                     }
                     /* postcss-bem-linter: ignore */
                     &-item {
                         /* postcss-bem-linter: ignore */
                         &__total-profit-loss {
-                            border-color: var(--border-disabled);
+                            border-color: var(--color-interactive-disabled);
                         }
                         /* postcss-bem-linter: ignore */
                         &:nth-child(1) {
@@ -647,7 +647,7 @@ $side-padding: 1.2em;
                 }
                 /* postcss-bem-linter: ignore */
                 & .dc-contract-card-dialog-toggle {
-                    border-color: var(--border-disabled);
+                    border-color: var(--color-interactive-disabled);
                 }
             }
             /* postcss-bem-linter: ignore */
@@ -713,7 +713,7 @@ $side-padding: 1.2em;
             &--title {
                 font-size: 1.4rem;
                 font-weight: bold;
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
             }
             &--content {
                 flex: 1;
@@ -738,13 +738,13 @@ $side-padding: 1.2em;
             .data-list__row-content {
                 font-size: 1rem;
                 line-height: 1.4rem;
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
             }
         }
         .dc-contract-card__no-resale-msg {
             display: flex;
             font-size: 1.4rem;
-            color: var(--text-general);
+            color: var(--color-text-secondary);
             justify-content: center;
             padding: 0.8rem 0rem;
         }
@@ -840,7 +840,7 @@ $side-padding: 1.2em;
             }
         }
         &--negative {
-            color: var(--text-loss-danger);
+            color: var(--color-text-danger);
 
             &:before {
                 content: '-';
@@ -848,7 +848,7 @@ $side-padding: 1.2em;
             }
         }
         &--positive {
-            color: var(--text-profit-success);
+            color: var(--color-text-success);
 
             &:before {
                 content: '+';
@@ -882,7 +882,7 @@ $side-padding: 1.2em;
         }
         .table__body {
             .open-positions__row_wrapper {
-                border-bottom: 1px solid var(--general-section-1);
+                border-bottom: 1px solid var(--color-surface-border);
             }
         }
         .table__foot {
@@ -940,7 +940,7 @@ $side-padding: 1.2em;
             justify-content: space-between;
 
             &-step {
-                background: var(--state-hover);
+                background: var(--color-interactive-hover);
             }
             &-wrapper {
                 margin-top: 6px;
@@ -961,7 +961,7 @@ $side-padding: 1.2em;
     width: 100%;
 
     .color1-fill {
-        fill: var(--brand-red-coral);
+        fill: var(--brand-primary);
     }
     .color2-fill {
         fill: var(--brand-secondary);
@@ -977,7 +977,7 @@ $side-padding: 1.2em;
         justify-content: flex-start;
         align-items: center;
         @include typeface(--paragraph-left-bold-active);
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
 
         svg {
             width: 2.4rem;
@@ -989,7 +989,7 @@ $side-padding: 1.2em;
         margin-right: 0.8rem;
     }
     &__multiplier {
-        color: var(--text-less-prominent);
+        color: var(--color-text-secondary);
         font-size: 1rem;
         display: flex;
         align-items: flex-end;
@@ -1073,10 +1073,10 @@ $side-padding: 1.2em;
                 }
             }
             &--negative {
-                color: var(--text-loss-danger);
+                color: var(--color-text-danger);
             }
             &--positive {
-                color: var(--text-profit-success);
+                color: var(--color-text-success);
             }
         }
     }
@@ -1114,7 +1114,7 @@ $side-padding: 1.2em;
     }
     /* postcss-bem-linter: ignore */
     .data-list__item {
-        background-color: var(--general-section-1);
+        background-color: var(--color-surface-primary);
         padding: 1.6rem 0;
 
         &--multiplier {
@@ -1123,7 +1123,7 @@ $side-padding: 1.2em;
     }
     .currency {
         &__wrapper {
-            background: var(--border-active);
+            background: var(--brand-secondary-dark);
             border-radius: $BORDER_RADIUS;
             padding: 0 0.4rem;
         }
@@ -1161,7 +1161,7 @@ $side-padding: 1.2em;
         width: 96px;
         height: 96px;
         margin-bottom: 16px;
-        @include colorIcon(var(--text-disabled));
+        @include colorIcon(var(--color-text-disabled));
     }
     &__text {
         line-height: 20px;
@@ -1169,12 +1169,12 @@ $side-padding: 1.2em;
     .dc-btn {
         width: 100%;
         height: 40px;
-        border: 1px solid var(--button-secondary-default);
-        color: var(--text-general);
+        border: 1px solid var(--color-button-secondary-border);
+        color: var(--color-text-secondary);
         background: transparent;
 
         &:hover {
-            background: var(--button-secondary-hover);
+            background: var(--color-button-secondary-hover);
         }
     }
 }

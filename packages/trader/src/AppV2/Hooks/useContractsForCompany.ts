@@ -31,26 +31,55 @@ const useContractsForCompany = () => {
     const [contract_types_list, setContractTypesList] = React.useState<TContractTypesList | []>([]);
 
     const [trade_types, setTradeTypes] = React.useState<TContractType[]>([]);
-    const { contract_type, onChange, setContractTypesListV2, setDefaultStake, processContractsForV2, symbol } =
-        useTraderStore();
+    const {
+        contract_type,
+        onChange,
+        setContractTypesListV2,
+        setDefaultStake,
+        processContractsForV2,
+        symbol,
+        active_symbols,
+    } = useTraderStore();
     const { client } = useStore();
     const { loginid, is_switching, landing_company_shortcode } = client;
     const prev_landing_company_shortcode_ref = React.useRef(landing_company_shortcode);
 
+    // Helper function to get underlying_symbol from active_symbols
+    const getUnderlyingSymbol = useCallback(
+        (current_symbol: string) => {
+            if (!current_symbol || !active_symbols?.length) return current_symbol;
+
+            // Find symbol object where either symbol or underlying_symbol matches current_symbol
+            const symbolInfo = active_symbols.find(symbol_info => {
+                const underlying = (symbol_info as any).underlying_symbol;
+                const symbol = (symbol_info as any).symbol;
+                return underlying === current_symbol || symbol === current_symbol;
+            });
+
+            // Return underlying_symbol if found, otherwise fallback to current_symbol
+            return symbolInfo ? (symbolInfo as any).underlying_symbol || current_symbol : current_symbol;
+        },
+        [active_symbols]
+    );
+
     const isQueryEnabled = useCallback(() => {
-        if (isLoginidDefined(loginid) && !symbol) return false;
+        // Always validate symbol presence first - prevents API calls with undefined symbol
+        if (!symbol) return false;
         if (is_switching) return false;
         return true;
-    }, [loginid, is_switching, symbol]);
+    }, [symbol, is_switching]);
+
+    // Get the underlying_symbol for the API call
+    const underlying_symbol = getUnderlyingSymbol(symbol);
 
     const {
         data: response,
         error,
         is_fetching,
     } = useDtraderQuery<TContractsForResponse>(
-        ['contracts_for', loginid ?? '', symbol],
+        ['contracts_for', loginid ?? '', underlying_symbol],
         {
-            contracts_for: symbol,
+            contracts_for: underlying_symbol, // Use underlying_symbol from active_symbols lookup
         },
         {
             enabled: isQueryEnabled(),

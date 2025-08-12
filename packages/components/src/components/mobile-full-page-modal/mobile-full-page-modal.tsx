@@ -90,7 +90,7 @@ const MobileFullPageModal = ({
                         {renderPageHeader && renderPageHeader()}
                         <div className='dc-mobile-full-page-modal__header-text'>
                             {renderPageHeaderElement ?? (
-                                <Text as='p' color='prominent' line_height='m' size='s' weight='bold'>
+                                <Text as='p' color='primary' line_height='m' size='s' weight='bold'>
                                     {page_header_text}
                                 </Text>
                             )}

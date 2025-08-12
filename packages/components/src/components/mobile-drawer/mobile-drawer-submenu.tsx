@@ -100,7 +100,7 @@ const SubMenuList = ({
                     <Icon className='dc-mobile-drawer__submenu-back-icon' icon='IcChevronLeft' />
                 </div>
                 {submenu_title && (
-                    <Text as='h3' weight='bold' color='prominent'>
+                    <Text as='h3' weight='bold' color='primary'>
                         {submenu_title}
                     </Text>
                 )}

@@ -2,15 +2,13 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { MobileDialog, useOnClickOutside } from '@deriv/components';
 import { Analytics } from '@deriv-com/analytics';
-import { LocalStore } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { Localize } from '@deriv/translations';
 import { useDevice } from '@deriv-com/ui';
 import NotificationListWrapper from './notification-list-wrapper';
 
 const NotificationsDialog = observer(() => {
-    const { client, notifications } = useStore();
-    const { loginid } = client;
+    const { notifications } = useStore();
     const {
         is_notifications_visible,
         notifications: notifications_array,
@@ -37,8 +35,6 @@ const NotificationsDialog = observer(() => {
     };
 
     const clearNotifications = () => {
-        // P2P functionality has been removed
-
         Analytics.trackEvent('ce_notification_form', {
             action: 'clear_all',
             form_name: 'ce_notification_form',

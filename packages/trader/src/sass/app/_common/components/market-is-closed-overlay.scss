@@ -10,7 +10,7 @@
     justify-content: center;
     flex-direction: column;
     padding: 0;
-    background-color: var(--overlay-inside-dialog);
+    background-color: var(--color-surface-overlay);
     z-index: 1000;
 
     &--loading {
@@ -31,7 +31,7 @@
     }
     &__separator {
         margin-top: 1rem;
-        border: 2px solid var(--general-section-1);
+        border: 2px solid var(--color-surface-border);
         width: 19.2rem;
         margin-bottom: 2rem;
     }

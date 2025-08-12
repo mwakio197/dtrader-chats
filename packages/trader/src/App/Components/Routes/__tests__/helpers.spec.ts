@@ -23,8 +23,8 @@ describe('Helpers', () => {
             expect(Helpers.findRouteByPath('invalidRoute', getRoutesConfig())).toBeUndefined();
         });
         it('should return route_info when path is in routes_config and is not nested', () => {
-            const result = Helpers.findRouteByPath(routes.trade, getRoutesConfig());
-            expect(result?.path).toBe(routes.trade);
+            const result = Helpers.findRouteByPath(routes.index, getRoutesConfig());
+            expect(result?.path).toBe(routes.index);
             expect(result?.exact).toBe(true);
             expect(result?.component).toBe(Trade);
         });

@@ -1,0 +1,33 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { Button } from '@deriv/components';
+import { brand_url } from '@deriv/shared';
+import { localize } from '@deriv/translations';
+
+interface LoginButtonV2Props {
+    className?: string;
+}
+
+const LoginButtonV2 = ({ className }: LoginButtonV2Props) => {
+    const handleLogin = () => {
+        window.location.href = brand_url.login;
+    };
+
+    return (
+        <Button
+            id='dt_login_button_v2'
+            className={className}
+            has_effect
+            text={localize('Log in')}
+            onClick={handleLogin}
+            primary
+        />
+    );
+};
+
+LoginButtonV2.propTypes = {
+    className: PropTypes.string,
+};
+
+export { LoginButtonV2 };

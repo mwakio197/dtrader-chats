@@ -5,7 +5,7 @@
     height: 100%;
 
     &--card-view {
-        background: var(--general-main-2);
+        background: var(--color-surface-primary);
     }
     &__table {
         height: 100%;
@@ -21,7 +21,7 @@
         justify-content: flex-end;
     }
     .container {
-        background: var(--general-section-1);
+        background: var(--color-surface-primary);
     }
     .contract-type {
         flex-grow: 1;
@@ -39,11 +39,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--state-normal);
+            background: var(--color-surface-primary);
         }
     }
     .reference a {
-        color: $COLOR_SKY_BLUE;
+        color: var(--color-text-link);
         text-decoration: none;
     }
     .table__body .indicative {
@@ -53,13 +53,13 @@
         text-align: right;
 
         &--price-moved-up {
-            color: var(--text-profit-success);
+            color: var(--color-text-success);
         }
         &--price-moved-down {
-            color: var(--text-loss-danger);
+            color: var(--color-text-danger);
         }
         &--no-resale {
-            color: var(--text-general);
+            color: var(--color-text-secondary);
         }
     }
 }

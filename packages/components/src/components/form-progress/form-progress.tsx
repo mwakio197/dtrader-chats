@@ -43,7 +43,7 @@ const FormProgress = ({ steps = [], current_step, sub_section_index }: TFormProg
             {isDesktop ? (
                 <div className='dc-form-progress'>
                     <div className='dc-form-progress__header'>
-                        <Text as='h2' color='prominent' weight='bold' line_height='unset'>
+                        <Text as='h2' color='primary' weight='bold' line_height='unset'>
                             {steps[current_step].header.active_title}
                         </Text>
                         <div className='dc-form-progress__steps'>
@@ -61,7 +61,7 @@ const FormProgress = ({ steps = [], current_step, sub_section_index }: TFormProg
                                             align='center'
                                             size='xs'
                                             weight='bold'
-                                            color='colored-background'
+                                            color='inverse'
                                             className={classNames('identifier', {
                                                 'identifier--active': idx <= current_step,
                                             })}

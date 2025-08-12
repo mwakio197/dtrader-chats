@@ -14,24 +14,24 @@
         justify-content: center;
         align-items: center;
         @include typeface(--paragraph-left-normal-black);
-        background-color: var(--state-normal);
-        color: var(--text-general);
+        background-color: var(--color-surface-primary);
+        color: var(--color-text-secondary);
 
         &:not(:first-child) {
             margin-left: 5px;
         }
         &--selected {
             @include typeface(--paragraph-left-bold-active);
-            background-color: var(--state-active);
-            color: var(--text-prominent);
+            background-color: var(--color-interactive-active);
+            color: var(--color-text-primary);
         }
         &--disabled {
-            color: var(--text-disabled);
+            color: var(--color-text-disabled);
             cursor: not-allowed;
         }
         &:hover:not(&--disabled):not(&--selected) {
             cursor: pointer;
-            background-color: var(--state-hover);
+            background-color: var(--color-interactive-hover);
         }
         &:last-child {
             margin-right: 0;
@@ -58,16 +58,16 @@
         margin-top: 0;
         padding: 0.8rem;
         border-radius: $BORDER_RADIUS;
-        background-color: var(--fill-normal);
+        background-color: var(--color-surface-primary);
 
         &__selection {
             width: calc(20% - 7px);
             height: 32px;
             font-size: 1.6rem;
-            background-color: var(--general-section-1);
+            background-color: var(--color-surface-primary);
 
             &--selected {
-                background-color: var(--state-active);
+                background-color: var(--color-interactive-active);
             }
             &:not(:first-child) {
                 margin-left: 0.8rem;

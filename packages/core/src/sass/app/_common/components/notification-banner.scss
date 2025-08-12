@@ -1,12 +1,12 @@
 .notification-banner {
     position: relative;
     display: flex;
-    background-color: var(--general-main-1);
-    color: var(--text-prominent);
+    background-color: var(--color-surface-primary);
+    color: var(--color-text-primary);
     border-radius: $BORDER_RADIUS;
     box-shadow:
-        0 4px 6px 0 var(--shadow-menu),
-        0 4px 6px 0 var(--shadow-menu);
+        0 4px 6px 0 var(--color-shadow-medium),
+        0 4px 6px 0 var(--color-shadow-medium);
     width: 100%;
     max-width: 40rem;
     min-height: 14.4rem;

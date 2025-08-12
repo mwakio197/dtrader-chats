@@ -26,9 +26,9 @@ type TCarousel = {
 };
 
 const Carousel = ({
-    active_bullet_color = 'var(--text-prominent)',
+    active_bullet_color = 'var(--color-text-primary)',
     autoplay_time = null,
-    bullet_color = 'var(--text-less-prominent)',
+    bullet_color = 'var(--color-text-secondary)',
     bullet_position = 'bottom',
     className,
     disable_swipe = false,

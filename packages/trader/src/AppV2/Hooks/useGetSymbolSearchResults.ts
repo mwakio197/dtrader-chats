@@ -11,7 +11,7 @@ export const useGetSymbolSearchResults = (searchValue: string) => {
     const searchResults = useMemo(() => {
         if (searchValue.trim() === '') return [];
         return activeSymbols.filter(symbol =>
-            getSymbolDisplayName([], (symbol as any).underlying_symbol || symbol.symbol)
+            getSymbolDisplayName(activeSymbols, (symbol as any).underlying_symbol || symbol.symbol)
                 .toLowerCase()
                 .includes(searchValue.toLowerCase())
         );

@@ -6,8 +6,8 @@
     text-decoration: none;
     position: relative;
     padding: 0.8rem;
-    background-color: var(--general-main-1);
-    color: var(--text-prominent);
+    background-color: var(--color-surface-primary);
+    color: var(--color-text-primary);
     padding-bottom: 0.8rem;
 
     &:before {
@@ -26,10 +26,10 @@
         background-image: linear-gradient(to top, rgba(16, 19, 32, 0), rgba(227, 28, 75, 0.16));
     }
     &--loss {
-        color: var(--text-loss-danger);
+        color: var(--color-text-danger);
     }
     &--profit {
-        color: var(--text-profit-success);
+        color: var(--color-text-success);
     }
     &__grid {
         display: grid;
@@ -68,14 +68,14 @@
             border-radius: $BORDER_RADIUS;
             margin-left: -4px;
             margin-right: -4px;
-            background: var(--general-hover);
+            background: var(--color-interactive-hover);
         }
         &-label {
             font-size: 1rem;
             align-self: flex-start;
             text-transform: none;
             line-height: 1.5;
-            color: var(--text-general);
+            color: var(--color-text-secondary);
             white-space: nowrap;
         }
         &-value {
@@ -100,15 +100,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--overlay-inside-dialog);
+        background-color: var(--color-surface-overlay);
 
         &--won,
         &--won:after {
-            background-image: var(--gradient-success);
+            background-image: var(--color-gradient-success);
         }
         &--lost,
         &--lost:after {
-            background-image: var(--gradient-danger);
+            background-image: var(--color-gradient-danger);
         }
         &--lg {
             max-height: 100%;
@@ -146,7 +146,7 @@
             transform 0.25s ease,
             opacity 0.25s linear;
         position: relative;
-        background: var(--general-main-1);
+        background: var(--color-surface-primary);
 
         .currency-badge {
             margin-bottom: 5px;
@@ -185,7 +185,7 @@
             align-self: flex-start;
             text-transform: none;
             margin-bottom: 4px;
-            color: var(--text-general);
+            color: var(--color-text-secondary);
             white-space: nowrap;
         }
         &__value {
@@ -206,7 +206,7 @@
     }
     &__separator {
         width: 100%;
-        border-top: 1px solid var(--general-section-1);
+        border-top: 1px solid var(--color-surface-border);
         margin: 4px 0 0;
     }
     &__underlying-name {
@@ -231,7 +231,7 @@
         /* postcss-bem-linter: ignore */
         .category-type {
             .color1-fill {
-                fill: var(--brand-red-coral) !important;
+                fill: var(--brand-primary) !important;
             }
             .color2-fill {
                 fill: var(--brand-secondary) !important;
@@ -262,7 +262,7 @@
         border-radius: $BORDER_RADIUS;
         width: 100%;
         padding: 0.8rem 0.4rem;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
         display: flex;
 
         &-wrapper {
@@ -383,7 +383,7 @@
             margin-left: -6px;
         }
         &--negative {
-            color: var(--text-loss-danger);
+            color: var(--color-text-danger);
 
             &:before {
                 content: '-';
@@ -391,7 +391,7 @@
             }
         }
         &--positive {
-            color: var(--text-profit-success);
+            color: var(--color-text-success);
 
             &:before {
                 content: '+';
@@ -421,14 +421,14 @@
             }
         }
         &__body--loss {
-            color: var(--text-loss-danger) !important;
+            color: var(--color-text-danger) !important;
 
             &:before {
                 content: '-';
             }
         }
         &__body--profit {
-            color: var(--text-profit-success) !important;
+            color: var(--color-text-success) !important;
 
             &:before {
                 content: '+';
@@ -436,7 +436,7 @@
         }
         &__total-profit-loss {
             padding: 0.8rem 0.8rem 0;
-            border-top: 1px solid var(--general-section-1);
+            border-top: 1px solid var(--color-surface-border);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -466,7 +466,7 @@
         }
         &__payout-limit {
             padding: 0.8rem 0 0;
-            border-top: 1px solid var(--general-section-1);
+            border-top: 1px solid var(--color-surface-border);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -490,7 +490,7 @@
             opacity 0.25s linear;
         padding-top: 0.4rem;
         margin-top: 0.8rem;
-        border-top: 1px solid var(--general-section-1);
+        border-top: 1px solid var(--color-surface-border);
         min-height: 4rem;
 
         &--positions {
@@ -574,7 +574,7 @@
     &__deal-cancel-fee {
         grid-area: deal-cancel-fee;
         &__disabled {
-            color: var(--text-disabled-1);
+            color: var(--color-text-disabled);
             .dc-contract-card-item__body {
                 color: inherit;
             }
@@ -674,7 +674,7 @@
         &-trade-param {
             font-size: 1rem;
             line-height: 1rem;
-            color: var(--text-less-prominent);
+            color: var(--color-text-secondary);
         }
     }
 }
@@ -701,7 +701,7 @@
         padding: unset;
         box-sizing: border-box;
         margin: 0.8rem 0;
-        border-bottom: 1px solid var(--general-section-1);
+        border-bottom: 1px solid var(--color-surface-border);
 
         @include mobile {
             display: flex;
@@ -713,7 +713,7 @@
     }
     &__track {
         height: 1.8rem;
-        background: var(--general-section-1);
+        background: var(--color-surface-primary);
         border-radius: #{$BORDER_RADIUS};
         position: relative;
         margin-bottom: 0.8rem;

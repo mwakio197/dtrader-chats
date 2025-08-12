@@ -75,21 +75,24 @@ const BinarySocketGeneral = (() => {
                     }
                     client_store.logout();
                 } else if (!/authorize/.test(State.get('skip_response'))) {
-                    // Check if this is a simplified authentication response
-                    const isSimplified =
+                    // Check if this is a V2 authentication response (session token based)
+                    const hasSessionToken = localStorage.getItem('session_token');
+                    const isV2Auth =
+                        hasSessionToken &&
                         response.authorize &&
                         typeof response.authorize.balance !== 'undefined' &&
                         typeof response.authorize.currency !== 'undefined' &&
                         typeof response.authorize.is_virtual !== 'undefined' &&
-                        typeof response.authorize.loginid !== 'undefined' &&
-                        !response.authorize.account_list;
+                        typeof response.authorize.loginid !== 'undefined';
 
-                    if (isSimplified) {
-                        // For simplified auth, always process the response regardless of loginid match
-                        // The client-store will handle the simplified auth logic
+                    if (isV2Auth) {
+                        // For V2 auth, always process the response and update loginid if needed
+                        if (response.authorize.loginid !== client_store.loginid) {
+                            client_store.setLoginId(response.authorize.loginid);
+                        }
                         authorizeAccount(response);
                     } else if (response.authorize.loginid === client_store.loginid) {
-                        // Multi-account authorization logic - loginid matches
+                        // Legacy multi-account authorization logic - loginid matches
                         authorizeAccount(response);
                     } else if (client_store.is_populating_account_list) {
                         // During initial login, allow loginid mismatch and update the store
@@ -131,6 +134,13 @@ const BinarySocketGeneral = (() => {
                 break;
             case 'transaction':
                 gtm_store.pushTransactionData(response);
+                if (client_store && client_store.loginid) {
+                    WS.authorized.balance().then(balance_response => {
+                        if (!balance_response.error) {
+                            ResponseHandlers.balanceActiveAccount(balance_response);
+                        }
+                    });
+                }
                 break;
             // no default
         }
@@ -253,13 +263,10 @@ const BinarySocketGeneral = (() => {
                 if (active_platform === 'DBot') return;
 
                 client_store.logout().then(() => {
-                    let redirect_to = routes.trade;
+                    const redirect_to = routes.index;
                     const action = getActionFromUrl();
                     if (action === 'system_email_change') {
                         return;
-                    }
-                    if (active_platform === 'Deriv MT5') {
-                        redirect_to = routes.mt5;
                     }
                     common_store.routeTo(redirect_to);
                 });
@@ -288,17 +295,10 @@ const BinarySocketGeneral = (() => {
     };
 
     const subscribeBalances = () => {
-        if (!client_store.isSimplifiedAuth || !client_store.isSimplifiedAuth()) {
-            WS.subscribeBalanceAll(ResponseHandlers.balanceOtherAccounts);
-        }
+        WS.subscribeBalanceAll(ResponseHandlers.balanceOtherAccounts);
 
         if (client_store.loginid) {
-            // For simplified auth, use alternative subscription method
-            if (client_store.isSimplifiedAuth && client_store.isSimplifiedAuth()) {
-                WS.get().subscribe({ balance: 1 }).subscribe(ResponseHandlers.balanceActiveAccount);
-            } else {
-                WS.subscribeBalanceActiveAccount(ResponseHandlers.balanceActiveAccount, client_store.loginid);
-            }
+            WS.subscribeBalanceActiveAccount(ResponseHandlers.balanceActiveAccount, client_store.loginid);
         }
     };
 

@@ -108,22 +108,16 @@ const AccountActionsWallets = observer(({ is_traders_hub_routes }: TAccountActio
     const history = useHistory();
 
     const handleManageFundsRedirect = () => {
-        if (isHubRedirectionEnabled) {
-            const PRODUCTION_REDIRECT_URL = `https://hub.${getDomainUrl()}/tradershub`;
-            const STAGING_REDIRECT_URL = `https://staging-hub.${getDomainUrl()}/tradershub`;
-            const redirectUrl = process.env.NODE_ENV === 'production' ? PRODUCTION_REDIRECT_URL : STAGING_REDIRECT_URL;
-
-            const url_query_string = window.location.search;
-            const url_params = new URLSearchParams(url_query_string);
-            const account_currency = window.sessionStorage.getItem('account') || url_params.get('account');
-
-            window.location.href = `${redirectUrl}/redirect?action=redirect_to&redirect_to=wallet${account_currency ? `&account=${account_currency}` : ''}`;
-        } else {
-            history.push(routes.wallets_transfer as unknown as Parameters<typeof history.push>[0], {
-                toAccountLoginId: loginid,
-                is_from_dtrader: window.location.pathname?.includes('dtrader'),
-            });
-        }
+        // TODO: Re-enable this when the Trader's Hub routes are restored
+        // if (isHubRedirectionEnabled) {
+        //     const PRODUCTION_REDIRECT_URL = `https://hub.${getDomainUrl()}/tradershub`;
+        //     const STAGING_REDIRECT_URL = `https://staging-hub.${getDomainUrl()}/tradershub`;
+        //     const redirectUrl = process.env.NODE_ENV === 'production' ? PRODUCTION_REDIRECT_URL : STAGING_REDIRECT_URL;
+        //     const url_query_string = window.location.search;
+        //     const url_params = new URLSearchParams(url_query_string);
+        //     const account_currency = window.sessionStorage.getItem('account') || url_params.get('account');
+        //     window.location.href = `${redirectUrl}/redirect?action=redirect_to&redirect_to=wallet${account_currency ? `&account=${account_currency}` : ''}`;
+        // }
     };
 
     if (!is_logged_in) {

@@ -13,13 +13,13 @@
         font-size: 1.4rem;
         font-weight: bold;
         cursor: pointer;
-        color: var(--text-general);
+        color: var(--color-text-secondary);
 
         &-icon {
             margin-right: 8px;
 
             .color1-fill {
-                fill: var(--text-general);
+                fill: var(--color-text-secondary);
             }
         }
     }

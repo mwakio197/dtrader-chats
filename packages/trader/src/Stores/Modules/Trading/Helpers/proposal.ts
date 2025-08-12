@@ -86,7 +86,9 @@ export const getProposalInfo = (
     const proposal: ExpandedProposal = response.proposal || ({} as ExpandedProposal);
     const profit = (proposal.payout || 0) - (proposal.ask_price || 0);
     const returns = (profit * 100) / (proposal.ask_price || 1);
-    const stake = proposal.display_value || (proposal.ask_price ? proposal.ask_price.toString() : '');
+    // display_value property has been removed from the API
+    // Using ask_price as fallback since display_value is no longer provided
+    const stake = proposal.ask_price ? proposal.ask_price.toString() : '';
     const basis_list = store.basis_list;
 
     const contract_basis: TObjContractBasis | undefined =

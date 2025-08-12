@@ -50,7 +50,7 @@ const AccessDeniedScreen = observer(() => {
             const redirectUrl = process.env.NODE_ENV === 'production' ? PRODUCTION_REDIRECT_URL : STAGING_REDIRECT_URL;
             window.location.href = redirectUrl;
         } else {
-            history.push(routes.trade);
+            history.push(routes.index);
         }
     };
 

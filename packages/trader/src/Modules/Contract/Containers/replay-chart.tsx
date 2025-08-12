@@ -1,13 +1,7 @@
 import React from 'react';
 
 import { usePrevious } from '@deriv/components';
-import {
-    getDurationPeriod,
-    getDurationUnitText,
-    getEndTime,
-    getPlatformRedirect,
-    hasContractStarted,
-} from '@deriv/shared';
+import { getDurationPeriod, getDurationUnitText, getEndTime, getPlatformRedirect } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { useDevice } from '@deriv-com/ui';
 
@@ -36,14 +30,16 @@ const ReplayChart = observer(
         const { contract_store, chart_state, chartStateChange, margin } = contract_replay;
         const { contract_config, is_digit_contract, barriers_array, getContractsArray, markers_array, contract_info } =
             contract_store;
-        const { underlying: symbol, audit_details, barrier_count } = contract_info;
+        // Backward compatibility: fallback to old field name
+        //@ts-expect-error TContractInfo has an invalid type, this will be fixed in a future update
+        const symbol = contract_info.underlying_symbol || contract_info.underlying;
+        const { audit_details, barrier_count } = contract_info;
         const allow_scroll_to_epoch = chart_state === 'READY' || chart_state === 'SCROLL_TO_LEFT';
         const { app_routing_history, current_language, is_socket_opened } = common;
         const { is_chart_layout_default, is_chart_countdown_visible } = ui;
         const { end_epoch, chart_type, start_epoch, granularity } = contract_config || {};
         const is_dark_theme = is_dark_theme_prop || ui.is_dark_mode_on;
-        const is_sold_before_started =
-            !!contract_info?.is_forward_starting && !hasContractStarted(contract_info) && !!contract_info.is_sold;
+        // Forwarding contract logic removed - contracts now always use start_epoch
         /**
          * TODO: remove forcing light theme once DBot supports dark theme
          * DBot does not support for dark theme since till now,
@@ -106,7 +102,7 @@ const ReplayChart = observer(
                 maxTick={isMobile ? 8 : undefined}
                 requestSubscribe={wsSubscribe}
                 settings={settings}
-                startEpoch={is_sold_before_started ? contract_info.purchase_time : start_epoch}
+                startEpoch={start_epoch}
                 scrollToEpoch={scroll_to_epoch}
                 stateChangeListener={chartStateChange}
                 symbol={symbol}

@@ -30,7 +30,7 @@ const Header = ({
                 <Icon icon='IcArrowLeftBold' />
             </span>
         )}
-        <Text size={text_size} weight='bold' color='prominent' className='contract-type-info__title'>
+        <Text size={text_size} weight='bold' color='primary' className='contract-type-info__title'>
             {title}
         </Text>
         {should_render_close && (

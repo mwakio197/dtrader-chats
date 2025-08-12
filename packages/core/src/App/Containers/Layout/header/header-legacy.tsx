@@ -1,9 +1,8 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { useIsHubRedirectionEnabled } from '@deriv/api';
-import { platforms, routes } from '@deriv/shared';
+import { routes } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { useDevice } from '@deriv-com/ui';
 
@@ -11,42 +10,29 @@ import { MenuLinks } from 'App/Components/Layout/Header';
 import { AccountsInfoLoader } from 'App/Components/Layout/Header/Components/Preloader';
 import ToggleMenuDrawer from 'App/Components/Layout/Header/toggle-menu-drawer.jsx';
 import ToggleMenuDrawerAccountsOS from 'App/Components/Layout/Header/toggle-menu-drawer-accounts-os.jsx';
-import platform_config from 'App/Constants/platform-config';
 import NewVersionNotification from 'App/Containers/new-version-notification.jsx';
 
 import BrandShortLogo from './brand-short-logo';
 import HeaderAccountActions from './header-account-actions';
+import HubButton from './hub-button';
 
 const HeaderLegacy = observer(() => {
     const { client, common, ui, notifications } = useStore();
     const {
         currency,
-        has_any_real_account,
         has_wallet,
-        is_bot_allowed,
-        is_dxtrade_allowed,
         is_logged_in,
         is_logging_in,
         is_single_logging_in,
-        is_mt5_allowed,
-        is_virtual,
         is_switching,
         is_client_store_initialized,
     } = client;
-    const { platform, is_from_tradershub_os } = common;
+    const { is_from_tradershub_os } = common;
     const { header_extension, is_app_disabled, is_route_modal_on, toggleReadyToDepositModal } = ui;
     const { addNotificationMessage, client_notifications, removeNotificationMessage } = notifications;
     const { isHubRedirectionEnabled, isHubRedirectionLoaded } = useIsHubRedirectionEnabled();
 
     const { isDesktop } = useDevice();
-
-    const { pathname } = useLocation();
-
-    const traders_hub_routes =
-        [routes.traders_hub].includes(pathname) ||
-        [routes.account, routes.settings, routes.wallets_compare_accounts, routes.compare_cfds].some(route =>
-            pathname.startsWith(route)
-        );
 
     const addUpdateNotification = () => addNotificationMessage(client_notifications?.new_version_available);
     const removeUpdateNotification = React.useCallback(
@@ -59,28 +45,8 @@ const HeaderLegacy = observer(() => {
         return () => document.removeEventListener('IgnorePWAUpdate', removeUpdateNotification);
     }, [removeUpdateNotification]);
 
-    const handleClickCashier = () => {
-        if (!has_any_real_account && is_virtual) {
-            toggleReadyToDepositModal();
-        }
-    };
-
-    const filterPlatformsForClients = (payload: typeof platform_config) =>
-        payload.filter(config => {
-            if (config.link_to === routes.mt5) {
-                return !is_logged_in || is_mt5_allowed;
-            }
-            if (config.link_to === routes.dxtrade) {
-                return is_dxtrade_allowed;
-            }
-            if (config.link_to === routes.bot || config.href === routes.smarttrader) {
-                return is_bot_allowed;
-            }
-            return true;
-        });
-
     const excludedRoutes = [
-        routes.trade,
+        routes.index,
         routes.trader_positions,
         routes.endpoint,
         routes.redirect,
@@ -102,7 +68,6 @@ const HeaderLegacy = observer(() => {
         <header
             className={classNames('header', {
                 'header--is-disabled': is_app_disabled || is_route_modal_on,
-                'header--is-hidden': platforms[platform] && !is_from_tradershub_os,
                 'header--tradershub_os_mobile': is_logged_in && is_from_tradershub_os && !isDesktop,
                 'header--tradershub_os_desktop': is_logged_in && is_from_tradershub_os && isDesktop,
             })}
@@ -114,19 +79,18 @@ const HeaderLegacy = observer(() => {
                             <BrandShortLogo />
                             <div className='header__divider' />
                             {/* <TradersHubHomeButton /> */}
+                            {is_logged_in && <HubButton />}
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
                             {is_from_tradershub_os ? (
                                 <>
-                                    <ToggleMenuDrawerAccountsOS
-                                        platform_config={filterPlatformsForClients(platform_config)}
-                                    />
+                                    <ToggleMenuDrawerAccountsOS />
                                     <BrandShortLogo />
                                 </>
                             ) : (
                                 <>
-                                    <ToggleMenuDrawer platform_config={filterPlatformsForClients(platform_config)} />
+                                    <ToggleMenuDrawer />
                                     <BrandShortLogo />
                                     {header_extension && is_logged_in && (
                                         <div className='header__menu-left-extensions'>{header_extension}</div>
@@ -135,7 +99,7 @@ const HeaderLegacy = observer(() => {
                             )}
                         </React.Fragment>
                     )}
-                    <MenuLinks is_traders_hub_routes={traders_hub_routes} />
+                    <MenuLinks />
                 </div>
 
                 <div
@@ -150,20 +114,10 @@ const HeaderLegacy = observer(() => {
                                 'acc-info__preloader--no-currency': !currency,
                             })}
                         >
-                            <AccountsInfoLoader
-                                is_logged_in={is_logged_in}
-                                is_desktop={isDesktop}
-                                speed={3}
-                                is_traders_hub_routes={traders_hub_routes}
-                            />
+                            <AccountsInfoLoader is_logged_in={is_logged_in} is_desktop={isDesktop} speed={3} />
                         </div>
                     ) : (
-                        !is_from_tradershub_os && (
-                            <HeaderAccountActions
-                                onClickDeposit={handleClickCashier}
-                                is_traders_hub_routes={traders_hub_routes}
-                            />
-                        )
+                        !is_from_tradershub_os && <HeaderAccountActions />
                     )}
                 </div>
             </div>

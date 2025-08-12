@@ -316,7 +316,12 @@ export const getMultiplierOpenPositionsColumnsTemplate = ({
         title: localize('Deal cancel. fee'),
         col_index: 'cancellation',
         renderCellContent: ({ row_obj }: TCellContentProps) => {
-            if (!row_obj.contract_info || !row_obj.contract_info.underlying) return '-';
+            if (!row_obj.contract_info) return '-';
+
+            // Backward compatibility: fallback to old field name
+            const contract_underlying = row_obj.contract_info.underlying_symbol || row_obj.contract_info.underlying;
+            if (!contract_underlying) return '-';
+
             if (row_obj.contract_info.cancellation) {
                 return <Money amount={row_obj.contract_info.cancellation.ask_price} currency={currency} />;
             }

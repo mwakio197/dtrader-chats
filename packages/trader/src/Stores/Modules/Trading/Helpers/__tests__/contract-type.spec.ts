@@ -550,12 +550,12 @@ describe('ContractType.getStartTime', () => {
     let start_date = 1701388800;
     const start_time = '03:03';
     it('should return start_time if start_date is valid number', () => {
-        const result = ContractType.getStartTime(sessions, start_date, start_time);
+        const result = ContractType.getStartTime(undefined, start_date, start_time);
         expect(result).toEqual({ start_time: '23:55' });
     });
     it('should return start_time null if start_date is 0', () => {
         start_date = 0;
-        const result = ContractType.getStartTime(sessions, start_date, start_time);
+        const result = ContractType.getStartTime(undefined, start_date, start_time);
         expect(result).toEqual({ start_time: null });
     });
 });
@@ -613,7 +613,6 @@ describe('ContractType.getContractCategories', () => {
         await ContractType.buildContractTypesConfig(symbol);
         const result = ContractType.getContractCategories();
         expect(result.contract_types_list).not.toEqual({});
-        expect(result.has_only_forward_starting_contracts).toBeFalsy();
         expect(result.non_available_contract_types_list).not.toEqual({});
     });
 });

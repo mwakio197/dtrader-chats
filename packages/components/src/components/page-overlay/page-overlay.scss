@@ -7,7 +7,7 @@
         transition:
             transform 0.25s cubic-bezier(0.25, 0.1, 0.1, 0.25),
             opacity 0.25s cubic-bezier(0.25, 0.1, 0.1, 0.25);
-        background-color: var(--general-main-2);
+        background-color: var(--color-surface-primary);
         opacity: 0;
 
         @include mobile-or-tablet-screen {
@@ -31,15 +31,15 @@
         position: sticky;
         top: 0;
         z-index: 2;
-        background-color: var(--general-main-1);
+        background-color: var(--color-surface-primary);
         padding: 0.8rem 2.4rem;
-        border-bottom: 1px solid var(--general-section-1);
+        border-bottom: 1px solid var(--color-surface-border);
 
         &-title {
             flex: 1;
             text-align: center;
             font-size: var(--text-size-m);
-            color: var(--text-prominent);
+            color: var(--color-text-primary);
             font-weight: bold;
             line-height: 1.5;
 
@@ -54,7 +54,7 @@
             right: 0;
 
             & .dc-icon {
-                --fill-color1: var(--text-prominent);
+                --fill-color1: var(--color-text-primary);
             }
             @include mobile-screen {
                 right: 1.6rem;
@@ -86,7 +86,7 @@
     &__content {
         padding: 2.4rem 0 0;
         display: flex;
-        background-color: var(--general-main-1);
+        background-color: var(--color-surface-primary);
 
         &-side-note {
             min-width: 256px;

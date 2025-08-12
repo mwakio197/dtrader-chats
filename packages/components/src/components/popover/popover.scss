@@ -31,7 +31,7 @@
             }
         }
         &__icon .counter {
-            color: var(--brand-red-coral);
+            color: var(--brand-primary);
             font-size: 10px;
             font-weight: bold;
             line-height: 1.4em;
@@ -49,8 +49,8 @@
         border-radius: 4px;
         display: flex;
         flex-direction: row;
-        background: var(--general-active);
-        color: var(--text-prominent);
+        background: var(--color-interactive-active);
+        color: var(--color-text-primary);
         z-index: 1;
 
         &__icon {
@@ -64,7 +64,7 @@
         }
         &--error {
             direction: ltr;
-            background-color: var(--status-danger);
+            background-color: var(--color-status-danger);
         }
     }
     &__trade-params {

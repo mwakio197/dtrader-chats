@@ -1,5 +1,5 @@
 import { action, observable, makeObservable, override } from 'mobx';
-import { routes, isEmptyObject, isForwardStarting, WS, contractCancelled, contractSold } from '@deriv/shared';
+import { routes, isEmptyObject, WS, contractCancelled, contractSold } from '@deriv/shared';
 import { Money } from '@deriv/components';
 import { Analytics } from '@deriv-com/analytics';
 import { localize } from '@deriv/translations';
@@ -17,7 +17,6 @@ export default class ContractReplayStore extends BaseStore {
     error_code = '';
     is_chart_loading = true;
     is_chart_scaling = false;
-    is_forward_starting = false;
     // ---- chart props
     margin;
 
@@ -75,7 +74,6 @@ export default class ContractReplayStore extends BaseStore {
             error_code: observable,
             is_chart_loading: observable,
             is_chart_scaling: observable,
-            is_forward_starting: observable,
             margin: observable,
             contract_id: observable,
             contract_info: observable.ref,
@@ -146,12 +144,6 @@ export default class ContractReplayStore extends BaseStore {
 
         this.contract_info = response.proposal_open_contract;
         this.contract_update = response.proposal_open_contract.limit_order;
-
-        const is_forward_starting =
-            !!this.contract_info.is_forward_starting ||
-            isForwardStarting(this.contract_info.shortcode, this.contract_info.purchase_time);
-
-        this.is_forward_starting = is_forward_starting;
 
         // update the contract_store here passing contract_info
         this.contract_store.populateConfig(this.contract_info);

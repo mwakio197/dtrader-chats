@@ -6,11 +6,11 @@
 
     &__container {
         display: flex;
-        border: 1px solid var(--border-normal);
+        border: 1px solid var(--color-interactive-default);
         border-radius: $BORDER_RADIUS;
         align-items: center;
         &:hover:not(.dc-input--disabled) {
-            border-color: var(--border-hover);
+            border-color: var(--color-interactive-hover);
         }
         &:focus-within {
             border-color: var(--brand-secondary);
@@ -20,10 +20,10 @@
             }
         }
         &--error {
-            border-color: var(--brand-red-coral) !important;
+            border-color: var(--brand-primary) !important;
         }
         &--disabled {
-            border-color: var(--general-disabled);
+            border-color: var(--color-interactive-disabled);
         }
 
         @include mobile-or-tablet-screen {
@@ -59,18 +59,19 @@
             width: 100%;
             border-radius: $BORDER_RADIUS;
             box-sizing: border-box;
+            appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
 
             &:hover:not(:disabled) {
                 cursor: pointer;
-                border-color: var(--border-hover);
+                border-color: var(--color-interactive-hover);
             }
             &:focus {
                 outline: none;
             }
             &:active {
-                border-color: var(--border-active);
+                border-color: var(--color-interactive-active);
             }
             &::-ms-clear {
                 // Edge: hide clear icon for increment input
@@ -114,7 +115,9 @@
             &-enter-done,
             &-exit {
                 /*rtl:ignore*/
-                transition: transform 0.25s ease, opacity 0.25s linear;
+                transition:
+                    transform 0.25s ease,
+                    opacity 0.25s linear;
             }
         }
         &--top {
@@ -129,7 +132,9 @@
             }
             &-enter-done,
             &-exit {
-                transition: transform 0.25s ease, opacity 0.25s linear;
+                transition:
+                    transform 0.25s ease,
+                    opacity 0.25s linear;
             }
         }
         &--bottom {
@@ -144,7 +149,9 @@
             }
             &-enter-done,
             &-exit {
-                transition: transform 0.25s ease, opacity 0.25s linear;
+                transition:
+                    transform 0.25s ease,
+                    opacity 0.25s linear;
             }
         }
     }
@@ -167,7 +174,7 @@
             height: 38px;
             position: relative;
             width: 100%;
-            color: var(--text-prominent);
+            color: var(--color-text-primary);
 
             &-text {
                 background-color: inherit;
@@ -183,7 +190,7 @@
             margin-right: 1rem;
         }
         &__placeholder {
-            color: var(--text-general);
+            color: var(--color-text-secondary);
             transform: none;
             transition: transform 0.25s linear;
             position: absolute;
@@ -192,11 +199,11 @@
 
             &--has-value {
                 transform: translate3d(-14px, -20px, 0px) scale(0.7);
-                color: var(--text-general);
-                background-color: var(--fill-normal);
+                color: var(--color-text-secondary);
+                background-color: var(--color-surface-primary);
             }
             &--has-error {
-                color: var(--brand-red-coral);
+                color: var(--brand-primary);
             }
             &--is-focused {
                 color: var(--brand-secondary);

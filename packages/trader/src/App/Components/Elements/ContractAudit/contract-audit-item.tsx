@@ -21,11 +21,11 @@ const ContractAuditItem = ({ additional_info, icon, id, label, timestamp, value,
                 {label}
             </Text>
             <div className='contract-audit__value-wrapper'>
-                <Text weight='bold' size='xxs' line_height='m' color='prominent' className='contract-audit__value'>
+                <Text weight='bold' size='xxs' line_height='m' color='primary' className='contract-audit__value'>
                     {value}
                 </Text>
                 {value2 && (
-                    <Text weight='bold' size='xxs' line_height='m' color='prominent' className='contract-audit__value2'>
+                    <Text weight='bold' size='xxs' line_height='m' color='primary' className='contract-audit__value2'>
                         {value2}
                     </Text>
                 )}

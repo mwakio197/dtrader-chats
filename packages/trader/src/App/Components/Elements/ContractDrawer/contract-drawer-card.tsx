@@ -87,8 +87,10 @@ const ContractDrawerCard = observer(
             active_symbols,
             getMarketInformation(contract_info.shortcode || '').underlying
         );
-
-        const is_crypto = isCryptoContract(contract_info.underlying);
+        // Backward compatibility: fallback to old field name
+        // @ts-expect-error - underlying_symbol exists in runtime but not in type definition
+        const contract_underlying = contract_info.underlying_symbol || contract_info.underlying;
+        const is_crypto = isCryptoContract(contract_underlying);
         const has_progress_slider = !is_multiplier || (is_crypto && is_multiplier);
 
         const card_header = (

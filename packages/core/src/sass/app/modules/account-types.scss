@@ -21,7 +21,9 @@
     }
     &__box {
         border-radius: 0.4rem;
-        box-shadow: 0 8px 8px 0 var(--shadow-menu), 0 0 8px 0 var(--shadow-menu);
+        box-shadow:
+            0 8px 8px 0 var(--color-shadow-medium),
+            0 0 8px 0 var(--color-shadow-medium);
         display: grid;
         margin: 0 auto 4rem;
         padding: 2.4rem;
@@ -64,7 +66,7 @@
         width: 4.8rem;
     }
     .account-card {
-        border: 1px solid var(--border-normal);
+        border: 1px solid var(--color-interactive-default);
         border-radius: 0.6rem;
         overflow: hidden;
         position: relative;
@@ -95,7 +97,7 @@
             }
             &-table-container {
                 height: 14.8rem;
-                border-bottom: 1px solid var(--border-normal);
+                border-bottom: 1px solid var(--color-surface-border);
                 padding-bottom: 1.6rem;
                 margin-bottom: 1.6rem;
             }
@@ -108,7 +110,7 @@
                 margin-bottom: 0.8rem;
 
                 &-label {
-                    color: var(--text-less-prominent);
+                    color: var(--color-text-secondary);
                     display: inline-block;
                     font-size: 1.2rem;
                     line-height: 1.5;
@@ -116,7 +118,7 @@
                     width: 10.3rem;
                 }
                 &-value {
-                    color: var(--text-general);
+                    color: var(--color-text-secondary);
                     display: inline-block;
                     font-size: 1.2rem;
                     line-height: 1.5;

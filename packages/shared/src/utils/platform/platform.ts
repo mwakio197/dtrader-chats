@@ -1,5 +1,4 @@
-import { Analytics } from '@deriv-com/analytics';
-import { getPlatformSettings } from '../brand';
+import { getPlatformName, getPlatformIcon } from '../brand';
 import { routes } from '../routes';
 
 type TRoutingHistory = {
@@ -15,54 +14,22 @@ type TRoutingHistory = {
  * */
 
 export const platform_name = Object.freeze({
-    DBot: getPlatformSettings('dbot').name,
-    DTrader: getPlatformSettings('trader').name,
-    DXtrade: getPlatformSettings('dxtrade').name,
-    DMT5: getPlatformSettings('mt5').name,
-    SmartTrader: getPlatformSettings('smarttrader').name,
-    DerivGO: getPlatformSettings('go').name,
+    DTrader: getPlatformName(),
 });
-
-export const CFD_PLATFORMS = Object.freeze({
-    MT5: 'mt5',
-    DXTRADE: 'dxtrade',
-    CTRADER: 'ctrader',
-});
-
-export const isBot = () =>
-    /^\/bot/.test(window.location.pathname) ||
-    (/^\/(br_)/.test(window.location.pathname) && window.location.pathname.split('/')[2] === 'bot');
-
-export const isMT5 = () =>
-    /^\/mt5/.test(window.location.pathname) ||
-    (/^\/(br_)/.test(window.location.pathname) && window.location.pathname.split('/')[2] === CFD_PLATFORMS.MT5);
-
-export const isDXtrade = () =>
-    /^\/derivx/.test(window.location.pathname) ||
-    (/^\/(br_)/.test(window.location.pathname) && window.location.pathname.split('/')[2] === 'derivx');
-
-export const isNavigationFromDerivGO = () => window.sessionStorage.getItem('config.platform') === 'derivgo';
-
-export const isNavigationFromTradersHubOS = () => window.sessionStorage.getItem('config.platform') === 'tradershub_os';
 
 export const getPathname = () => {
-    if (isBot()) return platform_name.DBot;
-    if (isMT5()) return platform_name.DMT5;
-    if (isDXtrade()) return platform_name.DXtrade;
     switch (window.location.pathname.split('/')[1]) {
         case '':
             return platform_name.DTrader;
         case 'reports':
             return 'Reports';
-        case 'cashier':
-            return 'Cashier';
         default:
-            return platform_name.SmartTrader;
+            return platform_name.DTrader;
     }
 };
 
 export const getPlatformInformation = () => {
-    return { header: platform_name.DTrader, icon: getPlatformSettings('trader').icon };
+    return { header: platform_name.DTrader, icon: getPlatformIcon() };
 };
 
 export const getActivePlatform = (routing_history: TRoutingHistory) => {
@@ -75,7 +42,7 @@ export const getActivePlatform = (routing_history: TRoutingHistory) => {
 };
 
 export const getPlatformRedirect = () => {
-    return { name: platform_name.DTrader, route: routes.trade };
+    return { name: platform_name.DTrader, route: routes.index };
 };
 
 export const isNavigationFromPlatform = (
@@ -105,7 +72,7 @@ export const isNavigationFromPlatform = (
                 // Return false when path matches a platform parent path, but don't return anything
                 // when a non-platform path was seen. i.e. navigating between /cashier and /reports
                 // should not affect navigating back to platform when clicking cross.
-                const platform_parent_paths = [routes.trade].map(route => getParentPath(route));
+                const platform_parent_paths = [routes.index].map(route => getParentPath(route));
                 const is_other_platform_path = platform_parent_paths.includes(history_item_parent_path);
 
                 if (is_other_platform_path) {
@@ -125,7 +92,7 @@ export const isNavigationFromExternalPlatform = (routing_history: TRoutingHistor
      */
 
     const platform_index = routing_history.findIndex(history_item => history_item.pathname === platform_route);
-    const dtrader_index = routing_history.findIndex(history_item => history_item.pathname === routes.trade);
+    const dtrader_index = routing_history.findIndex(history_item => history_item.pathname === routes.index);
     const has_visited_platform = platform_index !== -1;
     const has_visited_dtrader = dtrader_index !== -1;
 

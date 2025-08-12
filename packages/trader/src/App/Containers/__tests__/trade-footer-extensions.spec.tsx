@@ -45,11 +45,11 @@ describe('<TradeFooterExtensions>', () => {
             </TraderProviders>
         );
     };
-    it('should call populateFooterExtensions with position left when is_logged_in is true and current pathname is same as routes.trade', () => {
+    it('should call populateFooterExtensions with position left when is_logged_in is true and current pathname is same as routes.index', () => {
         mock_store.client.is_logged_in = true;
         router_prop = {
             location: {
-                pathname: routes.trade,
+                pathname: routes.index,
             },
         };
         renderTraderFooterExtensions(router_prop);
@@ -65,7 +65,7 @@ describe('<TradeFooterExtensions>', () => {
     it('should call populateFooterExtensions with empty array when pathname is not trader', () => {
         router_prop = {
             location: {
-                pathname: routes.trade,
+                pathname: routes.index,
             },
         };
         renderTraderFooterExtensions(router_prop);

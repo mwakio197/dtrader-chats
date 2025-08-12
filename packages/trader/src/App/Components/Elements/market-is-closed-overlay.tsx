@@ -44,7 +44,7 @@ const MarketIsClosedOverlay = ({
                 'market-is-closed-overlay--loading': is_timer_loading,
             })}
         >
-            <Text as='p' className='market-is-closed-overlay__main-heading' color='prominent' weight='bold'>
+            <Text as='p' className='market-is-closed-overlay__main-heading' color='primary' weight='bold'>
                 <Localize i18n_default_text='This market is closed' />
             </Text>
             <React.Suspense fallback={<UILoader />}>

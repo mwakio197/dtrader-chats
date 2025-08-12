@@ -16,8 +16,8 @@
         &--under_maintenance,
         &--unavailable {
             display: inline-flex;
-            border: 1.5px solid var(--status-warning);
-            color: var(--status-warning);
+            border: 1.5px solid var(--color-status-warning);
+            color: var(--color-status-warning);
             font-size: var(--text-size-xxxs);
             align-items: center;
         }
@@ -25,15 +25,15 @@
         &--pending {
             height: 2.4rem;
             justify-content: center;
-            color: var(--status-warning-dark);
-            background-color: var(--status-warning-transparent);
+            color: var(--color-status-warning);
+            background-color: var(--color-status-warning-bg);
             text-decoration: underline;
             font-weight: bold;
         }
 
         &--needs_verification {
-            background-color: var(--status-info-transparent);
-            color: var(--status-info);
+            background-color: var(--color-status-info-bg);
+            color: var(--color-status-info);
             text-decoration: underline;
             font-weight: bold;
         }
@@ -41,18 +41,18 @@
         &--rejected,
         &--suspected {
             height: 2.4rem;
-            border-color: var(--status-danger);
-            color: $color-status-danger;
+            border-color: var(--color-status-danger);
+            color: var(--color-status-danger);
             font-weight: bold;
             text-decoration: underline;
-            background-color: var(--status-danger-transparent);
+            background-color: var(--color-status-danger-bg);
         }
 
         &--verified {
             height: 2.4rem;
             margin-top: 0.1rem;
-            color: $color-status-verified;
-            background-color: var(--status-success-transparent);
+            color: var(--color-status-success);
+            background-color: var(--color-status-success-bg);
             font-weight: bold;
         }
 

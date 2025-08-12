@@ -75,7 +75,7 @@ const AccumulatorsStatsManualModal = ({
                     <Text
                         as='p'
                         size={is_mobile ? 'xs' : 's'}
-                        color='prominent'
+                        color='primary'
                         className='accumulators-stats-modal-body__text'
                     >
                         {localize(

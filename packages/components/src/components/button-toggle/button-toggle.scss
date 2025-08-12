@@ -20,29 +20,29 @@
         border: none;
         border-radius: 0px;
         width: 50%;
-        background-color: var(--state-normal);
+        background-color: var(--color-surface-primary);
         /* postcss-bem-linter: ignore */
         .dc-btn__text {
             display: contents;
         }
         @include desktop {
             &:hover:not(.dc-button-menu__button--active) {
-                background-color: var(--state-hover) !important;
+                background-color: var(--color-interactive-hover) !important;
             }
         }
         /* postcss-bem-linter: ignore */
         span {
             @include typeface(--paragraph-left-normal-black, unset);
-            color: var(--text-general);
+            color: var(--color-text-secondary);
         }
         &--active {
             cursor: initial;
-            background-color: var(--state-active) !important;
+            background-color: var(--color-interactive-active) !important;
 
             // stylelint-disable-next-line
             span {
                 @include typeface(--paragraph-left-bold-active, unset);
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
             }
         }
     }
@@ -52,7 +52,7 @@
         border: none;
         border-radius: 6px;
         width: 50%;
-        background-color: var(--general-section-1);
+        background-color: var(--color-surface-primary);
 
         /* postcss-bem-linter: ignore */
         .dc-btn__text {
@@ -60,22 +60,22 @@
         }
         @include desktop {
             &:hover:not(.dc-button-menu__button--active) {
-                background-color: var(--state-hover) !important;
+                background-color: var(--color-interactive-hover) !important;
             }
         }
         /* postcss-bem-linter: ignore */
         span {
             @include typeface(--paragraph-left-normal-black, unset);
-            color: var(--text-less-prominent);
+            color: var(--color-text-secondary);
         }
         &--active {
             cursor: initial;
-            background-color: var(--state-normal) !important;
+            background-color: var(--color-surface-primary) !important;
 
             // stylelint-disable-next-line
             span {
                 @include typeface(--paragraph-left-bold-active, unset);
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
             }
         }
     }
@@ -87,13 +87,12 @@
         position: relative;
         border-radius: $BORDER_RADIUS;
         width: 100%;
-        background-color: var(--state-normal);
+        background-color: var(--color-surface-primary);
         display: flex;
 
         .dc-button-menu {
             &__button,
             &__button--active {
-                background-color: rgba(0, 0, 0, 0) !important;
                 z-index: 1;
                 padding: 0.8rem 0.6rem;
                 white-space: normal;

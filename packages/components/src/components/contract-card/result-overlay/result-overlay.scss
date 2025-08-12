@@ -18,10 +18,10 @@
         gap: 0.4rem;
 
         &--won {
-            color: var(--text-profit-success);
+            color: var(--color-text-success);
         }
         &--lost {
-            color: var(--text-loss-danger);
+            color: var(--color-text-danger);
         }
         &-wrapper {
             cursor: pointer;
@@ -51,7 +51,7 @@
             content: '\0000D7';
             font-size: 24px;
             font-weight: 300;
-            color: var(--text-general);
+            color: var(--color-text-secondary);
         }
     }
     &__positions-overlay {

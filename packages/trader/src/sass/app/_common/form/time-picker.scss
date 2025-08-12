@@ -16,21 +16,23 @@
         margin: unset;
         /* postcss-bem-linter: ignore */
         g {
-            stroke: var(--text-general);
+            stroke: var(--color-text-secondary);
         }
     }
     &__dialog {
-        box-shadow: 0 2px 4px 0 var(--shadow-menu);
+        box-shadow: 0 2px 4px 0 var(--color-shadow-medium);
         border-radius: 4px;
         padding-top: 10px;
         position: absolute;
         top: 0;
         transform-origin: right;
         transform: scale(1, 0) translate3d(0, 0, 0);
-        transition: transform 0.25s ease, opacity 0.25s linear;
+        transition:
+            transform 0.25s ease,
+            opacity 0.25s linear;
         width: 231px;
         z-index: 2;
-        background-color: var(--general-main-2);
+        background-color: var(--color-surface-primary);
 
         &--enter,
         &--exit {
@@ -46,7 +48,7 @@
         height: inherit;
 
         &--hours {
-            border-right: 1px solid var(--general-section-1);
+            border-right: 1px solid var(--color-surface-border);
             border-radius: 0 0 0 4px;
             width: 150px;
         }
@@ -60,12 +62,12 @@
             height: 228px;
             overflow: hidden;
             text-align: center;
-            border-color: var(--general-section-1);
-            color: var(--text-prominent);
+            border-color: var(--color-surface-border);
+            color: var(--color-text-primary);
         }
         &-list-title {
             @include typeface(--small-center-bold-black);
-            color: var(--text-prominent);
+            color: var(--color-text-primary);
         }
         &-list-item {
             @include typeface(--small-left-normal-black);
@@ -74,18 +76,18 @@
             display: inline-block;
             margin: 3px;
             padding: 7px;
-            color: var(--text-general);
+            color: var(--color-text-secondary);
 
             &:hover:not(&--disabled):not(&--selected) {
-                background: var(--state-hover);
-                color: var(--text-general);
+                background: var(--color-interactive-hover);
+                color: var(--color-text-secondary);
             }
             &--selected {
-                background: var(--state-active);
-                color: var(--text-prominent) !important;
+                background: var(--color-interactive-active);
+                color: var(--color-text-primary) !important;
             }
             &--disabled {
-                color: var(--text-disabled);
+                color: var(--color-text-disabled);
                 cursor: default;
             }
         }

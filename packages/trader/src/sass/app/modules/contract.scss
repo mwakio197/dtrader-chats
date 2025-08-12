@@ -20,7 +20,7 @@ $CONTRACT_INFO_BOX_PADDING: 1.6em;
         position: relative;
         border-radius: $BORDER_RADIUS;
         padding: $CONTRACT_INFO_BOX_PADDING;
-        background: var(--general-section-1);
+        background: var(--color-surface-primary);
         font-weight: 300;
 
         &-longcode {
@@ -43,7 +43,7 @@ $CONTRACT_INFO_BOX_PADDING: 1.6em;
                 }
 
                 a {
-                    color: var(--brand-red-coral);
+                    color: var(--brand-primary);
                 }
             }
             &-text {
@@ -90,11 +90,11 @@ $CONTRACT_INFO_BOX_PADDING: 1.6em;
                 margin-right: 1em;
 
                 .color1-fill {
-                    fill: var(--status-success);
+                    fill: var(--color-status-success);
                 }
             }
             .pl-value {
-                color: var(--text-profit-success);
+                color: var(--color-text-success);
                 font-weight: bold;
                 font-size: 1.6em;
                 line-height: 1.5em;
@@ -106,10 +106,10 @@ $CONTRACT_INFO_BOX_PADDING: 1.6em;
             }
             &.lost {
                 .pl-value {
-                    color: var(--text-loss-danger);
+                    color: var(--color-text-danger);
                 }
                 svg .color1-fill {
-                    fill: var(--status-danger);
+                    fill: var(--color-status-danger);
                 }
             }
             .sell-info {
@@ -130,10 +130,10 @@ $CONTRACT_INFO_BOX_PADDING: 1.6em;
                 font-weight: bold;
 
                 .profit {
-                    color: var(--text-profit-success);
+                    color: var(--color-text-success);
                 }
                 .loss {
-                    color: var(--text-loss-danger);
+                    color: var(--color-text-danger);
                 }
             }
             .sell {
@@ -165,10 +165,10 @@ $CONTRACT_INFO_BOX_PADDING: 1.6em;
     }
     .message {
         margin-top: 0.5em;
-        border: 1px solid var(--brand-red-coral);
+        border: 1px solid var(--brand-primary);
         border-radius: $BORDER_RADIUS;
         padding: 1em;
-        background-color: transparentize($color-black, 0.84);
+        background-color: var(--color-surface-overlay);
         display: flex;
         align-items: center;
 

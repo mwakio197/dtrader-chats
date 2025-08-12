@@ -33,7 +33,7 @@ export const RadioButton = ({ id, className, selected_value, value, label, onCha
             />
             <Text
                 as='p'
-                color='prominent'
+                color='primary'
                 size='xs'
                 line_height='unset'
                 weight={selected_value === value ? 'bold' : 'normal'}

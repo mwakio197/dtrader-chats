@@ -1,8 +1,8 @@
 .amount {
     &--profit {
-        color: var(--text-profit-success);
+        color: var(--color-text-success);
     }
     &--loss {
-        color: var(--text-loss-danger);
+        color: var(--color-text-danger);
     }
 }

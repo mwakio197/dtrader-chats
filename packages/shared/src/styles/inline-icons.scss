@@ -9,26 +9,26 @@
 */
 
 %inline-icon {
-    @include colorIcon(var(--text-general), none);
+    @include colorIcon(var(--color-text-secondary), none);
 
     &.active,
     &-active {
-        @include colorIcon(var(--text-prominent), none);
+        @include colorIcon(var(--color-text-primary), none);
     }
     &.disabled,
     &-disabled {
-        @include colorIcon(var(--text-disabled), none);
+        @include colorIcon(var(--color-text-disabled), none);
     }
     &.white,
     &-white {
-        @include colorIcon(var(--text-prominent));
+        @include colorIcon(var(--color-text-primary));
     }
     &.border_hover_color,
     &-border_hover_color {
-        @include colorIcon(var(--text-prominent));
+        @include colorIcon(var(--color-text-primary));
     }
     &.secondary,
     &-secondary {
-        @include colorIcon(var(--text-less-prominent));
+        @include colorIcon(var(--color-text-secondary));
     }
 }

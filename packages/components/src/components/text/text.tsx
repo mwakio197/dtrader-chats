@@ -13,7 +13,7 @@ type TTextProps = Omit<HTMLProps<HTMLElement>, 'size'> & {
 const Text = ({
     children,
     size = 's',
-    color = 'general',
+    color = 'secondary',
     align = 'left',
     weight = 'normal',
     line_height = 'm',
@@ -24,7 +24,7 @@ const Text = ({
 }: TTextProps) => {
     const class_styles = {
         '--text-size': `var(--text-size-${size})`,
-        '--text-color': `var(--text-${color})`,
+        '--text-color': `var(--color-text-${color})`,
         '--text-lh': `var(--text-lh-${line_height})`,
         '--text-weight': `var(--text-weight-${weight})`,
         '--text-align': `var(--text-align-${align})`,

@@ -32,7 +32,6 @@ import {
     getContractSubtype,
     getCurrencyDisplayCode,
     getMinPayout,
-    getPlatformSettings,
     getPropertyValue,
     getTradeNotificationMessage,
     getTradeURLParams,
@@ -604,7 +603,9 @@ export default class TradeStore extends BaseStore {
                 const urlSymbol = searchParams.get('symbol');
                 const tradeStoreString = sessionStorage.getItem('trade_store');
                 const tradeStoreObj = safeParse(tradeStoreString ?? '{}') ?? {};
-                const isValidSymbol = this.active_symbols.some(symbol => symbol.symbol === urlSymbol);
+                const isValidSymbol = this.active_symbols.some(
+                    symbol => ((symbol as any).underlying_symbol || symbol.symbol) === urlSymbol
+                );
 
                 if (urlSymbol) {
                     if (isValidSymbol) {
@@ -715,7 +716,9 @@ export default class TradeStore extends BaseStore {
             this.is_accumulator &&
             !!this.root_store.portfolio.open_accu_contract &&
             !!this.root_store.portfolio.active_positions.find(
-                ({ contract_info, type }) => isAccumulatorContract(type) && contract_info.underlying === this.symbol
+                ({ contract_info, type }) =>
+                    //@ts-expect-error TContractInfo has an invalid type. This will be fixed in the future.
+                    isAccumulatorContract(type) && contract_info.underlying_symbol === this.symbol
             )
         );
     }
@@ -831,26 +834,6 @@ export default class TradeStore extends BaseStore {
 
         if (!active_symbols?.length) {
             await WS.wait('get_settings');
-            /*
-             * This logic is related to EU country checks
-             * Avoid moving this upward in the scope since mobx will lose reactivity
-             */
-            if (is_on_mf_account) {
-                showDigitalOptionsUnavailableError(showError, {
-                    text: localize(
-                        'We’re working to have this available for you soon. If you have another account, switch to that account to continue trading. You may add a Deriv MT5 Financial.'
-                    ),
-                    title: localize('{{platform_name_trader}} is not available for this account', {
-                        platform_name_trader: getPlatformSettings('trader').name,
-                    }),
-                    link: localize('Go to {{platform_name_mt5}} dashboard', {
-                        platform_name_mt5: getPlatformSettings('mt5').name,
-                    }),
-                });
-                return;
-            } else if (!is_on_mf_account) {
-                showUnavailableLocationError(showError, is_logged_in);
-            }
             showUnavailableLocationError(showError, is_logged_in);
         }
         await this.processNewValuesAsync({ active_symbols });
@@ -859,9 +842,7 @@ export default class TradeStore extends BaseStore {
     async processContractsForV2() {
         const contract_categories = ContractType.getContractCategories();
         this.processNewValuesAsync({
-            ...(contract_categories as Pick<TradeStore, 'contract_types_list'> & {
-                has_only_forward_starting_contracts: boolean;
-            }),
+            ...(contract_categories as Pick<TradeStore, 'contract_types_list'>),
         });
         this.processNewValuesAsync(ContractType.getContractValues(this));
     }
@@ -885,9 +866,7 @@ export default class TradeStore extends BaseStore {
                     this.root_store.ui.toggleUrlUnavailableModal(true);
                 }
                 this.processNewValuesAsync({
-                    ...(contract_categories as Pick<TradeStore, 'contract_types_list'> & {
-                        has_only_forward_starting_contracts: boolean;
-                    }),
+                    ...(contract_categories as Pick<TradeStore, 'contract_types_list'>),
                     ...ContractType.getContractType(
                         contract_categories.contract_types_list,
                         contractType ?? this.contract_type
@@ -1000,7 +979,11 @@ export default class TradeStore extends BaseStore {
     }
 
     async resetPreviousSymbol() {
-        this.setMarketStatus(isMarketClosed(this.active_symbols, this.previous_symbol));
+        if (this.previous_symbol && this.previous_symbol.trim() !== '') {
+            this.setMarketStatus(isMarketClosed(this.active_symbols, this.previous_symbol));
+        } else {
+            this.setMarketStatus(false);
+        }
 
         await Symbol.onChangeSymbolAsync(this.previous_symbol);
         this.updateSymbol(this.symbol);
@@ -1215,7 +1198,7 @@ export default class TradeStore extends BaseStore {
                                 )} ${currency}`;
                                 const trade_type = extracted_info_from_shortcode.category;
 
-                                if (window.location.pathname === routes.trade)
+                                if (window.location.pathname === routes.index)
                                     callback?.(
                                         {
                                             message: getTradeNotificationMessage(shortcode),
@@ -1372,14 +1355,17 @@ export default class TradeStore extends BaseStore {
             this.currency = obj_new_values.currency ?? '';
         }
 
-        let has_only_forward_starting_contracts;
-
         if (Object.keys(obj_new_values).includes('symbol')) {
             this.setPreviousSymbol(this.symbol);
             await Symbol.onChangeSymbolAsync(obj_new_values.symbol ?? '');
-            this.setMarketStatus(isMarketClosed(this.active_symbols, obj_new_values.symbol ?? ''));
-            has_only_forward_starting_contracts =
-                ContractType.getContractCategories().has_only_forward_starting_contracts;
+
+            const symbol_to_check = obj_new_values.symbol ?? '';
+            if (symbol_to_check && symbol_to_check.trim() !== '') {
+                this.setMarketStatus(isMarketClosed(this.active_symbols, symbol_to_check));
+            } else {
+                // Reset market status to false when no symbol is available
+                this.setMarketStatus(false);
+            }
         }
 
         // Set stake to default one (from contracts_for) on symbol or contract type switch.
@@ -1401,11 +1387,6 @@ export default class TradeStore extends BaseStore {
                 obj_new_values.take_profit = '';
             }
         }
-
-        // TODO: remove all traces of setHasOnlyForwardingContracts and has_only_forward_starting_contracts in app
-        //  once future contracts are implemented
-        this.root_store.ui.setHasOnlyForwardingContracts(has_only_forward_starting_contracts);
-        if (has_only_forward_starting_contracts) return;
 
         const new_state = this.updateStore(cloneObject(obj_new_values));
 

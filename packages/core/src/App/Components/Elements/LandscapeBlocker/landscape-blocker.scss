@@ -4,11 +4,11 @@
     position: fixed;
     inset: 0;
     overflow: hidden;
-    background: var(--general-main-1);
+    background: var(--color-surface-primary);
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    color: var(--text-prominent);
+    color: var(--color-text-primary);
     font-size: 1.6rem;
     z-index: 9999;
     font-weight: bold;

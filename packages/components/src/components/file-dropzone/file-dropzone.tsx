@@ -57,7 +57,7 @@ const FadeInMessage = ({
         ) : (
             <Text
                 align='center'
-                color={color || 'general'}
+                color={color || 'secondary'}
                 size='xxs'
                 line_height='m'
                 weight='normal'

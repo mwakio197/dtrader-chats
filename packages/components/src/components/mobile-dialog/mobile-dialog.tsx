@@ -127,7 +127,7 @@ const MobileDialog = (props: React.PropsWithChildren<TMobileDialog>) => {
                             <Text
                                 as='h2'
                                 size='xs'
-                                color='prominent'
+                                color='primary'
                                 weight='bold'
                                 line_height='unset'
                                 className='dc-mobile-dialog__title'

@@ -1,12 +1,6 @@
 import React from 'react';
 import { Redirect, RedirectProps, Route, RouteComponentProps, RouteProps } from 'react-router-dom';
-import {
-    redirectToLogin,
-    removeBranchName,
-    routes as shared_routes,
-    isEmptyObject,
-    default_title,
-} from '@deriv/shared';
+import { redirectToLogin, removeBranchName, routes as shared_routes, default_title } from '@deriv/shared';
 
 type TRoute = RouteProps & { default: boolean };
 
@@ -66,7 +60,7 @@ const RouteWithSubRoutes = ({
             if (should_redirect_login) {
                 redirectToLogin(is_logged_in, language);
             } else {
-                result = <Redirect to={shared_routes.trade} />;
+                result = <Redirect to={shared_routes.index} />;
             }
         } else {
             const default_subroute = routes.find(r => r.default);
@@ -81,7 +75,7 @@ const RouteWithSubRoutes = ({
                         <Component {...props} routes={routes} />
                     ) : (
                         <React.Fragment>
-                            {should_redirect ? <Redirect to={shared_routes.trade} /> : <Component404 />}
+                            {should_redirect ? <Redirect to={shared_routes.index} /> : <Component404 />}
                         </React.Fragment>
                     )}
                 </React.Fragment>

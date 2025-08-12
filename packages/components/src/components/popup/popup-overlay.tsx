@@ -21,7 +21,7 @@ const PopupOverlay = ({ title, descriptions, overlay_ref, toggleOverlay, done_te
                 as='h4'
                 size='s'
                 line_height='m'
-                color='prominent'
+                color='primary'
                 weight='bold'
                 className='dc-popup__overlay-content-header'
             >
@@ -31,7 +31,7 @@ const PopupOverlay = ({ title, descriptions, overlay_ref, toggleOverlay, done_te
             <ul className='dc-popup__overlay-content-list'>
                 {descriptions.map(description => (
                     <li key={description.key}>
-                        <Text size='xxs' line_height='m' color='general'>
+                        <Text size='xxs' line_height='m' color='secondary'>
                             {description.component}
                         </Text>
                     </li>

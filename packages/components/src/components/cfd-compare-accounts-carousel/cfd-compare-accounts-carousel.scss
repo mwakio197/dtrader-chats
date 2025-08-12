@@ -36,7 +36,7 @@
         }
     }
     &__button {
-        background-color: var(--general-main-1);
+        background-color: var(--color-surface-primary);
         z-index: 1;
         color: var(--background-site);
         position: absolute;
@@ -47,9 +47,11 @@
         cursor: pointer;
         width: 4rem;
         height: 4rem;
-        border: 1px solid var(--general-background-main);
+        border: 1px solid var(--color-interactive-default);
         border-radius: 50%;
-        box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.08), 0px 24px 24px rgba(0, 0, 0, 0.08);
+        box-shadow:
+            0px 0px 24px rgba(0, 0, 0, 0.08),
+            0px 24px 24px rgba(0, 0, 0, 0.08);
         &--prev {
             left: 1.6rem;
         }

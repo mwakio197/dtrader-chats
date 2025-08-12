@@ -118,4 +118,87 @@ describe('useContractsForCompany', () => {
             expect(mocked_store.modules.trade.setContractTypesListV2).not.toHaveBeenCalled();
         });
     });
+
+    describe('Symbol validation fix', () => {
+        it('should prevent API calls when symbol is undefined', async () => {
+            // Set up store with undefined symbol
+            mocked_store.modules.trade.symbol = undefined;
+
+            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+
+            // Wait a bit to ensure no API call is made
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Verify that no API call was made
+            expect(WS.authorized.send).not.toHaveBeenCalled();
+            expect(result.current.contract_types_list).toEqual([]);
+        });
+
+        it('should prevent API calls when symbol is null', async () => {
+            // Set up store with null symbol
+            mocked_store.modules.trade.symbol = null;
+
+            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+
+            // Wait a bit to ensure no API call is made
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Verify that no API call was made
+            expect(WS.authorized.send).not.toHaveBeenCalled();
+            expect(result.current.contract_types_list).toEqual([]);
+        });
+
+        it('should prevent API calls when symbol is empty string', async () => {
+            // Set up store with empty string symbol
+            mocked_store.modules.trade.symbol = '';
+
+            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+
+            // Wait a bit to ensure no API call is made
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Verify that no API call was made
+            expect(WS.authorized.send).not.toHaveBeenCalled();
+            expect(result.current.contract_types_list).toEqual([]);
+        });
+
+        it('should allow API calls when symbol is present regardless of loginid status', async () => {
+            // Set up store with undefined loginid but valid symbol
+            mocked_store.client.loginid = undefined;
+            mocked_store.modules.trade.symbol = 'R_100';
+
+            WS.authorized.send.mockResolvedValue({
+                contracts_for: {
+                    available: [{ contract_type: 'type_1', underlying_symbol: 'R_100' }],
+                    hit_count: 1,
+                },
+            });
+
+            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+
+            await waitFor(() => {
+                // Verify that API call was made with correct symbol
+                expect(WS.authorized.send).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        contracts_for: 'R_100',
+                    })
+                );
+            });
+        });
+
+        it('should prevent API calls when is_switching is true even with valid symbol', async () => {
+            // Set up store with valid symbol but is_switching = true
+            mocked_store.client.is_switching = true;
+            mocked_store.modules.trade.symbol = 'R_100';
+
+            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+
+            // Wait a bit to ensure no API call is made
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Verify that no API call was made due to switching
+            expect(WS.authorized.send).not.toHaveBeenCalled();
+            expect(result.current.contract_types_list).toEqual([]);
+        });
+    });
 });

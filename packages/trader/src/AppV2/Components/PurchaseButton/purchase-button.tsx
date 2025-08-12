@@ -75,9 +75,12 @@ const PurchaseButton = observer(() => {
     const [animation_duration, setAnimationDuration] = React.useState(450);
     const prev_has_open_accu_contract = usePrevious(
         !!open_accu_contract &&
-            !!active_positions.find(
-                ({ contract_info, type }) => isAccumulatorContract(type) && contract_info.underlying === symbol
-            )
+            !!active_positions.find(({ contract_info, type }) => {
+                // Backward compatibility: fallback to old field name
+                // @ts-expect-error - underlying_symbol exists in runtime but not in type definition
+                const contract_underlying = contract_info.underlying_symbol || contract_info.underlying;
+                return isAccumulatorContract(type) && contract_underlying === symbol;
+            })
     );
     const mf_account_status = useMFAccountStatus();
     const basis_options = React.useMemo(
@@ -102,10 +105,12 @@ const PurchaseButton = observer(() => {
         (is_accumulator && !has_open_accu_contract);
     const contract_types = getDisplayedContractTypes(trade_types, contract_type, trade_type_tab);
     const active_accu_contract = is_accumulator
-        ? all_positions.find(
-              ({ contract_info, type }) =>
-                  isAccumulatorContract(type) && contract_info.underlying === symbol && !contract_info.is_sold
-          )
+        ? all_positions.find(({ contract_info, type }) => {
+              // Backward compatibility: fallback to old field name
+              // @ts-expect-error - underlying_symbol exists in runtime but not in type definition
+              const contract_underlying = contract_info.underlying_symbol || contract_info.underlying;
+              return isAccumulatorContract(type) && contract_underlying === symbol && !contract_info.is_sold;
+          })
         : undefined;
     const is_valid_to_sell = active_accu_contract?.contract_info
         ? hasContractEntered(active_accu_contract.contract_info) &&

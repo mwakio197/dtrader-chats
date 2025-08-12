@@ -7,7 +7,7 @@ type TCurrencyWrapper = {
 
 const CurrencyWrapper = ({ currency }: TCurrencyWrapper) => (
     <div className='currency__wrapper'>
-        <Text color='colored-background' weight='bold' size='xxxs'>
+        <Text color='inverse' weight='bold' size='xxxs'>
             {currency}
         </Text>
     </div>

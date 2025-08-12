@@ -22,7 +22,7 @@ const NotificationListWrapperForwardRef = React.forwardRef(
                         as='h2'
                         className='notifications-dialog__header-text'
                         weight='bold'
-                        color='prominent'
+                        color='primary'
                         styles={{
                             lineHeight: '1.6rem',
                         }}

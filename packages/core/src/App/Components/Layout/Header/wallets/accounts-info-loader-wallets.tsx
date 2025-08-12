@@ -18,8 +18,8 @@ const AccountsInfoLoaderWallets = ({
         height={is_desktop ? 47 : 39}
         width={is_desktop ? 350 : 161}
         speed={speed}
-        backgroundColor={'var(--general-section-1)'}
-        foregroundColor={'var(--general-hover)'}
+        backgroundColor={'var(--color-surface-section)'}
+        foregroundColor={'var(--color-interactive-hover)'}
     >
         {is_logged_in ? (
             <LoggedInPreloader is_desktop={is_desktop} is_traders_hub_routes={is_traders_hub_routes} />

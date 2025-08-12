@@ -6,8 +6,8 @@ const PositionsCardLoader = ({ speed }: { speed: number }) => (
         height={173}
         width={218}
         speed={speed}
-        backgroundColor={'var(--general-section-1)'}
-        foregroundColor={'var(--general-hover)'}
+        backgroundColor={'var(--color-surface-section)'}
+        foregroundColor={'var(--color-interactive-hover)'}
     >
         <rect x='43' y='19' rx='0' ry='0' width='56' height='8' />
         <rect x='147' y='19' rx='0' ry='0' width='56' height='8' />

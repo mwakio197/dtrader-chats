@@ -13,7 +13,11 @@ export const useGetFavoriteSymbols = () => {
 
     const clientFavoriteList = useMemo(() => {
         return favoriteSymbols
-            ?.map(client_fav_symbol => activeSymbols.find(symbol_info => symbol_info.symbol === client_fav_symbol))
+            ?.map(client_fav_symbol =>
+                activeSymbols.find(
+                    symbol_info => ((symbol_info as any).underlying_symbol || symbol_info.symbol) === client_fav_symbol
+                )
+            )
             .filter((symbol_info): symbol_info is ActiveSymbols[0] => symbol_info !== undefined);
     }, [activeSymbols, favoriteSymbols]);
 

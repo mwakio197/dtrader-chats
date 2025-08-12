@@ -4,7 +4,6 @@ import moment from 'moment';
 import {
     hasContractEntered,
     isAccumulatorContract,
-    isForwardStarting,
     isMultiplierContract,
     isOpen,
     isValidToCancel,
@@ -24,7 +23,6 @@ import ContractDetails from '../contract-details';
 
 jest.mock('AppV2/Hooks/useContractDetails', () => jest.fn());
 jest.mock('AppV2/Hooks/useOrderDetails', () => jest.fn());
-jest.mock('AppV2/Components/ForwardStartingBanner', () => jest.fn(() => <div>ForwardStartingBanner</div>));
 
 jest.mock('AppV2/Components/ContractCard', () => {
     const ContractCard = () => <div data-testid='contract-card'>ContractCard</div>;
@@ -159,7 +157,6 @@ describe('ContractDetails', () => {
         (isValidToCancel as jest.Mock).mockReturnValue(true);
         (isOpen as jest.Mock).mockReturnValue(true);
         (hasContractEntered as jest.Mock).mockReturnValue(true);
-        (isForwardStarting as jest.Mock).mockReturnValue(true);
         (isAccumulatorContract as jest.Mock).mockReturnValue(false);
         (useWS as jest.Mock).mockReturnValue({
             send: jest.fn(),
@@ -188,11 +185,6 @@ describe('ContractDetails', () => {
             </TraderProviders>
         );
     };
-
-    it('should render the ForwardStartingBanner component', async () => {
-        await waitFor(() => renderContractDetails());
-        expect(screen.getByText('ForwardStartingBanner')).toBeInTheDocument();
-    });
 
     it('should render the ContractCard component', async () => {
         await waitFor(() => renderContractDetails());
@@ -251,7 +243,6 @@ describe('ContractDetails', () => {
 
     it('should not render the ContractDetailsFooter component if conditions are not met', async () => {
         (hasContractEntered as jest.Mock).mockReturnValue(false);
-        (isForwardStarting as jest.Mock).mockReturnValue(false);
         await waitFor(() => renderContractDetails());
         expect(screen.queryByText('Contract Details Footer Placeholder')).not.toBeInTheDocument();
     });

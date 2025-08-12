@@ -24,7 +24,7 @@ const ProgressBar = ({ label, value, danger_limit = 0.2, warning_limit = 0.5, cl
 
     return (
         <div className={classNames('dc-progress-bar__container', className)}>
-            <Text as='p' color='prominent' align='center' size='xs' weight='bold' className='dc-progress-bar__label'>
+            <Text as='p' color='primary' align='center' size='xs' weight='bold' className='dc-progress-bar__label'>
                 {label}
             </Text>
             <div

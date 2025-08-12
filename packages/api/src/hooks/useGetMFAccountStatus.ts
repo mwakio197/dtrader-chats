@@ -9,7 +9,7 @@ const useGetMFAccountStatus = () => {
 
     useEffect(() => {
         async function fetchData() {
-            if (is_logged_in && (!account_status || !window.location.pathname.startsWith(routes.trade)))
+            if (is_logged_in && (!account_status || !window.location.pathname.startsWith(routes.index)))
                 await updateAccountStatus();
         }
         fetchData();

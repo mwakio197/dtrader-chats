@@ -3,7 +3,7 @@
 
     &__heading {
         @include typeface(--paragraph-left-bold-black);
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
         margin: 0 0 16px;
         text-transform: none;
 
@@ -18,7 +18,7 @@
         min-width: 160px;
 
         &:empty {
-            background-color: var(--general-disabled);
+            background-color: var(--color-interactive-disabled);
         }
     }
     &__description {
@@ -26,7 +26,7 @@
         justify-content: flex-start;
         align-items: flex-start;
         @include typeface(--paragraph-left-normal-black);
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
     }
     &__form {
         display: flex;
@@ -34,6 +34,6 @@
         justify-content: flex-start;
         align-items: flex-start;
         text-transform: initial;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
     }
 }

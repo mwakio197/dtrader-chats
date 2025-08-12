@@ -23,7 +23,7 @@ export const FeatureFlagsSection = observer(() => {
 
     return (
         <div className='feature-flags'>
-            <Text as='h1' weight='bold' color='prominent'>
+            <Text as='h1' weight='bold' color='primary'>
                 Feature flags
             </Text>
             {Object.keys(visible_feature_flags).map(flag => (

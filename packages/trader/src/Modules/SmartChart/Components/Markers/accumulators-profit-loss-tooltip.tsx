@@ -30,7 +30,11 @@ const AccumulatorsProfitLossTooltip = ({
     current_spot,
     current_spot_time,
     currency,
+    // @ts-expect-error contract_info is not typed correctly this will not be an issue after the types are fixed
+    exit_spot,
     exit_tick,
+    // @ts-expect-error contract_info is not typed correctly this will not be an issue after the types are fixed
+    exit_spot_time,
     exit_tick_time,
     high_barrier,
     is_sold,
@@ -39,6 +43,11 @@ const AccumulatorsProfitLossTooltip = ({
     should_show_profit_text,
     is_mobile,
 }: TAccumulatorsProfitLossTooltip) => {
+    // [AI]
+    // Backward compatibility: fallback to old field names
+    const actual_exit_spot_time = exit_spot_time ?? exit_tick_time;
+    const actual_exit_spot = exit_spot ?? exit_tick;
+    // [/AI]
     const [is_tooltip_open, setIsTooltipOpen] = React.useState(false);
     const won = Number(profit) >= 0;
     const tooltip_timeout = React.useRef<ReturnType<typeof setTimeout>>();
@@ -76,20 +85,21 @@ const AccumulatorsProfitLossTooltip = ({
 
     const onRef = (ref: TRef | null): void => {
         if (ref) {
-            if (!exit_tick) {
+            if (!actual_exit_spot) {
                 // this call will hide the marker:
                 ref.setPosition({ epoch: null, price: null });
             }
-            if (exit_tick_time && exit_tick) {
+            if (actual_exit_spot_time && actual_exit_spot) {
                 ref.setPosition({
-                    epoch: +exit_tick_time,
-                    price: +exit_tick,
+                    epoch: +actual_exit_spot_time,
+                    price: +actual_exit_spot,
                 });
             }
         }
     };
 
-    if (typeof profit !== 'number') return null;
+    if (profit === undefined || isNaN(Number(profit))) return null;
+
     if (!is_sold && current_spot_time && high_barrier && should_show_profit_text)
         return (
             <AccumulatorsProfitLossText
@@ -101,7 +111,7 @@ const AccumulatorsProfitLossTooltip = ({
             />
         );
 
-    return is_sold && exit_tick_time ? (
+    return is_sold && actual_exit_spot_time ? (
         <FastMarker markerRef={onRef} className={classNames(className, won ? 'won' : 'lost')}>
             <span
                 className={`${className}__spot-circle`}

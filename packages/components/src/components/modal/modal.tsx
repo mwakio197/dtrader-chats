@@ -167,7 +167,7 @@ const ModalElement = ({
                     {rendered_title && (
                         <Text
                             as='h3'
-                            color='prominent'
+                            color='primary'
                             weight='bold'
                             styles={{ lineHeight: '2.4rem' }}
                             className={classNames('dc-modal-header__title', {
@@ -180,7 +180,7 @@ const ModalElement = ({
                     {title && (
                         <Text
                             as='h3'
-                            color='prominent'
+                            color='primary'
                             weight='bold'
                             styles={{ lineHeight: '2.4rem' }}
                             className={classNames('dc-modal-header__title', {

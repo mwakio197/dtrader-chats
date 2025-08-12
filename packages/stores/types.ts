@@ -740,7 +740,6 @@ type TUiStore = {
     duration_t: number;
     enableApp: () => void;
     getDurationFromUnit: (unit: string) => number;
-    has_only_forward_starting_contracts: boolean;
     has_real_account_signup_ended: boolean;
     header_extension: JSX.Element | null;
     is_account_switcher_disabled: boolean;
@@ -805,7 +804,6 @@ type TUiStore = {
     setIsForcedToExitPnv: (value: boolean) => void;
     setIsPhoneVerificationCompleted: (value: boolean) => void;
     setRedirectFromEmail: (value: boolean) => void;
-    setHasOnlyForwardingContracts: (has_only_forward_starting_contracts?: boolean) => void;
     setMobileLanguageMenuOpen: (is_mobile_language_menu_open: boolean) => void;
     setReportsTabIndex: (value: number) => void;
     setIsClosingCreateRealAccountModal: (value: boolean) => void;
@@ -1047,10 +1045,6 @@ type TNotificationStore = {
     is_notifications_empty: boolean;
     is_notifications_visible: boolean;
     filterNotificationMessages: () => void;
-    handleCurrencyRemovalNotification: (
-        account_currency_closure_status: Record<string, unknown>,
-        currency: string
-    ) => void;
     notifications: TNotificationMessage[];
     refreshNotifications: () => void;
     removeAllNotificationMessages: (should_close_persistent: boolean) => void;
@@ -1059,8 +1053,6 @@ type TNotificationStore = {
     removeNotificationMessage: ({ key, should_show_again }: { key: string; should_show_again?: boolean }) => void;
     removeNotificationMessageByKey: ({ key }: { key: string }) => void;
     removeTradeNotifications: (id?: string) => void;
-    showPOAAddressMismatchSuccessNotification: () => void;
-    showPOAAddressMismatchFailureNotification: () => void;
     showAccountSwitchToRealNotification: (loginid: string, currency: string) => void;
     setShouldShowPopups: (should_show_popups: boolean) => void;
     toggleNotificationsModal: () => void;
@@ -1097,80 +1089,31 @@ type TPlatform = 'mt5' | 'dxtrade' | 'ctrader';
 type TTradersHubStore = {
     closeModal: () => void;
     content_flag: 'low_risk_cr_eu' | 'low_risk_cr_non_eu' | 'high_risk_cr' | 'cr_demo' | 'eu_demo' | 'eu_real' | '';
-    combined_cfd_mt5_accounts: DetailsOfEachMT5Loginid &
-        {
-            tracking_name: string;
-            short_code_and_region: string;
-            login: string;
-            sub_title: string;
-            icon: 'Derived' | 'Financial' | 'Options';
-            status?: string;
-            action_type: 'get' | 'none' | 'trade' | 'dxtrade' | 'multi-action';
-            key: string;
-            name: string;
-            landing_company_short?: DetailsOfEachMT5Loginid['landing_company_short'];
-            platform?: TPlatform;
-            availability?: TRegionAvailability;
-            description?: string;
-            market_type?: 'all' | 'financial' | 'synthetic';
-            product: TProduct;
-        }[];
     openModal: (modal_id: string, props?: unknown) => void;
     selected_account: {
         login: string;
         account_id: string;
     };
-    is_low_risk_cr_eu_real: boolean;
     is_eu_user: boolean;
     is_onboarding_visited: boolean;
     is_first_time_visit: boolean;
     setIsOnboardingVisited: (is_visited: boolean) => void;
-    setIsFirstTimeVisit: (first_time_visit: boolean) => void;
     show_eu_related_content: boolean;
     setTogglePlatformType: (platform_type: string) => void;
     is_demo: boolean;
     is_real: boolean;
-    is_verification_docs_list_modal_visible: boolean;
     selectRegion: (region: string) => void;
-    closeAccountTransferModal: () => void;
-    toggleRegulatorsCompareModal: () => void;
-    setVerificationModalOpen: (value: boolean) => void;
     modal_data: TModalData;
-    financial_restricted_countries: boolean;
     selected_account_type: string;
     selected_platform_type: string;
-    setSelectedAccount: (account: { login?: string; account_id?: string }) => void;
-    no_CR_account: boolean;
-    no_MF_account: boolean;
-    toggleAccountTransferModal: () => void;
-    is_real_wallets_upgrade_on: boolean;
-    toggleWalletsUpgrade: (value: boolean) => void;
     platform_real_balance: TBalance;
     platform_demo_balance: TBalance;
-    selectAccountType: (account_type: string) => void;
-    is_wallet_migration_failed: boolean;
-    setWalletsMigrationFailedPopup: (value: boolean) => void;
     available_platforms: BrandConfig[];
     selected_region: TRegionAvailability;
-    getExistingAccounts: (platform: string, market_type: string) => AvailableAccount[];
-    active_modal_tab?: 'Deposit' | 'Withdraw' | 'Transfer' | 'Transactions';
-    setWalletModalActiveTab: (tab?: 'Deposit' | 'Withdraw' | 'Transfer' | 'Transactions') => void;
     active_modal_wallet_id?: string;
-    setWalletModalActiveWalletID: (wallet_id?: string) => void;
-    is_demo_low_risk: boolean;
     has_any_real_account: boolean;
-    startTrade: (platform?: TPlatform, existing_account?: DetailsOfEachMT5Loginid) => void;
     getAccount: () => void;
-    showTopUpModal: (existing_account?: DetailsOfEachMT5Loginid) => void;
-    is_regulators_compare_modal_visible: boolean;
-    is_setup_real_account_or_go_to_demo_modal_visible: boolean;
-    is_financial_restricted_country: boolean;
-    setIsFinancialRestrictedCountry: (value: boolean) => void;
-    setIsSetupRealAccountOrGoToDemoModalVisible: (value: boolean) => void;
     selected_jurisdiction_kyc_status: Record<string, string>;
-    setSelectedJurisdictionKYCStatus: (value: Record<string, string>) => void;
-    getDefaultJurisdiction: () => string;
-    getMT5AccountKYCStatus: () => void;
 };
 
 type TContractReplay = {
@@ -1234,7 +1177,6 @@ type TContractReplay = {
     error_message?: string;
     has_error: boolean;
     is_chart_loading: boolean;
-    is_forward_starting: boolean;
     is_market_closed: boolean;
     is_sell_requested: boolean;
     margin?: number;

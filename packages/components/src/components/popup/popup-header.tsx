@@ -37,7 +37,7 @@ const PopupHeader = () => {
                             </div>
                             {header_banner_text && isMobile() && (
                                 <div className='dc-popup__header-banner'>
-                                    <Text size='xxxxs' line_height='m' color='prominent'>
+                                    <Text size='xxxxs' line_height='m' color='primary'>
                                         {header_banner_text}
                                     </Text>
                                 </div>
@@ -69,7 +69,7 @@ const PopupHeader = () => {
                 {header_banner_text && isDesktop() && (
                     <div className='dc-popup__header-container'>
                         <div className='dc-popup__header-banner'>
-                            <Text size='xxxs' line_height='s' weight='bold' color='prominent'>
+                            <Text size='xxxs' line_height='s' weight='bold' color='primary'>
                                 {header_banner_text}
                             </Text>
                         </div>
@@ -81,7 +81,7 @@ const PopupHeader = () => {
                             <Text
                                 as='h3'
                                 className='dc-popup__header-big-text'
-                                color='prominent'
+                                color='primary'
                                 size='l'
                                 line_height='xs'
                                 weight='bold'

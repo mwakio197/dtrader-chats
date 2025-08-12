@@ -17,9 +17,9 @@ $solid-blue-700: #2c9aff;
         justify-content: center;
         align-items: center;
         font-weight: bold;
-        color: var(--text-prominent);
-        background-color: var(--general-main-5);
-        border: 2px solid var(--text-less-prominent);
+        color: var(--color-text-primary);
+        background-color: var(--color-surface-primary);
+        border: 2px solid var(--color-text-secondary);
 
         &--lost {
             border-color: $solid-red-700;
@@ -31,7 +31,7 @@ $solid-blue-700: #2c9aff;
         }
         &--won,
         &--lost {
-            color: $COLOR_WHITE;
+            color: var(--brand-white);
         }
         @include mobile {
             bottom: -9.5px;
@@ -41,14 +41,14 @@ $solid-blue-700: #2c9aff;
     }
     &__entry {
         align-items: center;
-        background-color: var(--general-main-5);
+        background-color: var(--color-surface-primary);
         border: 5px solid $solid-red-700;
         display: flex;
         justify-content: center;
         left: -12px;
         position: relative;
         top: -12px;
-        color: var(--text-general);
+        color: var(--color-text-secondary);
 
         @include mobile {
             border-width: 3px;
@@ -74,7 +74,7 @@ $solid-blue-700: #2c9aff;
                 height: 6px;
                 top: -3px;
                 margin-left: -4px;
-                background-color: var(--text-less-prominent);
+                background-color: var(--color-text-secondary);
 
                 &--preexit {
                     background-color: $solid-blue-700;
@@ -92,7 +92,7 @@ $solid-blue-700: #2c9aff;
                 height: 2rem;
                 margin-left: -1.05rem;
                 top: -0.95rem;
-                background-color: var(--general-main-4);
+                background-color: var(--color-surface-primary);
                 &:after {
                     content: '';
                     width: 0.6rem;
@@ -120,8 +120,8 @@ $solid-blue-700: #2c9aff;
         height: 2px;
         margin-left: -2px;
         margin-top: -2px;
-        background-color: var(--text-prominent);
-        border: 2px solid var(--text-prominent);
+        background-color: var(--color-text-primary);
+        border: 2px solid var(--color-surface-border);
     }
 }
 
@@ -210,7 +210,7 @@ $solid-blue-700: #2c9aff;
         svg {
             /* postcss-bem-linter: ignore */
             g {
-                stroke: var(--text-prominent);
+                stroke: var(--color-text-primary);
             }
         }
     }
@@ -218,7 +218,7 @@ $solid-blue-700: #2c9aff;
         margin-right: 2px;
     }
     &__value-container {
-        background: var(--text-less-prominent);
+        background: var(--color-text-secondary);
         font-size: 1.4rem;
         padding: 4px 8px;
         border-radius: 11px;
@@ -226,7 +226,7 @@ $solid-blue-700: #2c9aff;
         /* postcss-bem-linter: ignore */
         p {
             font-weight: bold;
-            color: $color-white;
+            color: var(--brand-white);
             margin-top: 2px;
         }
         &--lost {
@@ -237,7 +237,7 @@ $solid-blue-700: #2c9aff;
         }
         &--won,
         &--lost {
-            color: var(--text-colored-background);
+            color: var(--color-surface-contrast);
         }
         @include mobile {
             font-size: 1rem;
@@ -257,7 +257,7 @@ $solid-blue-700: #2c9aff;
             bottom: 0;
             left: -11px;
             white-space: nowrap;
-            background-color: var(--general-main-5);
+            background-color: var(--color-surface-primary);
             border-radius: 50%;
 
             @include mobile {
@@ -279,10 +279,10 @@ $solid-blue-700: #2c9aff;
         border-left-width: 2px;
         padding-left: 0.5em;
         height: 100%;
-        border-color: var(--text-less-prominent);
+        border-color: var(--color-text-secondary);
 
         &:after {
-            background: linear-gradient(to bottom, var(--general-main-5) 3%, transparent 10%);
+            background: linear-gradient(to bottom, var(--color-surface-primary) 3%, transparent 10%);
             position: absolute;
             content: ' ';
             top: 0px;
@@ -297,12 +297,12 @@ $solid-blue-700: #2c9aff;
         bottom: 0;
         left: -11px;
         white-space: nowrap;
-        background-color: var(--general-main-5);
+        background-color: var(--color-surface-primary);
 
         &--time {
             /* postcss-bem-linter: ignore */
             path {
-                fill: var(--text-less-prominent);
+                fill: var(--color-text-secondary);
             }
         }
         &--won {
@@ -438,7 +438,7 @@ $solid-blue-700: #2c9aff;
             height: 8%;
             top: -4%;
             z-index: -2;
-            background-color: var(--general-main-1);
+            background-color: var(--color-surface-primary);
 
             @include mobile {
                 width: calc(100% - 2.3rem);
@@ -452,8 +452,11 @@ $solid-blue-700: #2c9aff;
             top: -4%;
             z-index: -1;
             background-color: rgba(0, 167, 158, 0.1);
-            box-shadow: 0 -8px 11px 0 rgba(0, 167, 158, 0.08), 0 8px 11px 0 rgba(0, 167, 158, 0.08),
-                0 0 11px -5px rgba(0, 167, 158, 0.08), 0 0 11px -5px rgba(0, 167, 158, 0.08);
+            box-shadow:
+                0 -8px 11px 0 rgba(0, 167, 158, 0.08),
+                0 8px 11px 0 rgba(0, 167, 158, 0.08),
+                0 0 11px -5px rgba(0, 167, 158, 0.08),
+                0 0 11px -5px rgba(0, 167, 158, 0.08);
 
             @include mobile {
                 width: calc(100% - 2.3rem);
@@ -589,7 +592,7 @@ $solid-blue-700: #2c9aff;
             }
 
             #{$self}__text {
-                color: var(--text-colored-background);
+                color: var(--color-surface-contrast);
             }
         }
     }

@@ -12,9 +12,7 @@ import {
     getGrowthRatePercentage,
     getStartTime,
     getUnitMap,
-    hasForwardContractStarted,
     isAccumulatorContract,
-    isForwardStarting,
     isResetContract,
     isUserCancelled,
     TContractInfo,
@@ -112,17 +110,13 @@ const transformMultiplierData = (data: TContractInfo, CARD_LABELS: TCardLabels) 
 
 // For Rise
 const transformCallPutData = (data: TContractInfo, CARD_LABELS: TCardLabels) => {
-    const { barrier, purchase_time, shortcode } = data;
-    const is_forward_starting = isForwardStarting(shortcode ?? '', purchase_time);
-    const start_time = getStartTime(shortcode ?? '');
-    const has_forward_contract_started = hasForwardContractStarted(shortcode ?? '');
-    const show_barrier_placeholder = is_forward_starting && !!start_time && !has_forward_contract_started;
+    const { barrier } = data;
 
     const commonFields = getCommonFields(data, CARD_LABELS);
     return {
         [CARD_LABELS.REFERENCE_ID]: commonFields[CARD_LABELS.REFERENCE_ID],
         [CARD_LABELS.DURATION]: commonFields[CARD_LABELS.DURATION],
-        [CARD_LABELS.BARRIER]: (show_barrier_placeholder ? 'TBD' : barrier) ?? '',
+        [CARD_LABELS.BARRIER]: barrier ?? '',
         [CARD_LABELS.STAKE]: commonFields[CARD_LABELS.STAKE],
         [CARD_LABELS.POTENTIAL_PAYOUT]: commonFields[CARD_LABELS.POTENTIAL_PAYOUT],
     };
@@ -191,8 +185,9 @@ const transformVanillaData = (data: TContractInfo, CARD_LABELS: TCardLabels) => 
         [CARD_LABELS.REFERENCE_ID]: commonFields[`${CARD_LABELS.REFERENCE_ID}`],
         [CARD_LABELS.DURATION]: `${getDurationTime(data) ?? ''} ${getDurationUnitText(getDurationPeriod(data)) ?? ''}`,
         [CARD_LABELS.STRIKE_PRICE]:
-            (isResetContract(data.contract_type) ? addComma(data.entry_spot_display_value) : getBarrierValue(data)) ||
-            ' - ',
+            (isResetContract(data.contract_type)
+                ? addComma(data.entry_spot?.toString() || '')
+                : getBarrierValue(data)) || ' - ',
         [CARD_LABELS.PAYOUT_PER_POINT]: `${commonFields[CARD_LABELS.PAYOUT_PER_POINT]} ${data.currency}`,
         [CARD_LABELS.STAKE]: commonFields[CARD_LABELS.STAKE],
     };

@@ -45,10 +45,17 @@ export const showUnavailableLocationError = flow(function* (showError, is_logged
 });
 
 export const isMarketClosed = (active_symbols: ActiveSymbols = [], symbol: string) => {
-    if (!active_symbols.length) return false;
-    return active_symbols.filter(x => x.symbol === symbol)[0]
-        ? !active_symbols.filter(symbol_info => symbol_info.symbol === symbol)[0].exchange_is_open
-        : false;
+    if (!active_symbols.length) {
+        return false;
+    }
+
+    // Handle empty or invalid symbols
+    if (!symbol || symbol.trim() === '') {
+        return false;
+    }
+
+    const found_symbol = active_symbols.find(x => x.symbol === symbol || (x as any).underlying_symbol === symbol);
+    return found_symbol ? !found_symbol.exchange_is_open : false;
 };
 
 export const pickDefaultSymbol = async (active_symbols: ActiveSymbols = []) => {
@@ -66,13 +73,17 @@ const getFavoriteOpenSymbol = async (active_symbols: ActiveSymbols) => {
         const client_favorite_markets: string[] = JSON.parse(chart_favorites)['chartTitle&Comparison'];
 
         const client_favorite_list = client_favorite_markets.map(client_fav_symbol =>
-            active_symbols.find(symbol_info => symbol_info.symbol === client_fav_symbol)
+            active_symbols.find(
+                symbol_info => ((symbol_info as any).underlying_symbol || symbol_info.symbol) === client_fav_symbol
+            )
         );
         if (client_favorite_list) {
             const client_first_open_symbol = client_favorite_list.filter(symbol => symbol).find(isSymbolOpen);
             if (client_first_open_symbol) {
-                const is_symbol_offered = await isSymbolOffered(client_first_open_symbol.symbol);
-                if (is_symbol_offered) return client_first_open_symbol.symbol;
+                const symbol_to_use =
+                    (client_first_open_symbol as any).underlying_symbol || client_first_open_symbol.symbol;
+                const is_symbol_offered = await isSymbolOffered(symbol_to_use);
+                if (is_symbol_offered) return symbol_to_use;
             }
         }
         return undefined;
@@ -86,13 +97,18 @@ const getDefaultOpenSymbol = async (active_symbols: ActiveSymbols) => {
         (await findSymbol(active_symbols, '1HZ100V')) ||
         (await findFirstSymbol(active_symbols, /random_index/)) ||
         (await findFirstSymbol(active_symbols, /major_pairs/));
-    if (default_open_symbol) return default_open_symbol.symbol;
-    return active_symbols.find(symbol_info => symbol_info.submarket === 'major_pairs')?.symbol;
+    if (default_open_symbol) return (default_open_symbol as any).underlying_symbol || default_open_symbol.symbol;
+    const fallback_symbol = active_symbols.find(symbol_info => symbol_info.submarket === 'major_pairs');
+    return fallback_symbol ? (fallback_symbol as any).underlying_symbol || fallback_symbol.symbol : undefined;
 };
 
 const findSymbol = async (active_symbols: ActiveSymbols, symbol: string) => {
-    const first_symbol = active_symbols.find(symbol_info => symbol_info.symbol === symbol && isSymbolOpen(symbol_info));
-    const is_symbol_offered = await isSymbolOffered(first_symbol?.symbol);
+    const first_symbol = active_symbols.find(
+        symbol_info =>
+            ((symbol_info as any).underlying_symbol || symbol_info.symbol) === symbol && isSymbolOpen(symbol_info)
+    );
+    const symbol_to_check = first_symbol ? (first_symbol as any).underlying_symbol || first_symbol.symbol : undefined;
+    const is_symbol_offered = await isSymbolOffered(symbol_to_check);
     if (is_symbol_offered) return first_symbol;
     return undefined;
 };
@@ -101,7 +117,8 @@ const findFirstSymbol = async (active_symbols: ActiveSymbols, pattern: RegExp) =
     const first_symbol = active_symbols.find(
         symbol_info => pattern.test(symbol_info.submarket) && isSymbolOpen(symbol_info)
     );
-    const is_symbol_offered = await isSymbolOffered(first_symbol?.symbol);
+    const symbol_to_check = first_symbol ? (first_symbol as any).underlying_symbol || first_symbol.symbol : undefined;
+    const is_symbol_offered = await isSymbolOffered(symbol_to_check);
     if (is_symbol_offered) return first_symbol;
     return undefined;
 };
@@ -114,7 +131,8 @@ export const findFirstOpenMarket = async (
 ): Promise<TFindFirstOpenMarket> => {
     const market = markets.shift();
     const first_symbol = active_symbols.find(symbol_info => market === symbol_info.market && isSymbolOpen(symbol_info));
-    const is_symbol_offered = await isSymbolOffered(first_symbol?.symbol);
+    const symbol_to_check = first_symbol ? (first_symbol as any).underlying_symbol || first_symbol.symbol : undefined;
+    const is_symbol_offered = await isSymbolOffered(symbol_to_check);
     if (is_symbol_offered) return { category: first_symbol?.market, subcategory: first_symbol?.submarket };
     else if (markets.length > 0) return findFirstOpenMarket(active_symbols, markets);
     return undefined;
@@ -133,12 +151,25 @@ export type TActiveSymbols = {
 }[];
 
 export const getSymbolDisplayName = (active_symbols: TActiveSymbols = [], symbol: string) => {
+    // Add null safety check for symbol parameter
+    if (!symbol || typeof symbol !== 'string') {
+        return symbol || '';
+    }
+
     const market_names_map = getMarketNamesMap() as Record<string, string>;
     const symbol_upper = symbol.toUpperCase();
 
     // First try to get display name from the market names map
     if (market_names_map[symbol_upper]) {
         return market_names_map[symbol_upper];
+    }
+
+    // Try to find display name from active_symbols if provided
+    if (active_symbols && active_symbols.length > 0) {
+        const found_symbol = active_symbols.find(s => ((s as any).underlying_symbol || s.symbol) === symbol);
+        if (found_symbol && (found_symbol as any).display_name) {
+            return (found_symbol as any).display_name;
+        }
     }
 
     // Fallback: try to format common symbol patterns

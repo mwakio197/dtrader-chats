@@ -1,4 +1,4 @@
-import { getPlatformSettings, routes } from '@deriv/shared';
+import { getPlatformName, getPlatformIcon, routes } from '@deriv/shared';
 import { localize } from '@deriv/translations';
 
 type TPlatformConfig = {
@@ -13,11 +13,11 @@ type TPlatformConfig = {
 // Simplified platform config to only include trader platform
 const platform_config: TPlatformConfig[] = [
     {
-        icon: getPlatformSettings('trader').icon,
-        title: () => getPlatformSettings('trader').name,
-        name: getPlatformSettings('trader').name,
+        icon: getPlatformIcon(),
+        title: () => getPlatformName(),
+        name: getPlatformName(),
         description: () => localize('A whole new trading experience on a powerful yet easy to use platform.'),
-        link_to: routes.trade,
+        link_to: routes.index,
     },
 ];
 

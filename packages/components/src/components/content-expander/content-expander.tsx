@@ -76,7 +76,7 @@ const ContentExpander = ({
                         <Text
                             size={title_style?.size || 'xs'}
                             weight={title_style?.weight || 'bold'}
-                            color={title_style?.color || 'prominent'}
+                            color={title_style?.color || 'primary'}
                             {...title_style}
                         >
                             {title}

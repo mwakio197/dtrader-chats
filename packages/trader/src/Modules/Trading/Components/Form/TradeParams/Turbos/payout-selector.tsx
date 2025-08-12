@@ -24,21 +24,21 @@ const PayoutSelector = observer(() => {
     if (isMobile) {
         return (
             <button role='button' className='mobile-widget payout-selector' onClick={togglePayoutWheelPicker}>
-                <Text size='xs' color='prominent' align='center' className='payout-field'>
+                <Text size='xs' color='primary' align='center' className='payout-field'>
                     {barrier_1}
                     {Number(barrier_1) < 0 ? (
                         <LabelPairedChevronsDownCaptionRegularIcon
                             className='indicator-icon'
-                            stroke='var(--text-prominent)'
+                            stroke='var(--color-text-primary)'
                         />
                     ) : (
                         <LabelPairedChevronsUpCaptionRegularIcon
                             className='indicator-icon'
-                            stroke='var(--text-prominent)'
+                            stroke='var(--color-text-primary)'
                         />
                     )}
                 </Text>
-                <Text size='xs' className='payout-value' color='prominent' align='center' weight='bold'>
+                <Text size='xs' className='payout-value' color='primary' align='center' weight='bold'>
                     {payout_per_point} {currency}
                 </Text>
                 <Text size='xs' color='less-prominent' align='center'>

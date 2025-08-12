@@ -9,7 +9,7 @@
     bottom: 0;
     width: calc(100% - 4px);
     height: 100%;
-    background: var(--overlay-inside-dialog);
+    background: var(--color-surface-overlay);
 
     &__loading {
         position: absolute;
@@ -42,7 +42,9 @@
             &-path {
                 stroke-dasharray: 1, 200;
                 stroke-dashoffset: 0;
-                animation: dash 1.5s ease-in-out infinite, colorRed 6s ease-in-out infinite;
+                animation:
+                    dash 1.5s ease-in-out infinite,
+                    colorRed 6s ease-in-out infinite;
                 stroke-linecap: round;
             }
         }
@@ -74,6 +76,6 @@
 @keyframes colorRed {
     100%,
     0% {
-        stroke: var(--brand-red-coral);
+        stroke: var(--brand-primary);
     }
 }

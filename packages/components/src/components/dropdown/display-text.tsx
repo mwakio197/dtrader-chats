@@ -22,7 +22,7 @@ const DisplayText = ({ className, has_symbol, list, is_align_text_left, placehol
             ) : (
                 <Text
                     size='xs'
-                    color='prominent'
+                    color='primary'
                     align='center'
                     className={classNames('dc-dropdown__display-text', className)}
                     name={name}

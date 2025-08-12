@@ -16,19 +16,19 @@
     }
 
     &__warning {
-        background: $color-status-warning;
+        background: var(--color-status-warning-bg);
     }
 
     &__information {
-        background: $color-status-information;
+        background: var(--color-status-info-bg);
     }
 
     &__announcement {
-        background: $color-status-announcement;
+        background: var(--color-status-info-bg);
     }
 
     &__error {
-        background: $color-status-error;
+        background: var(--color-status-danger-bg);
     }
 
     &__icon {

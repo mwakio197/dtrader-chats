@@ -77,14 +77,7 @@ const PageError = ({
                     'dc-page-error__box--left': !!image_url,
                 })}
             >
-                <Text
-                    as='h3'
-                    size={is_mobile ? 's' : 'l'}
-                    align='center'
-                    weight='bold'
-                    line_height='s'
-                    color='prominent'
-                >
+                <Text as='h3' size={is_mobile ? 's' : 'l'} align='center' weight='bold' line_height='s' color='primary'>
                     {header}
                 </Text>
                 <div
@@ -93,7 +86,7 @@ const PageError = ({
                     })}
                 >
                     <Text
-                        color='prominent'
+                        color='primary'
                         className={classNames('dc-page-error__message', {
                             'dc-page-error__message--left': !!image_url,
                         })}

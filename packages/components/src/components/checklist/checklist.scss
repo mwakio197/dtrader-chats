@@ -6,7 +6,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: solid 1px var(--border-normal);
+        border-bottom: solid 1px var(--color-interactive-default);
         padding: 12px;
 
         &-text {
@@ -22,7 +22,7 @@
 
             &--action {
                 cursor: pointer;
-                background-color: var(--brand-red-coral);
+                background-color: var(--brand-primary);
                 border-radius: $BORDER_RADIUS;
                 display: flex;
                 justify-content: center;

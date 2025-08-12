@@ -15,7 +15,7 @@ const ModalContent = () => (
             className='da-icon-with-message__text'
             as='p'
             size='s'
-            color='general'
+            color='secondary'
             line_height='xxl'
             align='center'
             weight='bold'
@@ -26,7 +26,7 @@ const ModalContent = () => (
             className='da-icon-with-message__text__desc'
             as='p'
             size='xs'
-            color='general'
+            color='secondary'
             line_height='xxs'
             align='center'
         >

@@ -12,7 +12,7 @@
     display: none;
     overflow: hidden;
     opacity: 0;
-    background-color: var(--overlay-outside-dialog);
+    background-color: var(--color-modal-backdrop);
 
     &:not(:empty) {
         display: flex;

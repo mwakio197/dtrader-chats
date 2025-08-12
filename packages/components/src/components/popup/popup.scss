@@ -46,7 +46,7 @@
         }
 
         &-banner {
-            background-color: var(--status-warning);
+            background-color: var(--color-status-warning);
             border-radius: 10rem;
             padding: 0.4rem 0.8rem;
             display: flex;
@@ -57,7 +57,7 @@
             }
 
             @include mobile {
-                background-color: var(--general-main-1);
+                background-color: var(--color-surface-primary);
                 margin-left: 0.8rem;
             }
         }
@@ -85,7 +85,7 @@
 
         & .dc-tabs {
             &__content--popup {
-                background: var(--general-main-1);
+                background: var(--color-surface-primary);
             }
 
             &__list {
@@ -132,7 +132,7 @@
             }
 
             &__active--popup {
-                background: var(--general-main-1);
+                background: var(--color-surface-primary);
             }
 
             &--popup {
@@ -152,7 +152,7 @@
         bottom: 0;
 
         &__separator {
-            border-top: 2px solid var(--general-section-1);
+            border-top: 2px solid var(--color-surface-border);
         }
     }
 
@@ -161,7 +161,7 @@
         opacity: 0;
         padding: 3.2rem;
         overflow-y: auto;
-        background-color: var(--general-main-1);
+        background-color: var(--color-surface-primary);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -195,7 +195,7 @@
             &-separator {
                 height: 1px;
                 width: 100%;
-                background-color: var(--general-section-1);
+                background-color: var(--color-surface-primary);
             }
 
             &-list {
@@ -204,7 +204,7 @@
                 margin-top: 2.4rem;
 
                 li::marker {
-                    color: var(--text-general);
+                    color: var(--color-text-secondary);
                     font-size: var(--text-size-xs);
                 }
 

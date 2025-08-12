@@ -2,14 +2,7 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-import {
-    getCardLabels,
-    getContractPath,
-    getStartTime,
-    hasForwardContractStarted,
-    isForwardStarting,
-    toMoment,
-} from '@deriv/shared';
+import { getCardLabels, getContractPath, getStartTime, toMoment } from '@deriv/shared';
 import { TPortfolioPosition } from '@deriv/stores/types';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -20,9 +13,7 @@ import ContractCard from '../contract-card';
 
 jest.mock('@deriv/shared', () => ({
     ...jest.requireActual('@deriv/shared'),
-    isForwardStarting: jest.fn(),
     getStartTime: jest.fn(),
-    hasForwardContractStarted: jest.fn(),
 }));
 
 const mockedNow = Math.floor(Date.now() / 1000);
@@ -372,15 +363,6 @@ describe('ContractCard', () => {
         expect(screen.getByText('0.49 USD')).toBeInTheDocument();
         expect(screen.getByRole('button', { name: CANCEL })).toBeEnabled();
         expect(screen.getByRole('button', { name: CLOSE })).toBeDisabled();
-    });
-    it('should render specific tag if it is a forward starting contract', () => {
-        (isForwardStarting as jest.Mock).mockReturnValueOnce(true);
-        (hasForwardContractStarted as jest.Mock).mockReturnValueOnce(false);
-        (getStartTime as jest.Mock).mockReturnValueOnce(124525522);
-
-        render(mockedContractCard());
-
-        expect(screen.getByTestId('dt_forward-starting')).toBeInTheDocument();
     });
     it('should render a card for an open Accumulators position with a Close button only and ticks progress', () => {
         render(

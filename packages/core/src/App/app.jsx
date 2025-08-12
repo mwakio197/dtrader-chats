@@ -5,14 +5,7 @@ import PropTypes from 'prop-types';
 
 import { APIProvider } from '@deriv/api';
 import { Loading } from '@deriv/components';
-import {
-    initFormErrorMessages,
-    POIProvider,
-    setSharedCFDText,
-    setUrlLanguage,
-    setWebsocket,
-    useOnLoadTranslation,
-} from '@deriv/shared';
+import { initFormErrorMessages, setUrlLanguage, setWebsocket, useOnLoadTranslation } from '@deriv/shared';
 import { StoreProvider } from '@deriv/stores';
 import { getLanguage, initializeTranslations } from '@deriv/translations';
 import { Analytics } from '@deriv-com/analytics';
@@ -21,7 +14,6 @@ import { getInitialLanguage, initializeI18n, TranslationProvider } from '@deriv-
 
 import WS from 'Services/ws-methods';
 
-import { CFD_TEXT } from '../Constants/cfd-text';
 import { FORM_ERROR_MESSAGES } from '../Constants/form-error-messages';
 
 import AppContent from './AppContent';
@@ -87,7 +79,9 @@ const AppWithoutTranslation = ({ root_store }) => {
     React.useEffect(() => {
         sessionStorage.removeItem('redirect_url');
         const loadSmartchartsStyles = () => {
-            import('@deriv/deriv-charts/dist/smartcharts.css');
+            // [AI]
+            import('@deriv-com/derivatives-charts/dist/smartcharts.css');
+            // [/AI]
         };
 
         initializeTranslations();
@@ -95,7 +89,6 @@ const AppWithoutTranslation = ({ root_store }) => {
         // TODO: [translation-to-shared]: add translation implemnentation in shared
         setUrlLanguage(getLanguage());
         initFormErrorMessages(FORM_ERROR_MESSAGES);
-        setSharedCFDText(CFD_TEXT);
         root_store.common.setPlatform();
         loadSmartchartsStyles();
 
@@ -138,14 +131,12 @@ const AppWithoutTranslation = ({ root_store }) => {
                     <StoreProvider store={root_store}>
                         <BreakpointProvider>
                             <APIProvider>
-                                <POIProvider>
-                                    <TranslationProvider defaultLang={language} i18nInstance={i18nInstance}>
-                                        {/* This is required as translation provider uses suspense to reload language */}
-                                        <React.Suspense fallback={<Loading />}>
-                                            <AppContent passthrough={platform_passthrough} />
-                                        </React.Suspense>
-                                    </TranslationProvider>
-                                </POIProvider>
+                                <TranslationProvider defaultLang={language} i18nInstance={i18nInstance}>
+                                    {/* This is required as translation provider uses suspense to reload language */}
+                                    <React.Suspense fallback={<Loading />}>
+                                        <AppContent passthrough={platform_passthrough} />
+                                    </React.Suspense>
+                                </TranslationProvider>
                             </APIProvider>
                         </BreakpointProvider>
                     </StoreProvider>

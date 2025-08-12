@@ -40,7 +40,7 @@ const BarriersListBody = observer(
                     <ul className={`${className}__list`}>
                         {barriers_list.map(barrier => (
                             <Text
-                                color='prominent'
+                                color='primary'
                                 line_height={is_mobile ? 'xl' : 'l'}
                                 size={is_mobile ? 'xs' : 'xxs'}
                                 as='li'

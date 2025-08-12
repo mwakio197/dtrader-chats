@@ -1,5 +1,5 @@
 /**
- * Generate components/icon/icons.js & stories/icon/icons.js entries file automatically
+ * Generate components/icon/icons.js entries file automatically
  */
 
 const { EOL } = require('os');
@@ -42,12 +42,6 @@ function buildIcons() {
         }
     });
 
-    fs.writeFileSync(
-        path.join(__dirname, '../stories/icon/icons.js'),
-        JSON.stringify(categories, null, 4)
-            .replace(/"/g, "'")
-            .replace(/^/, '// auto-generated file. DO NOT MODIFY.\n\nexport const icons =\n')
-    );
     fs.writeFileSync(path.join(__dirname, '../src/components/icon/icons.js'), buffer.join(EOL) + EOL);
     /* eslint-disable no-console */
     console.info(`Build icons done. 'components/icon/icons.js' emitted with ${modules} modules.`);

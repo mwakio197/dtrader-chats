@@ -34,13 +34,13 @@
     }
     @include mobile {
         &--absolute {
-            background-color: var(--general-section-2);
+            background-color: var(--color-surface-primary);
             top: unset;
             bottom: 0;
             left: 0;
             position: absolute;
             padding: 1.6rem;
-            border-top: 2px solid var(--general-disabled);
+            border-top: 2px solid var(--color-interactive-disabled);
             max-height: 70px;
             width: 100%;
 

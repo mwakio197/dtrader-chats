@@ -3,7 +3,6 @@ export { default as getAccountListWithAuthToken } from './getAccountListWithAuth
 export { default as getActiveAuthTokenIDFromLocalStorage } from './getActiveAuthTokenIDFromLocalStorage';
 export { default as getActiveLoginIDFromLocalStorage } from './getActiveLoginIDFromLocalStorage';
 export { safeParse, getLocalStorage } from './getLocalStorage';
-export { default as getWalletCurrencyIcon } from './getWalletCurrencyIcon';
 export { default as getToken } from './getToken';
 export { default as groupTransactionsByDay } from './groupTransactionsByDay';
 export { default as getTruncatedString } from './getTruncatedString';

@@ -44,7 +44,7 @@ const HOISTED_PACKAGES = {
     '@deriv/shared': path.resolve(__dirname, '../../../node_modules/@deriv/shared'),
     '@deriv/components': path.resolve(__dirname, '../../../node_modules/@deriv/components'),
     '@deriv/translations': path.resolve(__dirname, '../../../node_modules/@deriv/translations'),
-    '@deriv/deriv-charts': path.resolve(__dirname, '../../../node_modules/@deriv/deriv-charts'),
+    '@deriv-com/derivatives-charts': path.resolve(__dirname, '../../../node_modules/@deriv-com/derivatives-charts'),
     '@deriv/trader': path.resolve(__dirname, '../../../node_modules/@deriv/trader'),
     '@deriv/reports': path.resolve(__dirname, '../../../node_modules/@deriv/reports'),
 };
@@ -125,7 +125,7 @@ const MINIMIZERS = !IS_RELEASE
 
 const plugins = ({ base, is_test_env }) => {
     return [
-        new Dotenv({}),
+        new Dotenv({ systemvars: true }),
         new DefinePlugin({
             'process.env.DATADOG_APPLICATION_ID': JSON.stringify(process.env.DATADOG_APPLICATION_ID),
             'process.env.DATADOG_CLIENT_TOKEN': JSON.stringify(process.env.DATADOG_CLIENT_TOKEN),
@@ -134,7 +134,6 @@ const plugins = ({ base, is_test_env }) => {
             ),
             'process.env.DATADOG_SESSION_SAMPLE_RATE': JSON.stringify(process.env.DATADOG_SESSION_SAMPLE_RATE),
             'process.env.REF_NAME': JSON.stringify(process.env.REF_NAME),
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.RUDDERSTACK_KEY': JSON.stringify(process.env.RUDDERSTACK_KEY),
             'process.env.GROWTHBOOK_CLIENT_KEY': JSON.stringify(process.env.GROWTHBOOK_CLIENT_KEY),
             'process.env.GROWTHBOOK_DECRYPTION_KEY': JSON.stringify(process.env.GROWTHBOOK_DECRYPTION_KEY),

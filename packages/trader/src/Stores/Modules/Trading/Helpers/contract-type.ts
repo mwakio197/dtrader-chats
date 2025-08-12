@@ -2,7 +2,6 @@ import { ContractsFor, ContractsForSymbolResponse, TradingTimes, TradingTimesRes
 import {
     buildBarriersConfig,
     buildDurationConfig,
-    buildForwardStartingConfig,
     cloneObject,
     getCleanedUpCategories,
     getContractCategoriesConfig,
@@ -78,14 +77,11 @@ export const ContractType = (() => {
     let non_available_categories: TTradeTypesCategories = {};
     const trading_events: { [key: string]: Record<string, TEvents | undefined> } = {};
     const trading_times: { [key: string]: Record<string, TTimes> } = {};
-    let has_only_forward_starting_contracts = false;
 
     const buildContractTypesConfig = (symbol: string): Promise<void> =>
         WS.contractsFor(symbol).then((r: Required<ContractsForSymbolResponse>) => {
             const has_contracts = getPropertyValue(r, ['contracts_for']);
-            has_only_forward_starting_contracts =
-                has_contracts && !r.contracts_for.available.find(contract => contract.start_type !== 'forward');
-            if (!has_contracts || has_only_forward_starting_contracts) return;
+            if (!has_contracts) return;
             const contract_categories = getContractCategoriesConfig();
             contract_types = getContractTypesConfig(symbol);
             available_contract_types = {};
@@ -125,7 +121,6 @@ export const ContractType = (() => {
                 config.barriers = buildBarriersConfig(contract, config.barriers);
                 config.barrier_category = contract.barrier_category as TConfig['barrier_category'];
                 config.barrier_choices = contract.barrier_choices as TConfig['barrier_choices'];
-                config.forward_starting_dates = buildForwardStartingConfig(contract, config.forward_starting_dates);
                 config.growth_rate_range = contract.growth_rate_range as TConfig['growth_rate_range'];
                 config.multiplier_range = contract.multiplier_range as TConfig['multiplier_range'];
                 config.cancellation_range = contract.cancellation_range as TConfig['cancellation_range'];
@@ -341,7 +336,7 @@ export const ContractType = (() => {
 
     const getStartType = (start_date: number) => ({
         // Number(0) refers to 'now'
-        contract_start_type: start_date === Number(0) ? 'spot' : 'forward',
+        contract_start_type: 'spot',
     });
 
     const getStartDates = (contract_type: string, current_start_date: number) => {
@@ -351,9 +346,6 @@ export const ContractType = (() => {
         if (config?.has_spot) {
             // Number(0) refers to 'now'
             start_dates_list.push({ text: localize('Now'), value: Number(0) });
-        }
-        if (config?.forward_starting_dates) {
-            start_dates_list.push(...config.forward_starting_dates);
         }
 
         const start_date = start_dates_list.find(item => item.value === current_start_date)
@@ -365,7 +357,7 @@ export const ContractType = (() => {
 
     const getSessions = (contract_type: string, start_date: number) => {
         const config: TConfig = getPropertyValue(available_contract_types, [contract_type, 'config']) || {};
-        const sessions = config.forward_starting_dates?.find(option => option.value === start_date)?.sessions;
+        const sessions = undefined;
         return { sessions };
     };
 
@@ -440,7 +432,7 @@ export const ContractType = (() => {
                                         trading_events[trading_times_response.echo_req.trading_times as string] = {};
                                     }
                                     trading_events[trading_times_response.echo_req.trading_times as string][
-                                        symbol.symbol
+                                        (symbol as any).underlying_symbol || symbol.symbol
                                     ] = symbol.events as TEvents;
                                 }
                             }
@@ -464,7 +456,10 @@ export const ContractType = (() => {
         const symbol_data = trading_times.markets.flatMap(
             market =>
                 market.submarkets?.flatMap(
-                    submarket => submarket.symbols?.find(symbol => symbol.symbol === underlying) || []
+                    submarket =>
+                        submarket.symbols?.find(
+                            symbol => ((symbol as any).underlying_symbol || symbol.symbol) === underlying
+                        ) || []
                 ) || []
         )[0];
 
@@ -495,7 +490,7 @@ export const ContractType = (() => {
                                         trading_times[trading_times_response.echo_req.trading_times as string] = {};
                                     }
                                     trading_times[trading_times_response.echo_req.trading_times as string][
-                                        symbol.symbol
+                                        (symbol as any).underlying_symbol || symbol.symbol
                                     ] = {
                                         open: (symbol.times as TTimes).open,
                                         close: (symbol.times as TTimes).close,
@@ -550,11 +545,7 @@ export const ContractType = (() => {
                     'YYYY-MM-DD'
                 );
             } else {
-                // forward starting contracts should only show today and tomorrow as expiry date
-                const is_invalid =
-                    moment_expiry.isBefore(moment_start, 'day') ||
-                    (start_date && moment_expiry.isAfter(moment_start.clone().add(1, 'day')));
-                proper_expiry_date = (is_invalid ? moment_start : moment_expiry).format('YYYY-MM-DD');
+                proper_expiry_date = moment_expiry.format('YYYY-MM-DD');
             }
         }
 
@@ -593,20 +584,6 @@ export const ContractType = (() => {
                 const end_moment = buildMoment(expiry_date, expiry_time);
 
                 end_time = end_moment.format('HH:mm');
-                // When the contract is forwarding, and the duration is endtime, users can purchase the contract within 24 hours.
-                const expiry_sessions = [
-                    {
-                        open: start_moment.clone().add(5, 'minute'), // expiry time should be at least 5 minute after start_time
-                        close: minDate(
-                            start_moment.clone().add(24, 'hour'),
-                            buildMoment(expiry_date, market_close_time)
-                        ),
-                    },
-                ];
-
-                if (!isSessionAvailable(expiry_sessions, end_moment)) {
-                    end_time = getValidTime(expiry_sessions, end_moment.clone(), start_moment.clone());
-                }
                 if (end_moment.isSameOrBefore(start_moment) || end_moment.diff(start_moment, 'minute') < 5) {
                     const is_end_of_day = start_moment.get('hours') === 23 && start_moment.get('minute') >= 55;
                     const is_end_of_session =
@@ -614,10 +591,6 @@ export const ContractType = (() => {
                     end_time = start_moment.clone().add(is_end_of_day || is_end_of_session ? 0 : 5, 'minutes');
                     // Set the end_time to be multiple of 5 to be equal as the SELECTED_TIME that shown to the client.
                     end_time = setMinuteMultipleByFive(end_time as moment.Moment).format('HH:mm');
-                }
-                // Set the expiry_time to 5 minute less than start_time for forwading contracts when the expiry_time is null and the expiry_date is tomorrow.
-                if (end_time === '00:00' && start_moment.isBefore(end_moment, 'day')) {
-                    end_time = start_moment.clone().subtract(5, 'minute').format('HH:mm');
                 }
             }
         }
@@ -742,7 +715,6 @@ export const ContractType = (() => {
         getTradingTimes,
         getContractCategories: () => ({
             contract_types_list: available_categories,
-            has_only_forward_starting_contracts,
             non_available_contract_types_list: non_available_categories,
         }),
     };

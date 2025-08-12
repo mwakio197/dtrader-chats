@@ -16,14 +16,14 @@
         align-items: center;
 
         .dc-tick-picker__holder {
-            color: var(--purchase-main-2);
+            color: var(--color-trade-fall);
             flex-direction: column;
             justify-content: center;
             text-align: center;
             margin: 0 1.4rem;
         }
         .operator {
-            background-color: var(--general-section-2);
+            background-color: var(--color-surface-primary);
             width: 48px;
             height: 48px;
 
@@ -37,12 +37,12 @@
         justify-content: center;
 
         button {
-            background-color: var(--general-section-2);
+            background-color: var(--color-surface-primary);
             height: 48px;
             width: 112px;
 
             span {
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
                 font-size: 1.6rem;
             }
         }
@@ -50,7 +50,7 @@
             pointer-events: none;
 
             .dc-btn {
-                background-color: var(--general-disabled);
+                background-color: var(--color-interactive-disabled);
             }
         }
     }

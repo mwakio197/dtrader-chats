@@ -1,7 +1,7 @@
 .dc-timeline {
     &__flex {
         display: flex;
-        border-left: var(--brand-red-coral) solid 1px;
+        border-left: var(--brand-primary) solid 1px;
         position: relative;
         margin-left: 1.2rem;
 
@@ -17,14 +17,14 @@
         max-width: 500px;
 
         @at-root .dc-timeline__flex--disabled & {
-            color: $color-grey-7;
+            color: var(--color-text-secondary);
         }
     }
     &__oval {
         width: 24px;
         height: 24px;
         line-height: 2.35rem;
-        background-color: var(--brand-red-coral);
+        background-color: var(--brand-primary);
         border-radius: 50%;
         text-align: center;
         margin-right: 8px;
@@ -33,7 +33,7 @@
         left: -12px;
 
         @at-root .dc-timeline__flex--disabled & {
-            background-color: $color-grey-7;
+            background-color: var(--color-text-secondary);
         }
     }
     &__number {
@@ -42,7 +42,7 @@
     }
     &__content {
         margin: 16px 0;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
 
         &:last-of-type {
             margin-bottom: 0;

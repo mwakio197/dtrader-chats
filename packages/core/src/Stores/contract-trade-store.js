@@ -306,9 +306,12 @@ export default class ContractTradeStore extends BaseStore {
             //to show both Call and Put recent contracts on DTrader chart
             trade_types = [CONTRACT_TYPES.VANILLA.CALL, CONTRACT_TYPES.VANILLA.PUT];
         }
-
         return this.contracts
-            .filter(c => c.contract_info.underlying === underlying)
+            .filter(c => {
+                // Backward compatibility: fallback to old field name
+                const contract_underlying = c.contract_info.underlying_symbol || c.contract_info.underlying;
+                return contract_underlying === underlying;
+            })
             .filter(c => {
                 const info = c.contract_info;
                 const has_multiplier_contract_ended =
@@ -322,8 +325,9 @@ export default class ContractTradeStore extends BaseStore {
                 const trade_type_is_supported = trade_types.indexOf(info.contract_type) !== -1;
                 // both high_low & rise_fall have the same contract_types in POC response
                 // entry_spot=barrier means it is rise_fall contract (blame the api)
-                if (trade_type_is_supported && is_call_put && ((info.barrier && info.entry_tick) || info.shortcode)) {
-                    if (`${+info.entry_tick}` === `${+info.barrier}` && !isHighLow(info)) {
+                const entry_value = info.entry_spot ?? info.entry_tick;
+                if (trade_type_is_supported && is_call_put && ((info.barrier && entry_value) || info.shortcode)) {
+                    if (`${+entry_value}` === `${+info.barrier}` && !isHighLow(info)) {
                         return trade_type === TRADE_TYPES.RISE_FALL || trade_type === TRADE_TYPES.RISE_FALL_EQUAL;
                     }
                     return trade_type === TRADE_TYPES.HIGH_LOW;
@@ -373,11 +377,14 @@ export default class ContractTradeStore extends BaseStore {
             .filter(m => m)
             .map(m => toJS(m));
 
-        const { current_spot_time, entry_tick_time, exit_tick_time } = this.last_contract.contract_info || {};
+        const { current_spot_time, entry_spot_time, exit_spot_time } = this.last_contract.contract_info || {};
+
+        // Backward compatibility: fallback to old field names
+        const entry_time = entry_spot_time || this.last_contract.contract_info?.entry_tick_time;
+        const exit_time = exit_spot_time || this.last_contract.contract_info?.exit_tick_time;
 
         const should_show_poc_barriers =
-            (entry_tick_time && entry_tick_time !== current_spot_time) ||
-            (exit_tick_time && current_spot_time <= exit_tick_time);
+            (entry_time && entry_time !== current_spot_time) || (exit_time && current_spot_time <= exit_time);
 
         const { accumulators_high_barrier, accumulators_low_barrier, barrier_spot_distance, proposal_prev_spot_time } =
             (isAccumulatorContractOpen(this.last_contract.contract_info) &&
@@ -403,7 +410,7 @@ export default class ContractTradeStore extends BaseStore {
                     has_crossed_accu_barriers: this.has_crossed_accu_barriers,
                     is_dark_theme: this.root_store.ui.is_dark_mode_on,
                     contract_info: is_open ? this.last_contract.contract_info : {},
-                    is_accumulator_trade_without_contract: force_without_contract || !is_open || !entry_tick_time,
+                    is_accumulator_trade_without_contract: force_without_contract || !is_open || !entry_time,
                 })
             );
         }

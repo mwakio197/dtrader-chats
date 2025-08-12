@@ -9,11 +9,11 @@
         cursor: pointer;
 
         &--active {
-            background-color: var(--general-active);
+            background-color: var(--color-interactive-active);
         }
 
         &:hover:not(&--active) {
-            background-color: var(--general-hover);
+            background-color: var(--color-interactive-hover);
         }
     }
 

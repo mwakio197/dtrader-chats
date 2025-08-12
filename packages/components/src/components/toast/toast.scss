@@ -1,7 +1,9 @@
 /** @define dc-toast; */
 .dc-toast {
     width: 100vw;
-    transition: transform 0.25s ease, opacity 0.25s linear;
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s linear;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +13,7 @@
         max-width: calc(100vw - 3.2rem);
         padding: 0.4rem 0.8rem;
         @include typeface(--paragraph-center-normal-black);
-        color: var(--text-colored-background);
+        color: var(--color-surface-contrast);
         border-radius: $BORDER_RADIUS;
         min-height: 34px;
         display: flex;
@@ -20,12 +22,12 @@
     }
     &__error {
         .dc-toast__message {
-            background-color: var(--status-danger);
+            background-color: var(--color-status-danger);
         }
     }
     &__info {
         .dc-toast__message {
-            background: var(--status-info);
+            background: var(--color-status-info);
             font-size: 1.2rem;
             /* iPhone SE screen height fixes due to UI space restrictions */
             @media only screen and (max-height: 580px) {
@@ -35,7 +37,7 @@
     }
     &__notification {
         .dc-toast__message {
-            background: var(--general-active);
+            background: var(--color-interactive-active);
             padding: 0.9rem 1.2rem;
         }
     }

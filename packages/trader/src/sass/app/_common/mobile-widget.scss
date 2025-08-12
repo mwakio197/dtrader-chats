@@ -4,7 +4,7 @@
     border-width: 0;
     padding: 1rem 0.8rem;
     height: 4rem;
-    background-color: var(--general-main-1);
+    background-color: var(--color-surface-primary);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,7 +22,7 @@
         padding: 1rem 0.8rem;
         margin-left: 0.8rem;
         height: 4rem;
-        background-color: var(--general-main-1);
+        background-color: var(--color-surface-primary);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -30,22 +30,22 @@
     }
     &__amount {
         @include typeface(--paragraph-center-bold-black);
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
     }
     &__duration {
         @include typeface(--paragraph-center-normal-black);
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
     }
     &__type {
         @include typeface(--paragraph-center-normal-black);
-        color: var(--text-less-prominent);
+        color: var(--color-text-secondary);
     }
     &__item {
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
         line-height: 1.4rem;
 
         &-disabled {
-            color: var(--text-disabled);
+            color: var(--color-text-disabled);
         }
 
         &-value {
@@ -99,7 +99,7 @@
             }
 
             .mobile-widget__item-label {
-                color: var(--text-general);
+                color: var(--color-text-secondary);
             }
         }
         &-risk-management {
@@ -108,7 +108,7 @@
             justify-content: center;
             align-items: stretch;
             margin-bottom: 0.6rem;
-            color: var(--text-general);
+            color: var(--color-text-secondary);
             padding: 0.4rem 0.8rem;
 
             .mobile-widget__item {
@@ -118,7 +118,7 @@
                 align-items: center;
             }
             .mobile-widget__item-label {
-                color: var(--text-general);
+                color: var(--color-text-secondary);
             }
             .mobile-widget__item-label,
             .mobile-widget__item-value {
@@ -129,7 +129,7 @@
         &-trade-info {
             display: flex;
             justify-content: space-evenly;
-            background: var(--general-main-1);
+            background: var(--color-surface-primary);
             flex: 2;
             margin-left: 0.8rem;
 
@@ -196,7 +196,7 @@
     }
     &__basis {
         font-weight: bold;
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
     }
 }
 

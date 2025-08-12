@@ -148,7 +148,7 @@
                 width: 100%;
             }
             &_container {
-                border: 1px solid var(--general-active);
+                border: 1px solid var(--color-interactive-active);
                 border-radius: 0.8rem;
 
                 @include desktop-screen {
@@ -350,8 +350,8 @@
             justify-content: flex-end;
             z-index: 4;
             border-radius: 0 $BORDER_RADIUS $BORDER_RADIUS 0;
-            border-top: 1px solid var(--general-section-1);
-            background-color: var(--general-main-1);
+            border-top: 1px solid var(--color-surface-border);
+            background-color: var(--color-surface-primary);
 
             @include desktop-screen {
                 max-width: 100%;
@@ -387,7 +387,7 @@
             }
 
             &-note {
-                color: var(--text-prominent);
+                color: var(--color-text-primary);
                 font-size: var(--text-size-xxs);
                 line-height: 1.5;
                 display: flex;
@@ -429,7 +429,7 @@
 
                 &-dashboard {
                     .dc-btn__text {
-                        color: var(--text-prominent);
+                        color: var(--color-text-primary);
                     }
                 }
 
@@ -499,7 +499,7 @@
                 flex-direction: column;
                 height: auto;
                 align-items: initial;
-                border-top: 2px solid var(--general-section-1);
+                border-top: 2px solid var(--color-surface-border);
                 width: 100vw;
             }
 
@@ -663,7 +663,7 @@
             margin: 1.6rem 0;
             padding: 1.6rem 2.4rem;
             border-radius: $BORDER_RADIUS * 2;
-            border: 1px solid var(--border-normal);
+            border: 1px solid var(--color-interactive-default);
         }
 
         .files-description {
@@ -748,7 +748,7 @@
 
         &--error {
             circle {
-                fill: var(--status-danger);
+                fill: var(--color-status-danger);
             }
         }
 
@@ -1011,7 +1011,7 @@
         height: fit-content;
         padding: 0.8rem;
         border-radius: 4px;
-        background-color: $color-grey-2;
+        background-color: var(--color-text-secondary)-2;
     }
 
     &__image {
@@ -1079,5 +1079,5 @@
 
 .focus-field {
     border-radius: $BORDER_RADIUS;
-    border: 1px solid var(--text-prominent);
+    border: 1px solid var(--color-surface-border);
 }

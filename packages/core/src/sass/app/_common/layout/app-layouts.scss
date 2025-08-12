@@ -99,14 +99,14 @@
     height: calc(100vh - #{$HEADER_HEIGHT} - #{$FOOTER_HEIGHT});
     overflow: hidden;
     backface-visibility: hidden;
-    background-color: var(--general-main-1);
+    background-color: var(--color-surface-primary);
 
     &--is-disabled:after {
         opacity: 1;
         pointer-events: auto;
     }
     &--is-route-modal {
-        background-color: var(--overlay-outside-dialog);
+        background-color: var(--color-modal-backdrop);
     }
     &--is-hidden {
         margin-top: 0;
@@ -194,7 +194,7 @@
             z-index: 1;
         }
         .contract-audit-card {
-            background-color: var(--general-section-1);
+            background-color: var(--color-surface-primary);
             border-radius: $BORDER_RADIUS;
 
             .contract-audit__wrapper {
@@ -253,7 +253,7 @@
     }
     &:hover {
         cursor: pointer;
-        background-color: var(--general-hover);
+        background-color: var(--color-interactive-hover);
     }
     &:focus {
         outline: none;
@@ -268,7 +268,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--general-section-1);
+    background: var(--color-surface-section);
 }
 
 /** @define category-wrapper */
@@ -282,7 +282,7 @@
 
     /* postcss-bem-linter: ignore */
     .color1-fill {
-        fill: var(--brand-red-coral);
+        fill: var(--brand-primary);
     }
     /* postcss-bem-linter: ignore */
     .color2-fill {
@@ -315,7 +315,7 @@
     }
     &__message {
         @include interpolate(font-size, 320px, 1440px, 14px, 20px);
-        color: var(--text-general);
+        color: var(--color-text-secondary);
     }
 }
 

@@ -110,7 +110,7 @@ const CollapsibleTradeParams = ({
                     <Text
                         as='p'
                         size='xxs'
-                        color='prominent'
+                        color='primary'
                         line_height='s'
                         weight='bold'
                         className='mobile-widget__digit'

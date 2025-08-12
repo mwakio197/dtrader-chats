@@ -1,7 +1,7 @@
 /* @define account-signup; weak */
 .account-signup {
     & .signup-separator-container {
-        border-bottom: 1px solid var(--general-section-1);
+        border-bottom: 1px solid var(--color-surface-border);
         @include mobile {
             display: none;
         }
@@ -57,7 +57,7 @@
     }
     .dc-password-input {
         &__visibility-icon {
-            background-color: var(--general-main-2);
+            background-color: var(--color-surface-primary);
         }
     }
     &__heading {
@@ -83,11 +83,11 @@
         }
     }
     &__btn {
-        background-color: var(--button-primary-default);
+        background-color: var(--color-button-primary-bg);
         font-weight: bold;
-        color: var(--text-colored-background);
+        color: var(--color-surface-contrast);
         &:hover {
-            background-color: var(--button-primary-hover);
+            background-color: var(--color-button-primary-hover);
         }
     }
     &__password-field {

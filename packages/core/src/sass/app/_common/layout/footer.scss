@@ -12,9 +12,9 @@
     align-items: center;
     transition: opacity 0.3s;
     backface-visibility: hidden;
-    background: var(--general-main-1);
-    color: var(--text-prominent);
-    border-top: 1px solid var(--general-section-1);
+    background: var(--color-surface-primary);
+    color: var(--color-text-primary);
+    border-top: 1px solid var(--color-surface-border);
 
     &--is-disabled {
         border-top: none;
@@ -49,7 +49,7 @@
             padding: 0.8rem;
             cursor: pointer;
             &:hover {
-                background: var(--general-hover);
+                background: var(--color-interactive-hover);
             }
         }
     }
@@ -63,7 +63,7 @@
         cursor: pointer;
 
         &:hover {
-            background: var(--general-hover);
+            background: var(--color-interactive-hover);
 
             .footer__icon {
                 @extend %inline-icon;
@@ -106,21 +106,21 @@
         text-decoration-line: none;
     }
     &__circle {
-        background: var(--general-section-1);
+        background: var(--color-surface-primary);
         width: 1em;
         height: 1em;
         margin: 0.2em 1.6em;
         border-radius: 50%;
 
         &--online {
-            background: var(--text-profit-success);
+            background: var(--color-text-success);
         }
         &--offline {
-            background: var(--text-loss-danger);
+            background: var(--color-text-danger);
         }
         &--blinker {
             animation: blinking-network-status 0.4s alternate infinite;
-            background: var(--text-profit-success);
+            background: var(--color-text-success);
         }
     }
 }
@@ -132,7 +132,7 @@
     margin-right: 1em;
     padding: 0 1em;
     @include typeface(--small-left-normal-black);
-    color: var(--text-general);
+    color: var(--color-text-secondary);
 
     &--is-mobile {
         padding: 0 1em 0 0;
@@ -144,7 +144,7 @@
 .ic-settings {
     &--active {
         position: relative;
-        background: var(--state-hover);
+        background: var(--color-interactive-hover);
 
         &:after {
             content: '';
@@ -153,7 +153,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            background: var(--text-prominent);
+            background: var(--color-text-primary);
         }
         .ic-settings__icon {
             @extend %inline-icon-active;
@@ -181,7 +181,7 @@
     }
     &__link {
         @include typeface(--paragraph-left-bold-prominent);
-        color: var(--brand-red-coral);
+        color: var(--brand-primary);
         text-decoration: none;
     }
     &__icon {
@@ -199,6 +199,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--general-section-1);
+    background: var(--color-surface-primary);
     margin: 0 0.1rem;
 }

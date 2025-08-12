@@ -13,7 +13,7 @@ import {
 } from 'react-virtualized';
 import { MeasuredCellParent } from 'react-virtualized/dist/es/CellMeasurer';
 import classNames from 'classnames';
-import { isDesktop, isForwardStartingBuyTransaction, isMobile } from '@deriv/shared';
+import { isDesktop, isMobile } from '@deriv/shared';
 import ThemedScrollbars from '../themed-scrollbars';
 import { TPassThrough, TRow, TTableRowItem } from '../types/common.types';
 import DataListCell from './data-list-cell';
@@ -102,14 +102,8 @@ const DataList = React.memo(
 
         const rowRenderer = ({ style, index, key, parent }: ListRowProps) => {
             const { getRowAction, passthrough, row_gap } = other_props;
-            let row = data_source[index];
+            const row = data_source[index];
             const { action_type, shortcode, purchase_time, transaction_time, id } = row;
-            if (isForwardStartingBuyTransaction(action_type, shortcode, purchase_time || transaction_time)) {
-                const is_sold = !!data_source?.find(
-                    transaction => transaction.action_type === 'sell' && transaction.id === id
-                );
-                row = { ...row, is_sold };
-            }
             const action = getRowAction && getRowAction(row);
             const destination_link = typeof action === 'string' ? action : undefined;
             const action_desc = typeof action === 'object' ? action : undefined;

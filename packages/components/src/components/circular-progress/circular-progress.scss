@@ -10,10 +10,10 @@
         stroke: var(--brand-secondary);
 
         &--warning {
-            stroke: var(--status-warning);
+            stroke: var(--color-status-warning);
         }
         &--danger {
-            stroke: var(--status-danger);
+            stroke: var(--color-status-danger);
         }
     }
     &--clockwise {

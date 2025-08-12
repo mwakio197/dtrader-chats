@@ -141,7 +141,7 @@ const Dialog = ({
                             })}
                         >
                             {!!title && (
-                                <Text as='h1' color='prominent' weight='bold' className='dc-dialog__header--title'>
+                                <Text as='h1' color='primary' weight='bold' className='dc-dialog__header--title'>
                                     {title}
                                 </Text>
                             )}

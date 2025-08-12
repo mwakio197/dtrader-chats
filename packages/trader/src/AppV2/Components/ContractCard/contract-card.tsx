@@ -12,10 +12,8 @@ import {
     getMarketName,
     getStartTime,
     getTradeTypeName,
-    hasForwardContractStarted,
     isCryptoContract,
     isEnded,
-    isForwardStarting,
     isHighLow,
     isMultiplierContract,
     isValidToCancel,
@@ -30,7 +28,6 @@ import { getProfit } from 'AppV2/Utils/positions-utils';
 import { TRootStore } from 'Types';
 
 import { ContractCardStatusTimer, TContractCardStatusTimerProps } from './contract-card-status-timer';
-import ForwardStartingTag from './forward-starting-tag';
 
 type TContractCardProps = TContractCardStatusTimerProps & {
     className?: string;
@@ -84,7 +81,8 @@ const ContractCard = ({
     const tradeTypeName = `${contract_main_title} ${getTradeTypeName(contract_type ?? '', {
         isHighLow: is_high_low,
     })}`.trim();
-    const symbolName = 'symbol' in contractInfo ? getMarketName(contractInfo.symbol ?? '') : display_name;
+    const symbol = (contractInfo as any).underlying_symbol || (contractInfo as any).symbol;
+    const symbolName = symbol ? getMarketName(symbol) : display_name;
     const is_crypto = isCryptoContract((contractInfo as TContractInfo).underlying);
     const isMultiplier = isMultiplierContract(contract_type);
     const isSold = !!sell_time || isEnded(contractInfo as TContractInfo);
@@ -94,11 +92,7 @@ const ContractCard = ({
     const isCancelButtonPressed = isSellRequested && isCanceling;
     const isCloseButtonPressed = isSellRequested && isClosing;
     const has_no_auto_expiry = isMultiplier && !is_crypto;
-    const is_forward_starting = isForwardStarting(shortcode ?? '', purchase_time);
-    const start_time = getStartTime(shortcode ?? '');
-    const has_forward_contract_started = hasForwardContractStarted(shortcode ?? '');
-    const show_tag_forward_starting = is_forward_starting && !!start_time && !has_forward_contract_started && !isSold;
-    const show_status_timer_tag = (!has_no_auto_expiry || (has_no_auto_expiry && isSold)) && !show_tag_forward_starting;
+    const show_status_timer_tag = !has_no_auto_expiry || (has_no_auto_expiry && isSold);
     const Component = redirectTo ? NavLink : 'div';
 
     const handleSwipe = (direction: string) => {
@@ -175,12 +169,6 @@ const ContractCard = ({
                                     isSold={isSold}
                                     serverTime={serverTime}
                                     {...contractInfo}
-                                />
-                            )}
-                            {show_tag_forward_starting && (
-                                <ForwardStartingTag
-                                    formatted_date={formatDate(toMoment(parseInt(start_time || '')), 'DD MMM YYYY')}
-                                    formatted_time={formatTime(parseInt(start_time || ''), 'HH:mm [GMT]')}
                                 />
                             )}
                         </div>

@@ -131,7 +131,7 @@ const VolumeControl = ({ onVolumeChange, volume, is_mobile, is_muted, is_v2 = fa
                 {!is_v2 && (
                     <Icon
                         icon={is_muted ? 'IcSoundOff' : 'IcSoundOn'}
-                        custom_color='var(--text-colored-background)'
+                        custom_color='var(--color-surface-contrast)'
                         height={18}
                         width={20}
                     />

@@ -12,7 +12,7 @@ $header-height: 52px;
     flex-direction: column;
     box-sizing: border-box;
     @include typeface(--paragraph-center-normal-black, default);
-    color: var(--text-general);
+    color: var(--color-text-secondary);
 
     &__cell {
         padding: 0.75em;
@@ -37,7 +37,7 @@ $header-height: 52px;
         &,
         &:active,
         &:visited {
-            color: var(--text-general);
+            color: var(--color-text-secondary);
         }
         &--preloader {
             position: absolute;
@@ -52,11 +52,11 @@ $header-height: 52px;
         }
     }
     &__head {
-        border-bottom: 2px solid var(--general-section-1);
+        border-bottom: 2px solid var(--color-surface-border);
         height: $header-height;
     }
     &__head &__row {
-        color: var(--text-prominent);
+        color: var(--color-text-primary);
         height: 100%;
         border-bottom: none;
     }
@@ -68,7 +68,7 @@ $header-height: 52px;
         flex-basis: 0;
 
         .table__row-link:hover {
-            background-color: var(--state-hover);
+            background-color: var(--color-interactive-hover);
             cursor: pointer;
         }
         .table__row:last-child {
@@ -81,10 +81,10 @@ $header-height: 52px;
         white-space: nowrap;
     }
     &__foot {
-        border-top: 2px solid var(--general-section-1);
+        border-top: 2px solid var(--color-surface-border);
     }
     &__foot &__row {
-        color: var(--text-general);
+        color: var(--color-text-secondary);
         border-bottom: none;
     }
 }

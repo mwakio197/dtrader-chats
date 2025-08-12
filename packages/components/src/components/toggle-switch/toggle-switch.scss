@@ -12,7 +12,7 @@
         cursor: pointer;
         width: 4.9rem;
         height: 2.52rem;
-        background: var(--general-disabled);
+        background: var(--color-interactive-disabled);
         border-radius: 4.9rem;
         transition: background-color 0.25s;
     }
@@ -21,10 +21,10 @@
         height: 1.9rem;
         border-radius: 1.9rem;
         transition: transform 0.25s;
-        background: var(--text-colored-background);
+        background: var(--color-surface-contrast);
     }
     &:checked + &__label {
-        background: var(--text-profit-success);
+        background: var(--color-text-success);
     }
     &:checked + &__label &__button {
         transform: translateX(2.25rem);

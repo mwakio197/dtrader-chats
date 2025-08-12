@@ -9,7 +9,7 @@
     }
     20% {
         background: center no-repeat
-            radial-gradient(50% 50% at 50% 50%, var(--text-loss-danger) 0%, rgba(55, 124, 252, 0) 100%);
+            radial-gradient(50% 50% at 50% 50%, var(--color-text-danger) 0%, rgba(55, 124, 252, 0) 100%);
     }
 }
 
@@ -20,7 +20,7 @@
     align-items: center;
     position: relative;
     margin: 0 2.5em 0 1em;
-    background-color: var(--general-section-1);
+    background-color: var(--color-surface-primary);
     border-radius: $BORDER_RADIUS * 2;
     min-width: 51.4rem;
 
@@ -88,7 +88,7 @@
         align-items: center;
         padding: 0 3.2rem 0 0.8rem;
         justify-content: flex-start;
-        border-left: 1px solid $color-grey-5;
+        border-left: 1px solid var(--color-surface-border);
 
         @include mobile-or-tablet-screen {
             padding-right: 0;
@@ -116,7 +116,7 @@
 
                 @for $i from 1 through 3 {
                     .dot-#{$i} {
-                        background-color: var(--text-general);
+                        background-color: var(--color-text-secondary);
                         border-radius: 50%;
                         width: 0.2rem;
                         height: 0.2rem;
@@ -134,11 +134,11 @@
                         0%,
                         45%,
                         100% {
-                            background: var(--text-less-prominent);
+                            background: var(--color-text-secondary);
                         }
                         50%,
                         95% {
-                            background: var(--text-general);
+                            background: var(--color-text-secondary);
                         }
                     }
                 }
@@ -187,7 +187,7 @@
                 width: inherit;
             }
             @include mobile-or-tablet-screen {
-                background-color: var(--general-section-1);
+                background-color: var(--color-surface-primary);
                 border-radius: $BORDER_RADIUS * 2;
                 padding: 1.3rem 0.8rem;
 

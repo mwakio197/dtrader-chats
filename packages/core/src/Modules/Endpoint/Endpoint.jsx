@@ -58,7 +58,7 @@ const Endpoint = () => {
             {({ errors, isSubmitting, touched, values, handleChange, setFieldTouched }) => (
                 <Form className='endpoint'>
                     <div className='endpoint__title'>
-                        <Text as='h1' weight='bold' color='prominent'>
+                        <Text as='h1' weight='bold' color='primary'>
                             Change API endpoint
                         </Text>
                     </div>

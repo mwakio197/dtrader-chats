@@ -7,14 +7,14 @@
     right: 0;
     z-index: 99;
     border-radius: $BORDER_RADIUS;
-    background-color: var(--general-main-2);
-    box-shadow: 0 2px 16px 8px var(--shadow-menu);
+    background-color: var(--color-surface-primary);
+    box-shadow: 0 2px 16px 8px var(--color-shadow-medium);
 
     .composite-wrapper {
         position: absolute;
         width: 100%;
         height: 100%;
-        background-color: var(--general-main-1);
+        background-color: var(--color-surface-primary);
         z-index: 98;
     }
     &__input-fields {
@@ -43,12 +43,12 @@
                 }
             }
 
-            @include colorIcon(var(--text-prominent));
+            @include colorIcon(var(--color-text-primary));
 
             & .input {
                 height: 3.2rem;
-                background-color: var(--fill-normal);
-                border: 1px solid var(--border-normal);
+                background-color: var(--color-surface-primary);
+                border: 1px solid var(--color-interactive-default);
                 appearance: none;
 
                 @include mobile-or-tablet-screen {
@@ -58,14 +58,14 @@
                 }
 
                 &:hover {
-                    border-color: var(--border-hover);
+                    border-color: var(--color-interactive-hover);
                 }
                 &:focus,
                 &:active {
-                    border-color: var(--border-active);
+                    border-color: var(--color-interactive-active);
                 }
                 &::placeholder {
-                    color: var(--text-general);
+                    color: var(--color-text-secondary);
                 }
             }
         }
@@ -82,12 +82,12 @@
     &__prepopulated-list {
         padding-top: 50px;
         @include typeface(--paragraph-center-normal-black);
-        color: var(--text-prominent);
-        background: var(--state-normal);
+        color: var(--color-text-primary);
+        background: var(--color-surface-primary);
 
         &--is-active {
-            color: var(--text-prominent);
-            background-color: var(--state-active);
+            color: var(--color-text-primary);
+            background-color: var(--color-interactive-active);
             font-weight: bold;
         }
         & li {
@@ -98,7 +98,7 @@
             align-items: center;
 
             &:hover:not(.composite-calendar__prepopulated-list--is-active) {
-                background: var(--state-hover);
+                background: var(--color-interactive-hover);
             }
         }
     }
@@ -110,7 +110,7 @@
         &__actions {
             display: flex;
             padding: 16px;
-            border-top: 2px solid var(--border-disabled);
+            border-top: 2px solid var(--color-interactive-disabled);
 
             > * {
                 flex: 1;
@@ -124,14 +124,14 @@
             padding: 16px 16px 24px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            border-bottom: 2px solid var(--border-disabled);
+            border-bottom: 2px solid var(--color-interactive-disabled);
         }
         &__radio {
             display: flex;
             align-items: center;
             padding: 7px 8px;
             border: 1px solid;
-            border-color: var(--border-normal);
+            border-color: var(--color-interactive-default);
             border-radius: 4px;
             margin: 8px;
             font-size: 1.4rem;
@@ -140,9 +140,9 @@
                 display: none;
             }
             &-circle {
-                border: 2px solid var(--text-general);
+                border: 2px solid var(--color-text-secondary);
                 border-radius: 50%;
-                box-shadow: 0 0 1px 0 var(--shadow-menu);
+                box-shadow: 0 0 1px 0 var(--color-shadow-medium);
                 width: 16px;
                 height: 16px;
                 transition: all 0.3s ease-in-out;
@@ -151,8 +151,8 @@
 
                 &--selected {
                     border-width: 4px;
-                    border-color: var(--brand-red-coral);
-                    background: $color-white;
+                    border-color: var(--brand-primary);
+                    background: var(--brand-white);
                 }
             }
             &--selected {

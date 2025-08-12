@@ -49,7 +49,7 @@ const Contract = observer(({ match, history }: TContract) => {
                     redirect_label={
                         dialog_errors.includes(error_code ?? '') ? localize('Ok') : localize('Go back to trading')
                     }
-                    redirectOnClick={() => history.push(routes.trade)}
+                    redirectOnClick={() => history.push(routes.index)}
                     should_show_refresh={false}
                 />
             ) : (

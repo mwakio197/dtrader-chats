@@ -57,7 +57,7 @@ export const MobileRowRenderer = ({
         if (!is_footer) {
             measure?.();
         }
-    }, [row.contract_info?.underlying, measure, is_footer]);
+    }, [row.contract_info?.underlying_symbol, measure, is_footer]);
 
     if (is_footer) {
         return (

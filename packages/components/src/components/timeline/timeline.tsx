@@ -11,7 +11,7 @@ type TTimeline = React.HTMLAttributes<HTMLDivElement> & { disabled_items?: numbe
 const Oval = ({ children }: TOval) => {
     return (
         <div className='dc-timeline__oval'>
-            <Text color='colored-background' size='s' weight='bold' className='dc-timeline__number'>
+            <Text color='inverse' size='s' weight='bold' className='dc-timeline__number'>
                 {children}
             </Text>
         </div>
@@ -34,7 +34,7 @@ const Timeline = ({ children, disabled_items, line_height = 'xxl', ...props }: R
                         <div className='dc-timeline__container'>
                             <Text
                                 as='h2'
-                                color='prominent'
+                                color='primary'
                                 size='xs'
                                 className='dc-timeline__title'
                                 line_height={line_height}

@@ -73,14 +73,14 @@ const PayoutPerPointInput = ({
                                 <LabelPairedChevronsDownCaptionRegularIcon
                                     width={12}
                                     height={12}
-                                    stroke='var(--text-prominent)'
+                                    stroke='var(--color-text-primary)'
                                     className='indicator-icon'
                                 />
                             ) : (
                                 <LabelPairedChevronsUpCaptionRegularIcon
                                     width={12}
                                     height={12}
-                                    stroke='var(--text-prominent)'
+                                    stroke='var(--color-text-primary)'
                                     className='indicator-icon'
                                 />
                             )}

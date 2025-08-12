@@ -50,7 +50,8 @@ export const isUserCancelled = (contract_info: TContractInfo) => contract_info.s
 export const getEndTime = (contract_info: TContractInfo) => {
     const {
         contract_type,
-        exit_tick_time,
+        // @ts-expect-error - exit_spot_time exists in runtime but not in type definition
+        exit_spot_time,
         date_expiry,
         is_expired,
         is_path_dependent,
@@ -86,7 +87,7 @@ export const getEndTime = (contract_info: TContractInfo) => {
 
     // Final fallback for closed contracts
     const result =
-        Number(date_expiry) > Number(exit_tick_time) && !normalizedIsPathDependent ? date_expiry : exit_tick_time;
+        Number(date_expiry) > Number(exit_spot_time) && !normalizedIsPathDependent ? date_expiry : exit_spot_time;
     return result;
 };
 
@@ -105,9 +106,17 @@ export const checkServerMaintenance = (website_status: WebsiteStatus | undefined
     return site_status === 'down' || site_status === 'updating';
 };
 
-export const isContractSupportedAndStarted = (symbol: string, contract_info?: TContractInfo) =>
-    !!contract_info &&
-    symbol === contract_info.underlying &&
-    //Added check for unsupported and forward starting contracts, which have not started yet
-    !!getSupportedContracts()[contract_info?.contract_type as keyof ReturnType<typeof getSupportedContracts>] &&
-    hasContractStarted(contract_info);
+export const isContractSupportedAndStarted = (symbol: string, contract_info?: TContractInfo) => {
+    if (!contract_info) return false;
+
+    // Backward compatibility: fallback to old field name
+    // @ts-expect-error - underlying_symbol exists in runtime but not in type definition
+    const contract_underlying = contract_info.underlying_symbol || contract_info.underlying;
+
+    return (
+        symbol === contract_underlying &&
+        //Added check for unsupported and forward starting contracts, which have not started yet
+        !!getSupportedContracts()[contract_info?.contract_type as keyof ReturnType<typeof getSupportedContracts>] &&
+        hasContractStarted(contract_info)
+    );
+};

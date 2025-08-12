@@ -20,17 +20,17 @@
         border-radius: 2px;
         align-self: center;
         box-sizing: border-box;
-        border: 2px solid var(--text-less-prominent);
+        border: 2px solid var(--color-text-secondary);
         outline: none !important;
 
         &--active {
             border: none;
-            background-color: var(--brand-red-coral);
+            background-color: var(--brand-primary);
         }
     }
     &--active {
         border: none;
-        background-color: var(--brand-red-coral);
+        background-color: var(--brand-primary);
     }
     &--disabled {
         opacity: 0.5;
@@ -42,7 +42,7 @@
 
     &__label {
         &--error {
-            color: var(--text-loss-danger) !important;
+            color: var(--color-text-danger) !important;
         }
     }
 }
