@@ -1089,30 +1089,11 @@ type TPlatform = 'mt5' | 'dxtrade' | 'ctrader';
 type TTradersHubStore = {
     closeModal: () => void;
     content_flag: 'low_risk_cr_eu' | 'low_risk_cr_non_eu' | 'high_risk_cr' | 'cr_demo' | 'eu_demo' | 'eu_real' | '';
-    combined_cfd_mt5_accounts: DetailsOfEachMT5Loginid &
-        {
-            tracking_name: string;
-            short_code_and_region: string;
-            login: string;
-            sub_title: string;
-            icon: 'Derived' | 'Financial' | 'Options';
-            status?: string;
-            action_type: 'get' | 'none' | 'trade' | 'dxtrade' | 'multi-action';
-            key: string;
-            name: string;
-            landing_company_short?: DetailsOfEachMT5Loginid['landing_company_short'];
-            platform?: TPlatform;
-            availability?: TRegionAvailability;
-            description?: string;
-            market_type?: 'all' | 'financial' | 'synthetic';
-            product: TProduct;
-        }[];
     openModal: (modal_id: string, props?: unknown) => void;
     selected_account: {
         login: string;
         account_id: string;
     };
-    is_low_risk_cr_eu_real: boolean;
     is_eu_user: boolean;
     is_onboarding_visited: boolean;
     is_first_time_visit: boolean;
@@ -1121,31 +1102,17 @@ type TTradersHubStore = {
     setTogglePlatformType: (platform_type: string) => void;
     is_demo: boolean;
     is_real: boolean;
-    is_verification_docs_list_modal_visible: boolean;
     selectRegion: (region: string) => void;
-    setVerificationModalOpen: (value: boolean) => void;
     modal_data: TModalData;
     selected_account_type: string;
     selected_platform_type: string;
-    setSelectedAccount: (account: { login?: string; account_id?: string }) => void;
-    is_real_wallets_upgrade_on: boolean;
     platform_real_balance: TBalance;
     platform_demo_balance: TBalance;
-    selectAccountType: (account_type: string) => void;
-    is_wallet_migration_failed: boolean;
     available_platforms: BrandConfig[];
     selected_region: TRegionAvailability;
-    active_modal_tab?: 'Deposit' | 'Withdraw' | 'Transfer' | 'Transactions';
-    setWalletModalActiveTab: (tab?: 'Deposit' | 'Withdraw' | 'Transfer' | 'Transactions') => void;
     active_modal_wallet_id?: string;
-    setWalletModalActiveWalletID: (wallet_id?: string) => void;
-    is_demo_low_risk: boolean;
     has_any_real_account: boolean;
-    startTrade: (platform?: TPlatform, existing_account?: DetailsOfEachMT5Loginid) => void;
     getAccount: () => void;
-    is_regulators_compare_modal_visible: boolean;
-    is_financial_restricted_country: boolean;
-    setIsFinancialRestrictedCountry: (value: boolean) => void;
     selected_jurisdiction_kyc_status: Record<string, string>;
 };
 
