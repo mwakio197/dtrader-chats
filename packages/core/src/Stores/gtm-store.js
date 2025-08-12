@@ -1,6 +1,6 @@
 import * as Cookies from 'js-cookie';
 import { action, computed, makeObservable } from 'mobx';
-import { getAppId, toMoment, epochToMoment, CFD_PLATFORMS } from '@deriv/shared';
+import { getAppId, toMoment, epochToMoment } from '@deriv/shared';
 import { getLanguage } from '@deriv/translations';
 import BinarySocket from '_common/base/socket_base';
 import BaseStore from './base-store';
@@ -38,7 +38,6 @@ export default class GTMStore extends BaseStore {
         const platform = () => {
             const url = new URL(window.location.href);
             const domain = url.hostname;
-            const path = url.pathname;
 
             // TODO: [app-link-refactor] - Remove backwards compatibility for `deriv.app`
             if (
@@ -46,11 +45,6 @@ export default class GTMStore extends BaseStore {
                     domain
                 )
             ) {
-                if (path === 'bot') {
-                    return 'DBot';
-                } else if (path === CFD_PLATFORMS.MT5) {
-                    return 'MT5';
-                }
                 return 'DTrader';
             }
             return 'undefined';
