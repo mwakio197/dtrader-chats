@@ -1,4 +1,4 @@
-import config_data from 'root/brand.config.json';
+import config_data from '../../../../../brand.config.json';
 
 export const getBrandWebsiteName = () => {
     return config_data.brand_domain;
