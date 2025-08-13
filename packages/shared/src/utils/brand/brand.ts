@@ -1,4 +1,4 @@
-import config_data from '../../../../../brand.config.json';
+import config_data from 'root/brand.config.json';
 
 export const getBrandWebsiteName = () => {
     return config_data.brand_domain;
@@ -32,4 +32,20 @@ export const getDomainName = () => {
     }
 
     return '';
+};
+
+export const getBrandHubUrl = () => {
+    // Determine environment - use production if NODE_ENV is production, otherwise staging
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    // Return appropriate hub URL from brand config
+    return isProduction ? config_data.brand_hub.production : config_data.brand_hub.staging;
+};
+
+export const getBrandHubHomeUrl = () => {
+    return `${getBrandHubUrl()}/home`;
+};
+
+export const getBrandHubLoginUrl = () => {
+    return `${getBrandHubUrl()}/login`;
 };

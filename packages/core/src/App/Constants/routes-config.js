@@ -6,7 +6,6 @@ import { localize } from '@deriv/translations';
 import Redirect from 'App/Containers/Redirect';
 import Endpoint from 'Modules/Endpoint';
 
-import OSRedirect from '../Containers/OSRedirect';
 import CallbackPage from '../../Modules/Callback/CallbackPage.tsx';
 
 // Error Routes
@@ -72,7 +71,6 @@ const getModules = () => {
 // TODO: search tag: test-route-parent-info -> Enable test for getting route parent info when there are nested routes
 const initRoutesConfig = () => [
     { path: routes.endpoint, component: Endpoint, getTitle: () => 'Endpoint' }, // doesn't need localization as it's for internal use
-    { path: routes.os_redirect, component: OSRedirect, getTitle: () => localize('Redirect') },
     { path: routes.redirect, component: Redirect, getTitle: () => localize('Redirect') },
     { path: routes.callback_page, component: CallbackPage, getTitle: () => 'Callback' },
     ...getModules(),

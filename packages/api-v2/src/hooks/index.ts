@@ -5,7 +5,6 @@ export { default as useGetAccountStatus } from './useGetAccountStatus';
 export { default as useGrowthbookGetFeatureValue } from './useGrowthbookGetFeatureValue';
 export { default as useGrowthbookIsOn } from './useGrowthbookIsOn';
 export { default as useIsGrowthbookLoaded } from './useIsGrowthbookLoaded';
-export { default as useIsHubRedirectionEnabled } from './useIsHubRedirectionEnabled';
 export { default as useRemoteConfig } from './useRemoteConfig';
 export { default as useServerTime } from './useServerTime';
 export { default as useSettings } from './useSettings';

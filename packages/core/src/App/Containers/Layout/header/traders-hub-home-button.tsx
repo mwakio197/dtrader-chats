@@ -1,34 +1,22 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 import classNames from 'classnames';
 import { Icon, Text } from '@deriv/components';
-import { getDomainUrl, routes } from '@deriv/shared';
-import { observer, useStore } from '@deriv/stores';
+import { getBrandHubUrl, routes } from '@deriv/shared';
+import { observer } from '@deriv/stores';
 import { Localize } from '@deriv/translations';
-import { useIsHubRedirectionEnabled } from '@deriv/api';
 
 const TradersHubHomeButton = observer(() => {
-    const { client } = useStore();
-    const history = useHistory();
     const location = useLocation();
-    const { isHubRedirectionEnabled } = useIsHubRedirectionEnabled();
-    const { has_wallet } = client;
     const { pathname } = location;
 
     const handleTradershubRedirect = () => {
-        if (isHubRedirectionEnabled && has_wallet) {
-            const PRODUCTION_REDIRECT_URL = `https://hub.${getDomainUrl()}/tradershub`;
-            const STAGING_REDIRECT_URL = `https://staging-hub.${getDomainUrl()}/tradershub`;
-            const redirectUrl = process.env.NODE_ENV === 'production' ? PRODUCTION_REDIRECT_URL : STAGING_REDIRECT_URL;
+        const hubUrl = getBrandHubUrl();
+        const url_query_string = window.location.search;
+        const url_params = new URLSearchParams(url_query_string);
+        const account_currency = url_params.get('account') || window.sessionStorage.getItem('account');
 
-            const url_query_string = window.location.search;
-            const url_params = new URLSearchParams(url_query_string);
-            const account_currency = url_params.get('account') || window.sessionStorage.getItem('account');
-
-            window.location.href = `${redirectUrl}/redirect?action=redirect_to&redirect_to=home${account_currency ? `&account=${account_currency}` : ''}`;
-        } else {
-            history.push(routes.index);
-        }
+        window.location.href = `${hubUrl}/redirect?action=redirect_to&redirect_to=home${account_currency ? `&account=${account_currency}` : ''}`;
     };
 
     return (

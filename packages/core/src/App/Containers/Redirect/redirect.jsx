@@ -3,8 +3,8 @@ import { useHistory, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
 
-import { useIsHubRedirectionEnabled, useTMB } from '@deriv/api';
-import { getDomainName, platforms, redirectToLogin, routes, SessionStore } from '@deriv/shared';
+import { useTMB } from '@deriv/api';
+import { getBrandHubUrl, getDomainName, redirectToLogin, routes, SessionStore } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { getLanguage } from '@deriv/translations';
 import { Chat } from '@deriv/utils';
@@ -44,8 +44,6 @@ const Redirect = observer(() => {
         is_mobile,
     } = ui;
 
-    const { isHubRedirectionEnabled } = useIsHubRedirectionEnabled();
-
     const url_query_string = window.location.search;
     const url_params = new URLSearchParams(url_query_string);
     let redirected_to_route = false;
@@ -79,9 +77,6 @@ const Redirect = observer(() => {
     const openLivechat = () => {
         Chat.open();
     };
-
-    const accounts = JSON.parse(localStorage.getItem('client.accounts') || '{}');
-    const hasVRWorCRW = Object.keys(accounts).some(key => key.includes('VRW') || key.includes('CRW'));
 
     const action_param = url_params.get('action');
     const code_param = url_params.get('code') || verification_code[action_param];
@@ -294,11 +289,7 @@ const Redirect = observer(() => {
         }
         // P2P functionality has been removed
         case 'ctrader_account_transfer': {
-            if (isHubRedirectionEnabled && (has_wallet || hasVRWorCRW)) {
-                window.location.assign(`${platforms.tradershub_os.url}/wallets/transfer`);
-            } else {
-                history.push(routes.wallets_transfer);
-            }
+            window.location.assign(`${getBrandHubUrl()}/transfer`);
             redirected_to_route = true;
             break;
         }

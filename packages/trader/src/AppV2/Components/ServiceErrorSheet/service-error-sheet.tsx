@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
-import { useIsHubRedirectionEnabled } from '@deriv/api';
-import { getDomainUrl, isEmptyObject, redirectToLogin, redirectToSignUp, routes } from '@deriv/shared';
+import { getBrandHubUrl, isEmptyObject, redirectToLogin, redirectToSignUp, routes } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { getLanguage, Localize } from '@deriv/translations';
 import { ActionSheet } from '@deriv-com/quill-ui';
@@ -16,11 +15,10 @@ const ServiceErrorSheet = observer(() => {
     const [is_open, setIsOpen] = useState(false);
     const { common, client, ui } = useStore();
     const { is_mf_verification_pending_modal_visible, setIsMFVericationPendingModal } = ui;
-    const { has_wallet, is_virtual } = client;
+    const { is_virtual } = client;
     const { services_error, resetServicesError } = common;
     const { clearPurchaseInfo, requestProposal: resetPurchase } = useTraderStore();
     const history = useHistory();
-    const { isHubRedirectionEnabled } = useIsHubRedirectionEnabled();
 
     const { code, message, type } = services_error || {};
     const is_insufficient_balance = code === SERVICE_ERROR.INSUFFICIENT_BALANCE;
@@ -49,21 +47,13 @@ const ServiceErrorSheet = observer(() => {
                     onAction: () => {
                         resetServicesError();
                         if (!is_virtual) {
-                            if (has_wallet && isHubRedirectionEnabled) {
-                                const PRODUCTION_REDIRECT_URL = `https://hub.${getDomainUrl()}/tradershub`;
-                                const STAGING_REDIRECT_URL = `https://staging-hub.${getDomainUrl()}/tradershub`;
-                                const redirectUrl =
-                                    process.env.NODE_ENV === 'production'
-                                        ? PRODUCTION_REDIRECT_URL
-                                        : STAGING_REDIRECT_URL;
+                            const hubUrl = getBrandHubUrl();
+                            const url_query_string = window.location.search;
+                            const url_params = new URLSearchParams(url_query_string);
+                            const account_currency =
+                                window.sessionStorage.getItem('account') || url_params.get('account');
 
-                                const url_query_string = window.location.search;
-                                const url_params = new URLSearchParams(url_query_string);
-                                const account_currency =
-                                    window.sessionStorage.getItem('account') || url_params.get('account');
-
-                                window.location.href = `${redirectUrl}/redirect?action=redirect_to&redirect_to=wallet${account_currency ? `&account=${account_currency}` : ''}`;
-                            }
+                            window.location.href = `${hubUrl}/redirect?action=redirect_to&redirect_to=wallet${account_currency ? `&account=${account_currency}` : ''}`;
                         } else {
                             onClose();
                         }
