@@ -13,7 +13,7 @@ import { localize } from '@deriv/translations';
 
 import { useTraderStore } from 'Stores/useTraderStores';
 
-import useContractsForCompany from './useContractsForCompany';
+import useContractsFor from './useContractsFor';
 import { useDtraderQuery } from './useDtraderQuery';
 
 const useActiveSymbols = () => {

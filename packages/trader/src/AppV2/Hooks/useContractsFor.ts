@@ -26,7 +26,7 @@ type TContractsForResponse = {
     };
 };
 
-const useContractsForCompany = () => {
+const useContractsFor = () => {
     const [contract_types_list, setContractTypesList] = React.useState<TContractTypesList | []>([]);
 
     const [trade_types, setTradeTypes] = React.useState<TContractType[]>([]);
@@ -40,8 +40,7 @@ const useContractsForCompany = () => {
         active_symbols,
     } = useTraderStore();
     const { client } = useStore();
-    const { loginid, is_switching, landing_company_shortcode } = client;
-    const prev_landing_company_shortcode_ref = React.useRef(landing_company_shortcode);
+    const { loginid, is_switching } = client;
 
     // Helper function to get underlying_symbol from active_symbols
     const getUnderlyingSymbol = useCallback(
@@ -191,17 +190,8 @@ const useContractsForCompany = () => {
                 const new_contract_type = getNewContractType(trade_types);
                 processNewContractType(new_contract_type);
 
-                if (symbol !== prev_landing_company_shortcode_ref.current) {
-                    onChange({
-                        target: {
-                            name: 'symbol',
-                            value: symbol,
-                        },
-                    }).then(() => {
-                        processContractsForV2();
-                        prev_landing_company_shortcode_ref.current = symbol;
-                    });
-                }
+                // Process contracts for V2 when data is available
+                processContractsForV2();
             }
         } catch (err) {
             /* eslint-disable no-console */
@@ -217,4 +207,4 @@ const useContractsForCompany = () => {
     return { trade_types, contract_types_list, available_contract_types, is_fetching_ref, resetTradeTypes };
 };
 
-export default useContractsForCompany;
+export default useContractsFor;

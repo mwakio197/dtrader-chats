@@ -15,7 +15,7 @@ const stake_param_label = 'Stake';
 const input_placeholder = 'Amount';
 const save_button_label = 'Save';
 
-jest.mock('AppV2/Hooks/useContractsForCompany', () => ({
+jest.mock('AppV2/Hooks/useContractsFor', () => ({
     __esModule: true,
     default: jest.fn(() => ({
         available_contract_types: {
