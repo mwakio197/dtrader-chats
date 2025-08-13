@@ -39,7 +39,6 @@ export default class CommonStore extends BaseStore {
             has_error: observable,
             init: action.bound,
             is_from_derivgo: computed,
-            is_from_tradershub_os: computed,
             is_language_changing: observable,
             is_network_online: observable,
             is_socket_opened: observable,
@@ -170,10 +169,6 @@ export default class CommonStore extends BaseStore {
 
     get is_from_derivgo() {
         return platforms[this.platform]?.platform_name === platforms.derivgo.platform_name;
-    }
-
-    get is_from_tradershub_os() {
-        return platforms[this.platform]?.platform_name === platforms.tradershub_os.platform_name;
     }
 
     setInitialRouteHistoryItem(location) {

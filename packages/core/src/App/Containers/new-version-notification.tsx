@@ -1,5 +1,9 @@
 import React from 'react';
 
+interface NewVersionNotificationProps {
+    onUpdate: () => void;
+}
+
 /**
  * Listens on emitted events to show notification on available updates.
  *  - IgnorePWAUpdate event will prevent notification
@@ -8,7 +12,7 @@ import React from 'react';
  * @return {null}
  * @constructor
  */
-const NewVersionNotification = ({ onUpdate }) => {
+const NewVersionNotification: React.FC<NewVersionNotificationProps> = ({ onUpdate }) => {
     React.useEffect(() => {
         const removeUpdateListener = () => {
             document.removeEventListener('UpdateAvailable', onUpdate);

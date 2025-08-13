@@ -1,15 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import {
-    useRemoteConfig,
-    useGrowthbookGetFeatureValue,
-    useGrowthbookIsOn,
-    useIntercom,
-    useIsHubRedirectionEnabled,
-    useLiveChat,
-    useOauth2,
-} from '@deriv/api';
+import { useRemoteConfig, useGrowthbookGetFeatureValue, useGrowthbookIsOn, useIntercom, useLiveChat } from '@deriv/api';
 import { observer, useStore } from '@deriv/stores';
 import { ThemeProvider } from '@deriv-com/quill-ui';
 import { useTranslations } from '@deriv-com/translations';
@@ -51,11 +43,6 @@ const AppContent: React.FC<{ passthrough: any }> = observer(({ passthrough }) =>
     const location = useLocation();
     const has_access_denied_error = location.search.includes('access_denied');
 
-    const { isChangingToHubAppId } = useIsHubRedirectionEnabled();
-
-    const is_app_id_set = localStorage.getItem('config.app_id');
-    const is_change_login_app_id_set = localStorage.getItem('change_login_app_id');
-
     const [isWebPasskeysFFEnabled, isGBLoaded] = useGrowthbookIsOn({
         featureFlag: 'web_passkeys',
     });
@@ -86,15 +73,6 @@ const AppContent: React.FC<{ passthrough: any }> = observer(({ passthrough }) =>
     const active_account = accounts?.[loginid ?? ''];
     const token = active_account ? active_account.token : null;
     useIntercom(token);
-
-    React.useEffect(() => {
-        if (isChangingToHubAppId && !is_app_id_set) {
-            const app_id = process.env.NODE_ENV === 'production' ? 61554 : 53503;
-            localStorage.setItem('change_login_app_id', app_id.toString());
-            return;
-        }
-        is_change_login_app_id_set && localStorage.removeItem('change_login_app_id');
-    }, [isChangingToHubAppId, is_app_id_set, is_change_login_app_id_set]);
 
     React.useEffect(() => {
         switchLanguage(current_language);

@@ -1,7 +1,11 @@
 {
-    "brand_name": "Deriv",
-    "brand_domain": "deriv.com",
+    "brand_name": "Champion",
+    "brand_domain": "https://champion.trade",
     "brand_logo": "IcBrandShortLogo",
+    "brand_hub": {
+        "staging": "https://staging-app.champion.trade/champion",
+        "production": "https://app.champion.trade/champion"
+    },
     "colors": {
         "primary": "#ff444f",
         "secondary": "#85acb0",
@@ -20,7 +24,7 @@
         "darken_percentage": 10
     },
     "platform": {
-            "name": "Deriv Trader",
-            "icon": "IcRebrandingDerivTrader"
+        "name": "Derivatives Trader",
+        "icon": "IcRebrandingDerivTrader"
     }
 }

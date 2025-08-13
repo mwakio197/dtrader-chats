@@ -11,11 +11,11 @@
 
 ## 📊 Quick Stats
 
-| Metric | Value | Metric | Value |
-|--------|-------|--------|-------|
-| **📁 Total Merged PRs** | 26 | **📈 Average AI Code** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 13% |
-| **🤖 PRs with AI Analysis** | 23 | **🎯 Overall AI Percentage** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 10% |
-| **📄 Files Analyzed** | 499 | **⚡ Total AI Characters** | 26,966 |
+| Metric                      | Value | Metric                       | Value                    |
+| --------------------------- | ----- | ---------------------------- | ------------------------ |
+| **📁 Total Merged PRs**     | 25    | **📈 Average AI Code**       | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 14% |
+| **🤖 PRs with AI Analysis** | 22    | **🎯 Overall AI Percentage** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 10% |
+| **📄 Files Analyzed**       | 498   | **⚡ Total AI Characters**   | 26,966                   |
 
 ---
 
@@ -23,18 +23,18 @@
 
 > 📊 Showing the 10 most recent merged PRs (stats above include all 26 PRs)
 
-| PR | Author | Date | Files | AI Content | Percentage |
-|----|--------|------|-------|------------|------------|
-| [#138](#) **Revert "Nijil / Fix Claude Code workflow failure"** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/12/2025 | 1 | 0 / 44 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#136](#) **Nijil / Fix Claude Code workflow failure** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/12/2025 | 1 | 0 / 868 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#133](#) **adding Claude code** | [@ashkan-deriv](https://github.com/ashkan-deriv) | 8/12/2025 | 1 | 0 / 1,593 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#130](#) **Matin/Cleanup TH Store & Account Switcher Removal** | [@matin-deriv](https://github.com/matin-deriv) | 8/12/2025 | 8 | 0 / 3,135 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#128](#) **Matin/Clean-up Work on TH Store** | [@matin-deriv](https://github.com/matin-deriv) | 8/12/2025 | 6 | 0 / 500 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#126](#) **Nijil / Routing fixes + Notification logic clean-ups** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/12/2025 | 74 | 0 / 12,704 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#124](#) **Akmal / refactor: remove support for forward starting contracts** | [@akmal-deriv](https://github.com/akmal-deriv) | 8/11/2025 | 32 | 0 / 3,656 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#120](#) **Nijil / Fix overlay on contract card closed status in positions drawer** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/11/2025 | 7 | 0 / 7,651 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#121](#) **Farabi/remove-one-time-token-from-url** | [@farabi-deriv](https://github.com/farabi-deriv) | 8/11/2025 | 1 | 0 / 386 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#116](#) **Akmal / feat: multiple fixes and improvements** | [@akmal-deriv](https://github.com/akmal-deriv) | 8/8/2025 | 4 | 0 / 3,565 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
+| PR                                                                                   | Author                                           | Date      | Files | AI Content          | Percentage                         |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------ | --------- | ----- | ------------------- | ---------------------------------- |
+| [#136](#) **Nijil / Fix Claude Code workflow failure**                               | [@nijil-deriv](https://github.com/nijil-deriv)   | 8/12/2025 | 1     | 0 / 868 chars       | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0%  |
+| [#133](#) **adding Claude code**                                                     | [@ashkan-deriv](https://github.com/ashkan-deriv) | 8/12/2025 | 1     | 0 / 1,593 chars     | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0%  |
+| [#130](#) **Matin/Cleanup TH Store & Account Switcher Removal**                      | [@matin-deriv](https://github.com/matin-deriv)   | 8/12/2025 | 8     | 0 / 3,135 chars     | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0%  |
+| [#128](#) **Matin/Clean-up Work on TH Store**                                        | [@matin-deriv](https://github.com/matin-deriv)   | 8/12/2025 | 6     | 0 / 500 chars       | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0%  |
+| [#126](#) **Nijil / Routing fixes + Notification logic clean-ups**                   | [@nijil-deriv](https://github.com/nijil-deriv)   | 8/12/2025 | 74    | 0 / 12,704 chars    | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0%  |
+| [#124](#) **Akmal / refactor: remove support for forward starting contracts**        | [@akmal-deriv](https://github.com/akmal-deriv)   | 8/11/2025 | 32    | 0 / 3,656 chars     | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0%  |
+| [#120](#) **Nijil / Fix overlay on contract card closed status in positions drawer** | [@nijil-deriv](https://github.com/nijil-deriv)   | 8/11/2025 | 7     | 0 / 7,651 chars     | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0%  |
+| [#121](#) **Farabi/remove-one-time-token-from-url**                                  | [@farabi-deriv](https://github.com/farabi-deriv) | 8/11/2025 | 1     | 0 / 386 chars       | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0%  |
+| [#116](#) **Akmal / feat: multiple fixes and improvements**                          | [@akmal-deriv](https://github.com/akmal-deriv)   | 8/8/2025  | 4     | 0 / 3,565 chars     | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0%  |
+| [#111](#) **Jim/fix markers 3**                                                      | [@jim-deriv](https://github.com/jim-deriv)       | 8/8/2025  | 11    | 2,235 / 5,518 chars | 🟧🟧🟧🟧🟧🟧⬜⬜⬜⬜⬜⬜⬜⬜⬜ 41% |
 
 ---
 
