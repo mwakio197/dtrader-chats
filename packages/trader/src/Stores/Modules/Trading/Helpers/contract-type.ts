@@ -115,7 +115,7 @@ export const ContractType = (() => {
                 const config: TConfig = available_contract_types[type].config || {};
 
                 // set config values
-                config.has_spot = config.has_spot || contract.start_type === 'spot';
+                config.has_spot = true; // Default to spot behavior since start_type was removed from API
                 config.durations = config.hide_duration ? undefined : buildDurationConfig(contract, config.durations);
                 config.trade_types = buildTradeTypesConfig(contract, config.trade_types);
                 config.barriers = buildBarriersConfig(contract, config.barriers);
@@ -286,7 +286,7 @@ export const ContractType = (() => {
                     'config',
                     'durations',
                     'units_display',
-                    contract_start_type,
+                    'spot', // Always use 'spot' since start_type was removed from API
                 ]) as TTextValueStrings[]) || [],
         };
     };
@@ -298,7 +298,7 @@ export const ContractType = (() => {
                 'config',
                 'durations',
                 'units_display',
-                contract_start_type,
+                'spot', // Always use 'spot' since start_type was removed from API
             ]) as TTextValueStrings[]) || [];
         const arr_units: string[] = [];
         duration_units.forEach(obj => {
@@ -317,7 +317,7 @@ export const ContractType = (() => {
                 'config',
                 'durations',
                 'min_max',
-                contract_start_type,
+                'spot', // Always use 'spot' since start_type was removed from API
             ]) || {};
 
         if (contract_expiry_type) {

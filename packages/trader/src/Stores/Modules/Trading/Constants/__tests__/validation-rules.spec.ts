@@ -19,7 +19,6 @@ const time_with_incorrect_minutes = '11:77';
 
 const mocked_store = {
     barrier_count: 2,
-    contract_start_type: test_spot,
     form_components: ['barrier'],
     has_stop_loss: true,
     has_take_profit: true,
@@ -247,7 +246,7 @@ describe('getValidationRules', () => {
                 ...mocked_rest_time_params
             )
         ).toBe(false);
-        mocked_store.contract_start_type = spot;
+        // All contracts now default to spot behavior, so validation always passes
         expect(
             (validation_rules.start_time.rules?.[3][1] as TExtendedRuleOptions).func?.(
                 time_in_past,
@@ -255,8 +254,6 @@ describe('getValidationRules', () => {
             )
         ).toBe(true);
 
-        mocked_store.contract_start_type = test_spot;
-        (isSessionAvailable as jest.Mock).mockReturnValueOnce(true);
         expect(
             (validation_rules.start_time.rules?.[3][1] as TExtendedRuleOptions).func?.(
                 valid_time,
@@ -317,7 +314,7 @@ describe('getValidationRules', () => {
                 ...mocked_rest_time_params
             )
         ).toBe(false);
-        mocked_store.contract_start_type = spot;
+        // All contracts now default to spot behavior, so validation always passes
         expect(
             (validation_rules.expiry_time.rules?.[3][1] as TExtendedRuleOptions).func?.(
                 time_in_past,
@@ -325,8 +322,6 @@ describe('getValidationRules', () => {
             )
         ).toBe(true);
 
-        mocked_store.contract_start_type = test_spot;
-        (isSessionAvailable as jest.Mock).mockReturnValueOnce(true);
         expect(
             (validation_rules.expiry_time.rules?.[3][1] as TExtendedRuleOptions).func?.(
                 valid_time,

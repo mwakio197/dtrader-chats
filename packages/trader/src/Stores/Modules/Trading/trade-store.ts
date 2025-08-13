@@ -229,7 +229,6 @@ export default class TradeStore extends BaseStore {
 
     // Contract Type
     contract_expiry_type = '';
-    contract_start_type = '';
     contract_type = '';
     prev_contract_type = '';
     contract_types_list: TContractTypesList = {};
@@ -364,7 +363,6 @@ export default class TradeStore extends BaseStore {
             'barrier_1',
             'barrier_2',
             'basis',
-            'contract_start_type',
             'duration',
             'duration_unit',
             'expiry_date',
@@ -415,7 +413,6 @@ export default class TradeStore extends BaseStore {
             cached_multiplier_cancellation_list: observable,
             commission: observable,
             contract_expiry_type: observable,
-            contract_start_type: observable,
             contract_type: observable,
             contract_types_list: observable,
             contract_types_list_v2: observable,

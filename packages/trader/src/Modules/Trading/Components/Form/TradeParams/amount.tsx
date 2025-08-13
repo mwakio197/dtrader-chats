@@ -69,7 +69,6 @@ const Amount = observer(({ is_minimized = false }: { is_minimized?: boolean }) =
         amount,
         basis,
         basis_list,
-        contract_start_type,
         contract_type,
         contract_types_list,
         currency,
@@ -180,7 +179,6 @@ const Amount = observer(({ is_minimized = false }: { is_minimized?: boolean }) =
                     />
                 )}
                 <AllowEquals
-                    contract_start_type={contract_start_type}
                     contract_type={contract_type}
                     contract_types_list={contract_types_list}
                     duration_unit={duration_unit}

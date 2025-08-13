@@ -6,7 +6,6 @@ import { TTradeStore } from 'Types';
 type THasDurationForCallPutEqual = {
     contract_type_list: TTradeStore['contract_types_list'];
     duration_unit: TTradeStore['duration_unit'];
-    contract_start_type: string;
 };
 
 export const hasCallPutEqual = (contract_type_list: THasDurationForCallPutEqual['contract_type_list']) => {
@@ -20,10 +19,9 @@ export const hasCallPutEqual = (contract_type_list: THasDurationForCallPutEqual[
 
 export const hasDurationForCallPutEqual = (
     contract_type_list: THasDurationForCallPutEqual['contract_type_list'],
-    duration_unit: THasDurationForCallPutEqual['duration_unit'],
-    contract_start_type: THasDurationForCallPutEqual['contract_start_type']
+    duration_unit: THasDurationForCallPutEqual['duration_unit']
 ) => {
-    if (!contract_type_list || !duration_unit || !contract_start_type) return false;
+    if (!contract_type_list || !duration_unit) return false;
 
     const contract_list = Object.keys(contract_type_list || {}).reduce<string[]>((key, list) => {
         const item: THasDurationForCallPutEqual['contract_type_list']['Ups & Downs'] = contract_type_list[list];
@@ -36,7 +34,7 @@ export const hasDurationForCallPutEqual = (
             'config',
             'durations',
             'units_display',
-            contract_start_type,
+            'spot', // Always use spot since all contracts now default to spot behavior
         ]),
     }));
 
