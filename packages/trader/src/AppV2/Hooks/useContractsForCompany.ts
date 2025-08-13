@@ -15,7 +15,6 @@ import { useDtraderQuery } from './useDtraderQuery';
 type TContractsForResponse = {
     contracts_for: {
         available: {
-            barrier_category: string;
             contract_category: string;
             contract_type: string;
             default_stake: number;
@@ -172,16 +171,11 @@ const useContractsForCompany = () => {
                         sub_cats[(sub_cats as string[]).indexOf(type)] = {
                             value: type,
                             text: contract_types[type].title,
-                            barrier_category: contract.barrier_category,
                         };
 
                         available_contract_types[type] = cloneObject(contract_types[type]);
                     }
                     const config: TConfig = available_contract_types[type].config || {};
-                    config.barrier_category =
-                        contract_types[type].barrier_count === 0
-                            ? 'euro_atm'
-                            : (contract.barrier_category as TConfig['barrier_category']);
                     config.default_stake = contract.default_stake;
                     if (type === contract_type) setDefaultStake(contract.default_stake);
                     available_contract_types[type].config = config;

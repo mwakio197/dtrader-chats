@@ -34,7 +34,6 @@ const activeSymbols = [
 
 jest.mock('@deriv/shared', () => {
     const commonRiseFallProperties = {
-        barrier_category: 'euro_atm',
         barriers: 0,
         exchange_name: 'RANDOM',
         market: 'synthetic_index',

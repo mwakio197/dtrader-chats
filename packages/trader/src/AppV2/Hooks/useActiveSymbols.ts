@@ -29,12 +29,6 @@ const useActiveSymbols = () => {
     } = useTraderStore();
     const [activeSymbols, setActiveSymbols] = useState<ActiveSymbols | []>(symbols_from_store);
 
-    const trade_types_with_barrier_category = [
-        TRADE_TYPES.RISE_FALL,
-        TRADE_TYPES.RISE_FALL_EQUAL,
-        TRADE_TYPES.HIGH_LOW,
-    ] as string[];
-
     const getContractTypesList = () => {
         if (is_turbos) return [CONTRACT_TYPES.TURBOS.LONG, CONTRACT_TYPES.TURBOS.SHORT];
         if (is_vanilla) return [CONTRACT_TYPES.VANILLA.CALL, CONTRACT_TYPES.VANILLA.PUT];

@@ -3,7 +3,6 @@ import moment from 'moment';
 
 describe('buildDurationConfig', () => {
     const contract = {
-        barrier_category: 'euro_atm',
         barriers: 0,
         contract_category: 'callput',
         contract_category_display: 'Up/Down',

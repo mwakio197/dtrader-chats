@@ -118,7 +118,6 @@ export const ContractType = (() => {
                 config.durations = config.hide_duration ? undefined : buildDurationConfig(contract, config.durations);
                 config.trade_types = buildTradeTypesConfig(contract, config.trade_types);
                 config.barriers = buildBarriersConfig(contract, config.barriers);
-                config.barrier_category = contract.barrier_category as TConfig['barrier_category'];
                 config.barrier_choices = contract.barrier_choices as TConfig['barrier_choices'];
                 config.growth_rate_range = contract.growth_rate_range as TConfig['growth_rate_range'];
                 config.multiplier_range = contract.multiplier_range as TConfig['multiplier_range'];
@@ -624,10 +623,6 @@ export const ContractType = (() => {
             [],
     });
 
-    const getBarrierCategory = (contract_type: string) => ({
-        barrier_category: getPropertyValue(available_contract_types, [contract_type, 'config', 'barrier_category']),
-    });
-
     const getBarrierChoices = (contract_type: string, stored_barrier_choices = [] as string[]) => ({
         barrier_choices: stored_barrier_choices.length
             ? stored_barrier_choices
@@ -683,7 +678,6 @@ export const ContractType = (() => {
 
     return {
         buildContractTypesConfig,
-        getBarrierCategory,
         getBarriers,
         getContractType,
         getContractValues,

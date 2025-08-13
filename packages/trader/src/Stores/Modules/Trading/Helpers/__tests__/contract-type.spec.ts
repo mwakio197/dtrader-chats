@@ -15,7 +15,6 @@ jest.mock('@deriv/shared', () => ({
                 contracts_for: {
                     available: [
                         {
-                            barrier_category: 'euro_atm',
                             barriers: 0,
                             contract_category: 'callput',
                             contract_category_display: 'Up/Down',
@@ -32,7 +31,6 @@ jest.mock('@deriv/shared', () => ({
                             underlying_symbol: 'frxAUDJPY',
                         },
                         {
-                            barrier_category: 'euro_non_atm',
                             barriers: 2,
                             contract_category: 'endsinout',
                             contract_category_display: 'Ends Between/Ends Outside',
@@ -68,7 +66,6 @@ jest.mock('@deriv/shared', () => ({
                             underlying_symbol: 'frxAUDJPY',
                         },
                         {
-                            barrier_category: 'euro_atm',
                             barriers: 0,
                             contract_category: 'callputequal',
                             contract_category_display: 'Rise/Fall Equal',
@@ -87,7 +84,6 @@ jest.mock('@deriv/shared', () => ({
                         },
                         {
                             barrier: '101.389',
-                            barrier_category: 'euro_non_atm',
                             barriers: 1,
                             contract_category: 'callput',
                             contract_category_display: 'Up/Down',
@@ -604,19 +600,5 @@ describe('ContractType.getContractCategories', () => {
         const result = ContractType.getContractCategories();
         expect(result.contract_types_list).not.toEqual({});
         expect(result.non_available_contract_types_list).not.toEqual({});
-    });
-});
-describe('ContractType.getBarrierCategory', () => {
-    it('should return a correct barrier_category for Rise/Fall', () => {
-        const { barrier_category } = ContractType.getBarrierCategory(TRADE_TYPES.RISE_FALL);
-        expect(barrier_category).toEqual('euro_atm');
-    });
-    it('should return a correct barrier_category for Rise/Fall Equal', () => {
-        const { barrier_category } = ContractType.getBarrierCategory(TRADE_TYPES.RISE_FALL);
-        expect(barrier_category).toEqual('euro_atm');
-    });
-    it('should return a correct barrier_category for Higher/Lower', () => {
-        const { barrier_category } = ContractType.getBarrierCategory(TRADE_TYPES.HIGH_LOW);
-        expect(barrier_category).toEqual('euro_non_atm');
     });
 });

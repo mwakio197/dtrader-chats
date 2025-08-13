@@ -2,7 +2,6 @@ import { buildBarriersConfig } from '../barrier';
 
 describe('buildBarriersConfig', () => {
     const contract_obj = {
-        barrier_category: 'euro_atm',
         contract_category: 'callput',
         contract_category_display: 'Up/Down',
         contract_display: 'Higher',
