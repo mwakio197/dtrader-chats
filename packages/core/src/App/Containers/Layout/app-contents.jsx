@@ -20,7 +20,7 @@ const AppContents = observer(({ children }) => {
     const [is_gtm_tracking, setIsGtmTracking] = React.useState(false);
     const {
         client,
-        common: { platform, is_from_tradershub_os },
+        common: { platform },
         gtm: { pushDataLayer },
         ui,
     } = useStore();
@@ -132,8 +132,7 @@ const AppContents = observer(({ children }) => {
                 'app-contents--is-route-modal': is_route_modal_on,
                 'app-contents--is-scrollable': is_cfd_page || is_cashier_visible,
                 'app-contents--is-hidden':
-                    (isDuplicateLoginEnabled && has_access_denied_error) ||
-                    (platforms[platform] && !(is_from_tradershub_os && isMobile)),
+                    (isDuplicateLoginEnabled && has_access_denied_error) || (platforms[platform] && !isMobile),
                 'app-contents--is-dtrader-v2': isMobile,
             })}
             ref={scroll_ref}
