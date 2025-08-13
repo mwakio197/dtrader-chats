@@ -1565,12 +1565,6 @@ export default class ClientStore extends BaseStore {
     }
 
     async logout() {
-        // For V2 authentication, don't logout if we have a valid session token
-        const hasSessionToken = !!this.getSessionToken();
-        if (hasSessionToken) {
-            return { logout: 0 };
-        }
-
         // makes sure to clear the cached traders-hub data when logging out
         localStorage.removeItem('traders_hub_store');
         localStorage.removeItem('trade_store');

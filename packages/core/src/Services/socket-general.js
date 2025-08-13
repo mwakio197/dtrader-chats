@@ -73,6 +73,12 @@ const BinarySocketGeneral = (() => {
                     if (getPropertyValue(response, ['error', 'code']) === 'SelfExclusion' && is_active_tab) {
                         sessionStorage.removeItem('active_tab');
                     }
+
+                    const hasSessionToken = !!localStorage.getItem('session_token');
+                    if (hasSessionToken) {
+                        return;
+                    }
+
                     client_store.logout();
                 } else if (!/authorize/.test(State.get('skip_response'))) {
                     // Check if this is a V2 authentication response (session token based)
@@ -266,8 +272,9 @@ const BinarySocketGeneral = (() => {
                 const current_path = window.location.pathname;
                 const is_on_contract_page = /^\/contract\//.test(current_path);
                 const is_on_reports_page = /^\/reports\//.test(current_path);
+                const is_on_trade_page = current_path === '/';
 
-                if (is_on_contract_page || is_on_reports_page) {
+                if (is_on_contract_page || is_on_reports_page || is_on_trade_page) {
                     return;
                 }
 
