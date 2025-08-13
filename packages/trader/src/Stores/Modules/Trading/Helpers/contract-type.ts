@@ -60,7 +60,6 @@ export const ContractType = (() => {
         ReturnType<typeof getBasis> &
         ReturnType<typeof getTradeTypes> &
         ReturnType<typeof getStartDates> &
-        ReturnType<typeof getStartType> &
         ReturnType<typeof getBarriers> &
         ReturnType<typeof getDurationUnit> &
         ReturnType<typeof getDurationUnitsList> &
@@ -170,7 +169,9 @@ export const ContractType = (() => {
     const getArrayDefaultValue = <T>(arr_new_values: Array<T>, value: T): T =>
         arr_new_values.indexOf(value) !== -1 ? value : arr_new_values[0];
 
-    const getContractValues = (store: TTradeStore): TContractValues | Record<string, never> => {
+    const getContractValues = (
+        store: TTradeStore
+    ): (TContractValues & { contract_start_type: 'spot' }) | Record<string, never> => {
         const {
             contract_expiry_type,
             contract_type,
@@ -215,12 +216,11 @@ export const ContractType = (() => {
         const obj_basis = getBasis(contract_type, basis);
         const obj_trade_types = getTradeTypes(contract_type);
         const obj_start_dates = getStartDates(contract_type, start_date);
-        const obj_start_type = getStartType(obj_start_dates.start_date);
         const obj_barrier = getBarriers(contract_type, contract_expiry_type, stored_barriers_data?.barrier);
-        const obj_duration_unit = getDurationUnit(duration_unit, contract_type, obj_start_type.contract_start_type);
+        const obj_duration_unit = getDurationUnit(duration_unit, contract_type);
 
-        const obj_duration_units_list = getDurationUnitsList(contract_type, obj_start_type.contract_start_type);
-        const obj_duration_units_min_max = getDurationMinMax(contract_type, obj_start_type.contract_start_type);
+        const obj_duration_units_list = getDurationUnitsList(contract_type);
+        const obj_duration_units_min_max = getDurationMinMax(contract_type);
         const obj_accumulator_range_list = getAccumulatorRange(contract_type);
         const obj_barrier_choices = getBarrierChoices(contract_type, stored_barriers_data?.barrier_choices);
         const obj_multiplier_range_list = getMultiplierRange(contract_type, multiplier);
@@ -233,7 +233,7 @@ export const ContractType = (() => {
             ...obj_basis,
             ...obj_trade_types,
             ...obj_start_dates,
-            ...obj_start_type,
+            contract_start_type: 'spot' as const, // All contracts now default to spot behavior
             ...obj_barrier,
             ...obj_duration_unit,
             ...obj_duration_units_list,
@@ -278,7 +278,7 @@ export const ContractType = (() => {
         );
     };
 
-    const getDurationUnitsList = (contract_type: string, contract_start_type: string) => {
+    const getDurationUnitsList = (contract_type: string) => {
         return {
             duration_units_list:
                 (getPropertyValue(available_contract_types, [
@@ -286,19 +286,17 @@ export const ContractType = (() => {
                     'config',
                     'durations',
                     'units_display',
-                    'spot', // Always use 'spot' since start_type was removed from API
                 ]) as TTextValueStrings[]) || [],
         };
     };
 
-    const getDurationUnit = (duration_unit: string, contract_type: string, contract_start_type: string) => {
+    const getDurationUnit = (duration_unit: string, contract_type: string) => {
         const duration_units =
             (getPropertyValue(available_contract_types, [
                 contract_type,
                 'config',
                 'durations',
                 'units_display',
-                'spot', // Always use 'spot' since start_type was removed from API
             ]) as TTextValueStrings[]) || [];
         const arr_units: string[] = [];
         duration_units.forEach(obj => {
@@ -310,15 +308,9 @@ export const ContractType = (() => {
         };
     };
 
-    const getDurationMinMax = (contract_type: string, contract_start_type: string, contract_expiry_type?: string) => {
+    const getDurationMinMax = (contract_type: string, contract_expiry_type?: string) => {
         let duration_min_max: TTradeStore['duration_min_max'] =
-            getPropertyValue(available_contract_types, [
-                contract_type,
-                'config',
-                'durations',
-                'min_max',
-                'spot', // Always use 'spot' since start_type was removed from API
-            ]) || {};
+            getPropertyValue(available_contract_types, [contract_type, 'config', 'durations', 'min_max']) || {};
 
         if (contract_expiry_type) {
             duration_min_max =
@@ -333,11 +325,6 @@ export const ContractType = (() => {
     };
 
     const getFullContractTypes = () => available_contract_types;
-
-    const getStartType = (start_date: number) => ({
-        // Number(0) refers to 'now'
-        contract_start_type: 'spot',
-    });
 
     const getStartDates = (contract_type: string, current_start_date: number) => {
         const config: TConfig = getPropertyValue(available_contract_types, [contract_type, 'config']);
@@ -709,7 +696,6 @@ export const ContractType = (() => {
         getExpiryType,
         getSessions,
         getStartTime,
-        getStartType,
         getTradingEvents,
         getTradingDays,
         getTradingTimes,

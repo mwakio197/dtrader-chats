@@ -18,11 +18,8 @@ type TUnit = {
 };
 
 export type TDurations = {
-    min_max: {
-        spot: Partial<Record<'tick' | 'intraday' | 'daily', TMaxMin>>;
-        forward: Partial<Record<'intraday', TMaxMin>>;
-    };
-    units_display: Partial<Record<'spot' | 'forward', TUnit[]>>;
+    min_max: Partial<Record<'tick' | 'intraday' | 'daily', TMaxMin>>;
+    units_display: TUnit[];
 };
 
 type TDurationMinMax = {
@@ -42,27 +39,24 @@ const getDurationMaps = () => ({
 
 export const buildDurationConfig = (
     contract: TContract,
-    durations: TDurations = { min_max: { spot: {}, forward: {} }, units_display: {} }
+    durations: TDurations = { min_max: {}, units_display: [] }
 ) => {
     type TDurationMaps = keyof typeof duration_maps;
-    // Always use 'spot' since start_type was removed from API
-    const startType = 'spot';
-    durations.units_display[startType as keyof typeof durations.units_display] =
-        durations.units_display[startType as keyof typeof durations.units_display] || [];
 
-    const duration_min_max = durations.min_max[startType as keyof typeof durations.min_max];
+    // Initialize units_display if not already set
+    durations.units_display = durations.units_display || [];
+
     const obj_min = getDurationFromString(contract.min_contract_duration);
     const obj_max = getDurationFromString(contract.max_contract_duration);
 
-    durations.min_max[startType as keyof typeof durations.min_max][
-        contract.expiry_type as keyof typeof duration_min_max
-    ] = {
+    // Set min/max values directly without spot/forward nesting
+    durations.min_max[contract.expiry_type as keyof typeof durations.min_max] = {
         min: convertDurationUnit(obj_min.duration, obj_min.unit, 's') || 0,
         max: convertDurationUnit(obj_max.duration, obj_max.unit, 's') || 0,
     };
 
     const arr_units: string[] = [];
-    durations?.units_display?.[startType as keyof typeof durations.units_display]?.forEach?.(obj => {
+    durations.units_display.forEach(obj => {
         arr_units.push(obj.value);
     });
 
@@ -85,7 +79,7 @@ export const buildDurationConfig = (
         });
     }
 
-    durations.units_display[startType as keyof typeof durations.units_display] = arr_units
+    durations.units_display = arr_units
         .sort((a, b) => (duration_maps[a as TDurationMaps].order > duration_maps[b as TDurationMaps].order ? 1 : -1))
         .reduce((o, c) => [...o, { text: duration_maps[c as TDurationMaps].display, value: c }], [] as TUnit[]);
     return durations;

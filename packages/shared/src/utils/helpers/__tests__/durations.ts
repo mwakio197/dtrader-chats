@@ -22,30 +22,31 @@ describe('buildDurationConfig', () => {
 
     const durations = {
         min_max: {
-            spot: {
-                daily: {
-                    min: 86400,
-                    max: 31536000,
-                },
+            daily: {
+                min: 86400,
+                max: 31536000,
             },
-            forward: {},
         },
-        units_display: {
-            spot: [
-                {
-                    text: 'Days',
-                    value: 'd',
-                },
-            ],
-        },
+        units_display: [
+            {
+                text: 'Days',
+                value: 'd',
+            },
+        ],
     };
 
     it('Returns correct value when durations is not passed', () => {
-        expect(Duration.buildDurationConfig(contract, durations)).toEqual(durations);
+        expect(Duration.buildDurationConfig(contract)).toEqual({
+            min_max: { daily: { min: 86400, max: 31536000 } },
+            units_display: [{ text: 'Days', value: 'd' }],
+        });
     });
 
     it('Returns correct value when durations passed', () => {
-        expect(Duration.buildDurationConfig(contract, durations)).toEqual(durations);
+        expect(Duration.buildDurationConfig(contract, durations)).toEqual({
+            min_max: { daily: { min: 86400, max: 31536000 } },
+            units_display: [{ text: 'Days', value: 'd' }],
+        });
     });
 });
 
