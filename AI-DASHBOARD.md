@@ -3,7 +3,7 @@
 <div align="center">
 
 **deriv-com/derivatives-trader**
-📅 Last updated: 2025-08-12 14:54:36 UTC • 🔄 Tracking merged PRs to main/master
+📅 Last updated: 2025-08-12 15:04:25 UTC • 🔄 Tracking merged PRs to main/master
 
 </div>
 
@@ -21,7 +21,7 @@
 
 ## 🚀 Recent Merged Pull Requests
 
-> 📊 Showing the 10 most recent merged PRs (stats above include all 25 PRs)
+> 📊 Showing the 10 most recent merged PRs (stats above include all 26 PRs)
 
 | PR                                                                                   | Author                                           | Date      | Files | AI Content          | Percentage                         |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------ | --------- | ----- | ------------------- | ---------------------------------- |
