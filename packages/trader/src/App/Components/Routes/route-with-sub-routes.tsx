@@ -3,13 +3,16 @@ import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 
 import { default_title, isEmptyObject, redirectToLogin, removeBranchName, routes } from '@deriv/shared';
 import { getLanguage } from '@deriv/translations';
+import { observer, useStore } from '@deriv/stores';
 
 import Page404 from 'Modules/Page404';
 import { TBinaryRoutesProps, TRouteConfig } from 'Types';
 
 type TRouteWithSubRoutesProps = TRouteConfig & TBinaryRoutesProps;
 
-const RouteWithSubRoutes = (route: TRouteWithSubRoutesProps) => {
+const RouteWithSubRoutes = observer((route: TRouteWithSubRoutesProps) => {
+    const { client } = useStore();
+    const { is_client_store_initialized, is_logged_in } = client;
     const validateRoute = (pathname: string) => {
         if (pathname === '') return true;
         if (route.path?.includes(':')) {
@@ -34,8 +37,11 @@ const RouteWithSubRoutes = (route: TRouteWithSubRoutesProps) => {
                 to = location.pathname.toLowerCase().replace(route.path, '');
             }
             result = <Redirect to={to} />;
-        } else if (is_valid_route && route.is_authenticated && !route.is_logging_in && !route.is_logged_in) {
-            redirectToLogin(route.is_logged_in, getLanguage());
+        } else if (is_valid_route && route.is_authenticated && !route.is_logging_in && !is_logged_in) {
+            // Only redirect if client store is initialized - prevents race condition during page refresh
+            if (is_client_store_initialized) {
+                redirectToLogin(is_logged_in, getLanguage());
+            }
         } else {
             const default_subroute = route.routes ? route.routes.find(r => r.default) : {};
             const has_default_subroute = !isEmptyObject(default_subroute);
@@ -55,6 +61,6 @@ const RouteWithSubRoutes = (route: TRouteWithSubRoutesProps) => {
     };
 
     return <Route exact={route.exact} path={route.path} render={renderFactory} />;
-};
+});
 
 export default RouteWithSubRoutes;

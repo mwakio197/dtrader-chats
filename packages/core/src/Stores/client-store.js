@@ -258,7 +258,13 @@ export default class ClientStore extends BaseStore {
             ],
             () => {
                 this.setCookieAccount();
-                if (!this.is_logged_in) {
+
+                // For V2 authentication, only cleanup if we're definitely logged out
+                // Don't cleanup during authentication transitions or when we have a session token
+                const hasSessionToken = !!this.getSessionToken();
+                const shouldCleanup = !this.is_logged_in && !hasSessionToken && this.is_client_store_initialized;
+
+                if (shouldCleanup) {
                     this.root_store.traders_hub.cleanup();
                 }
             }
@@ -589,6 +595,12 @@ export default class ClientStore extends BaseStore {
     }
 
     get is_logged_in() {
+        // For V2 authentication, always check for session token first
+        const hasSessionToken = !!this.getSessionToken();
+        if (hasSessionToken) {
+            return true;
+        }
+
         if (
             isEmptyObject(this.accounts) ||
             !Object.keys(this.accounts).length ||
@@ -598,8 +610,9 @@ export default class ClientStore extends BaseStore {
             return false;
         }
 
-        // For multi-account auth, require a valid token
-        return !!this.accounts[this.loginid].token;
+        // For legacy authentication, check for account token
+        const account = this.accounts[this.loginid];
+        return !!account.token;
     }
 
     get should_show_eu_error() {
@@ -1107,7 +1120,9 @@ export default class ClientStore extends BaseStore {
                 message: localize('Please Log in'),
                 should_show_refresh: false,
                 redirect_label: localize('Log in'),
-                redirectOnClick: () => redirectToLogin(false, getLanguage()),
+                redirectOnClick: () => {
+                    redirectToLogin(false, getLanguage());
+                },
             });
             this.setIsLoggingIn(false);
             this.setInitialized(false);
@@ -1503,6 +1518,12 @@ export default class ClientStore extends BaseStore {
     }
 
     async cleanUp() {
+        // For V2 authentication, don't cleanup if we have a valid session token
+        const hasSessionToken = !!this.getSessionToken();
+        if (hasSessionToken) {
+            return;
+        }
+
         // delete all notifications keys for this account when logout
         const notification_messages = LocalStore.getObject('notification_messages');
         if (notification_messages && this.loginid) {
@@ -1544,6 +1565,12 @@ export default class ClientStore extends BaseStore {
     }
 
     async logout() {
+        // For V2 authentication, don't logout if we have a valid session token
+        const hasSessionToken = !!this.getSessionToken();
+        if (hasSessionToken) {
+            return { logout: 0 };
+        }
+
         // makes sure to clear the cached traders-hub data when logging out
         localStorage.removeItem('traders_hub_store');
         localStorage.removeItem('trade_store');

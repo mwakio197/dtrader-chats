@@ -3,13 +3,12 @@ import { useHistory, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
 
-import { useIsHubRedirectionEnabled, useTMB } from '@deriv/api';
+import { useIsHubRedirectionEnabled } from '@deriv/api';
 import { getDomainName, platforms, redirectToLogin, routes, SessionStore } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { getLanguage } from '@deriv/translations';
 import { Chat } from '@deriv/utils';
 import { Analytics } from '@deriv-com/analytics';
-import { requestOidcAuthentication } from '@deriv-com/auth-client';
 
 import { WS } from 'Services';
 
@@ -17,8 +16,6 @@ const Redirect = observer(() => {
     const history = useHistory();
     const { client, ui } = useStore();
     const [queryCurrency, setQueryCurrency] = useState('USD');
-    const is_deriv_com = /deriv\.(com)/.test(window.location.hostname) || /localhost:8443/.test(window.location.host);
-    const { isTmbEnabled } = useTMB();
 
     const {
         authorize_accounts_list,
@@ -212,44 +209,6 @@ const Redirect = observer(() => {
             redirected_to_route = true;
             break;
         }
-        // case 'payment_deposit': {
-        //     history.push(routes.wallets_deposit);
-        //     redirected_to_route = true;
-        //     break;
-        // }
-        // case 'payment_withdraw': {
-        //     if (verification_code?.payment_withdraw) {
-        //         history.push(
-        //             `${routes.wallets_withdrawal}?verification=${verification_code.payment_withdraw}${
-        //                 client.loginid ? `&loginid=${client.loginid}` : ''
-        //             }`
-        //         );
-        //     } else {
-        //         history.push(routes.wallets_withdrawal);
-        //     }
-        //     redirected_to_route = true;
-        //     break;
-        // }
-        // case 'payment_transfer': {
-        //     history.push(routes.wallets_transfer);
-        //     redirected_to_route = true;
-        //     break;
-        // }
-        // case 'crypto_transactions_withdraw': {
-        //     history.push(`${routes.wallets_withdrawal}?action=${action_param}`);
-        //     redirected_to_route = true;
-        //     break;
-        // }
-        // case 'payment_transactions': {
-        //     history.push(routes.wallets_transactions);
-        //     redirected_to_route = true;
-        //     break;
-        // }
-        // case 'payment_agent_withdraw': {
-        //     history.push(routes.wallets_withdrawal);
-        //     redirected_to_route = true;
-        //     break;
-        // }
         case 'add_account': {
             WS.wait('get_account_status').then(() => {
                 if (!currency) return openRealAccountSignup('set_currency');
@@ -316,15 +275,11 @@ const Redirect = observer(() => {
     }, []);
 
     useEffect(() => {
-        const checkTmbAndRedirect = async () => {
-            const is_tmb_enabled = await isTmbEnabled();
+        const handleRedirect = () => {
             const account_currency = queryCurrency;
             if (!redirected_to_route && history.location.pathname !== routes.index && is_client_store_initialized) {
                 const client_account_lists = JSON.parse(localStorage.getItem('client.accounts') || '{}');
 
-                const length_of_authorize_accounts_list = authorize_accounts_list.length;
-                const length_of_client_account_lists = Object.keys(client_account_lists).length;
-                const should_retrigger_oidc = length_of_authorize_accounts_list !== length_of_client_account_lists;
                 const route_mappings = [
                     { pattern: /accumulator/i, route: routes.index, type: 'accumulator' },
                     { pattern: /turbos/i, route: routes.index, type: 'turboslong' },
@@ -346,22 +301,7 @@ const Redirect = observer(() => {
                     updated_search = `${params.toString()}`;
                 }
 
-                if (should_retrigger_oidc && authorize_accounts_list.length > 0 && is_deriv_com && !is_tmb_enabled) {
-                    try {
-                        requestOidcAuthentication({
-                            redirectCallbackUri: `${window.location.origin}/callback`,
-                            postLoginRedirectUri: `redirect?${updated_search}`,
-                        }).catch(err => {
-                            // eslint-disable-next-line no-console
-                            console.error(err);
-                        });
-                    } catch (err) {
-                        // eslint-disable-next-line no-console
-                        console.error(err);
-                    }
-                }
-
-                if (account_currency && !is_tmb_enabled) {
+                if (account_currency) {
                     let matching_loginid;
 
                     const converted_account_currency = account_currency.toUpperCase();
@@ -394,7 +334,7 @@ const Redirect = observer(() => {
             }
         };
 
-        checkTmbAndRedirect();
+        handleRedirect();
     }, [redirected_to_route, url_query_string, history, is_client_store_initialized, authorize_accounts_list]);
 
     return null;

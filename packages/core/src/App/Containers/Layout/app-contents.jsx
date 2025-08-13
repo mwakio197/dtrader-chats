@@ -51,11 +51,18 @@ const AppContents = observer(({ children }) => {
     });
 
     React.useEffect(() => {
-        if (should_redirect_user_to_login) {
-            setShouldRedirectToLogin(false);
-            redirectToLogin(is_logged_in, getLanguage());
+        if (should_redirect_user_to_login && client.is_client_store_initialized) {
+            // For V2 authentication, don't redirect if we have a session token
+            const hasSessionToken = !!localStorage.getItem('session_token');
+
+            if (hasSessionToken) {
+                setShouldRedirectToLogin(false);
+            } else {
+                setShouldRedirectToLogin(false);
+                redirectToLogin(is_logged_in, getLanguage());
+            }
         }
-    }, [should_redirect_user_to_login, is_logged_in, setShouldRedirectToLogin]);
+    }, [should_redirect_user_to_login, is_logged_in, setShouldRedirectToLogin, client.is_client_store_initialized]);
 
     React.useEffect(() => {
         if (scroll_ref.current) setAppContentsScrollRef(scroll_ref);
