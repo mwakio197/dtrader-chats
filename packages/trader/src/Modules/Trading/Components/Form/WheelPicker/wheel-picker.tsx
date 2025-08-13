@@ -88,7 +88,7 @@ const WheelPicker = ({ options, onClick, defaultValue, currency }: WheelPickerTy
                                 size={index === 1 ? 'xs' : 'xxs'}
                                 line_height={index === 1 ? 'l' : 'm'}
                                 weight={index === 1 ? 'bolder' : 'bold'}
-                                color={index === 1 ? 'default' : 'disabled-1'}
+                                color={index === 1 ? 'default' : 'disabled'}
                                 align='center'
                                 as='p'
                                 className={index === 1 ? '' : 'wheel-picker__wheel__placeholder'}

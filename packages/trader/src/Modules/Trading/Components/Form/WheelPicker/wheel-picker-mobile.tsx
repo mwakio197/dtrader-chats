@@ -192,7 +192,7 @@ const WheelPickerMobile: React.FC<WheelPickerMobileProps> = ({
                             <Text
                                 size={getFontSize(index)}
                                 weight={index === selectedIndex ? 'bolder' : 'bold'}
-                                color={index === selectedIndex ? 'prominent' : 'disabled-1'}
+                                color={index === selectedIndex ? 'prominent' : 'disabled'}
                                 align='center'
                                 as='p'
                             >
