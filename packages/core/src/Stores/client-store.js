@@ -1800,6 +1800,9 @@ export default class ClientStore extends BaseStore {
 
             // If we don't have a session token but we have a one-time token, exchange it
             if (!sessionToken && oneTimeToken) {
+                // Remove the one-time token from URL immediately
+                this.removeTokenFromUrl();
+
                 const sessionResponse = await WS.getSessionToken(oneTimeToken);
 
                 if (sessionResponse.error) {
@@ -1813,9 +1816,6 @@ export default class ClientStore extends BaseStore {
 
                 sessionToken = sessionResponse.get_session_token.token;
                 this.storeSessionToken(sessionToken);
-
-                // Remove the one-time token from URL after successful exchange
-                this.removeTokenFromUrl();
             } else if (!sessionToken) {
                 return {
                     error: {
