@@ -3,8 +3,7 @@
     "compilerOptions": {
         "baseUrl": "./",
         "paths": {
-            "@deriv/*": ["../*/src"],
-            "@root/*": ["../../*"]
+            "@deriv/*": ["../*/src"]
         },
         "typeRoots": ["node_modules/@types"]
     },

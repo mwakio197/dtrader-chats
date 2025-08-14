@@ -22,9 +22,7 @@ describe('useAccountSettingsRedirect', () => {
         Object.defineProperty(window, 'location', {
             writable: true,
             value: {
-                pathname: '/account',
                 search: '?account=demo',
-                href: 'https://app.champion.trade/account?account=demo',
             },
         });
     });
@@ -59,9 +57,7 @@ describe('useAccountSettingsRedirect', () => {
         Object.defineProperty(window, 'location', {
             writable: true,
             value: {
-                pathname: '/account',
                 search: '?account=BTC',
-                href: 'https://app.champion.trade/account?account=BTC',
             },
         });
 
