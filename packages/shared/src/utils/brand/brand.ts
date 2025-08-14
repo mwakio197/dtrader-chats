@@ -1,5 +1,5 @@
-// eslint-disable-next-line import/no-unresolved
-import config_data from 'root/brand.config.json';
+// eslint-disable-next-line import/no-relative-packages
+import config_data from '../../../../../brand.config.json';
 
 export const getBrandWebsiteName = () => {
     return config_data.brand_domain;
