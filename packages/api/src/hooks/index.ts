@@ -10,7 +10,6 @@ export { default as useGetMFAccountStatus } from './useGetMFAccountStatus';
 export { default as useHasActiveRealAccount } from './useHasActiveRealAccount';
 export { default as useHasMaltaInvestAccount } from './useHasMaltaInvestAccount';
 export { default as useHasSetCurrency } from './useHasSetCurrency';
-export { default as useIsHubRedirectionEnabled } from './useIsHubRedirectionEnabled';
 export { default as useIsRtl } from './useIsRtl';
 export { default as useLiveChat } from './useLiveChat';
 export { default as useIntercom, useIsIntercomAvailable } from './useIntercom';

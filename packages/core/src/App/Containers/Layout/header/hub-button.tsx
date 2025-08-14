@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { Icon, Text } from '@deriv/components';
-import { brand_url } from '@deriv/shared';
+import { getBrandHubHomeUrl } from '@deriv/shared';
 import { observer } from '@deriv/stores';
 import { Localize } from '@deriv/translations';
 
 const HubButton = observer(() => {
     const handleHubRedirect = () => {
-        window.open(brand_url.home, '_blank', 'noopener,noreferrer');
+        window.open(getBrandHubHomeUrl(), '_blank', 'noopener,noreferrer');
     };
 
     return (

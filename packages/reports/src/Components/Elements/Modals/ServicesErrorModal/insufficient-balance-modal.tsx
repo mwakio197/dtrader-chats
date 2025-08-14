@@ -1,10 +1,9 @@
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Button, Modal } from '@deriv/components';
-import { getDomainUrl, routes } from '@deriv/shared';
+import { getBrandHubUrl } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { localize } from '@deriv/translations';
-import { useIsHubRedirectionEnabled } from '@deriv/api';
 
 type TInsufficientBalanceModal = RouteComponentProps & {
     is_virtual?: boolean;
@@ -14,13 +13,10 @@ type TInsufficientBalanceModal = RouteComponentProps & {
 };
 
 const InsufficientBalanceModal = observer(
-    ({ history, is_virtual, is_visible, message, toggleModal }: TInsufficientBalanceModal) => {
+    ({ is_virtual, is_visible, message, toggleModal }: TInsufficientBalanceModal) => {
         const {
             ui: { is_mobile },
-            client,
         } = useStore();
-        const { isHubRedirectionEnabled } = useIsHubRedirectionEnabled();
-        const { has_wallet } = client;
         return (
             <Modal
                 id='dt_insufficient_balance_modal'
@@ -37,21 +33,13 @@ const InsufficientBalanceModal = observer(
                         text={is_virtual ? localize('OK') : localize('Deposit now')}
                         onClick={() => {
                             if (!is_virtual) {
-                                if (has_wallet && isHubRedirectionEnabled) {
-                                    const PRODUCTION_REDIRECT_URL = `https://hub.${getDomainUrl()}/tradershub`;
-                                    const STAGING_REDIRECT_URL = `https://staging-hub.${getDomainUrl()}/tradershub`;
-                                    const redirectUrl =
-                                        process.env.NODE_ENV === 'production'
-                                            ? PRODUCTION_REDIRECT_URL
-                                            : STAGING_REDIRECT_URL;
+                                const hubUrl = getBrandHubUrl();
+                                const url_query_string = window.location.search;
+                                const url_params = new URLSearchParams(url_query_string);
+                                const account_currency =
+                                    window.sessionStorage.getItem('account') || url_params.get('account');
 
-                                    const url_query_string = window.location.search;
-                                    const url_params = new URLSearchParams(url_query_string);
-                                    const account_currency =
-                                        window.sessionStorage.getItem('account') || url_params.get('account');
-
-                                    window.location.href = `${redirectUrl}/redirect?action=redirect_to&redirect_to=wallet${account_currency ? `&account=${account_currency}` : ''}`;
-                                }
+                                window.location.href = `${hubUrl}/redirect?action=redirect_to&redirect_to=wallet${account_currency ? `&account=${account_currency}` : ''}`;
                             } else {
                                 toggleModal();
                             }

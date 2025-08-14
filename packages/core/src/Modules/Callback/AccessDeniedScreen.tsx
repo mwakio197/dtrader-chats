@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 import { Icon, Loading } from '@deriv/components';
-import { useIsHubRedirectionEnabled, useOauth2 } from '@deriv/api';
+import { useOauth2 } from '@deriv/api';
 import { BrandBrandLightDerivWordmarkHorizontal25YearsEnglishIcon as DerivLogo } from '@deriv/quill-icons';
-import { getDomainUrl, routes } from '@deriv/shared';
+import { getBrandHubUrl, routes } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { localize } from '@deriv/translations';
 import { requestOidcAuthentication } from '@deriv-com/auth-client';
@@ -13,19 +12,14 @@ import { Text } from '@deriv-com/ui';
 
 import './AccessDeniedScreen.scss';
 
-const PRODUCTION_REDIRECT_URL = `https://hub.${getDomainUrl()}/tradershub`;
-const STAGING_REDIRECT_URL = `https://staging-hub.${getDomainUrl()}/tradershub`;
-
 const AccessDeniedScreen = observer(() => {
     const client_information = JSON.parse(Cookies.get('client_information') || '{}');
     const email_address = client_information?.email;
 
     const [is_loading, setIsLoading] = useState(false);
 
-    const history = useHistory();
     const { client } = useStore();
-    const { has_wallet, logout } = client;
-    const { isHubRedirectionEnabled } = useIsHubRedirectionEnabled();
+    const { logout } = client;
     const { oAuthLogout } = useOauth2({
         handleLogout: async () => {
             setIsLoading(true);
@@ -46,12 +40,7 @@ const AccessDeniedScreen = observer(() => {
     });
 
     const continueOnClick = () => {
-        if (isHubRedirectionEnabled && has_wallet) {
-            const redirectUrl = process.env.NODE_ENV === 'production' ? PRODUCTION_REDIRECT_URL : STAGING_REDIRECT_URL;
-            window.location.href = redirectUrl;
-        } else {
-            history.push(routes.index);
-        }
+        window.location.href = getBrandHubUrl();
     };
 
     return (

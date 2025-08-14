@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { /* useOauth2, */ useRemoteConfig } from '@deriv/api';
 import { Div100vhContainer, Icon, MobileDrawer, ToggleSwitch } from '@deriv/components';
 // eslint-disable-next-line no-unused-vars -- getDomainUrl kept for future handleTradershubRedirect restoration
-import { getStaticUrl, routes, brand_url } from '@deriv/shared';
+import { routes, getBrandHubHomeUrl } from '@deriv/shared';
 import { observer, useStore } from '@deriv/stores';
 import { localize } from '@deriv/translations';
 // eslint-disable-next-line no-unused-vars, import/no-unresolved -- Kept for future restoration of Analytics functionality
@@ -188,11 +188,11 @@ const ToggleMenuDrawer = observer(() => {
                             <MobileDrawer.Body>
                                 <MobileDrawer.Item>
                                     <MenuLink
-                                        link_to={brand_url.home}
+                                        link_to={getBrandHubHomeUrl()}
                                         icon='IcAppstoreTradersHubHome'
                                         text={localize('Hub')}
                                         onClickLink={() => {
-                                            window.open(brand_url.home, '_blank', 'noopener,noreferrer');
+                                            window.open(getBrandHubHomeUrl(), '_blank', 'noopener,noreferrer');
                                             toggleDrawer();
                                         }}
                                     />
