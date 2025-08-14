@@ -73,6 +73,12 @@ const BinarySocketGeneral = (() => {
                     if (getPropertyValue(response, ['error', 'code']) === 'SelfExclusion' && is_active_tab) {
                         sessionStorage.removeItem('active_tab');
                     }
+
+                    const hasSessionToken = !!localStorage.getItem('session_token');
+                    if (hasSessionToken) {
+                        return;
+                    }
+
                     client_store.logout();
                 } else if (!/authorize/.test(State.get('skip_response'))) {
                     // Check if this is a V2 authentication response (session token based)
@@ -98,7 +104,7 @@ const BinarySocketGeneral = (() => {
                         // During initial login, allow loginid mismatch and update the store
                         client_store.setLoginId(response.authorize.loginid);
                         authorizeAccount(response);
-                    } else {
+                    } else if (client_store.is_client_store_initialized) {
                         // Only logout if it's not during initial account population
                         client_store.logout();
                     }
@@ -239,7 +245,7 @@ const BinarySocketGeneral = (() => {
             case 'DisabledClient':
                 common_store.setError(true, { message: response.error.message });
                 break;
-            case 'InvalidToken':
+            case 'InvalidToken': {
                 if (
                     [
                         'cashier',
@@ -262,6 +268,16 @@ const BinarySocketGeneral = (() => {
                 // DBot handles this internally. Special case: 'client.invalid_token'
                 if (active_platform === 'DBot') return;
 
+                // Don't redirect during page refresh on valid pages
+                const current_path = window.location.pathname;
+                const is_on_contract_page = /^\/contract\//.test(current_path);
+                const is_on_reports_page = /^\/reports\//.test(current_path);
+                const is_on_trade_page = current_path === '/';
+
+                if (is_on_contract_page || is_on_reports_page || is_on_trade_page) {
+                    return;
+                }
+
                 client_store.logout().then(() => {
                     const redirect_to = routes.index;
                     const action = getActionFromUrl();
@@ -271,6 +287,7 @@ const BinarySocketGeneral = (() => {
                     common_store.routeTo(redirect_to);
                 });
                 break;
+            }
             case 'AuthorizationRequired':
                 // if msg_type is coming from 'buy', behaviour should be handled in app itself.
                 if (msg_type === 'buy') {
