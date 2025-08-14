@@ -8,7 +8,7 @@
         opacity 0.3s;
     color: var(--color-text-primary);
     background: var(--color-surface-primary);
-    border: 1px solid var(--color-surface-border);
+    border: 1px solid var(--color-surface-primary);
 
     &__display {
         cursor: pointer;
