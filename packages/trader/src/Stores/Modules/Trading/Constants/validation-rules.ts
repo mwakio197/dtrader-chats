@@ -96,24 +96,21 @@ export const getValidationRules = (): TValidationRules => ({
             [
                 'custom',
                 {
-                    func: (value: TTradeStore['start_time'], options, store) =>
-                        store?.contract_start_type === 'spot' || isTimeValid(value ?? ''),
+                    func: (value: TTradeStore['start_time'], options, store) => true, // Always valid since all contracts now default to spot behavior
                     message: localize('Please enter the start time in the format "HH:MM".'),
                 },
             ],
             [
                 'custom',
                 {
-                    func: (value: TTradeStore['start_time'], options, store) =>
-                        store?.contract_start_type === 'spot' || isHourValid(value ?? ''),
+                    func: (value: TTradeStore['start_time'], options, store) => true, // Always valid since all contracts now default to spot behavior
                     message: localize('Hour must be between 0 and 23.'),
                 },
             ],
             [
                 'custom',
                 {
-                    func: (value: TTradeStore['start_time'], options, store) =>
-                        store?.contract_start_type === 'spot' || isMinuteValid(value ?? ''),
+                    func: (value: TTradeStore['start_time'], options, store) => true, // Always valid since all contracts now default to spot behavior
                     message: localize('Minute must be between 0 and 59.'),
                 },
             ],
@@ -121,16 +118,7 @@ export const getValidationRules = (): TValidationRules => ({
                 'custom',
                 {
                     func: (value: TTradeStore['start_time'], options, store) => {
-                        if (store?.contract_start_type === 'spot') return true;
-                        if (!isTimeValid(value ?? '')) return false;
-                        const start_moment = toMoment(store?.start_date);
-                        const start_moment_clone = start_moment.clone();
-                        const [h, m] = value?.split(':') ?? [];
-                        return isSessionAvailable(
-                            store?.sessions,
-                            start_moment_clone.hour(+h).minute(+m),
-                            start_moment
-                        );
+                        return true; // Always valid since all contracts now default to spot behavior
                     },
                     message: localize('Start time cannot be in the past.'),
                 },
@@ -142,24 +130,21 @@ export const getValidationRules = (): TValidationRules => ({
             [
                 'custom',
                 {
-                    func: (value: TTradeStore['expiry_time'], options, store) =>
-                        store?.contract_start_type === 'spot' || isTimeValid(value ?? ''),
+                    func: (value: TTradeStore['expiry_time'], options, store) => true, // Always valid since all contracts now default to spot behavior
                     message: localize('Please enter the expiry time in the format "HH:MM".'),
                 },
             ],
             [
                 'custom',
                 {
-                    func: (value: TTradeStore['expiry_time'], options, store) =>
-                        store?.contract_start_type === 'spot' || isHourValid(value ?? ''),
+                    func: (value: TTradeStore['expiry_time'], options, store) => true, // Always valid since all contracts now default to spot behavior
                     message: localize('Hour must be between 0 and 23.'),
                 },
             ],
             [
                 'custom',
                 {
-                    func: (value: TTradeStore['expiry_time'], options, store) =>
-                        store?.contract_start_type === 'spot' || isMinuteValid(value ?? ''),
+                    func: (value: TTradeStore['expiry_time'], options, store) => true, // Always valid since all contracts now default to spot behavior
                     message: localize('Minute must be between 0 and 59.'),
                 },
             ],
@@ -167,16 +152,7 @@ export const getValidationRules = (): TValidationRules => ({
                 'custom',
                 {
                     func: (value: TTradeStore['expiry_time'], options, store) => {
-                        if (store?.contract_start_type === 'spot') return true;
-                        if (!isTimeValid(value ?? '')) return false;
-                        const start_moment = toMoment(store?.start_date);
-                        const start_moment_clone = start_moment.clone();
-                        const [h, m] = value?.split(':') ?? [];
-                        return isSessionAvailable(
-                            store?.sessions,
-                            start_moment_clone.hour(+h).minute(+m),
-                            start_moment
-                        );
+                        return true; // Always valid since all contracts now default to spot behavior
                     },
                     message: localize('Expiry time cannot be in the past.'),
                 },

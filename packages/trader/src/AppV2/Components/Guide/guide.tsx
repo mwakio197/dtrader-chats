@@ -5,7 +5,7 @@ import { observer, useStore } from '@deriv/stores';
 import { Localize } from '@deriv/translations';
 import { Button, Text } from '@deriv-com/quill-ui';
 
-import useContractsForCompany from 'AppV2/Hooks/useContractsForCompany';
+import useContractsFor from 'AppV2/Hooks/useContractsFor';
 import { AVAILABLE_CONTRACTS, CONTRACT_LIST } from 'AppV2/Utils/trade-types-utils';
 import { useTraderStore } from 'Stores/useTraderStores';
 
@@ -36,7 +36,7 @@ const Guide = observer(
         } = useStore();
         const { contract_type } = useTraderStore();
         const contract_type_title = AVAILABLE_CONTRACTS.find(item => item.for.includes(contract_type))?.id ?? '';
-        const { trade_types } = useContractsForCompany();
+        const { trade_types } = useContractsFor();
         const order = [
             CONTRACT_LIST.RISE_FALL,
             CONTRACT_LIST.ACCUMULATORS,

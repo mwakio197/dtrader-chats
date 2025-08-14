@@ -66,7 +66,7 @@ jest.mock('@lottiefiles/dotlottie-react', () => ({
     DotLottieReact: jest.fn(() => <div>DotLottieReact</div>),
 }));
 jest.mock('AppV2/Components/OnboardingGuide/GuideForPages', () => jest.fn(() => 'OnboardingGuide'));
-jest.mock('AppV2/Hooks/useContractsForCompany', () => ({
+jest.mock('AppV2/Hooks/useContractsFor', () => ({
     __esModule: true,
     default: jest.fn(() => ({
         is_fetching_ref: { current: false },

@@ -22,7 +22,6 @@ jest.mock('@deriv/shared', () => {
         '1910.00',
     ];
     const vanilla_contracts_for_data = {
-        barrier_category: 'euro_non_atm',
         barriers: 1,
         contract_category: 'vanilla',
         contract_category_display: 'Vanilla Options',

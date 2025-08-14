@@ -15,7 +15,6 @@ import { useDtraderQuery } from './useDtraderQuery';
 type TContractsForResponse = {
     contracts_for: {
         available: {
-            barrier_category: string;
             contract_category: string;
             contract_type: string;
             default_stake: number;
@@ -27,7 +26,7 @@ type TContractsForResponse = {
     };
 };
 
-const useContractsForCompany = () => {
+const useContractsFor = () => {
     const [contract_types_list, setContractTypesList] = React.useState<TContractTypesList | []>([]);
 
     const [trade_types, setTradeTypes] = React.useState<TContractType[]>([]);
@@ -41,8 +40,7 @@ const useContractsForCompany = () => {
         active_symbols,
     } = useTraderStore();
     const { client } = useStore();
-    const { loginid, is_switching, landing_company_shortcode } = client;
-    const prev_landing_company_shortcode_ref = React.useRef(landing_company_shortcode);
+    const { loginid, is_switching } = client;
 
     // Helper function to get underlying_symbol from active_symbols
     const getUnderlyingSymbol = useCallback(
@@ -172,16 +170,11 @@ const useContractsForCompany = () => {
                         sub_cats[(sub_cats as string[]).indexOf(type)] = {
                             value: type,
                             text: contract_types[type].title,
-                            barrier_category: contract.barrier_category,
                         };
 
                         available_contract_types[type] = cloneObject(contract_types[type]);
                     }
                     const config: TConfig = available_contract_types[type].config || {};
-                    config.barrier_category =
-                        contract_types[type].barrier_count === 0
-                            ? 'euro_atm'
-                            : (contract.barrier_category as TConfig['barrier_category']);
                     config.default_stake = contract.default_stake;
                     if (type === contract_type) setDefaultStake(contract.default_stake);
                     available_contract_types[type].config = config;
@@ -197,17 +190,8 @@ const useContractsForCompany = () => {
                 const new_contract_type = getNewContractType(trade_types);
                 processNewContractType(new_contract_type);
 
-                if (symbol !== prev_landing_company_shortcode_ref.current) {
-                    onChange({
-                        target: {
-                            name: 'symbol',
-                            value: symbol,
-                        },
-                    }).then(() => {
-                        processContractsForV2();
-                        prev_landing_company_shortcode_ref.current = symbol;
-                    });
-                }
+                // Process contracts for V2 when data is available
+                processContractsForV2();
             }
         } catch (err) {
             /* eslint-disable no-console */
@@ -223,4 +207,4 @@ const useContractsForCompany = () => {
     return { trade_types, contract_types_list, available_contract_types, is_fetching_ref, resetTradeTypes };
 };
 
-export default useContractsForCompany;
+export default useContractsFor;

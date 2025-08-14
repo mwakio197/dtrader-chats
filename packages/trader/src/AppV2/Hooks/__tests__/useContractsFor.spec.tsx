@@ -6,7 +6,7 @@ import { waitFor } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 
 import TraderProviders from '../../../trader-providers';
-import useContractsForCompany from '../useContractsForCompany';
+import useContractsFor from '../useContractsFor';
 import { invalidateDTraderCache } from '../useDtraderQuery';
 
 jest.mock('@deriv/shared', () => ({
@@ -22,7 +22,7 @@ jest.mock('@deriv/shared', () => ({
     },
 }));
 
-describe('useContractsForCompany', () => {
+describe('useContractsFor', () => {
     let mocked_store: ReturnType<typeof mockStore>;
 
     const wrapper = ({ children }: { children: JSX.Element }) => (
@@ -76,7 +76,7 @@ describe('useContractsForCompany', () => {
             },
         });
 
-        const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+        const { result } = renderHook(() => useContractsFor(), { wrapper });
 
         await waitFor(() => {
             expect(result.current.contract_types_list).toEqual({
@@ -95,7 +95,7 @@ describe('useContractsForCompany', () => {
             error: { message: 'Some error' },
         });
 
-        const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+        const { result } = renderHook(() => useContractsFor(), { wrapper });
 
         await waitFor(() => {
             expect(result.current.contract_types_list).toEqual([]);
@@ -111,7 +111,7 @@ describe('useContractsForCompany', () => {
             },
         });
 
-        const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+        const { result } = renderHook(() => useContractsFor(), { wrapper });
 
         await waitFor(() => {
             expect(result.current.contract_types_list).toEqual([]);
@@ -124,7 +124,7 @@ describe('useContractsForCompany', () => {
             // Set up store with undefined symbol
             mocked_store.modules.trade.symbol = undefined;
 
-            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+            const { result } = renderHook(() => useContractsFor(), { wrapper });
 
             // Wait a bit to ensure no API call is made
             await new Promise(resolve => setTimeout(resolve, 100));
@@ -138,7 +138,7 @@ describe('useContractsForCompany', () => {
             // Set up store with null symbol
             mocked_store.modules.trade.symbol = null;
 
-            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+            const { result } = renderHook(() => useContractsFor(), { wrapper });
 
             // Wait a bit to ensure no API call is made
             await new Promise(resolve => setTimeout(resolve, 100));
@@ -152,7 +152,7 @@ describe('useContractsForCompany', () => {
             // Set up store with empty string symbol
             mocked_store.modules.trade.symbol = '';
 
-            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+            const { result } = renderHook(() => useContractsFor(), { wrapper });
 
             // Wait a bit to ensure no API call is made
             await new Promise(resolve => setTimeout(resolve, 100));
@@ -174,7 +174,7 @@ describe('useContractsForCompany', () => {
                 },
             });
 
-            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+            const { result } = renderHook(() => useContractsFor(), { wrapper });
 
             await waitFor(() => {
                 // Verify that API call was made with correct symbol
@@ -191,7 +191,7 @@ describe('useContractsForCompany', () => {
             mocked_store.client.is_switching = true;
             mocked_store.modules.trade.symbol = 'R_100';
 
-            const { result } = renderHook(() => useContractsForCompany(), { wrapper });
+            const { result } = renderHook(() => useContractsFor(), { wrapper });
 
             // Wait a bit to ensure no API call is made
             await new Promise(resolve => setTimeout(resolve, 100));

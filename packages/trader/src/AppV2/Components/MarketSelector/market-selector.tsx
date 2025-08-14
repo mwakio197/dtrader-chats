@@ -7,7 +7,7 @@ import { Localize } from '@deriv/translations';
 import { CaptionText, Skeleton, Tag, Text, useSnackbar } from '@deriv-com/quill-ui';
 
 import useActiveSymbols from 'AppV2/Hooks/useActiveSymbols';
-import useContractsForCompany from 'AppV2/Hooks/useContractsForCompany';
+import useContractsFor from 'AppV2/Hooks/useContractsFor';
 import { TContractType } from 'Modules/Trading/Components/Form/ContractType/types';
 import { useTraderStore } from 'Stores/useTraderStores';
 
@@ -19,7 +19,7 @@ const MarketSelector = observer(() => {
     const { activeSymbols } = useActiveSymbols();
     const { symbol: storeSymbol, tick_data, is_market_closed, contract_type } = useTraderStore();
     const { addSnackbar } = useSnackbar();
-    const { trade_types } = useContractsForCompany();
+    const { trade_types } = useContractsFor();
 
     const currentSymbol = activeSymbols.find(
         symbol_info => ((symbol_info as any).underlying_symbol || symbol_info.symbol) === storeSymbol

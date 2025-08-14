@@ -656,7 +656,6 @@ const mock = (): TStores & { is_mock: boolean } => {
                 clearV2ParamsInitialValues: jest.fn(),
                 contract_expiry_type: '',
                 contract_purchase_toast_box: {},
-                contract_start_type: '',
                 contract_type: '',
                 contract_types_list: {},
                 contract_types_list_v2: {},

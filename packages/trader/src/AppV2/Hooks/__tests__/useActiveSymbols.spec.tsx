@@ -42,8 +42,8 @@ jest.mock('@deriv/components', () => ({
     usePrevious: jest.fn(),
 }));
 
-jest.mock('AppV2/Hooks/useContractsForCompany', () => ({
-    ...jest.requireActual('AppV2/Hooks/useContractsForCompany'),
+jest.mock('AppV2/Hooks/useContractsFor', () => ({
+    ...jest.requireActual('AppV2/Hooks/useContractsFor'),
     __esModule: true,
     default: jest.fn(() => ({
         available_contract_types: [{ contract_type: 'accumulator' }, { contract_type: 'rise_fall' }],

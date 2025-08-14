@@ -76,7 +76,7 @@ jest.mock('@lottiefiles/dotlottie-react', () => ({
     DotLottieReact: jest.fn(() => <div>DotLottieReact</div>),
 }));
 
-jest.mock('AppV2/Hooks/useContractsForCompany', () => ({
+jest.mock('AppV2/Hooks/useContractsFor', () => ({
     __esModule: true,
     default: jest.fn(() => ({
         contracts_for: mock_contract_data,

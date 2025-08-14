@@ -32,8 +32,8 @@ jest.mock('AppV2/Hooks/useActiveSymbols', () => ({
     })),
 }));
 
-// Mock the useContractsForCompany hook
-jest.mock('AppV2/Hooks/useContractsForCompany', () => ({
+// Mock the useContractsFor hook
+jest.mock('AppV2/Hooks/useContractsFor', () => ({
     __esModule: true,
     default: jest.fn(() => ({
         trade_types: [{ value: 'rise_fall', text: 'Rise/Fall' }],

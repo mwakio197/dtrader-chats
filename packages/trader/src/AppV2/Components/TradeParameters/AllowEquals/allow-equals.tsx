@@ -10,23 +10,11 @@ import { hasCallPutEqual, hasDurationForCallPutEqual } from 'Stores/Modules/Trad
 import { useTraderStore } from 'Stores/useTraderStores';
 
 const AllowEquals = observer(() => {
-    const {
-        contract_types_list,
-        contract_start_type,
-        duration_unit,
-        expiry_type,
-        is_equal,
-        is_market_closed,
-        onChange,
-    } = useTraderStore();
+    const { contract_types_list, duration_unit, expiry_type, is_equal, is_market_closed, onChange } = useTraderStore();
 
     const [is_open, setIsOpen] = React.useState(false);
 
-    const has_callputequal_duration = hasDurationForCallPutEqual(
-        contract_types_list,
-        duration_unit,
-        contract_start_type
-    );
+    const has_callputequal_duration = hasDurationForCallPutEqual(contract_types_list, duration_unit);
     const has_callputequal = hasCallPutEqual(contract_types_list);
     const has_allow_equals = (has_callputequal_duration || expiry_type === 'endtime') && has_callputequal;
 
