@@ -22,7 +22,6 @@ const getModules = () => {
             component: Reports,
             getTitle: () => localize('Reports'),
             icon_component: 'IcReports',
-            is_authenticated: true,
             routes: [
                 {
                     path: routes.positions,
@@ -54,12 +53,10 @@ const getModules = () => {
             path: routes.contract,
             component: Trader,
             getTitle: () => localize('Contract Details'),
-            is_authenticated: true,
         },
         {
             path: routes.callback_page,
             component: CallbackPage,
-            is_authenticated: false,
             getTitle: () => 'Callback',
         },
     ];
