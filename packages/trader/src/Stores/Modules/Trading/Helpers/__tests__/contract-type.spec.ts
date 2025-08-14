@@ -15,7 +15,6 @@ jest.mock('@deriv/shared', () => ({
                 contracts_for: {
                     available: [
                         {
-                            barrier_category: 'euro_atm',
                             barriers: 0,
                             contract_category: 'callput',
                             contract_category_display: 'Up/Down',
@@ -32,7 +31,6 @@ jest.mock('@deriv/shared', () => ({
                             underlying_symbol: 'frxAUDJPY',
                         },
                         {
-                            barrier_category: 'euro_non_atm',
                             barriers: 2,
                             contract_category: 'endsinout',
                             contract_category_display: 'Ends Between/Ends Outside',
@@ -68,7 +66,6 @@ jest.mock('@deriv/shared', () => ({
                             underlying_symbol: 'frxAUDJPY',
                         },
                         {
-                            barrier_category: 'euro_atm',
                             barriers: 0,
                             contract_category: 'callputequal',
                             contract_category_display: 'Rise/Fall Equal',
@@ -87,7 +84,6 @@ jest.mock('@deriv/shared', () => ({
                         },
                         {
                             barrier: '101.389',
-                            barrier_category: 'euro_non_atm',
                             barriers: 1,
                             contract_category: 'callput',
                             contract_category_display: 'Up/Down',
@@ -320,7 +316,7 @@ describe('ContractType.getDurationMinMax', () => {
     it('should return an empty object if contract_expiry_type is given', async () => {
         await ContractType.buildContractTypesConfig(symbol);
         const contract_expiry_type = 'daily';
-        const result = ContractType.getDurationMinMax(contract_type, contract_start_type, contract_expiry_type);
+        const result = ContractType.getDurationMinMax(contract_type, contract_expiry_type);
         expect(result).toEqual({ duration_min_max: {} });
     });
     it('should return if contract_expiry_type is not given', async () => {
@@ -337,7 +333,7 @@ describe('ContractType.getDurationUnit', () => {
     const contract_start_type = 'spot';
     it('should return correct duration_unit given the input', async () => {
         await ContractType.buildContractTypesConfig(symbol);
-        const result = ContractType.getDurationUnit(duration_unit, contract_type, contract_start_type);
+        const result = ContractType.getDurationUnit(duration_unit, contract_type);
         expect(result).toEqual({ duration_unit: 'd' });
     });
 });
@@ -348,7 +344,7 @@ describe('ContractType.getDurationUnitsList', () => {
     const contract_start_type = 'spot';
     it('should return correct duration_unit_list given the input', async () => {
         await ContractType.buildContractTypesConfig(symbol);
-        const result = ContractType.getDurationUnitsList(contract_type, contract_start_type);
+        const result = ContractType.getDurationUnitsList(contract_type);
         expect(result).toEqual({ duration_units_list: [{ text: 'Days', value: 'd' }] });
     });
 });
@@ -559,18 +555,8 @@ describe('ContractType.getStartTime', () => {
         expect(result).toEqual({ start_time: null });
     });
 });
-describe('ContractType.getStartType', () => {
-    let start_date = 0;
-    it('should return spot if start_date 0', () => {
-        const result = ContractType.getStartType(start_date);
-        expect(result).toEqual({ contract_start_type: 'spot' });
-    });
-    it('should return forward if start_date is not 0', () => {
-        start_date = 1;
-        const result = ContractType.getStartType(start_date);
-        expect(result).toEqual({ contract_start_type: 'forward' });
-    });
-});
+// getStartType function has been removed since all contracts now default to spot behavior
+// This test is no longer needed as the functionality is hardcoded to 'spot'
 describe('ContractType.getTradingEvents', () => {
     it('return empty array if date is empty', async () => {
         const result = await ContractType.getTradingEvents('', 'frxAUDJPY');
@@ -614,19 +600,5 @@ describe('ContractType.getContractCategories', () => {
         const result = ContractType.getContractCategories();
         expect(result.contract_types_list).not.toEqual({});
         expect(result.non_available_contract_types_list).not.toEqual({});
-    });
-});
-describe('ContractType.getBarrierCategory', () => {
-    it('should return a correct barrier_category for Rise/Fall', () => {
-        const { barrier_category } = ContractType.getBarrierCategory(TRADE_TYPES.RISE_FALL);
-        expect(barrier_category).toEqual('euro_atm');
-    });
-    it('should return a correct barrier_category for Rise/Fall Equal', () => {
-        const { barrier_category } = ContractType.getBarrierCategory(TRADE_TYPES.RISE_FALL);
-        expect(barrier_category).toEqual('euro_atm');
-    });
-    it('should return a correct barrier_category for Higher/Lower', () => {
-        const { barrier_category } = ContractType.getBarrierCategory(TRADE_TYPES.HIGH_LOW);
-        expect(barrier_category).toEqual('euro_non_atm');
     });
 });

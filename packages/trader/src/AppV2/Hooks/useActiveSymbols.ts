@@ -13,7 +13,7 @@ import { localize } from '@deriv/translations';
 
 import { useTraderStore } from 'Stores/useTraderStores';
 
-import useContractsForCompany from './useContractsForCompany';
+import useContractsFor from './useContractsFor';
 import { useDtraderQuery } from './useDtraderQuery';
 
 const useActiveSymbols = () => {
@@ -28,12 +28,6 @@ const useActiveSymbols = () => {
         setActiveSymbolsV2,
     } = useTraderStore();
     const [activeSymbols, setActiveSymbols] = useState<ActiveSymbols | []>(symbols_from_store);
-
-    const trade_types_with_barrier_category = [
-        TRADE_TYPES.RISE_FALL,
-        TRADE_TYPES.RISE_FALL_EQUAL,
-        TRADE_TYPES.HIGH_LOW,
-    ] as string[];
 
     const getContractTypesList = () => {
         if (is_turbos) return [CONTRACT_TYPES.TURBOS.LONG, CONTRACT_TYPES.TURBOS.SHORT];

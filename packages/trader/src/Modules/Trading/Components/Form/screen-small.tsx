@@ -201,7 +201,6 @@ const ScreenSmall = observer(({ is_trade_enabled }: { is_trade_enabled: boolean 
         contract_types_list,
         contract_type,
         expiry_type,
-        contract_start_type,
         form_components,
         has_take_profit,
         onChange,
@@ -237,11 +236,7 @@ const ScreenSmall = observer(({ is_trade_enabled }: { is_trade_enabled: boolean 
         contract_type,
     };
 
-    const has_callputequal_duration = hasDurationForCallPutEqual(
-        contract_types_list,
-        duration_unit,
-        contract_start_type
-    );
+    const has_callputequal_duration = hasDurationForCallPutEqual(contract_types_list, duration_unit);
 
     const has_callputequal = hasCallPutEqual(contract_types_list);
     const has_allow_equals =

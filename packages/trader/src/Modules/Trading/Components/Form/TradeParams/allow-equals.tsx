@@ -12,12 +12,7 @@ import { useTraderStore } from 'Stores/useTraderStores';
 
 type TTradeStore = Pick<
     ReturnType<typeof useTraderStore>,
-    | 'contract_start_type'
-    | 'contract_type'
-    | 'contract_types_list'
-    | 'duration_unit'
-    | 'expiry_type'
-    | 'has_equals_only'
+    'contract_type' | 'contract_types_list' | 'duration_unit' | 'expiry_type' | 'has_equals_only'
 >;
 
 type TAllowEquals = TTradeStore & {
@@ -26,7 +21,6 @@ type TAllowEquals = TTradeStore & {
 };
 
 const AllowEquals = ({
-    contract_start_type,
     contract_type,
     contract_types_list,
     duration_unit,
@@ -35,11 +29,7 @@ const AllowEquals = ({
     value,
     has_equals_only,
 }: TAllowEquals) => {
-    const has_callputequal_duration = hasDurationForCallPutEqual(
-        contract_types_list,
-        duration_unit,
-        contract_start_type
-    );
+    const has_callputequal_duration = hasDurationForCallPutEqual(contract_types_list, duration_unit);
     const has_callputequal = hasCallPutEqual(contract_types_list);
 
     const has_allow_equals =

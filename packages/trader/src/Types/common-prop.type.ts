@@ -155,7 +155,6 @@ export type TConfig = ReturnType<typeof getContractTypesConfig>[string]['config'
     has_spot?: boolean;
     durations?: ReturnType<typeof buildDurationConfig>;
     trade_types?: { [key: string]: string };
-    barrier_category?: string;
     barriers?: ReturnType<typeof buildBarriersConfig>;
     growth_rate_range?: number[];
     multiplier_range?: number[];

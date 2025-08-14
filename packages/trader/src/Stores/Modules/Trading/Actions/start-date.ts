@@ -8,24 +8,24 @@ export const onChangeStartDate = async (store: TTradeStore) => {
 
     start_time = start_time || server_time?.clone().add(6, 'minute').format('HH:mm'); // when there is not a default value for start_time, it should be set more than 5 min after server_time
 
-    const obj_contract_start_type = ContractType.getStartType(start_date);
-    const contract_start_type = obj_contract_start_type.contract_start_type;
+    // All contracts now default to spot behavior since start_type was removed from API
+    const contract_start_type = 'spot';
     const obj_sessions = ContractType.getSessions(contract_type, start_date);
     const sessions = obj_sessions.sessions;
     const obj_start_time = ContractType.getStartTime(sessions, start_date, start_time);
 
-    const obj_duration_units_list = ContractType.getDurationUnitsList(contract_type, contract_start_type);
+    const obj_duration_units_list = ContractType.getDurationUnitsList(contract_type);
     const duration_units_list = obj_duration_units_list.duration_units_list;
-    const obj_duration_unit = ContractType.getDurationUnit(duration_unit, contract_type, contract_start_type);
+    const obj_duration_unit = ContractType.getDurationUnit(duration_unit, contract_type);
 
     const obj_expiry_type = ContractType.getExpiryType(duration_units_list, expiry_type);
     expiry_type = obj_expiry_type.expiry_type;
     const obj_expiry_date = ContractType.getExpiryDate(duration_units_list, store.expiry_date, expiry_type, start_date);
 
-    const obj_duration_min_max = ContractType.getDurationMinMax(contract_type, contract_start_type);
+    const obj_duration_min_max = ContractType.getDurationMinMax(contract_type);
 
     return {
-        ...obj_contract_start_type,
+        contract_start_type, // Already set to 'spot' above
         ...obj_duration_units_list,
         ...obj_duration_min_max,
         ...obj_duration_unit,
