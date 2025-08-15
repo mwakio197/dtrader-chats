@@ -86,12 +86,33 @@ export const ContractType = (() => {
             available_contract_types = {};
             available_categories = cloneObject(contract_categories); // To preserve the order (will clean the extra items later in this function)
             r.contracts_for.available.forEach(contract => {
-                const type = Object.keys(contract_types).find(
-                    key =>
-                        contract_types[key].trade_types.indexOf(contract.contract_type) !== -1 &&
+                const type = Object.keys(contract_types).find(key => {
+                    const isContractTypeMatch = contract_types[key].trade_types.indexOf(contract.contract_type) !== -1;
+
+                    // Handle the new API structure where Rise/Fall and Higher/Lower are distinguished by contract_category
+                    if (contract.contract_category) {
+                        // For Rise/Fall contracts with contract_category "callput"
+                        if (contract.contract_category === 'callput' && key === 'rise_fall') {
+                            return isContractTypeMatch;
+                        }
+                        // For Higher/Lower contracts with contract_category "higherLower"
+                        if (contract.contract_category === 'higherLower' && key === 'high_low') {
+                            return isContractTypeMatch;
+                        }
+                        // For other contract types, just match by contract_type
+                        if (contract.contract_category !== 'callput' && contract.contract_category !== 'higherLower') {
+                            return isContractTypeMatch;
+                        }
+                        return false;
+                    }
+
+                    // Fallback to old logic for backward compatibility
+                    return (
+                        isContractTypeMatch &&
                         (typeof contract_types[key].barrier_count === 'undefined' ||
-                            Number(contract_types[key].barrier_count) === contract.barriers) // To distinguish betweeen Rise/Fall & Higher/Lower
-                );
+                            Number(contract_types[key].barrier_count) === contract.barriers)
+                    );
+                });
 
                 if (!type) return; // ignore unsupported contract types
 
