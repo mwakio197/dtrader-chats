@@ -74,7 +74,7 @@ export const getContractTypesConfig: TGetContractTypesConfig = symbol => ({
     },
     [TRADE_TYPES.HIGH_LOW]: {
         title: localize('Higher/Lower'),
-        trade_types: [CONTRACT_TYPES.CALL, CONTRACT_TYPES.PUT],
+        trade_types: [CONTRACT_TYPES.HIGHER, CONTRACT_TYPES.LOWER],
         basis: ['stake', 'payout'],
         components: ['barrier'],
         barrier_count: 1,
@@ -525,6 +525,14 @@ export const getSupportedContracts = (is_high_low?: boolean) =>
         },
         [CONTRACT_TYPES.PUT]: {
             name: is_high_low ? localize('Lower') : localize('Fall'),
+            position: 'bottom',
+        },
+        [CONTRACT_TYPES.HIGHER]: {
+            name: localize('Higher'),
+            position: 'top',
+        },
+        [CONTRACT_TYPES.LOWER]: {
+            name: localize('Lower'),
             position: 'bottom',
         },
         [CONTRACT_TYPES.CALLE]: {
