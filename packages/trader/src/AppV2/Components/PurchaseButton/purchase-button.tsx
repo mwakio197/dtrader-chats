@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { observer } from 'mobx-react-lite';
 
 import { usePrevious } from '@deriv/components';
-import { useMFAccountStatus } from '@deriv/api';
 import { StandaloneStopwatchRegularIcon } from '@deriv/quill-icons';
 import {
     getCardLabelsV2,
@@ -14,7 +13,6 @@ import {
     isAccumulatorContract,
     isOpen,
     isValidToSell,
-    MT5_ACCOUNT_STATUS,
 } from '@deriv/shared';
 import { useStore } from '@deriv/stores';
 import { Button, useNotifications, useSnackbar } from '@deriv-com/quill-ui';
@@ -82,7 +80,6 @@ const PurchaseButton = observer(() => {
                 return isAccumulatorContract(type) && contract_underlying === symbol;
             })
     );
-    const mf_account_status = useMFAccountStatus();
     const basis_options = React.useMemo(
         () => (basis_list.length ? basis_list.map(item => item.value) : []),
         [basis_list]
@@ -241,12 +238,8 @@ const PurchaseButton = observer(() => {
                                     isOpaque
                                     disabled={is_disabled && !is_loading}
                                     onClick={() => {
-                                        if (is_multiplier && mf_account_status === MT5_ACCOUNT_STATUS.PENDING) {
-                                            setIsMFVericationPendingModal(true);
-                                        } else {
-                                            setLoadingButtonIndex(index);
-                                            onPurchaseV2(trade_type, isMobile, addNotificationBannerCallback);
-                                        }
+                                        setLoadingButtonIndex(index);
+                                        onPurchaseV2(trade_type, isMobile, addNotificationBannerCallback);
                                     }}
                                 >
                                     {!is_loading && (
