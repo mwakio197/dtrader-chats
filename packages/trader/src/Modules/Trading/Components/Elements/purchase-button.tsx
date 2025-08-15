@@ -2,9 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { IconTradeTypes, Money, Text } from '@deriv/components';
-import { useMFAccountStatus } from '@deriv/api';
-import { getContractTypeDisplay, MT5_ACCOUNT_STATUS } from '@deriv/shared';
-import { useStore } from '@deriv/stores';
+import { getContractTypeDisplay } from '@deriv/shared';
 import { useDevice } from '@deriv-com/ui';
 
 import ContractInfo from 'Modules/Trading/Components/Form/Purchase/contract-info';
@@ -83,10 +81,6 @@ const PurchaseButton = ({
     should_fade,
     type,
 }: TPurchaseButton) => {
-    const {
-        ui: { setIsMFVericationPendingModal },
-    } = useStore();
-    const mf_account_status = useMFAccountStatus();
     const { isMobile } = useDevice();
     const getIconType = () => {
         if (!should_fade && is_loading) return '';
@@ -129,12 +123,8 @@ const PurchaseButton = ({
                 'btn-purchase--has-bottom-gradient-2': index === 1 && (is_vanilla || is_turbos),
             })}
             onClick={() => {
-                if (is_multiplier && mf_account_status === MT5_ACCOUNT_STATUS.PENDING) {
-                    setIsMFVericationPendingModal(true);
-                } else {
-                    setPurchaseState(index);
-                    onClickPurchase(info.id, info.stake, type, isMobile);
-                }
+                setPurchaseState(index);
+                onClickPurchase(info.id, info.stake, type, isMobile);
             }}
         >
             {isMobile ? (

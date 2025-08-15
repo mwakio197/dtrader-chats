@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Modal, Popover } from '@deriv/components';
 import { localize, Localize } from '@deriv/translations';
-import { deriv_urls, getLegalEntityName } from '@deriv/shared';
+import { deriv_urls } from '@deriv/shared';
 
 const MFRegulatoryInformation = () => (
     <div className='footer-regulatory-information'>
@@ -18,7 +18,7 @@ const MFRegulatoryInformation = () => (
                     />,
                 ]}
                 values={{
-                    legal_entity_name: getLegalEntityName('maltainvest'),
+                    legal_entity_name: 'Deriv Investments (Europe) Limited',
                 }}
             />
         </p>
