@@ -308,8 +308,8 @@
             @include typeface(--title-left-normal-black);
             padding: 0.5em 0;
             position: relative;
-            color: var(--color-text-secondary);
-            @include colorIcon(var(--color-text-secondary), none, var(--color-text-secondary));
+            color: var(--color-text-primary);
+            @include colorIcon(var(--color-text-primary), none, var(--color-text-primary));
         }
         &:hover:not(&--active) {
             background-color: var(--color-interactive-hover);
