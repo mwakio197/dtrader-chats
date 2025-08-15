@@ -86,7 +86,6 @@ const ToggleMenuDrawer = observer(() => {
         const routeConfig = routes_config.find(route => route.path === routePath);
 
         if (!routeConfig || !routeConfig.routes || !is_logged_in) {
-
             return null;
         }
 
