@@ -44,10 +44,16 @@ const IconTradeTypes = ({ type, className, ...props }: TIconTradeTypes) => {
             return <Icon icon='IcTradetypeExpiryrange' className={className} color='brand' {...props} />;
         case CONTRACT_TYPES.LB_CALL:
             return <Icon icon='IcTradetypeLbcall' className={className} color='brand' {...props} />;
+        case CONTRACT_TYPES.HIGHER:
+        case 'HIGHER_BARRIER':
+            return <Icon icon='IcTradetypeCall' className={className} color='brand' {...props} />;
         case CONTRACT_TYPES.LB_PUT:
             return <Icon icon='IcTradetypeLbput' className={className} color='brand' {...props} />;
         case CONTRACT_TYPES.LB_HIGH_LOW:
             return <Icon icon='IcTradetypeLbhighlow' className={className} color='brand' {...props} />;
+        case CONTRACT_TYPES.LOWER:
+        case 'LOWER_BARRIER':
+            return <Icon icon='IcTradetypePut' className={className} color='brand' {...props} />;
         case CONTRACT_TYPES.MULTIPLIER.DOWN:
             return <Icon icon='IcTradetypeMultdown' className={className} color='brand' {...props} />;
         case CONTRACT_TYPES.MULTIPLIER.UP:
