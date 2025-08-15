@@ -14,13 +14,13 @@ import {
     getTradeTypeName,
     isCryptoContract,
     isEnded,
-    isHigherLowerContract,
     isMultiplierContract,
     isValidToCancel,
     isValidToSell,
     TContractInfo,
     toMoment,
 } from '@deriv/shared';
+import { isHigherLowerContract } from '@deriv/shared/src/utils/helpers/market-underlying';
 import { CaptionText, Tag, Text } from '@deriv-com/quill-ui';
 
 import { TClosedPosition } from 'AppV2/Containers/Positions/positions-content';
