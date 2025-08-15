@@ -13,7 +13,7 @@ type TTextProps = Omit<HTMLProps<HTMLElement>, 'size'> & {
 const Text = ({
     children,
     size = 's',
-    color = 'secondary',
+    color = 'primary',
     align = 'left',
     weight = 'normal',
     line_height = 'm',

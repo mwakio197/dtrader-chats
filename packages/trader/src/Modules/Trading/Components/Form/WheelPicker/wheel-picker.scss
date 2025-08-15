@@ -21,7 +21,7 @@
         &__btn {
             padding: 0rem 0.8rem;
             min-width: 1.6rem;
-            background: var(--color-surface-primary);
+            background: var(--color-surface-section);
             :disabled {
                 .chevron-icon svg {
                     stroke: var(--color-surface-border);

@@ -1,7 +1,280 @@
 {
-  "lastUpdated": "2025-08-14T11:03:35.992Z",
-  "totalMergedPRs": 34,
+  "lastUpdated": "2025-08-15T08:50:26.320Z",
+  "totalMergedPRs": 38,
   "analyses": [
+    {
+      "percentage": 0,
+      "totalCharacters": 4502,
+      "aiCharacters": 0,
+      "files": [
+        {
+          "name": "packages/trader/src/AppV2/Utils/trade-types-utils.tsx",
+          "totalCharacters": 1545,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": ") => {\n    const trade_type_tabs = getTradeTypeTabsList(contract_type);\n    const available_types = Object.keys(trade_types);\n\n    // If there are no trade type tabs, return all available types\n    if..."
+        },
+        {
+          "name": "packages/trader/src/Stores/Modules/Trading/trade-store.ts",
+          "totalCharacters": 2957,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "        try {\n            await when(() => {\n                const proposal_info_keys = Object.keys(this.proposal_info);\n                const proposal_request_keys = Object.keys(this.proposal_request..."
+        }
+      ],
+      "timestamp": "2025-08-15T08:50:26.270Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "178",
+      "branch": "f-api-changes",
+      "author": "akmal-deriv",
+      "prTitle": "Akmal / fix: Rise/Fall/Higher/Lower on mobile",
+      "hasAnalysis": true
+    },
+    {
+      "percentage": 0,
+      "totalCharacters": 674,
+      "aiCharacters": 0,
+      "files": [
+        {
+          "name": ".stylelintrc.js",
+          "totalCharacters": 212,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "    plugins: ['stylelint-no-unsupported-browser-features', 'stylelint-selector-bem-pattern'],\n    customSyntax: 'postcss-scss',\n        'value-keyword-case': ['lower', { ignoreKeywords: ['optimizeLegi..."
+        },
+        {
+          "name": "packages/api/src/hooks/index.ts",
+          "totalCharacters": 0,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "note": "No added content in this PR"
+        },
+        {
+          "name": "packages/core/src/App/Components/Layout/Footer/regulatory-information.jsx",
+          "totalCharacters": 120,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "import { deriv_urls } from '@deriv/shared';\n                    legal_entity_name: 'Deriv Investments (Europe) Limited',"
+        },
+        {
+          "name": "packages/core/src/App/Containers/Layout/header/__tests__/header.spec.tsx",
+          "totalCharacters": 0,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "note": "No added content in this PR"
+        },
+        {
+          "name": "packages/trader/src/AppV2/Components/PurchaseButton/purchase-button.tsx",
+          "totalCharacters": 176,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "                                        setLoadingButtonIndex(index);\n                                        onPurchaseV2(trade_type, isMobile, addNotificationBannerCallback);"
+        },
+        {
+          "name": "packages/trader/src/Modules/Trading/Components/Elements/purchase-button.tsx",
+          "totalCharacters": 166,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "import { getContractTypeDisplay } from '@deriv/shared';\n                setPurchaseState(index);\n                onClickPurchase(info.id, info.stake, type, isMobile);"
+        }
+      ],
+      "timestamp": "2025-08-15T07:26:41.380Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "176",
+      "branch": "matin/update_stylelint",
+      "author": "matin-deriv",
+      "prTitle": "Matin/Update Stylelint to V16.23.1",
+      "hasAnalysis": true
+    },
+    {
+      "percentage": 0,
+      "totalCharacters": 7068,
+      "aiCharacters": 0,
+      "files": [
+        {
+          "name": "packages/components/src/components/icon-trade-types/icon-trade-types.tsx",
+          "totalCharacters": 328,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "        case CONTRACT_TYPES.HIGHER:\n        case 'HIGHER_BARRIER':\n            return <Icon icon='IcTradetypeCall' className={className} color='brand' {...props} />;\n        case CONTRACT_TYPES.LOWER:..."
+        },
+        {
+          "name": "packages/shared/src/utils/constants/barriers.ts",
+          "totalCharacters": 52,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "    HIGHER: 'NONE_SINGLE',\n    LOWER: 'NONE_SINGLE',"
+        },
+        {
+          "name": "packages/shared/src/utils/constants/contract.ts",
+          "totalCharacters": 294,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "        trade_types: [CONTRACT_TYPES.HIGHER, CONTRACT_TYPES.LOWER],\n        [CONTRACT_TYPES.HIGHER]: {\n            name: localize('Higher'),\n            position: 'top',\n        },\n        [CONTRACT_T..."
+        },
+        {
+          "name": "packages/shared/src/utils/helpers/__tests__/barrier.ts",
+          "totalCharacters": 1749,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "    const higher_lower_contract = {\n        contract_category: 'higherLower',\n        contract_category_display: 'Higher/Lower',\n\n    const rise_fall_contract = {\n        contract_category: 'callput',..."
+        },
+        {
+          "name": "packages/shared/src/utils/helpers/__tests__/market-underlying.spec.ts",
+          "totalCharacters": 1731,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "import {\n    getContractDurationType,\n    getMarketInformation,\n    getMarketName,\n    getTradeTypeName,\n    isHigherLowerContract,\n} from '../market-underlying';\n    describe('isHigherLowerContract',..."
+        },
+        {
+          "name": "packages/shared/src/utils/helpers/barrier.ts",
+          "totalCharacters": 214,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "    contract_category?: string;\n    // Rise/Fall contracts should not have barriers, even if API incorrectly returns barriers > 0\n    if (contract.contract_category === 'callput') {\n        return und..."
+        },
+        {
+          "name": "packages/shared/src/utils/helpers/market-underlying.ts",
+          "totalCharacters": 741,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "import { isHighLow } from '../shortcode';\n/**\n * Determines if a contract should be treated as Higher/Lower based on contract_category\n * This is more reliable than checking barriers since Rise/Fall c..."
+        },
+        {
+          "name": "packages/trader/src/AppV2/Components/ContractCard/contract-card.tsx",
+          "totalCharacters": 430,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "import { isHigherLowerContract } from '@deriv/shared/src/utils/helpers/market-underlying';\n    const is_higher_lower = isHigherLowerContract({\n        contract_category: (contractInfo as any).contract..."
+        },
+        {
+          "name": "packages/trader/src/Stores/Modules/Trading/Helpers/contract-type.ts",
+          "totalCharacters": 1529,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "                const type = Object.keys(contract_types).find(key => {\n                    const isContractTypeMatch = contract_types[key].trade_types.indexOf(contract.contract_type) !== -1;\n\n        ..."
+        }
+      ],
+      "timestamp": "2025-08-15T06:30:24.973Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "174",
+      "branch": "f-api-changes",
+      "author": "akmal-deriv",
+      "prTitle": "Akmal / fix: higher/lower/rise/fall contracts on desktop",
+      "hasAnalysis": true
+    },
+    {
+      "percentage": 0,
+      "totalCharacters": 1167,
+      "aiCharacters": 0,
+      "files": [
+        {
+          "name": "packages/components/src/components/checkbox/checkbox.scss",
+          "totalCharacters": 59,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "        border: 2px solid var(--color-interactive-default);"
+        },
+        {
+          "name": "packages/components/src/components/text/text.tsx",
+          "totalCharacters": 22,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "    color = 'primary',"
+        },
+        {
+          "name": "packages/components/src/components/vertical-tab/vertical-tab.scss",
+          "totalCharacters": 41,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "        color: var(--color-text-primary);"
+        },
+        {
+          "name": "packages/core/src/sass/app/_common/layout/header.scss",
+          "totalCharacters": 137,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "            color: var(--color-text-primary);\n            @include colorIcon(var(--color-text-primary), none, var(--color-text-primary));"
+        },
+        {
+          "name": "packages/shared/src/styles/tokens/semantic.scss",
+          "totalCharacters": 258,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "        --color-interactive-active: #{lighten($color-neutral, 25%)}; // Active/selected states (derived from brand-neutral)\n        --color-interactive-active: #{lighten($color-black, 25%)}; // Active..."
+        },
+        {
+          "name": "packages/trader/src/Modules/Trading/Components/Elements/PayoutPerPoint/payout-per-point.scss",
+          "totalCharacters": 0,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "note": "No added content in this PR"
+        },
+        {
+          "name": "packages/trader/src/Modules/Trading/Components/Form/WheelPicker/wheel-picker.scss",
+          "totalCharacters": 53,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "            background: var(--color-surface-section);"
+        },
+        {
+          "name": "packages/trader/src/sass/app/_common/components/contract-type-dialog.scss",
+          "totalCharacters": 63,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "                background-color: var(--color-surface-section);"
+        },
+        {
+          "name": "packages/trader/src/sass/app/_common/components/contract-type-widget.scss",
+          "totalCharacters": 51,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "    border: 1px solid var(--color-surface-primary);"
+        },
+        {
+          "name": "packages/trader/src/sass/app/_common/drawer/positions-drawer.scss",
+          "totalCharacters": 58,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "        border-top: 1px solid var(--color-surface-border);"
+        },
+        {
+          "name": "packages/trader/src/sass/app/modules/contract.scss",
+          "totalCharacters": 49,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "        background: var(--color-surface-section);"
+        },
+        {
+          "name": "packages/trader/src/sass/app/modules/contract/accumulators-stats.scss",
+          "totalCharacters": 51,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "    background-color: var(--color-surface-section);"
+        },
+        {
+          "name": "packages/trader/src/sass/app/modules/trading.scss",
+          "totalCharacters": 59,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "            border: 1px solid var(--color-surface-primary);"
+        },
+        {
+          "name": "scripts/generate-colors.js",
+          "totalCharacters": 266,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "addedContent": "    --color-interactive-active: #{lighten($color-neutral, 25%)};        // Active/selected states (derived from brand-neutral)\n    --color-interactive-active: #{lighten($color-black, 25%)};          /..."
+        }
+      ],
+      "timestamp": "2025-08-15T02:23:39.828Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "172",
+      "branch": "ui-fixes",
+      "author": "nijil-deriv",
+      "prTitle": "Nijil / Fix background color issues in multiple places",
+      "hasAnalysis": true
+    },
     {
       "percentage": 0,
       "totalCharacters": 109,

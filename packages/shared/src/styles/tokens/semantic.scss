@@ -31,7 +31,7 @@
         // Interactive States
         --color-interactive-default: #{transparentize($color-black, 0.8)}; // Default borders, dividers
         --color-interactive-hover: #{lighten($color-neutral, 30%)}; // Hover states (derived from brand-neutral)
-        --color-interactive-active: #{lighten($color-neutral, 15%)}; // Active/selected states (derived from brand-neutral)
+        --color-interactive-active: #{lighten($color-neutral, 25%)}; // Active/selected states (derived from brand-neutral)
         --color-interactive-disabled: #{transparentize($color-black, 0.9)}; // Disabled states
         --color-interactive-focus: var(--brand-info); // Focus states
 
@@ -78,7 +78,7 @@
         // Interactive States
         --color-interactive-default: #{lighten($color-black, 20%)}; // Default borders, dividers
         --color-interactive-hover: #{lighten($color-black, 8%)}; // Hover states (derived from brand-black to get #242828)
-        --color-interactive-active: #{lighten($color-black, 15%)}; // Active/selected states (derived from brand-black to get #323738)
+        --color-interactive-active: #{lighten($color-black, 25%)}; // Active/selected states (derived from brand-black to get #323738)
         --color-interactive-disabled: #{lighten($color-black, 12%)}; // Disabled states
         --color-interactive-focus: var(--brand-info); // Focus states
 

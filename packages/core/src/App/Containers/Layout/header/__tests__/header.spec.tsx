@@ -4,7 +4,6 @@ import Header from '../header';
 
 jest.mock('@deriv/api', () => ({
     ...jest.requireActual('@deriv/api'),
-    useStoreWalletAccountsList: jest.fn(() => ({ data: [], has_wallet: false })),
     useFeatureFlags: jest.fn(() => ({})),
 }));
 jest.mock('react-router-dom', () => ({
