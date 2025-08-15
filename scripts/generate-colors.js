@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-// [AI]
 const fs = require('fs');
 const path = require('path');
 
@@ -556,4 +555,3 @@ module.exports = {
     generateSemanticTokens,
     generateComponentTokens,
 };
-// [/AI]
