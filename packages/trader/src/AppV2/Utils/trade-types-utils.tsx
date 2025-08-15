@@ -112,10 +112,37 @@ export const getDisplayedContractTypes = (
     trade_types: ReturnType<typeof useTraderStore>['trade_types'],
     contract_type: string,
     trade_type_tab: string
-) =>
-    Object.keys(trade_types)
-        .filter(type => !getTradeTypeTabsList(contract_type).length || type === trade_type_tab)
-        .sort((a, b) => getSortedIndex(a) - getSortedIndex(b));
+) => {
+    const trade_type_tabs = getTradeTypeTabsList(contract_type);
+    const available_types = Object.keys(trade_types);
+
+    // If there are no trade type tabs, return all available types
+    if (!trade_type_tabs.length) {
+        return available_types.sort((a, b) => getSortedIndex(a) - getSortedIndex(b));
+    }
+
+    // Special handling for trade types with tabs but empty trade_types object
+    // This can happen when the store hasn't been properly populated yet
+    if (available_types.length === 0 && trade_type_tabs.length > 0) {
+        // Return the contract types from the tabs configuration
+        const fallback_types = trade_type_tabs.map(tab => tab.contract_type);
+        return fallback_types.sort((a, b) => getSortedIndex(a) - getSortedIndex(b));
+    }
+
+    // If trade_type_tab is set, filter by it
+    if (trade_type_tab) {
+        const filtered_types = available_types.filter(type => type === trade_type_tab);
+        // If filtering results in empty array but we have a valid trade_type_tab, return it
+        if (filtered_types.length === 0 && trade_type_tabs.some(tab => tab.contract_type === trade_type_tab)) {
+            return [trade_type_tab];
+        }
+        return filtered_types.sort((a, b) => getSortedIndex(a) - getSortedIndex(b));
+    }
+
+    // If trade_type_tab is not set but there are tabs, return all available types
+    // This ensures buttons are displayed even when trade_type_tab hasn't been initialized yet
+    return available_types.sort((a, b) => getSortedIndex(a) - getSortedIndex(b));
+};
 
 export const sortCategoriesInTradeTypeOrder = (trade_types: TContractType[], categories: TCategories[]) => {
     return trade_types

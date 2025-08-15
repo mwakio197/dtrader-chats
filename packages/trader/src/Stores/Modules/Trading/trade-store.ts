@@ -1051,14 +1051,68 @@ export default class TradeStore extends BaseStore {
         isMobile: boolean,
         callback?: (params: { message: string; redirectTo: string; title: string }, contract_id: number) => void
     ) {
-        await when(() => {
-            const proposal_info_keys = Object.keys(this.proposal_info);
-            const proposal_request_keys = Object.keys(this.proposal_requests);
-            return proposal_info_keys.length > 0 && proposal_info_keys.length === proposal_request_keys.length;
-        });
+        try {
+            await when(() => {
+                const proposal_info_keys = Object.keys(this.proposal_info);
+                const proposal_request_keys = Object.keys(this.proposal_requests);
 
-        const info = this.proposal_info?.[trade_type];
-        if (info) this.onPurchase(info.id, info.stake, trade_type, isMobile, callback, true);
+                // Determine what type of keys we have
+                const hasHigherLowerKeys =
+                    proposal_info_keys.includes('HIGHER') && proposal_info_keys.includes('LOWER');
+                const hasCallPutKeys = proposal_info_keys.includes('CALL') && proposal_info_keys.includes('PUT');
+
+                // Determine the expected key based on available keys
+                let expectedKey = trade_type;
+                if (hasHigherLowerKeys && !hasCallPutKeys) {
+                    if (trade_type === 'CALL') expectedKey = 'HIGHER';
+                    else if (trade_type === 'PUT') expectedKey = 'LOWER';
+                }
+
+                const hasRequiredProposal =
+                    this.proposal_info[expectedKey] && !this.proposal_info[expectedKey].has_error;
+
+                // Standard condition: both proposal_info and proposal_requests have matching keys
+                const standardCondition =
+                    proposal_info_keys.length > 0 && proposal_info_keys.length === proposal_request_keys.length;
+
+                // Higher/Lower condition: proposal_info has HIGHER/LOWER keys and the required proposal
+                const higherLowerCondition = hasHigherLowerKeys && hasRequiredProposal;
+
+                // Rise/Fall condition: proposal_info has CALL/PUT keys and the required proposal
+                const riseFallCondition = hasCallPutKeys && hasRequiredProposal;
+
+                const condition = standardCondition || higherLowerCondition || riseFallCondition;
+
+                return condition;
+            });
+
+            // Determine the correct key to use based on what's available in proposal_info
+            const proposal_info_keys = Object.keys(this.proposal_info);
+            const hasHigherLowerKeys = proposal_info_keys.includes('HIGHER') && proposal_info_keys.includes('LOWER');
+            const hasCallPutKeys = proposal_info_keys.includes('CALL') && proposal_info_keys.includes('PUT');
+
+            let proposalKey = trade_type;
+
+            if (hasHigherLowerKeys && !hasCallPutKeys) {
+                // For Higher/Lower contracts, map CALL->HIGHER and PUT->LOWER
+                if (trade_type === 'CALL') proposalKey = 'HIGHER';
+                else if (trade_type === 'PUT') proposalKey = 'LOWER';
+            }
+            // If hasCallPutKeys, use trade_type directly (no mapping needed)
+
+            const info = this.proposal_info?.[proposalKey];
+
+            if (info) {
+                this.onPurchase(info.id, info.stake, trade_type, isMobile, callback, true);
+            } else {
+                // Reset purchase state if no info found
+                this.enablePurchase();
+            }
+        } catch (error) {
+            // Reset purchase state on error
+            this.enablePurchase();
+            throw error;
+        }
     }
 
     onPurchase = debounce(this.processPurchase, 300);
