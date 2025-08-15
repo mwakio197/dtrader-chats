@@ -56,9 +56,9 @@ const OnboardingGuide = ({ type = 'trade_page', is_dark_mode_on, callback }: TOn
         primaryButtonCallback: onGuideSkip,
         ...(is_trade_page_guide
             ? {
-                  title: <Localize i18n_default_text='Welcome to the new Deriv Trader' />,
+                  title: <Localize i18n_default_text='Welcome to Deriv Trader' />,
                   content: (
-                      <Localize i18n_default_text='Enjoy a smoother, more intuitive trading experience. Here’s a quick tour to get you started.' />
+                      <Localize i18n_default_text='Enjoy a smooth, intuitive trading experience. Here’s a quick tour to get you started.' />
                   ),
                   button_label: <Localize i18n_default_text="Let's begin" />,
                   primaryButtonCallback: onGuideStart,

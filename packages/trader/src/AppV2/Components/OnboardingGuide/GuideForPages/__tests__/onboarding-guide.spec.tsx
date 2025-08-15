@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import OnboardingGuide from '../onboarding-guide';
 
-const trading_modal_text = 'Welcome to the new Deriv Trader';
+const trading_modal_text = 'Welcome to Deriv Trader';
 const positions_modal_text = 'View your positions';
 const guide_container = 'GuideContainer';
 const localStorage_key = 'guide_dtrader_v2';
