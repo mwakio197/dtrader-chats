@@ -14,7 +14,7 @@ import {
     getTradeTypeName,
     isCryptoContract,
     isEnded,
-    isHighLow,
+    isHigherLowerContract,
     isMultiplierContract,
     isValidToCancel,
     isValidToSell,
@@ -71,15 +71,18 @@ const ContractCard = ({
     const { buy_price, contract_type, display_name, purchase_time, sell_time, shortcode, limit_order } =
         contractInfo as TContractInfo;
     const { take_profit, stop_loss } = limit_order ?? { take_profit: {}, stop_loss: {} };
-    const is_high_low = isHighLow({ shortcode });
+    const is_higher_lower = isHigherLowerContract({
+        contract_category: (contractInfo as any).contract_category,
+        shortcode,
+    });
     const contract_main_title = getTradeTypeName(contract_type ?? '', {
-        isHighLow: is_high_low,
+        isHighLow: is_higher_lower,
         showMainTitle: true,
     });
     const cancellation_date_expiry = 'cancellation' in contractInfo ? contractInfo.cancellation?.date_expiry : null;
     const currentTick = 'tick_count' in contractInfo && contractInfo.tick_count ? getCurrentTick(contractInfo) : null;
     const tradeTypeName = `${contract_main_title} ${getTradeTypeName(contract_type ?? '', {
-        isHighLow: is_high_low,
+        isHighLow: is_higher_lower,
     })}`.trim();
     const symbol = (contractInfo as any).underlying_symbol || (contractInfo as any).symbol;
     const symbolName = symbol ? getMarketName(symbol) : display_name;
@@ -151,7 +154,7 @@ const ContractCard = ({
             >
                 <div className={`${className}__body`}>
                     <div className={`${className}__details`}>
-                        <IconTradeTypes type={is_high_low ? `${contract_type}_barrier` : contract_type} size={16} />
+                        <IconTradeTypes type={is_higher_lower ? `${contract_type}_barrier` : contract_type} size={16} />
                         <div className='tag__wrapper'>
                             {show_risk_management_labels &&
                                 risk_management_labels.map(label => (

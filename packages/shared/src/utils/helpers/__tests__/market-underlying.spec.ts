@@ -1,4 +1,10 @@
-import { getContractDurationType, getMarketInformation, getMarketName, getTradeTypeName } from '../market-underlying';
+import {
+    getContractDurationType,
+    getMarketInformation,
+    getMarketName,
+    getTradeTypeName,
+    isHigherLowerContract,
+} from '../market-underlying';
 import { getSymbolDisplayName } from '../active-symbols';
 import { CONTRACT_TYPES, TRADE_TYPES } from '../../contract';
 
@@ -148,6 +154,37 @@ describe('market-underlying', () => {
         });
         it('should not return main title for contracts which have not such field if show_main_title is true', () => {
             expect(getTradeTypeName(CONTRACT_TYPES.FALL, { showMainTitle: true })).toBeFalsy();
+        });
+    });
+    describe('isHigherLowerContract', () => {
+        it('should return true for Higher/Lower contracts based on contract_category', () => {
+            expect(isHigherLowerContract({ contract_category: 'higherLower' })).toBe(true);
+        });
+
+        it('should return false for Rise/Fall contracts based on contract_category', () => {
+            expect(isHigherLowerContract({ contract_category: 'callput' })).toBe(false);
+        });
+
+        it('should fallback to shortcode detection when contract_category is not available', () => {
+            // Test with a shortcode that has numeric barriers (should be Higher/Lower)
+            expect(isHigherLowerContract({ shortcode: 'CALL_1HZ100V_19.53_1695913929_5T_19.60_0' })).toBe(true);
+
+            // Test with a shortcode that has S0P barrier (should be Rise/Fall)
+            expect(isHigherLowerContract({ shortcode: 'CALL_1HZ100V_19.53_1695913929_5T_S0P_0' })).toBe(false);
+        });
+
+        it('should return false when neither contract_category nor shortcode is available', () => {
+            expect(isHigherLowerContract({})).toBe(false);
+        });
+
+        it('should prioritize contract_category over shortcode when both are available', () => {
+            // Even if shortcode suggests Higher/Lower, contract_category should take precedence
+            expect(
+                isHigherLowerContract({
+                    contract_category: 'callput',
+                    shortcode: 'CALL_R_100_10_1234567890_1234567890_+1.23_0',
+                })
+            ).toBe(false);
         });
     });
 });
