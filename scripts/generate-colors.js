@@ -239,6 +239,7 @@ function generateSemanticTokens() {
     --color-shadow-strong: #{transparentize($color-black, 0.16)};       // Strong shadows
 
     // Gradient Colors
+    --color-gradient-overlay: linear-gradient(to top, #{$color-white 85%}, #{transparentize($color-danger, 0.84)});
     --color-gradient-success: linear-gradient(to top, #{$color-white}, #{transparentize($color-success, 0.84)});
     --color-gradient-danger: linear-gradient(to top, #{$color-white}, #{transparentize($color-danger, 0.84)});
   }
@@ -286,6 +287,7 @@ function generateSemanticTokens() {
     --color-shadow-strong: #{transparentize($color-black, 0.28)};       // Strong shadows
 
     // Gradient Colors
+    --color-gradient-overlay: linear-gradient(to top, #{$color-black 85%}, #{transparentize($color-danger, 0.84)});
     --color-gradient-success: linear-gradient(to top, #{$color-black}, #{transparentize($color-success, 0.84)});
     --color-gradient-danger: linear-gradient(to top, #{$color-black}, #{transparentize($color-danger, 0.84)});
   }
