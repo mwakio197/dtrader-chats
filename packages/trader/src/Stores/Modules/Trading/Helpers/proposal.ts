@@ -10,6 +10,7 @@ import {
     TRADE_TYPES,
 } from '@deriv/shared';
 
+import { isRiseFallContractType } from './allow-equals';
 import { TError, TTradeStore } from 'Types';
 
 type TObjContractBasis = {
@@ -210,10 +211,15 @@ export const createProposalRequestForContract = (store: TTradeStore, type_of_con
             : obj_expiry),
         ...((store.barrier_count > 0 || store.form_components.indexOf('last_digit') !== -1) &&
             !isAccumulatorContract(type_of_contract) &&
-            !isTurbosContract(type_of_contract) && {
+            !isTurbosContract(type_of_contract) &&
+            !isRiseFallContractType(type_of_contract) && {
                 barrier: store.barrier || store.barrier_1 || store.last_digit,
             }),
-        ...(store.barrier_count === 2 && !isAccumulatorContract(type_of_contract) && { barrier2: store.barrier_2 }),
+        ...(store.barrier_count === 2 &&
+            !isAccumulatorContract(type_of_contract) &&
+            !isRiseFallContractType(type_of_contract) && {
+                barrier2: store.barrier_2,
+            }),
         ...(isTurbosContract(type_of_contract) && {
             payout_per_point: store.payout_per_point || store.last_digit,
         }),

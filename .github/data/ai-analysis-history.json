@@ -1,7 +1,101 @@
 {
-  "lastUpdated": "2025-08-15T09:15:37.833Z",
-  "totalMergedPRs": 39,
+  "lastUpdated": "2025-08-18T10:13:26.764Z",
+  "totalMergedPRs": 44,
   "analyses": [
+    {
+      "timestamp": "2025-08-18T10:13:26.712Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "192",
+      "branch": "farabi/update-brand-to-deriv",
+      "author": "farabi-deriv",
+      "prTitle": "Farabi/update-brand-to-deriv",
+      "hasAnalysis": false,
+      "percentage": 0,
+      "totalCharacters": 0,
+      "aiCharacters": 0,
+      "files": []
+    },
+    {
+      "timestamp": "2025-08-18T09:26:47.243Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "190",
+      "branch": "fix-more-bugs",
+      "author": "akmal-deriv",
+      "prTitle": "Akmal / Fix more bugs",
+      "hasAnalysis": false,
+      "percentage": 0,
+      "totalCharacters": 0,
+      "aiCharacters": 0,
+      "files": []
+    },
+    {
+      "timestamp": "2025-08-18T06:52:54.827Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "188",
+      "branch": "farabi/update-footer-and-header",
+      "author": "farabi-deriv",
+      "prTitle": "Farabi/update-footer-and-header",
+      "hasAnalysis": false,
+      "percentage": 0,
+      "totalCharacters": 0,
+      "aiCharacters": 0,
+      "files": []
+    },
+    {
+      "percentage": 0,
+      "totalCharacters": 276,
+      "aiCharacters": 0,
+      "files": [
+        {
+          "name": "packages/trader/src/AppV2/Components/OnboardingGuide/GuideForPages/__tests__/onboarding-guide.spec.tsx",
+          "totalCharacters": 53,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "const trading_modal_text = 'Welcome to Deriv Trader';"
+        },
+        {
+          "name": "packages/trader/src/AppV2/Components/OnboardingGuide/GuideForPages/onboarding-guide.tsx",
+          "totalCharacters": 223,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "                  title: <Localize i18n_default_text='Welcome to Deriv Trader' />,\n                      <Localize i18n_default_text='Enjoy a smooth, intuitive trading experience. Here’s a quick tour to get you started.' />"
+        }
+      ],
+      "timestamp": "2025-08-15T11:54:06.408Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "183",
+      "branch": "nijil/onboarding-content-update",
+      "author": "nijil-deriv",
+      "prTitle": "Nijil / Update onboarding content in mobile version",
+      "hasAnalysis": true
+    },
+    {
+      "percentage": 88,
+      "totalCharacters": 67,
+      "aiCharacters": 59,
+      "files": [
+        {
+          "name": "packages/core/src/App/Components/Layout/Header/toggle-menu-drawer.jsx",
+          "totalCharacters": 67,
+          "aiCharacters": 59,
+          "percentage": 88,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "        if (!routeConfig || !routeConfig.routes || !is_logged_in) {"
+        }
+      ],
+      "timestamp": "2025-08-15T11:49:51.136Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "182",
+      "branch": "nijil/drawer-missing-reports",
+      "author": "nijil-deriv",
+      "prTitle": "Nijil / Fix missing Reports menu item in side nav drawer",
+      "hasAnalysis": true
+    },
     {
       "percentage": 0,
       "totalCharacters": 44263,

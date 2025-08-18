@@ -81,12 +81,11 @@ const ToggleMenuDrawer = observer(() => {
 
     // const { oAuthLogout } = useOauth2({ handleLogout });
 
-    // [AI]
     const renderSubMenuFromConfig = routePath => {
         const routes_config = getRoutesConfig();
         const routeConfig = routes_config.find(route => route.path === routePath);
 
-        if (!routeConfig || !routeConfig.routes || !routeConfig.is_authenticated || !is_logged_in) {
+        if (!routeConfig || !routeConfig.routes || !is_logged_in) {
             return null;
         }
 
@@ -161,7 +160,6 @@ const ToggleMenuDrawer = observer(() => {
             )
         );
     };
-    // [/AI]
 
     return (
         <React.Fragment>

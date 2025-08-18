@@ -3,7 +3,7 @@
 <div align="center">
 
 **deriv-com/derivatives-trader**
-📅 Last updated: 2025-08-15 09:15:37 UTC • 🔄 Tracking merged PRs to main/master
+📅 Last updated: 2025-08-18 10:13:26 UTC • 🔄 Tracking merged PRs to main/master
 
 </div>
 
@@ -13,28 +13,28 @@
 
 | Metric | Value | Metric | Value |
 |--------|-------|--------|-------|
-| **📁 Total Merged PRs** | 39 | **📈 Average AI Code** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 10% |
-| **🤖 PRs with AI Analysis** | 36 | **🎯 Overall AI Percentage** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 9% |
-| **📄 Files Analyzed** | 617 | **⚡ Total AI Characters** | 37,342 |
+| **📁 Total Merged PRs** | 44 | **📈 Average AI Code** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 12% |
+| **🤖 PRs with AI Analysis** | 38 | **🎯 Overall AI Percentage** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 9% |
+| **📄 Files Analyzed** | 620 | **⚡ Total AI Characters** | 37,401 |
 
 ---
 
 ## 🚀 Recent Merged Pull Requests
 
-> 📊 Showing the 10 most recent merged PRs (stats above include all 39 PRs)
+> 📊 Showing the 10 most recent merged PRs (stats above include all 44 PRs)
 
 | PR | Author | Date | Files | AI Content | Percentage |
 |----|--------|------|-------|------------|------------|
+| [#192](#) **Farabi/update-brand-to-deriv** | [@farabi-deriv](https://github.com/farabi-deriv) | 8/18/2025 | N/A | No data | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
+| [#190](#) **Akmal / Fix more bugs** | [@akmal-deriv](https://github.com/akmal-deriv) | 8/18/2025 | N/A | No data | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
+| [#188](#) **Farabi/update-footer-and-header** | [@farabi-deriv](https://github.com/farabi-deriv) | 8/18/2025 | N/A | No data | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
+| [#183](#) **Nijil / Update onboarding content in mobile version** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/15/2025 | 2 | 0 / 276 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
+| [#182](#) **Nijil / Fix missing Reports menu item in side nav drawer** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/15/2025 | 1 | 59 / 67 chars | 🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜  88% |
 | [#171](#) **Prince/ implemented shiftai phase 2** | [@prince-deriv](https://github.com/prince-deriv) | 8/15/2025 | 7 | 0 / 44,263 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
 | [#178](#) **Akmal / fix: Rise/Fall/Higher/Lower on mobile** | [@akmal-deriv](https://github.com/akmal-deriv) | 8/15/2025 | 2 | 0 / 4,502 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
 | [#176](#) **Matin/Update Stylelint to V16.23.1** | [@matin-deriv](https://github.com/matin-deriv) | 8/15/2025 | 6 | 0 / 674 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
 | [#174](#) **Akmal / fix: higher/lower/rise/fall contracts on desktop** | [@akmal-deriv](https://github.com/akmal-deriv) | 8/15/2025 | 9 | 0 / 7,068 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
 | [#172](#) **Nijil / Fix background color issues in multiple places** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/15/2025 | 14 | 0 / 1,167 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#169](#) **Farabi/remove-invalid-token-from-url** | [@farabi-deriv](https://github.com/farabi-deriv) | 8/14/2025 | 1 | 0 / 109 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#159](#) **Nijil / Remove OS redirections** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/14/2025 | 18 | 0 / 7,958 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#142](#) **Akmal / feat: API changes** | [@akmal-deriv](https://github.com/akmal-deriv) | 8/14/2025 | 33 | 0 / 21,775 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#165](#) **Update derivatives-charts to 1.0.5** | [@DerivFE](https://github.com/DerivFE) | 8/14/2025 | 0 | 0 / 0 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#141](#) **Farabi/fix-auth-issues-on-contract-details** | [@farabi-deriv](https://github.com/farabi-deriv) | 8/14/2025 | 8 | 0 / 3,643 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
 
 ---
 

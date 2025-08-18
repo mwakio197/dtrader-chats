@@ -44,3 +44,9 @@ export const hasDurationForCallPutEqual = (
 };
 
 export const isRiseFallEqual = (contract_type: string) => /^(rise_fall|rise_fall_equal)$/.test(contract_type);
+
+export const isRiseFallContractType = (contract_type: string): boolean => {
+    // Check for API contract types used in proposal requests (CALL, PUT, CALLE, PUTE)
+    const apiRiseFallTypes = ['CALL', 'PUT', 'CALLE', 'PUTE'];
+    return apiRiseFallTypes.includes(contract_type);
+};

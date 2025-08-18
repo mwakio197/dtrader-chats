@@ -1,15 +1,16 @@
 import React from 'react';
-import { StaticUrl, Icon } from '@deriv/components';
-import { getBrandLogo } from '@deriv/shared';
+import { Icon } from '@deriv/components';
+import { getBrandLogo, getBrandWebsiteName } from '@deriv/shared';
 
 const BrandShortLogo = () => {
     const brandLogo = getBrandLogo();
+    const brandWebsiteName = getBrandWebsiteName();
 
     return (
         <div className='header__menu-left-logo'>
-            <StaticUrl href='/'>
+            <a href={brandWebsiteName} target='_blank' rel='noopener noreferrer'>
                 <Icon icon={brandLogo} size={24} />
-            </StaticUrl>
+            </a>
         </div>
     );
 };
