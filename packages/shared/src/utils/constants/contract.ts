@@ -720,7 +720,5 @@ export const getContractTypeFeatureFlag = (type: string, is_high_low = false) =>
 export const getContractTypePosition = (type: TGetSupportedContracts, is_high_low = false) =>
     getContractConfig(is_high_low)?.[type]?.position || 'top';
 
-export const isCallPut = (trade_type: 'rise_fall' | 'rise_fall_equal' | 'high_low'): boolean =>
-    trade_type === TRADE_TYPES.RISE_FALL ||
-    trade_type === TRADE_TYPES.RISE_FALL_EQUAL ||
-    trade_type === TRADE_TYPES.HIGH_LOW;
+export const isCallPut = (trade_type: 'rise_fall' | 'rise_fall_equal'): boolean =>
+    trade_type === TRADE_TYPES.RISE_FALL || trade_type === TRADE_TYPES.RISE_FALL_EQUAL;
