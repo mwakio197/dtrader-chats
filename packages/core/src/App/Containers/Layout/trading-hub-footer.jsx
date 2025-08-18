@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { withRouter } from 'react-router';
 import NetworkStatus, {
-    AccountLimits as AccountLimitsFooter,
+    // AccountLimits as AccountLimitsFooter,
     EndpointNote,
-    HelpCentre,
+    // HelpCentre,
     RegulatoryInformation,
-    ResponsibleTrading,
+    // ResponsibleTrading,
     ToggleSettings,
     ToggleFullScreen,
     ToggleLanguageSettings,
@@ -99,8 +99,8 @@ const TradingHubFooter = observer(() => {
                 {footer_extensions_right.map(FooterExtensionRenderer)}
                 {cs_chat_whatsapp && <WhatsApp showPopover={showPopover} />}
                 {cs_chat_livechat && <LiveChat showPopover={showPopover} />}
-                <ResponsibleTrading showPopover={showPopover} />
-                {is_logged_in && <AccountLimitsFooter showPopover={showPopover} />}
+                {/* <ResponsibleTrading showPopover={showPopover} /> */}
+                {/* {is_logged_in && <AccountLimitsFooter showPopover={showPopover} />} */}
                 {is_logged_in && !is_virtual && (
                     <RegulatoryInformation
                         landing_company={landing_company_shortcode}
@@ -121,7 +121,7 @@ const TradingHubFooter = observer(() => {
                     </div>
                 )}
                 <FooterIconSeparator />
-                <HelpCentre showPopover={showPopover} />
+                {/* <HelpCentre showPopover={showPopover} /> */}
                 {location === routes.index && (
                     <ToggleSettings
                         is_settings_visible={is_settings_modal_on}
