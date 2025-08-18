@@ -55,7 +55,6 @@ const ContractCardHeader = ({
     const current_tick = contract_info.tick_count ? getCurrentTick(contract_info) : null;
     const {
         growth_rate,
-        underlying,
         multiplier,
         contract_type,
         shortcode,
@@ -63,9 +62,11 @@ const ContractCardHeader = ({
         date_expiry,
         tick_count,
         tick_passed,
+        // @ts-expect-error TContractInfo has an invalid type, this will be fixed in a future update
+        underlying_symbol,
     } = contract_info;
 
-    const effective_underlying = underlying || getUnderlyingFromShortcode(shortcode);
+    const effective_underlying = underlying_symbol || getUnderlyingFromShortcode(shortcode);
     const is_sold = !!contract_info.is_sold || is_contract_sold;
     const is_accumulator = isAccumulatorContract(contract_type);
     const is_smarttrader_contract = isSmartTraderContract(contract_type);
