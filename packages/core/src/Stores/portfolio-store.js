@@ -53,9 +53,7 @@ export default class PortfolioStore extends BaseStore {
     contract_type = '';
 
     responseQueue = [];
-    // [AI]
     isUpdatingPositions = false; // Mutex to prevent concurrent updates
-    // [/AI]
 
     active_positions = [];
 
@@ -247,12 +245,10 @@ export default class PortfolioStore extends BaseStore {
         this.updateLimitOrderBarriers(is_over, portfolio_position);
     }
 
-    // [AI]
     proposalOpenContractQueueHandler = response => {
         this.responseQueue.push(response);
         this.debouncedUpdatePositions();
     };
-    // [/AI]
 
     proposalOpenContractHandler(response) {
         if ('error' in response) {
@@ -639,7 +635,6 @@ export default class PortfolioStore extends BaseStore {
         this.open_accu_contract = this.active_positions.find(({ type }) => isAccumulatorContract(type));
     }
 
-    // [AI]
     updatePositions = () => {
         // Prevent concurrent executions using mutex pattern
         if (this.isUpdatingPositions) {
@@ -670,7 +665,6 @@ export default class PortfolioStore extends BaseStore {
     };
 
     debouncedUpdatePositions = debounce(this.updatePositions, 300);
-    // [/AI]
 
     get is_active_empty() {
         return !this.is_loading && this.active_positions.length === 0;

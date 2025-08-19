@@ -61,14 +61,12 @@ const EntryExitDetails = ({ contract_info }: { contract_info: TContractInfo }) =
         exit_tick,
     } = contract_info;
 
-    // [AI]
     // Backward compatibility: fallback to old field names
     const actual_entry_spot = entry_spot ?? entry_spot_display_value;
     const actual_exit_spot = exit_spot ?? exit_tick;
     const actual_exit_spot_display_value = exit_spot ?? exit_tick_display_value;
     const actual_entry_spot_time = entry_spot_time ?? entry_tick_time;
     const actual_exit_spot_time = exit_spot_time ?? exit_tick_time;
-    // [/AI]
 
     const dateTimes = useMemo(
         () => ({

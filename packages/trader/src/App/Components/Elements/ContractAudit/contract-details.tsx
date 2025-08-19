@@ -86,12 +86,10 @@ const ContractDetails = ({
     } = contract_info;
     const { isMobile } = useDevice();
 
-    // [AI]
     // Backward compatibility: fallback to old field names
     const actual_entry_spot = entry_spot ?? entry_spot_display_value;
     const actual_exit_spot = exit_spot_value ?? exit_tick;
     const actual_exit_spot_display_value = exit_spot_value ?? exit_tick_display_value;
-    // [/AI]
 
     const is_profit = Number(profit) >= 0;
     const cancellation_price = getCancellationPrice(contract_info);

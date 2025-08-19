@@ -117,7 +117,6 @@ const TradeChart = observer(() => {
     // max ticks to display for mobile view for tick chart
     const max_ticks = granularity === 0 ? 8 : 24;
 
-    // [AI]
     // Memoized chart data objects to prevent unnecessary rerenders
     const initialData = React.useMemo(
         () => ({
@@ -134,7 +133,6 @@ const TradeChart = observer(() => {
     );
 
     const feedCall = { activeSymbols: false };
-    // [/AI]
 
     if (!symbol || !active_symbols.length) return null;
     return (

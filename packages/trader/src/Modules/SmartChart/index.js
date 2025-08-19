@@ -5,9 +5,7 @@ let module;
 
 const init = () => {
     module = moduleLoader(() => {
-        // [AI]
         return import(/* webpackChunkName: "smart_chart" */ '@deriv-com/derivatives-charts');
-        // [/AI]
     });
 
     module.then(({ setSmartChartsPublicPath }) => {

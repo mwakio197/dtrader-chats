@@ -104,9 +104,7 @@ const DigitsWrapper = ({
             // dimension of a single digit widget including margin/padding (number)
             // i.e - 40px + 6px left and 6px right padding/margin = 52
             dimension={is_mobile ? 64 : 52}
-            // [AI]
             has_entry_spot={!!(contract_info.entry_spot ?? contract_info.entry_tick)}
-            // [/AI]
             barrier={!is_contract_elapsed && is_tick_ready ? Number(contract_info.barrier) : null}
             contract_type={!is_contract_elapsed && is_tick_ready ? contract_info.contract_type : ''}
             digits={digits_array}
@@ -170,7 +168,6 @@ const Digits = React.memo((props: TDigits) => {
         return (
             <div className='digits__container'>
                 <Bounce
-                    // [AI]
                     is_visible={
                         !!(
                             is_digit_contract &&
@@ -179,7 +176,6 @@ const Digits = React.memo((props: TDigits) => {
                             !!(contract_info.entry_spot ?? contract_info.entry_tick)
                         )
                     }
-                    // [/AI]
                     className={classNames('digits__digit-spot', {
                         'digits__digit-spot--is-trading': is_trade_page,
                     })}
