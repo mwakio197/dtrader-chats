@@ -507,6 +507,34 @@ export const getPayoutInfo = (proposal_info: ReturnType<typeof getProposalInfo>)
 };
 
 /**
+ * Gets the correct proposal info key for accessing payout data based on contract type and trade type tab
+ * For Higher/Lower contracts, maps CALL→HIGHER and PUT→LOWER
+ * For other contracts, returns the trade_type_tab directly
+ * @param proposal_info - The proposal info object containing contract data
+ * @param trade_type_tab - The current trade type tab (CALL, PUT, etc.)
+ * @param contract_type - The contract type (HIGH_LOW, RISE_FALL, etc.)
+ * @returns The correct key to access proposal_info data
+ */
+export const getProposalInfoKey = (
+    proposal_info: Record<string, any>,
+    trade_type_tab: string,
+    contract_type: string
+): string => {
+    const proposal_info_keys = Object.keys(proposal_info);
+    const hasHigherLowerKeys = proposal_info_keys.includes('HIGHER') && proposal_info_keys.includes('LOWER');
+    const hasCallPutKeys = proposal_info_keys.includes('CALL') && proposal_info_keys.includes('PUT');
+
+    // For Higher/Lower contracts, map CALL→HIGHER and PUT→LOWER when API returns HIGHER/LOWER keys
+    if (contract_type === TRADE_TYPES.HIGH_LOW && hasHigherLowerKeys && !hasCallPutKeys) {
+        if (trade_type_tab === 'CALL') return 'HIGHER';
+        if (trade_type_tab === 'PUT') return 'LOWER';
+    }
+
+    // For all other cases, return the trade_type_tab directly
+    return trade_type_tab;
+};
+
+/**
  * Validates if persisted duration values are compatible with current contract constraints
  * @param duration - The persisted duration value
  * @param duration_unit - The persisted duration unit
