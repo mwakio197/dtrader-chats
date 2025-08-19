@@ -586,7 +586,7 @@ $side-padding: 1.2em;
         &-accumulator {
             /* postcss-bem-linter: ignore */
             & .data-list__item {
-                background-color: var(--color-surface-primary);
+                background-color: var(--color-surface-section);
                 border-radius: $BORDER_RADIUS;
                 border: 1px solid var(--color-interactive-disabled);
                 padding: 0 !important;
@@ -1114,7 +1114,7 @@ $side-padding: 1.2em;
     }
     /* postcss-bem-linter: ignore */
     .data-list__item {
-        background-color: var(--color-surface-primary);
+        background-color: var(--color-surface-section);
         padding: 1.6rem 0;
 
         &--multiplier {

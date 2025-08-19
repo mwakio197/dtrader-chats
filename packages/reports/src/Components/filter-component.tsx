@@ -30,10 +30,6 @@ const FilterComponent = observer(() => {
             text: localize('Withdrawal'),
             value: 'withdrawal',
         },
-        {
-            text: localize('Transfer'),
-            value: 'transfer',
-        },
     ];
 
     return (
