@@ -447,6 +447,7 @@ export type TClientStore = {
     // Essential actions
     setInitialized: (status?: boolean) => void;
     setIsClientStoreInitialized: () => void;
+    setIsSingleLoggingIn: (value: boolean) => void;
     setLogout: (status?: boolean) => void;
     selectCurrency: (currency: string) => void;
     setLoginId: (loginid: string) => void;
