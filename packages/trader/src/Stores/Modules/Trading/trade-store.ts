@@ -945,6 +945,10 @@ export default class TradeStore extends BaseStore {
                 this.duration = 5;
                 this.duration_unit = 'm';
                 this.barrier_1 = '+0.1';
+                // Reset expiry type to duration and clear end time values
+                this.expiry_type = 'duration';
+                this.expiry_time = null;
+                this.expiry_date = null;
             }
         }
 
