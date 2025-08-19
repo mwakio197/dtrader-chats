@@ -1,7 +1,173 @@
 {
-  "lastUpdated": "2025-08-18T10:13:26.764Z",
-  "totalMergedPRs": 44,
+  "lastUpdated": "2025-08-19T11:23:38.042Z",
+  "totalMergedPRs": 49,
   "analyses": [
+    {
+      "percentage": 0,
+      "totalCharacters": 0,
+      "aiCharacters": 0,
+      "files": [],
+      "timestamp": "2025-08-19T11:23:37.992Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "202",
+      "branch": "remove-ai-tags",
+      "author": "nijil-deriv",
+      "prTitle": "Nijil / Remove [AI] tags from codebase",
+      "hasAnalysis": true
+    },
+    {
+      "timestamp": "2025-08-19T11:05:10.078Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "198",
+      "branch": "jim/GRWT-6886/barrier-on-the-chart-glitch",
+      "author": "jim-deriv",
+      "prTitle": "Jim/grwt 6886/barrier on the chart glitch",
+      "hasAnalysis": false,
+      "percentage": 0,
+      "totalCharacters": 0,
+      "aiCharacters": 0,
+      "files": []
+    },
+    {
+      "timestamp": "2025-08-19T11:01:47.626Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "199",
+      "branch": "fix-more-bugs",
+      "author": "akmal-deriv",
+      "prTitle": "Akmal / fix: bugs and improvements",
+      "hasAnalysis": false,
+      "percentage": 0,
+      "totalCharacters": 0,
+      "aiCharacters": 0,
+      "files": []
+    },
+    {
+      "percentage": 0,
+      "totalCharacters": 938,
+      "aiCharacters": 0,
+      "files": [
+        {
+          "name": "packages/components/src/components/contract-card/contract-card-items/contract-card-header.tsx",
+          "totalCharacters": 220,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "        // @ts-expect-error TContractInfo has an invalid type, this will be fixed in a future update\n        underlying_symbol,\n    const effective_underlying = underlying_symbol || getUnderlyingFromShortcode(shortcode);"
+        },
+        {
+          "name": "packages/components/src/components/icon/icon.scss",
+          "totalCharacters": 48,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "    --fill-color3: var(--color-surface-section);"
+        },
+        {
+          "name": "packages/reports/src/Components/filter-component.tsx",
+          "totalCharacters": 0,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "only-deletions",
+          "hasAddedContent": false,
+          "addedContent": ""
+        },
+        {
+          "name": "packages/reports/src/sass/app/modules/reports.scss",
+          "totalCharacters": 119,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "                background-color: var(--color-surface-section);\n        background-color: var(--color-surface-section);"
+        },
+        {
+          "name": "packages/shared/src/styles/tokens/semantic.scss",
+          "totalCharacters": 239,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "        --color-gradient-overlay: linear-gradient(to top, #{$color-white 85%}, #{transparentize($color-danger, 0.84)});\n        --color-gradient-overlay: linear-gradient(to top, #{$color-black 85%}, #{transparentize($color-danger, 0.84)});"
+        },
+        {
+          "name": "packages/trader/src/sass/app/_common/drawer/contract-drawer.scss",
+          "totalCharacters": 81,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "        padding: 0.8rem;\n        background-image: var(--color-gradient-overlay);"
+        },
+        {
+          "name": "scripts/generate-colors.js",
+          "totalCharacters": 231,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "    --color-gradient-overlay: linear-gradient(to top, #{$color-white 85%}, #{transparentize($color-danger, 0.84)});\n    --color-gradient-overlay: linear-gradient(to top, #{$color-black 85%}, #{transparentize($color-danger, 0.84)});"
+        }
+      ],
+      "timestamp": "2025-08-19T02:25:04.257Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "194",
+      "branch": "bug-fixes-1",
+      "author": "nijil-deriv",
+      "prTitle": "Nijil / Fix - Market closed overlay color & removed Transfer from Statement page filter",
+      "hasAnalysis": true
+    },
+    {
+      "percentage": 0,
+      "totalCharacters": 930,
+      "aiCharacters": 0,
+      "files": [
+        {
+          "name": ".husky/pre-commit",
+          "totalCharacters": 0,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "only-deletions",
+          "hasAddedContent": false,
+          "addedContent": ""
+        },
+        {
+          "name": ".husky/pre-push",
+          "totalCharacters": 263,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "\n\n# 🗑️ EARLY EXIT: Check for delete operations at shell level\nif ps aux | grep -v grep | grep -q \"git.*push.*--delete\"; then\n  exit 0\nfi\n\n# Check command line arguments in current process tree\nif pgrep -f \"git.*push.*--delete\" > /dev/null 2>&1; then\n  exit 0\nfi\n"
+        },
+        {
+          "name": "package-lock.json",
+          "totalCharacters": 624,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "                \"@deriv-com/shiftai-cli\": \"^0.0.4\",\n            \"version\": \"0.0.4\",\n            \"resolved\": \"https://registry.npmjs.org/@deriv-com/shiftai-cli/-/shiftai-cli-0.0.4.tgz\",\n            \"integrity\": \"sha512-xR9z3//S+ngntBjZRVlvZhUXZdHFFkMCr50bW0e/lZ17wcQo19B02ouJnS4cEf3MrOx7Tx4chvGDaniyQnjGXQ==\",\n                \"shai\": \"bin/shai\",\n                \"shai-dev\": \"bin/shai\"\n            \"version\": \"24.3.0\",\n            \"resolved\": \"https://registry.npmjs.org/@types/node/-/node-24.3.0.tgz\",..."
+        },
+        {
+          "name": "package.json",
+          "totalCharacters": 43,
+          "aiCharacters": 0,
+          "percentage": 0,
+          "status": "modified",
+          "hasAddedContent": true,
+          "addedContent": "        \"@deriv-com/shiftai-cli\": \"^0.0.4\","
+        }
+      ],
+      "timestamp": "2025-08-18T14:27:18.609Z",
+      "repository": "deriv-com/derivatives-trader",
+      "pullRequest": "195",
+      "branch": "update-shiftai-version",
+      "author": "prince-deriv",
+      "prTitle": "chore: update shiftai-cli version",
+      "hasAnalysis": true
+    },
     {
       "timestamp": "2025-08-18T10:13:26.712Z",
       "repository": "deriv-com/derivatives-trader",

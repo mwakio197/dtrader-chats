@@ -934,6 +934,24 @@ export default class TradeStore extends BaseStore {
             this.stop_loss = '';
         }
 
+        // Reset duration and barrier when switching TO Vanilla contracts
+        if (name === 'contract_type' && value) {
+            const is_switching_to_vanilla = isVanillaContract(value as string);
+            const was_vanilla = isVanillaContract(this.contract_type);
+
+            if (is_switching_to_vanilla && !was_vanilla) {
+                // Reset to safe defaults for Vanilla contracts
+                // Use minutes (m) with duration 5 to ensure relative barriers (+/-)
+                this.duration = 5;
+                this.duration_unit = 'm';
+                this.barrier_1 = '+0.1';
+                // Reset expiry type to duration and clear end time values
+                this.expiry_type = 'duration';
+                this.expiry_time = null;
+                this.expiry_date = null;
+            }
+        }
+
         if (name === 'symbol' && value) {
             // set trade params skeleton and chart loader to true until processNewValuesAsync resolves
             this.setChartStatus(true);

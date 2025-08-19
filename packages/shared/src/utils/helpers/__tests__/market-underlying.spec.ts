@@ -3,7 +3,7 @@ import {
     getMarketInformation,
     getMarketName,
     getTradeTypeName,
-    isHigherLowerContract,
+    isHigherLowerContractInfo,
 } from '../market-underlying';
 import { getSymbolDisplayName } from '../active-symbols';
 import { CONTRACT_TYPES, TRADE_TYPES } from '../../contract';
@@ -156,31 +156,31 @@ describe('market-underlying', () => {
             expect(getTradeTypeName(CONTRACT_TYPES.FALL, { showMainTitle: true })).toBeFalsy();
         });
     });
-    describe('isHigherLowerContract', () => {
+    describe('isHigherLowerContractInfo', () => {
         it('should return true for Higher/Lower contracts based on contract_category', () => {
-            expect(isHigherLowerContract({ contract_category: 'higherLower' })).toBe(true);
+            expect(isHigherLowerContractInfo({ contract_category: 'higherLower' })).toBe(true);
         });
 
         it('should return false for Rise/Fall contracts based on contract_category', () => {
-            expect(isHigherLowerContract({ contract_category: 'callput' })).toBe(false);
+            expect(isHigherLowerContractInfo({ contract_category: 'callput' })).toBe(false);
         });
 
         it('should fallback to shortcode detection when contract_category is not available', () => {
             // Test with a shortcode that has numeric barriers (should be Higher/Lower)
-            expect(isHigherLowerContract({ shortcode: 'CALL_1HZ100V_19.53_1695913929_5T_19.60_0' })).toBe(true);
+            expect(isHigherLowerContractInfo({ shortcode: 'CALL_1HZ100V_19.53_1695913929_5T_19.60_0' })).toBe(true);
 
             // Test with a shortcode that has S0P barrier (should be Rise/Fall)
-            expect(isHigherLowerContract({ shortcode: 'CALL_1HZ100V_19.53_1695913929_5T_S0P_0' })).toBe(false);
+            expect(isHigherLowerContractInfo({ shortcode: 'CALL_1HZ100V_19.53_1695913929_5T_S0P_0' })).toBe(false);
         });
 
         it('should return false when neither contract_category nor shortcode is available', () => {
-            expect(isHigherLowerContract({})).toBe(false);
+            expect(isHigherLowerContractInfo({})).toBe(false);
         });
 
         it('should prioritize contract_category over shortcode when both are available', () => {
             // Even if shortcode suggests Higher/Lower, contract_category should take precedence
             expect(
-                isHigherLowerContract({
+                isHigherLowerContractInfo({
                     contract_category: 'callput',
                     shortcode: 'CALL_R_100_10_1234567890_1234567890_+1.23_0',
                 })

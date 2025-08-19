@@ -79,9 +79,7 @@ const AppWithoutTranslation = ({ root_store }) => {
     React.useEffect(() => {
         sessionStorage.removeItem('redirect_url');
         const loadSmartchartsStyles = () => {
-            // [AI]
             import('@deriv-com/derivatives-charts/dist/smartcharts.css');
-            // [/AI]
         };
 
         initializeTranslations();

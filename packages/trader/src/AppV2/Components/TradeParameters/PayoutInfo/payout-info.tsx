@@ -7,11 +7,13 @@ import { Localize } from '@deriv/translations';
 import { Text } from '@deriv-com/quill-ui';
 
 import { useTraderStore } from 'Stores/useTraderStores';
+import { getProposalInfoKey } from 'AppV2/Utils/trade-params-utils';
 
 const PayoutInfo = observer(() => {
-    const { currency, is_market_closed, proposal_info, trade_type_tab } = useTraderStore();
-    const { value: payout } = proposal_info[trade_type_tab]?.obj_contract_basis || {};
-    const has_error = proposal_info[trade_type_tab]?.has_error;
+    const { currency, is_market_closed, proposal_info, trade_type_tab, contract_type } = useTraderStore();
+    const proposal_key = getProposalInfoKey(proposal_info, trade_type_tab, contract_type);
+    const { value: payout } = proposal_info[proposal_key]?.obj_contract_basis || {};
+    const has_error = proposal_info[proposal_key]?.has_error;
 
     return (
         <div className='payout-info__container'>

@@ -1,5 +1,5 @@
-import throttle from 'lodash.throttle';
-import { action, computed, makeObservable, observable, override, reaction } from 'mobx';
+import debounce from 'lodash.debounce';
+import { action, computed, makeObservable, observable, override, reaction, runInAction } from 'mobx';
 import { computedFn } from 'mobx-utils';
 
 import { Money } from '@deriv/components';
@@ -53,6 +53,7 @@ export default class PortfolioStore extends BaseStore {
     contract_type = '';
 
     responseQueue = [];
+    isUpdatingPositions = false; // Mutex to prevent concurrent updates
 
     active_positions = [];
 
@@ -246,7 +247,7 @@ export default class PortfolioStore extends BaseStore {
 
     proposalOpenContractQueueHandler = response => {
         this.responseQueue.push(response);
-        this.throttledUpdatePositions();
+        this.debouncedUpdatePositions();
     };
 
     proposalOpenContractHandler(response) {
@@ -445,7 +446,6 @@ export default class PortfolioStore extends BaseStore {
         contract_info.exit_spot_time = contract_info.date_expiry;
         contract_info.sell_price = String(amount);
         contract_info.profit = amount - contract_info.buy_price;
-
         this.updatePositions();
     };
 
@@ -636,12 +636,35 @@ export default class PortfolioStore extends BaseStore {
     }
 
     updatePositions = () => {
-        this.responseQueue.forEach(res => this.proposalOpenContractHandler(res));
-        this.responseQueue = [];
-        this.setActivePositions();
+        // Prevent concurrent executions using mutex pattern
+        if (this.isUpdatingPositions) {
+            return;
+        }
+
+        this.isUpdatingPositions = true;
+
+        try {
+            // Use runInAction for better MobX state consistency
+            runInAction(() => {
+                // Atomically capture and clear the queue to prevent race conditions
+                // This ensures no responses are lost if new ones arrive during processing
+                const currentQueue = [...this.responseQueue];
+                this.responseQueue = [];
+
+                // Process the captured queue
+                currentQueue.forEach(res => this.proposalOpenContractHandler(res));
+                this.setActivePositions();
+            });
+        } catch (error) {
+            //eslint-disable-next-line no-console
+            console.error('updatePositions: Error during update:', error);
+        } finally {
+            // Always release the mutex, even if an error occurs
+            this.isUpdatingPositions = false;
+        }
     };
 
-    throttledUpdatePositions = throttle(this.updatePositions, 500);
+    debouncedUpdatePositions = debounce(this.updatePositions, 300);
 
     get is_active_empty() {
         return !this.is_loading && this.active_positions.length === 0;

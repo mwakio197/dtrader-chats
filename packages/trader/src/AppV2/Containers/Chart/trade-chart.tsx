@@ -117,6 +117,23 @@ const TradeChart = observer(() => {
     // max ticks to display for mobile view for tick chart
     const max_ticks = granularity === 0 ? 8 : 24;
 
+    // Memoized chart data objects to prevent unnecessary rerenders
+    const initialData = React.useMemo(
+        () => ({
+            activeSymbols: active_symbols,
+        }),
+        [active_symbols]
+    );
+
+    const chartData = React.useMemo(
+        () => ({
+            activeSymbols: active_symbols,
+        }),
+        [active_symbols]
+    );
+
+    const feedCall = { activeSymbols: false };
+
     if (!symbol || !active_symbols.length) return null;
     return (
         <SmartChart
@@ -130,15 +147,9 @@ const TradeChart = observer(() => {
             chartControlsWidgets={null}
             chartStatusListener={(v: boolean) => setChartStatus(!v, true)}
             chartType={chart_type}
-            initialData={{
-                activeSymbols: JSON.parse(JSON.stringify(active_symbols)),
-            }}
-            chartData={{
-                activeSymbols: JSON.parse(JSON.stringify(active_symbols)),
-            }}
-            feedCall={{
-                activeSymbols: false,
-            }}
+            initialData={initialData}
+            chartData={chartData}
+            feedCall={feedCall}
             enabledNavigationWidget={!isMobile}
             enabledChartFooter={false}
             id='trade'
