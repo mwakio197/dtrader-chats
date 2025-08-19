@@ -96,10 +96,8 @@ const PositionsModalCard = observer(
             underlying,
         } = contract_info;
 
-        // [AI]
         // Backward compatibility: fallback to old field name
         const actual_entry_spot = entry_spot ?? entry_spot_display_value;
-        // [/AI]
         const { STAKE, CONTRACT_VALUE, ENTRY_SPOT, STRIKE, TOTAL_PROFIT_LOSS } = getCardLabels();
         const is_multiplier = isMultiplierContract(contract_type);
         const is_accumulator = isAccumulatorContract(contract_type);

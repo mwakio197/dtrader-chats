@@ -29,17 +29,13 @@ const CurrentSpot = observer(() => {
         display_status,
         is_digit_contract,
         is_ended,
-        // [AI]
     } = (last_contract.contract_info?.entry_spot ?? last_contract.contract_info?.entry_tick) || !prev_contract
         ? last_contract
         : prev_contract;
-    // [/AI]
     const { tick_data, symbol } = useTraderStore();
     //
-    // [AI]
     const { contract_id, date_start, contract_type, tick_stream } = contract_info;
     const entry_spot = contract_info.entry_spot ?? contract_info.entry_tick;
-    // [/AI]
     // Backward compatibility: fallback to old field name
     //@ts-expect-error TContractInfo has an invalid type, this will be fixed in a future update
     const underlying = contract_info.underlying_symbol || contract_info.underlying;
@@ -96,9 +92,7 @@ const CurrentSpot = observer(() => {
 
     const barrier = !is_contract_elapsed && !!tick ? Number(contract_info.barrier) : null;
     const is_winning = isDigitContractWinning(contract_type, barrier, latest_digit.digit);
-    // [AI]
     const has_contract = is_digit_contract && status && latest_digit.spot && !!entry_spot;
-    // [/AI]
     const has_open_contract = has_contract && !is_ended;
     const has_relevant_tick_data = underlying === symbol || !underlying;
     const should_show_tick_count = has_contract && has_relevant_tick_data;
@@ -113,11 +107,9 @@ const CurrentSpot = observer(() => {
 
     React.useEffect(() => {
         const has_multiple_contracts =
-            // [AI]
             prev_contract?.contract_info &&
             !is_prev_contract_elapsed &&
             (last_contract.contract_info?.entry_spot ?? last_contract.contract_info?.entry_tick);
-        // [/AI]
         const is_next_contract_opened = prev_contract_id && contract_id && prev_contract_id !== contract_id;
         if (has_multiple_contracts && is_next_contract_opened) {
             setShouldEnterFromTop(true);

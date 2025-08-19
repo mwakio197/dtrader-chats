@@ -115,7 +115,6 @@ const TradeChart = observer((props: TTradeChartProps) => {
             );
     }, []);
 
-    // [AI]
     // Create stable references that persist across renders for all dynamic props
     const stableBarrierRef = React.useRef<any[]>([]);
     const stableMarkersRef = React.useRef<any[]>([]);
@@ -214,12 +213,10 @@ const TradeChart = observer((props: TTradeChartProps) => {
 
         return stableMarkersRef.current;
     }, [markers_array]);
-    // [/AI]
 
     // max ticks to display for mobile view for tick chart
     const max_ticks = granularity === 0 ? 8 : 24;
 
-    // [AI]
     // Memoized object props to prevent unnecessary rerenders
     const initialData = React.useMemo(
         () => ({
@@ -237,7 +234,6 @@ const TradeChart = observer((props: TTradeChartProps) => {
 
     // Simplified constant object - no need for useMemo since it never changes
     const feedCall = { activeSymbols: false };
-    // [/AI]
 
     const yAxisMargin = React.useMemo(
         () => ({
@@ -275,7 +271,6 @@ const TradeChart = observer((props: TTradeChartProps) => {
     const toolbarWidget = React.useCallback(() => {
         return <ToolbarWidgets updateChartType={updateChartType} updateGranularity={updateGranularity} />;
     }, [updateChartType, updateGranularity]);
-    // [/AI]
 
     if (!symbol || !active_symbols.length) return null;
     return (

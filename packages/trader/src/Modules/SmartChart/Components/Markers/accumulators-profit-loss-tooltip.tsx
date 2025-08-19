@@ -43,11 +43,9 @@ const AccumulatorsProfitLossTooltip = ({
     should_show_profit_text,
     is_mobile,
 }: TAccumulatorsProfitLossTooltip) => {
-    // [AI]
     // Backward compatibility: fallback to old field names
     const actual_exit_spot_time = exit_spot_time ?? exit_tick_time;
     const actual_exit_spot = exit_spot ?? exit_tick;
-    // [/AI]
     const [is_tooltip_open, setIsTooltipOpen] = React.useState(false);
     const won = Number(profit) >= 0;
     const tooltip_timeout = React.useRef<ReturnType<typeof setTimeout>>();
