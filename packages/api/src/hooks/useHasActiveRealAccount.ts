@@ -2,9 +2,9 @@ import { useStore } from '@deriv/stores';
 
 const useHasActiveRealAccount = () => {
     const { client } = useStore();
-    const { active_accounts } = client;
+    const { current_account } = client;
 
-    const has_active_real_account = active_accounts.some(account => account.is_virtual === 0);
+    const has_active_real_account = current_account ? !current_account.is_virtual : false;
 
     return has_active_real_account;
 };

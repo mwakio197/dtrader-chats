@@ -306,7 +306,6 @@ const mock = (): TStores & { is_mock: boolean } => {
             resetLocalStorageValues: jest.fn(),
             setIsAlreadyAttempted: jest.fn(),
             is_already_attempted: false,
-            is_bot_allowed: false,
             account_open_date: undefined,
             setAccounts: jest.fn(),
             updateMt5LoginList: jest.fn(),
