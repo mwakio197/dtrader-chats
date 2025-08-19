@@ -61,7 +61,7 @@ export const getMarketName = (underlying: string) =>
  * This is more reliable than checking barriers since Rise/Fall contracts shouldn't have barriers
  * but sometimes do due to API inconsistencies
  */
-export const isHigherLowerContract = (contract_info: { contract_category?: string; shortcode?: string }) => {
+export const isHigherLowerContractInfo = (contract_info: { contract_category?: string; shortcode?: string }) => {
     // Primary method: use contract_category if available
     if (contract_info.contract_category) {
         return contract_info.contract_category === 'higherLower';

@@ -186,6 +186,8 @@ export const isMultiplierContract = (contract_type = '') => /MULT/i.test(contrac
 
 export const isRiseFallContract = (contract_type = '') => /RISE_FALL/i.test(contract_type);
 
+export const isHigherLowerContract = (contract_type = '') => /HIGHER|LOWER/i.test(contract_type);
+
 export const isTouchContract = (contract_type: string) => /TOUCH/i.test(contract_type);
 
 export const isTurbosContract = (contract_type = '') => /TURBOS/i.test(contract_type);

@@ -20,7 +20,7 @@ import {
     TContractInfo,
     toMoment,
 } from '@deriv/shared';
-import { isHigherLowerContract } from '@deriv/shared/src/utils/helpers/market-underlying';
+import { isHigherLowerContractInfo } from '@deriv/shared/src/utils/helpers/market-underlying';
 import { CaptionText, Tag, Text } from '@deriv-com/quill-ui';
 
 import { TClosedPosition } from 'AppV2/Containers/Positions/positions-content';
@@ -71,7 +71,7 @@ const ContractCard = ({
     const { buy_price, contract_type, display_name, purchase_time, sell_time, shortcode, limit_order } =
         contractInfo as TContractInfo;
     const { take_profit, stop_loss } = limit_order ?? { take_profit: {}, stop_loss: {} };
-    const is_higher_lower = isHigherLowerContract({
+    const is_higher_lower = isHigherLowerContractInfo({
         contract_category: (contractInfo as any).contract_category,
         shortcode,
     });
