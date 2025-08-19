@@ -223,24 +223,21 @@ const TradeChart = observer((props: TTradeChartProps) => {
     // Memoized object props to prevent unnecessary rerenders
     const initialData = React.useMemo(
         () => ({
-            activeSymbols: JSON.parse(JSON.stringify(active_symbols)),
+            activeSymbols: active_symbols,
         }),
         [active_symbols]
     );
 
     const chartData = React.useMemo(
         () => ({
-            activeSymbols: JSON.parse(JSON.stringify(active_symbols)),
+            activeSymbols: active_symbols,
         }),
         [active_symbols]
     );
 
-    const feedCall = React.useMemo(
-        () => ({
-            activeSymbols: false,
-        }),
-        []
-    );
+    // Simplified constant object - no need for useMemo since it never changes
+    const feedCall = { activeSymbols: false };
+    // [/AI]
 
     const yAxisMargin = React.useMemo(
         () => ({
