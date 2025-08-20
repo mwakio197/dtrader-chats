@@ -172,13 +172,13 @@ describe('getTradeTypeTabsList', () => {
             {
                 label: 'Higher',
                 value: TRADE_TYPES.HIGH_LOW,
-                contract_type: CONTRACT_TYPES.CALL,
+                contract_type: CONTRACT_TYPES.HIGHER,
                 is_displayed: true,
             },
             {
                 label: 'Lower',
                 value: TRADE_TYPES.HIGH_LOW,
-                contract_type: CONTRACT_TYPES.PUT,
+                contract_type: CONTRACT_TYPES.LOWER,
                 is_displayed: true,
             },
         ]);
