@@ -1,17 +1,12 @@
 import { flow } from 'mobx';
-import {
-    State,
-    getSocketURL,
-    getActivePlatform,
-    getPropertyValue,
-    routes,
-    getActionFromUrl,
-    checkServerMaintenance,
-} from '@deriv/shared';
+
+import { checkServerMaintenance, getPropertyValue, getSocketURL, State } from '@deriv/shared';
 import { localize } from '@deriv/translations';
+
+import WS from './ws-methods';
+
 import ServerTime from '_common/base/server_time';
 import BinarySocket from '_common/base/socket_base';
-import WS from './ws-methods';
 
 let client_store, common_store, gtm_store;
 let reconnectionCounter = 1;
@@ -113,6 +108,7 @@ const BinarySocketGeneral = (() => {
 
     // Removed setBalanceOtherAccounts - not needed for single account
 
+    // V2 Authentication - Simplified error handling
     const handleError = response => {
         const msg_type = response.msg_type;
         const error_code = getPropertyValue(response, ['error', 'code']);
@@ -122,13 +118,6 @@ const BinarySocketGeneral = (() => {
                     WS.forgetAll('balance').then(subscribeBalances);
                 }
                 break;
-            case 'InternalServerError':
-            case 'OutputValidationFailed': {
-                if (msg_type !== 'mt5_login_list') {
-                    common_store.setError(true, { message: response.error.message });
-                }
-                break;
-            }
             case 'RateLimit':
                 if (msg_type !== 'cashier_password') {
                     common_store.setError(true, {
@@ -142,57 +131,24 @@ const BinarySocketGeneral = (() => {
             case 'DisabledClient':
                 common_store.setError(true, { message: response.error.message });
                 break;
-            case 'InvalidToken': {
-                if (
-                    [
-                        'cashier',
-                        'paymentagent_withdraw',
-                        'reset_password',
-                        'trading_platform_password_reset',
-                        'trading_platform_investor_password_reset',
-                        'new_account_virtual',
-                        'portfolio',
-                        'proposal_open_contract',
-                        'change_email',
-                        'phone_number_challenge',
-                    ].includes(msg_type)
-                ) {
-                    return;
-                }
-                // eslint-disable-next-line no-case-declarations
-                const active_platform = getActivePlatform(common_store.app_routing_history);
-
-                // DBot handles this internally. Special case: 'client.invalid_token'
-                if (active_platform === 'DBot') return;
-
-                // Don't redirect during page refresh on valid pages
-                const current_path = window.location.pathname;
-                const is_on_contract_page = /^\/contract\//.test(current_path);
-                const is_on_reports_page = /^\/reports\//.test(current_path);
-                const is_on_trade_page = current_path === '/';
-
-                if (is_on_contract_page || is_on_reports_page || is_on_trade_page) {
-                    return;
-                }
-
-                client_store.logout().then(() => {
-                    const redirect_to = routes.index;
-                    const action = getActionFromUrl();
-                    if (action === 'system_email_change') {
-                        return;
-                    }
-                    common_store.routeTo(redirect_to);
-                });
-                break;
-            }
-            case 'AuthorizationRequired':
-                // if msg_type is coming from 'buy', behaviour should be handled in app itself.
+            case 'AuthorizationRequired': {
                 if (msg_type === 'buy') {
+                    return;
+                }
+
+                // For V2, check if we have a valid session token before logout
+                const hasSessionToken = !!localStorage.getItem('session_token');
+                if (hasSessionToken) {
                     return;
                 }
                 client_store.logout();
                 break;
-            // no default
+            }
+            // V2 Authentication - Removed redundant error cases:
+            // - InvalidToken (not used with session tokens)
+            // - InternalServerError/OutputValidationFailed/InputValidationFailed (should be fixed at API level)
+            default:
+                break;
         }
     };
 

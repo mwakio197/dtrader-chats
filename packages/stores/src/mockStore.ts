@@ -167,7 +167,6 @@ const mock = (): TStores & { is_mock: boolean } => {
             is_populating_ctrader_account_list: false,
             is_social_signup: false,
             is_single_currency: false,
-            is_switching: false,
             is_high_risk: false,
             is_trading_experience_incomplete: false,
             is_unwelcome: false,
