@@ -346,4 +346,159 @@ describe('TradeStore', () => {
             expect(mockedTradeStore.v2_params_initial_values).toEqual({});
         });
     });
+
+    describe('Vanilla contract expiry type reset behavior', () => {
+        beforeEach(() => {
+            // Reset trade store to a clean state
+            mockedTradeStore.contract_type = 'rise_fall';
+            mockedTradeStore.expiry_type = 'endtime';
+            mockedTradeStore.expiry_time = '23:59:59';
+            mockedTradeStore.expiry_date = '2024-12-31';
+            mockedTradeStore.duration = 10;
+            mockedTradeStore.duration_unit = 'd';
+            mockedTradeStore.barrier_1 = '100';
+        });
+
+        it('should reset expiry_type to duration when switching from non-Vanilla to Vanilla Call', () => {
+            // Initial state: non-Vanilla contract with endtime
+            expect(mockedTradeStore.contract_type).toBe('rise_fall');
+            expect(mockedTradeStore.expiry_type).toBe('endtime');
+            expect(mockedTradeStore.expiry_time).toBe('23:59:59');
+            expect(mockedTradeStore.expiry_date).toBe('2024-12-31');
+
+            // Switch to Vanilla Call
+            mockedTradeStore.onChange({ target: { name: 'contract_type', value: 'vanillalongcall' } });
+
+            // Should reset expiry type and clear end time values
+            expect(mockedTradeStore.expiry_type).toBe('duration');
+            expect(mockedTradeStore.expiry_time).toBeNull();
+            expect(mockedTradeStore.expiry_date).toBeNull();
+            // Should also reset UI store's advanced_expiry_type
+            expect(mockedTradeStore.root_store.ui.advanced_expiry_type).toBe('duration');
+            // Should also reset other defaults for new Vanilla contract
+            expect(mockedTradeStore.duration).toBe(5);
+            expect(mockedTradeStore.duration_unit).toBe('m');
+            expect(mockedTradeStore.barrier_1).toBe('+0.1');
+        });
+
+        it('should reset expiry_type to duration when switching from non-Vanilla to Vanilla Put', () => {
+            // Initial state: non-Vanilla contract with endtime
+            expect(mockedTradeStore.contract_type).toBe('rise_fall');
+            expect(mockedTradeStore.expiry_type).toBe('endtime');
+
+            // Switch to Vanilla Put
+            mockedTradeStore.onChange({ target: { name: 'contract_type', value: 'vanillalongput' } });
+
+            // Should reset expiry type and clear end time values
+            expect(mockedTradeStore.expiry_type).toBe('duration');
+            expect(mockedTradeStore.expiry_time).toBeNull();
+            expect(mockedTradeStore.expiry_date).toBeNull();
+            // Should also reset UI store's advanced_expiry_type
+            expect(mockedTradeStore.root_store.ui.advanced_expiry_type).toBe('duration');
+        });
+
+        it('should reset expiry_type to duration when switching from Vanilla Call to Vanilla Put', () => {
+            // Set initial state to Vanilla Call with endtime
+            mockedTradeStore.contract_type = 'vanillalongcall';
+            mockedTradeStore.expiry_type = 'endtime';
+            mockedTradeStore.expiry_time = '15:30:00';
+            mockedTradeStore.expiry_date = '2024-12-25';
+            mockedTradeStore.duration = 5;
+            mockedTradeStore.duration_unit = 'm';
+            mockedTradeStore.barrier_1 = '+0.5';
+            // Set UI store advanced_expiry_type to endtime as well
+            mockedTradeStore.root_store.ui.advanced_expiry_type = 'endtime';
+
+            expect(mockedTradeStore.contract_type).toBe('vanillalongcall');
+            expect(mockedTradeStore.expiry_type).toBe('endtime');
+            expect(mockedTradeStore.expiry_time).toBe('15:30:00');
+            expect(mockedTradeStore.root_store.ui.advanced_expiry_type).toBe('endtime');
+
+            // Switch to Vanilla Put
+            mockedTradeStore.onChange({ target: { name: 'contract_type', value: 'vanillalongput' } });
+
+            // Should reset expiry type and clear end time values
+            expect(mockedTradeStore.expiry_type).toBe('duration');
+            expect(mockedTradeStore.expiry_time).toBeNull();
+            expect(mockedTradeStore.expiry_date).toBeNull();
+            // Should also reset UI store's advanced_expiry_type
+            expect(mockedTradeStore.root_store.ui.advanced_expiry_type).toBe('duration');
+            // Should NOT reset other values since we're switching within Vanilla contracts
+            expect(mockedTradeStore.duration).toBe(5);
+            expect(mockedTradeStore.duration_unit).toBe('m');
+            expect(mockedTradeStore.barrier_1).toBe('+0.5');
+        });
+
+        it('should reset expiry_type to duration when switching from Vanilla Put to Vanilla Call', () => {
+            // Set initial state to Vanilla Put with endtime
+            mockedTradeStore.contract_type = 'vanillalongput';
+            mockedTradeStore.expiry_type = 'endtime';
+            mockedTradeStore.expiry_time = '12:00:00';
+            mockedTradeStore.expiry_date = '2024-11-15';
+            mockedTradeStore.duration = 15;
+            mockedTradeStore.duration_unit = 'm';
+            mockedTradeStore.barrier_1 = '-0.2';
+            // Set UI store advanced_expiry_type to endtime as well
+            mockedTradeStore.root_store.ui.advanced_expiry_type = 'endtime';
+
+            expect(mockedTradeStore.contract_type).toBe('vanillalongput');
+            expect(mockedTradeStore.expiry_type).toBe('endtime');
+            expect(mockedTradeStore.root_store.ui.advanced_expiry_type).toBe('endtime');
+
+            // Switch to Vanilla Call
+            mockedTradeStore.onChange({ target: { name: 'contract_type', value: 'vanillalongcall' } });
+
+            // Should reset expiry type and clear end time values
+            expect(mockedTradeStore.expiry_type).toBe('duration');
+            expect(mockedTradeStore.expiry_time).toBeNull();
+            expect(mockedTradeStore.expiry_date).toBeNull();
+            // Should also reset UI store's advanced_expiry_type
+            expect(mockedTradeStore.root_store.ui.advanced_expiry_type).toBe('duration');
+            // Should NOT reset other values since we're switching within Vanilla contracts
+            expect(mockedTradeStore.duration).toBe(15);
+            expect(mockedTradeStore.duration_unit).toBe('m');
+            expect(mockedTradeStore.barrier_1).toBe('-0.2');
+        });
+
+        it('should reset expiry_type to duration even when already on Vanilla Call and selecting it again', () => {
+            // Set initial state to Vanilla Call with endtime
+            mockedTradeStore.contract_type = 'vanillalongcall';
+            mockedTradeStore.expiry_type = 'endtime';
+            mockedTradeStore.expiry_time = '18:45:00';
+            mockedTradeStore.expiry_date = '2024-10-30';
+            // Set UI store advanced_expiry_type to endtime as well
+            mockedTradeStore.root_store.ui.advanced_expiry_type = 'endtime';
+
+            expect(mockedTradeStore.expiry_type).toBe('endtime');
+            expect(mockedTradeStore.root_store.ui.advanced_expiry_type).toBe('endtime');
+
+            // Select Vanilla Call again (simulating user clicking on the same contract type)
+            mockedTradeStore.onChange({ target: { name: 'contract_type', value: 'vanillalongcall' } });
+
+            // Should still reset expiry type and clear end time values
+            expect(mockedTradeStore.expiry_type).toBe('duration');
+            expect(mockedTradeStore.expiry_time).toBeNull();
+            expect(mockedTradeStore.expiry_date).toBeNull();
+            // Should also reset UI store's advanced_expiry_type
+            expect(mockedTradeStore.root_store.ui.advanced_expiry_type).toBe('duration');
+        });
+
+        it('should not affect non-Vanilla contracts when switching between them', () => {
+            // Set initial state to Rise/Fall with endtime
+            mockedTradeStore.contract_type = 'rise_fall';
+            mockedTradeStore.expiry_type = 'endtime';
+            mockedTradeStore.expiry_time = '20:00:00';
+            mockedTradeStore.expiry_date = '2024-09-15';
+
+            expect(mockedTradeStore.expiry_type).toBe('endtime');
+
+            // Switch to another non-Vanilla contract
+            mockedTradeStore.onChange({ target: { name: 'contract_type', value: 'high_low' } });
+
+            // Should NOT reset expiry type for non-Vanilla contracts
+            expect(mockedTradeStore.expiry_type).toBe('endtime');
+            expect(mockedTradeStore.expiry_time).toBe('20:00:00');
+            expect(mockedTradeStore.expiry_date).toBe('2024-09-15');
+        });
+    });
 });
