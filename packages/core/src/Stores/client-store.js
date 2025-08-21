@@ -643,8 +643,6 @@ export default class ClientStore extends BaseStore {
 
         if (response?.logout === 1) {
             await this.cleanUp();
-
-            // Note: setIsSingleLoggingIn method was removed as part of cleanup
             this.setLogout(true);
         }
 
