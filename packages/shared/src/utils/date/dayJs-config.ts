@@ -10,6 +10,6 @@ export const setLocale = async (lang: string) => {
         dayjs.locale(localeModule.default);
     } catch (error) {
         // eslint-disable-next-line no-console
-        console.error(`Locale ${locale} could not be loaded`, error);
+        console.error('Locale could not be loaded:', { locale, error });
     }
 };

@@ -98,8 +98,19 @@ InScriptStore.prototype = {
     ) {
         let key = k;
         if (!Array.isArray(key)) key = [key];
+
+        // Prevent prototype pollution
+        const dangerousKeys = ['__proto__', 'constructor', 'prototype'];
+        key.forEach(k => {
+            if (typeof k === 'string' && dangerousKeys.includes(k)) {
+                throw new Error('Invalid property name');
+            }
+        });
+
         if (key.length > 1) {
-            if (!(key[0] in obj) || isEmptyObject(obj[key[0]])) obj[key[0]] = {};
+            if (!(key[0] in obj) || isEmptyObject(obj[key[0]])) {
+                obj[key[0]] = Object.create(null); // Safer object creation
+            }
             this.set(key.slice(1), value, obj[key[0]]);
         } else {
             obj[key[0]] = value;
