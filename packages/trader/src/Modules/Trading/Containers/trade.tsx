@@ -67,8 +67,7 @@ const Trade = observer(() => {
         symbol,
     } = useTraderStore();
     const { is_dark_mode_on: is_dark_theme, notification_messages_ui: NotificationMessages } = ui;
-    const { is_logged_in, is_logging_in } = client;
-    const is_eu = client.landing_company_shortcode === 'maltainvest';
+    const { is_eu, is_logged_in, is_logging_in } = client;
     const { network_status } = common;
     const { isDesktop, isMobile, isTabletPortrait } = useDevice();
 

@@ -655,8 +655,6 @@ type TUiStore = {
     purchase_states: boolean[];
     setIsMFVericationPendingModal: (value: boolean) => void;
     vanilla_trade_type: 'VANILLALONGCALL' | 'VANILLALONGPUT';
-    is_trading_disabled_by_residence_modal_visible: boolean;
-    setIsTradingDisabledByResidenceModal: (value: boolean) => void;
     field_ref_to_focus: string | null; // field_ref_to_focus accepts a field identifier which will be focused
     setFieldRefToFocus: (value: string | null) => void;
     setHashedValue: (value: string) => void;

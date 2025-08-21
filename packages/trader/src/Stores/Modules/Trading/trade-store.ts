@@ -818,7 +818,6 @@ export default class TradeStore extends BaseStore {
     }
 
     async setActiveSymbols() {
-        const is_on_mf_account = this.root_store.client.landing_company_shortcode === 'maltainvest';
         const is_logged_in = this.root_store.client.is_logged_in;
         const showError = this.root_store.common.showError;
 
@@ -1313,7 +1312,6 @@ export default class TradeStore extends BaseStore {
     }
 
     enablePurchase() {
-        // Simplified for trading app - always enable purchase
         this.is_purchase_enabled = true;
     }
 
@@ -1917,7 +1915,6 @@ export default class TradeStore extends BaseStore {
             return;
         }
         this.root_store.notifications.setShouldShowPopups(false);
-        // Removed account switching calls for single account model
         this.resetAccumulatorData();
         this.onLogout(this.logoutListener);
         this.onClientInit(this.clientInitListener);
@@ -1976,7 +1973,6 @@ export default class TradeStore extends BaseStore {
         if (this.should_skip_prepost_lifecycle) {
             return;
         }
-        // Removed account switching dispose calls for single account model
         this.disposeLogout();
         this.disposeClientInit();
         this.disposeNetworkStatusChange();

@@ -4,7 +4,6 @@ import moment from 'moment';
 
 import {
     deriv_urls,
-    excludeParamsFromUrlQuery,
     filterUrlQuery,
     getAppId,
     isCryptocurrency,
@@ -36,31 +35,24 @@ const storage_key = 'current_account';
 const store_name = 'client_store';
 
 export default class ClientStore extends BaseStore {
-    // Core authentication properties
     loginid;
     preferred_language;
     email;
     user_id;
 
-    // Single account model - replaces complex accounts object
     current_account = null;
-
-    // Essential state management
     initialized_broadcast = false;
     is_authorize = false;
     is_logging_in = false;
     is_client_store_initialized = false;
     has_logged_out = false;
-    is_logging_out = false;
     should_redirect_user_to_login = false;
     is_new_session = false;
 
-    // Essential trading data
     currencies_list = {};
     selected_currency = '';
     website_status = {};
 
-    // Minimal cookie tracking
     has_cookie_account = false;
 
     constructor(root_store) {
@@ -68,7 +60,6 @@ export default class ClientStore extends BaseStore {
         super({ root_store, local_storage_properties, store_name });
 
         makeObservable(this, {
-            // Core observables
             loginid: observable,
             preferred_language: observable,
             email: observable,
@@ -81,13 +72,11 @@ export default class ClientStore extends BaseStore {
             is_logging_in: observable,
             is_client_store_initialized: observable,
             has_logged_out: observable,
-            is_logging_out: observable,
             should_redirect_user_to_login: observable,
             website_status: observable,
             has_cookie_account: observable,
             is_new_session: observable,
 
-            // Essential computed properties
             balance: computed,
             currency: computed,
             is_virtual: computed,
@@ -99,7 +88,6 @@ export default class ClientStore extends BaseStore {
             email_address: computed,
             landing_company_shortcode: computed,
 
-            // Simplified getters for trading
             is_cr_account: computed,
             is_mf_account: computed,
             clients_country: computed,
@@ -107,13 +95,11 @@ export default class ClientStore extends BaseStore {
             is_options_blocked: computed,
             is_multipliers_only: computed,
 
-            // Simplified compatibility getters
             has_active_real_account: computed,
             has_any_real_account: computed,
             has_wallet: computed,
             is_single_currency: computed,
 
-            // Essential actions
             setPreferredLanguage: action.bound,
             setCookieAccount: action.bound,
             responsePayoutCurrencies: action.bound,
@@ -130,7 +116,6 @@ export default class ClientStore extends BaseStore {
             cleanUp: action.bound,
             logout: action.bound,
             setLogout: action.bound,
-            setIsLoggingOut: action.bound,
             setShouldRedirectToLogin: action.bound,
             getToken: action.bound,
             init: action.bound,
@@ -144,23 +129,12 @@ export default class ClientStore extends BaseStore {
             is_crypto: action.bound,
         });
 
-        // Simplified reactions for V2 authentication
         reaction(
             () => [this.is_logged_in, this.loginid, this.email, this.currency, this.preferred_language],
             () => {
                 this.setCookieAccount();
-
-                // For V2 authentication, only cleanup if we're definitely logged out
-                const hasSessionToken = !!this.getSessionToken();
-                const shouldCleanup = !this.is_logged_in && !hasSessionToken && this.is_client_store_initialized;
-
-                if (shouldCleanup) {
-                    // Remove traders_hub cleanup - not needed for trading app
-                }
             }
         );
-
-        // Remove account_settings reaction - not needed for trading app
 
         when(
             () => !this.is_logged_in && this.root_store.ui && this.root_store.ui.is_real_acc_signup_on,
@@ -168,12 +142,10 @@ export default class ClientStore extends BaseStore {
         );
     }
 
-    // Simplified balance getter - direct access to current account
     get balance() {
         return this.current_account?.balance?.toString() || undefined;
     }
 
-    // Simplified getters for trading-only app
     get has_active_real_account() {
         return !this.is_virtual;
     }
@@ -186,7 +158,6 @@ export default class ClientStore extends BaseStore {
         return false; // Simplified for trading app
     }
 
-    // Simplified currency getter
     get currency() {
         if (this.selected_currency.length) {
             return this.selected_currency;
@@ -207,7 +178,6 @@ export default class ClientStore extends BaseStore {
         return 'USD';
     }
 
-    // Simplified login check - V2 only
     get is_logged_in() {
         const hasSessionToken = !!this.getSessionToken();
         const hasCurrentAccountLoginId = !!this.current_account?.loginid;
@@ -215,7 +185,6 @@ export default class ClientStore extends BaseStore {
         return hasSessionToken && hasCurrentAccountLoginId && hasLoginId;
     }
 
-    // Simplified virtual account check
     get is_virtual() {
         return !!this.current_account?.is_virtual;
     }
@@ -228,7 +197,6 @@ export default class ClientStore extends BaseStore {
         return getClientAccountType(this.loginid);
     }
 
-    // Simplified residence getter
     get residence() {
         return this.current_account?.residence || '';
     }
@@ -241,7 +209,6 @@ export default class ClientStore extends BaseStore {
         return this.current_account?.landing_company_shortcode || '';
     }
 
-    // Simplified account type checks
     get is_cr_account() {
         return this.loginid?.startsWith('CR');
     }
@@ -271,16 +238,6 @@ export default class ClientStore extends BaseStore {
     get is_single_currency() {
         return true; // Simplified for single account
     }
-
-    setIsLoggingOut(is_logging_out) {
-        this.is_logging_out = is_logging_out;
-    }
-
-    isBotAllowed = () => {
-        if (!this.is_logged_in && this.is_eu_country) return false;
-        const is_mf = this.landing_company_shortcode === 'maltainvest';
-        return this.is_virtual ? !this.is_multipliers_only : !is_mf && !this.is_options_blocked;
-    };
 
     setIsAuthorize(value) {
         this.is_authorize = value;
@@ -325,11 +282,9 @@ export default class ClientStore extends BaseStore {
         this.selectCurrency('');
     }
 
-    // Simplified V2-only responseAuthorize
     responseAuthorize(response) {
         const { authorize } = response;
 
-        // Update current account with V2 response data using runInAction for proper reactivity
         runInAction(() => {
             this.current_account = {
                 loginid: authorize.loginid,
@@ -389,7 +344,6 @@ export default class ClientStore extends BaseStore {
         await WS.authorized.topupVirtual();
     }
 
-    // Simplified account type check
     isAccountOfType = type => {
         const client_account_type = getClientAccountType(this.loginid);
         return (
@@ -399,8 +353,6 @@ export default class ClientStore extends BaseStore {
         );
     };
 
-    // Removed account creation stub methods
-    // Simplified init method - V2 authentication only
     async init() {
         let search = '';
         try {
@@ -414,12 +366,10 @@ export default class ClientStore extends BaseStore {
         const action_param = search_params?.get('action');
         const loginid_param = search_params?.get('loginid');
 
-        // Redirect to DTrader if needed
         if (!window.location.pathname.endsWith(routes.index) && /chart_type|interval|symbol|trade_type/.test(search)) {
             window.history.replaceState({}, document.title, routes.index + search);
         }
 
-        // V2 authentication only
         const urlParams = new URLSearchParams(search);
         const oneTimeToken = urlParams.get('token');
         const existingSessionToken = this.getSessionToken();
@@ -541,27 +491,6 @@ export default class ClientStore extends BaseStore {
             );
         }
 
-        const unused_params = [
-            'type',
-            'acp',
-            'label',
-            'server',
-            'interface',
-            'cid',
-            'age',
-            'utm_source',
-            'first_name',
-            'second_name',
-            'email',
-            'phone',
-            '_filteredParams',
-        ];
-        history.replaceState(
-            null,
-            null,
-            window.location.href.replace(`${search}`, excludeParamsFromUrlQuery(search, unused_params))
-        );
-
         this.setIsClientStoreInitialized();
 
         // Ensure balance subscription is active
@@ -582,13 +511,10 @@ export default class ClientStore extends BaseStore {
         this.website_status = response.website_status;
     }
 
-    // Removed legacy landing company methods
-
     setLoginId(loginid) {
         this.loginid = loginid;
     }
 
-    // Simplified token getter - returns session token
     getToken() {
         return this.getSessionToken();
     }
@@ -606,7 +532,6 @@ export default class ClientStore extends BaseStore {
                   }
                 : Cookies.getJSON('utm_data');
 
-        // Simplified for trading app - use residence from current_account
         const residence_country = !isLoggedOut ? this.residence : '';
         const login_status = !isLoggedOut && this.is_logged_in;
 
@@ -633,7 +558,6 @@ export default class ClientStore extends BaseStore {
         this.is_logging_in = bool;
     }
 
-    // Simplified balance update for single account
     setBalanceActiveAccount(obj_balance) {
         if (!obj_balance || typeof obj_balance.balance === 'undefined') {
             return;
@@ -652,8 +576,6 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-    // Stub for setBalanceOtherAccounts - not needed for single account
-
     selectCurrency(value) {
         this.selected_currency = value;
     }
@@ -669,14 +591,11 @@ export default class ClientStore extends BaseStore {
         this.is_client_store_initialized = true;
     }
 
-    // Removed legacy account settings and status methods
-
     setInitialized(is_initialized) {
         this.initialized_broadcast = is_initialized;
     }
 
     async cleanUp() {
-        // For V2 authentication, don't cleanup if we have a valid session token
         const hasSessionToken = !!this.getSessionToken();
         if (hasSessionToken) {
             return;
@@ -719,10 +638,6 @@ export default class ClientStore extends BaseStore {
     }
 
     async logout() {
-        // makes sure to clear the cached traders-hub data when logging out
-        localStorage.removeItem('traders_hub_store');
-        localStorage.removeItem('trade_store');
-
         // TODO: [add-client-action] - Move logout functionality to client store
         const response = await requestLogout();
 
@@ -731,7 +646,6 @@ export default class ClientStore extends BaseStore {
 
             // Note: setIsSingleLoggingIn method was removed as part of cleanup
             this.setLogout(true);
-            this.setIsLoggingOut(false);
         }
 
         return response;
@@ -741,8 +655,6 @@ export default class ClientStore extends BaseStore {
         this.has_logged_out = is_logged_out;
         if (this.root_store.common.has_error) this.root_store.common.setError(false, null);
     }
-
-    // Removed legacy authentication methods - V2 only
 
     // V2 Authentication Method
     async authenticateV2(oneTimeToken) {
@@ -811,7 +723,6 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-    // Session token storage methods
     storeSessionToken(token) {
         if (token) {
             localStorage.setItem('session_token', token);

@@ -6,7 +6,6 @@ import { observer, useStore } from '@deriv/stores';
 import AccountVerificationPendingModal from 'App/Components/Elements/Modals/AccountVerificationPendingModal';
 import MarketUnavailableModal from 'App/Components/Elements/Modals/MarketUnavailableModal';
 import ServicesErrorModal from 'App/Components/Elements/Modals/ServicesErrorModal';
-import TradingDisabledByResidenceModal from 'App/Components/Elements/Modals/TradingDisabledByResidenceModal';
 import { useTraderStore } from 'Stores/useTraderStores';
 
 const TradeModals = observer(() => {
@@ -58,8 +57,6 @@ const TradeModals = observer(() => {
                 is_visible={is_mf_verification_pending_modal_visible}
                 onConfirm={() => setIsMFVericationPendingModal(false)}
             />
-
-            <TradingDisabledByResidenceModal />
         </React.Fragment>
     );
 });

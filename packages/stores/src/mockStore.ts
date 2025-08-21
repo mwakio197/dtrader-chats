@@ -493,8 +493,6 @@ const mock = (): TStores & { is_mock: boolean } => {
             is_additional_kyc_info_modal_open: false,
             isUrlUnavailableModalVisible: false,
             toggleUrlUnavailableModal: jest.fn(),
-            is_trading_disabled_by_residence_modal_visible: false,
-            setIsTradingDisabledByResidenceModal: jest.fn(),
             field_ref_to_focus: null,
             setFieldRefToFocus: jest.fn(),
             setHashedValue: jest.fn(),

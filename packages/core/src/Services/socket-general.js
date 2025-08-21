@@ -75,7 +75,6 @@ const BinarySocketGeneral = (() => {
 
                     client_store.logout();
                 } else if (!/authorize/.test(State.get('skip_response'))) {
-                    // Simplified V2-only authentication logic
                     if (response.authorize.loginid !== client_store.loginid) {
                         client_store.setLoginId(response.authorize.loginid);
                     }
@@ -99,16 +98,11 @@ const BinarySocketGeneral = (() => {
         }
     };
 
-    // Removed unused functions for trading-only app
-
     const setBalanceActiveAccount = flow(function* (obj_balance) {
         yield BinarySocket?.wait('website_status');
         client_store.setBalanceActiveAccount(obj_balance);
     });
 
-    // Removed setBalanceOtherAccounts - not needed for single account
-
-    // V2 Authentication - Simplified error handling
     const handleError = response => {
         const msg_type = response.msg_type;
         const error_code = getPropertyValue(response, ['error', 'code']);
@@ -144,9 +138,6 @@ const BinarySocketGeneral = (() => {
                 client_store.logout();
                 break;
             }
-            // V2 Authentication - Removed redundant error cases:
-            // - InvalidToken (not used with session tokens)
-            // - InternalServerError/OutputValidationFailed/InputValidationFailed (should be fixed at API level)
             default:
                 break;
         }
@@ -164,7 +155,6 @@ const BinarySocketGeneral = (() => {
         };
     };
 
-    // Simplified single account balance subscription
     const subscribeBalances = () => {
         if (client_store.current_account?.loginid) {
             WS.subscribeBalanceActiveAccount(
@@ -174,7 +164,6 @@ const BinarySocketGeneral = (() => {
         }
     };
 
-    // Simplified authorizeAccount
     const authorizeAccount = response => {
         client_store.responseAuthorize(response);
         subscribeBalances(); // Single account balance
