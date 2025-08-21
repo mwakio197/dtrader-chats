@@ -1,7 +1,6 @@
 import React from 'react';
 import { observer, useStore } from '@deriv/stores';
 import ServicesErrorModal from 'App/Components/Elements/Modals/ServicesErrorModal';
-import TradingDisabledByResidenceModal from 'App/Components/Elements/Modals/TradingDisabledByResidenceModal';
 import { useTraderStore } from 'Stores/useTraderStores';
 
 const TradeModals = observer(() => {
@@ -29,7 +28,6 @@ const TradeModals = observer(() => {
                 is_virtual={is_virtual}
                 is_logged_in={is_logged_in}
             />
-            <TradingDisabledByResidenceModal />
         </React.Fragment>
     );
 });

@@ -54,8 +54,6 @@ const useOauth2 = ({ handleLogout }: { handleLogout: () => Promise<void> }) => {
             // eslint-disable-next-line no-console
             console.error(error);
 
-            client.setIsSingleLoggingIn(false);
-
             if (common.setError) {
                 common.setError(true, {
                     code: 'LogoutError',

@@ -51,8 +51,6 @@ describe('HeaderLegacy', () => {
             currency: 'USD',
             is_logged_in: true,
             is_logging_in: false,
-            is_single_logging_in: false,
-            is_switching: false,
         },
         ui: {
             header_extension: null,
@@ -181,30 +179,6 @@ describe('HeaderLegacy', () => {
                 client: {
                     ...default_mock_store.client,
                     is_logging_in: true,
-                },
-            });
-
-            expect(screen.getByTestId('dt_accounts_info_loader')).toBeInTheDocument();
-            expect(screen.queryByTestId('dt_header_account_actions')).not.toBeInTheDocument();
-        });
-
-        it('should render AccountsInfoLoader when is_single_logging_in is true', () => {
-            renderComponent({
-                client: {
-                    ...default_mock_store.client,
-                    is_single_logging_in: true,
-                },
-            });
-
-            expect(screen.getByTestId('dt_accounts_info_loader')).toBeInTheDocument();
-            expect(screen.queryByTestId('dt_header_account_actions')).not.toBeInTheDocument();
-        });
-
-        it('should render AccountsInfoLoader when is_switching is true', () => {
-            renderComponent({
-                client: {
-                    ...default_mock_store.client,
-                    is_switching: true,
                 },
             });
 
