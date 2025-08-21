@@ -631,7 +631,6 @@ type TUiStore = {
     toggleReports: (is_visible: boolean) => void;
     is_real_acc_signup_on: boolean;
     is_need_real_account_for_cashier_modal_visible: boolean;
-    is_mf_verification_pending_modal_visible: boolean;
     toggleNeedRealAccountForCashierModal: () => void;
     is_switch_to_deriv_account_modal_visible: boolean;
     openSwitchToRealAccountModal: () => void;
@@ -652,7 +651,6 @@ type TUiStore = {
     populateHeaderExtensions: (header_items: JSX.Element | null) => void;
     populateSettingsExtensions: (menu_items: Array<TPopulateSettingsExtensionsMenuItem> | null) => void;
     purchase_states: boolean[];
-    setIsMFVericationPendingModal: (value: boolean) => void;
     vanilla_trade_type: 'VANILLALONGCALL' | 'VANILLALONGPUT';
     field_ref_to_focus: string | null; // field_ref_to_focus accepts a field identifier which will be focused
     setFieldRefToFocus: (value: string | null) => void;

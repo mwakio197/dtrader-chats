@@ -3,7 +3,7 @@
 <div align="center">
 
 **deriv-com/derivatives-trader**
-📅 Last updated: 2025-08-19 11:23:38 UTC • 🔄 Tracking merged PRs to main/master
+📅 Last updated: 2025-08-21 03:01:57 UTC • 🔄 Tracking merged PRs to main/master
 
 </div>
 
@@ -11,30 +11,30 @@
 
 ## 📊 Quick Stats
 
-| Metric | Value | Metric | Value |
-|--------|-------|--------|-------|
-| **📁 Total Merged PRs** | 49 | **📈 Average AI Code** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 11% |
-| **🤖 PRs with AI Analysis** | 41 | **🎯 Overall AI Percentage** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 9% |
-| **📄 Files Analyzed** | 631 | **⚡ Total AI Characters** | 37,401 |
+| Metric                      | Value | Metric                       | Value                    |
+| --------------------------- | ----- | ---------------------------- | ------------------------ |
+| **📁 Total Merged PRs**     | 51    | **📈 Average AI Code**       | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 11% |
+| **🤖 PRs with AI Analysis** | 42    | **🎯 Overall AI Percentage** | 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 9%  |
+| **📄 Files Analyzed**       | 644   | **⚡ Total AI Characters**   | 37,401                   |
 
 ---
 
 ## 🚀 Recent Merged Pull Requests
 
-> 📊 Showing the 10 most recent merged PRs (stats above include all 49 PRs)
+> 📊 Showing the 10 most recent merged PRs (stats above include all 51 PRs)
 
-| PR | Author | Date | Files | AI Content | Percentage |
-|----|--------|------|-------|------------|------------|
-| [#202](#) **Nijil / Remove [AI] tags from codebase** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/19/2025 | 0 | 0 / 0 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#198](#) **Jim/grwt 6886/barrier on the chart glitch** | [@jim-deriv](https://github.com/jim-deriv) | 8/19/2025 | N/A | No data | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#199](#) **Akmal / fix: bugs and improvements** | [@akmal-deriv](https://github.com/akmal-deriv) | 8/19/2025 | N/A | No data | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#194](#) **Nijil / Fix - Market closed overlay color & removed Transfer from Statement page filter** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/19/2025 | 7 | 0 / 938 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#195](#) **chore: update shiftai-cli version** | [@prince-deriv](https://github.com/prince-deriv) | 8/18/2025 | 4 | 0 / 930 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#192](#) **Farabi/update-brand-to-deriv** | [@farabi-deriv](https://github.com/farabi-deriv) | 8/18/2025 | N/A | No data | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#190](#) **Akmal / Fix more bugs** | [@akmal-deriv](https://github.com/akmal-deriv) | 8/18/2025 | N/A | No data | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#188](#) **Farabi/update-footer-and-header** | [@farabi-deriv](https://github.com/farabi-deriv) | 8/18/2025 | N/A | No data | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#183](#) **Nijil / Update onboarding content in mobile version** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/15/2025 | 2 | 0 / 276 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   0% |
-| [#182](#) **Nijil / Fix missing Reports menu item in side nav drawer** | [@nijil-deriv](https://github.com/nijil-deriv) | 8/15/2025 | 1 | 59 / 67 chars | 🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜  88% |
+| PR                                                                                                    | Author                                           | Date      | Files | AI Content    | Percentage                        |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------ | --------- | ----- | ------------- | --------------------------------- |
+| [#207](#) **Nijil / Remove account-verification-pending-modal and all it's usage**                    | [@nijil-deriv](https://github.com/nijil-deriv)   | 8/21/2025 | 13    | 0 / 662 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
+| [#205](#) **Akmal / Fix more bugs**                                                                   | [@akmal-deriv](https://github.com/akmal-deriv)   | 8/20/2025 | N/A   | No data       | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
+| [#202](#) **Nijil / Remove [AI] tags from codebase**                                                  | [@nijil-deriv](https://github.com/nijil-deriv)   | 8/19/2025 | 0     | 0 / 0 chars   | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
+| [#198](#) **Jim/grwt 6886/barrier on the chart glitch**                                               | [@jim-deriv](https://github.com/jim-deriv)       | 8/19/2025 | N/A   | No data       | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
+| [#199](#) **Akmal / fix: bugs and improvements**                                                      | [@akmal-deriv](https://github.com/akmal-deriv)   | 8/19/2025 | N/A   | No data       | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
+| [#194](#) **Nijil / Fix - Market closed overlay color & removed Transfer from Statement page filter** | [@nijil-deriv](https://github.com/nijil-deriv)   | 8/19/2025 | 7     | 0 / 938 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
+| [#195](#) **chore: update shiftai-cli version**                                                       | [@prince-deriv](https://github.com/prince-deriv) | 8/18/2025 | 4     | 0 / 930 chars | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
+| [#192](#) **Farabi/update-brand-to-deriv**                                                            | [@farabi-deriv](https://github.com/farabi-deriv) | 8/18/2025 | N/A   | No data       | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
+| [#190](#) **Akmal / Fix more bugs**                                                                   | [@akmal-deriv](https://github.com/akmal-deriv)   | 8/18/2025 | N/A   | No data       | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
+| [#188](#) **Farabi/update-footer-and-header**                                                         | [@farabi-deriv](https://github.com/farabi-deriv) | 8/18/2025 | N/A   | No data       | ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0% |
 
 ---
 

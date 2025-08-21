@@ -938,16 +938,22 @@ export default class TradeStore extends BaseStore {
             const is_switching_to_vanilla = isVanillaContract(value as string);
             const was_vanilla = isVanillaContract(this.contract_type);
 
-            if (is_switching_to_vanilla && !was_vanilla) {
-                // Reset to safe defaults for Vanilla contracts
-                // Use minutes (m) with duration 5 to ensure relative barriers (+/-)
-                this.duration = 5;
-                this.duration_unit = 'm';
-                this.barrier_1 = '+0.1';
-                // Reset expiry type to duration and clear end time values
+            if (is_switching_to_vanilla) {
+                // Reset expiry type to duration for ALL Vanilla contract selections
+                // This ensures the duration toggle always resets to "Duration" tab
                 this.expiry_type = 'duration';
+                this.root_store.ui.advanced_expiry_type = 'duration';
                 this.expiry_time = null;
                 this.expiry_date = null;
+
+                // Only reset other defaults when switching from non-Vanilla to Vanilla
+                if (!was_vanilla) {
+                    // Reset to safe defaults for Vanilla contracts
+                    // Use minutes (m) with duration 5 to ensure relative barriers (+/-)
+                    this.duration = 5;
+                    this.duration_unit = 'm';
+                    this.barrier_1 = '+0.1';
+                }
             }
         }
 

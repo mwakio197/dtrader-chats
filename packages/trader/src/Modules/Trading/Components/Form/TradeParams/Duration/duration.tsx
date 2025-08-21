@@ -73,6 +73,14 @@ const Duration = ({
         }
     }, [contract_type]);
 
+    // Reset advanced_expiry_type to 'duration' for Vanilla contracts when contract type changes
+    // This ensures the duration toggle resets to "Duration" tab when switching TO Vanilla contracts
+    React.useEffect(() => {
+        if (isVanillaContract(contract_type)) {
+            onChangeUiStore({ name: 'advanced_expiry_type', value: 'duration' });
+        }
+    }, [contract_type, onChangeUiStore]);
+
     const expiry_list = [{ text: localize('Duration'), value: 'duration' }];
 
     const has_end_time = expiry_list.find(expiry => expiry.value === 'endtime');

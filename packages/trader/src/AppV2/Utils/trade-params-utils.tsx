@@ -173,8 +173,13 @@ export const getTradeTypeTabsList = (contract_type = '') => {
             contract_type: CONTRACT_TYPES.VANILLA.PUT,
             is_displayed: is_vanilla,
         },
-        { label: 'Higher', value: TRADE_TYPES.HIGH_LOW, contract_type: CONTRACT_TYPES.CALL, is_displayed: is_high_low },
-        { label: 'Lower', value: TRADE_TYPES.HIGH_LOW, contract_type: CONTRACT_TYPES.PUT, is_displayed: is_high_low },
+        {
+            label: 'Higher',
+            value: TRADE_TYPES.HIGH_LOW,
+            contract_type: CONTRACT_TYPES.HIGHER,
+            is_displayed: is_high_low,
+        },
+        { label: 'Lower', value: TRADE_TYPES.HIGH_LOW, contract_type: CONTRACT_TYPES.LOWER, is_displayed: is_high_low },
         {
             label: 'Touch',
             value: TRADE_TYPES.TOUCH,
