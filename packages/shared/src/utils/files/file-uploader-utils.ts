@@ -1,5 +1,6 @@
 import { useMutation } from '@deriv/api';
-import { compressImg, convertToBase64, isImageType, getFormatFromMIME, TImage } from './image/image_utility';
+
+import { compressImg, convertToBase64, getFormatFromMIME, isImageType, TImage } from './image/image_utility';
 
 export type TSettings = Parameters<ReturnType<typeof useMutation<'document_upload'>>['mutate']>[0]['payload'];
 
@@ -16,8 +17,14 @@ export const truncateFileName = (file: File, limit: number) => {
 };
 
 export const getFileExtension = (file: Blob) => {
-    const f = file?.type?.match(/[^/]+$/);
-    return f && f[0];
+    if (!file?.type) return null;
+
+    // Prevent ReDoS by limiting input length and using safer approach
+    const mimeType = file.type;
+    if (mimeType.length > 100) return null; // Prevent long inputs
+
+    const lastSlashIndex = mimeType.lastIndexOf('/');
+    return lastSlashIndex !== -1 ? mimeType.substring(lastSlashIndex + 1) : null;
 };
 
 export const compressImageFiles = (files?: File[]) => {

@@ -1,6 +1,7 @@
 import { addComma } from '../currency';
 import { cloneObject } from '../object';
 import { compareBigUnsignedInt } from '../string';
+
 import { TFormErrorMessagesTypes } from './form-error-messages-types';
 
 export type TOptions = {
@@ -57,7 +58,19 @@ export const validAddress = (value: string, options?: TOptions) => {
 export const validPostCode = (value: string) => value === '' || /^[A-Za-z0-9][A-Za-z0-9\s-]*$/.test(value);
 export const validTaxID = (value: string) => /(?!^$|\s+)[A-Za-z0-9./\s-]$/.test(value);
 export const validPhone = (value: string) => /^\+?([0-9-]+\s)*[0-9-]+$/.test(value);
-export const validLetterSymbol = (value: string) => /^[A-Za-z]+([a-zA-Z.' -])*[a-zA-Z.' -]+$/.test(value);
+export const validLetterSymbol = (value: string) => {
+    if (!value || value.length > 100) return false; // Prevent long inputs
+    if (value.length < 2) return false; // Minimum length check
+
+    // Check first character is letter
+    if (!/^[A-Za-z]/.test(value)) return false;
+
+    // Check last character is valid
+    if (!/[a-zA-Z.' -]$/.test(value)) return false;
+
+    // Check all characters are valid (no nested quantifiers)
+    return /^[a-zA-Z.' -]+$/.test(value);
+};
 export const validName = (value: string) => /^(?!.*\s{2,})(?!\s)[\p{L}\s'.-]{1,50}$/u.test(value);
 export const validLength = (value = '', options: TOptions) =>
     (options.min ? value.length >= Number(options.min) : true) &&
