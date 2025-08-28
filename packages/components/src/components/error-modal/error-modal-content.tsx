@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../button';
-import Icon from '../icon';
 import Text from '../text';
+import { DerivLightIcCashierBlockedIcon } from '@deriv/quill-icons';
 import { Localize } from '@deriv-com/translations';
 
 type TErrorModalContent = {
@@ -11,7 +11,7 @@ type TErrorModalContent = {
 const ErrorModalContent = ({ error_message }: TErrorModalContent) => {
     return (
         <div className='unhandled-error'>
-            <Icon icon='IcAccountError' size={96} />
+            <DerivLightIcCashierBlockedIcon width={96} height={96} />
             <Text className='da-icon-with-message__text' as='p' line_height='xxl' align='center' weight='bold'>
                 <Localize i18n_default_text='Sorry for the interruption' />
             </Text>

@@ -44,8 +44,8 @@ export type TInputProps = {
         React.ComponentType extends 'textarea'
             ? HTMLTextAreaElement
             : React.ComponentType extends 'input'
-            ? HTMLInputElement
-            : never
+              ? HTMLInputElement
+              : never
     >;
     required?: boolean;
     trailing_icon?: React.ReactElement | null;
@@ -133,6 +133,8 @@ const Input = React.forwardRef<HTMLInputElement & HTMLTextAreaElement, TInputPro
                         {leading_icon &&
                             React.cloneElement(leading_icon, {
                                 className: classNames('dc-input__leading-icon', leading_icon.props.className),
+                                iconSize: leading_icon.props.iconSize || 'xs',
+                                fill: leading_icon.props.fill || 'var(--color-text-primary)',
                             })}
                         {props.type === 'textarea' ? (
                             <textarea
@@ -174,6 +176,8 @@ const Input = React.forwardRef<HTMLInputElement & HTMLTextAreaElement, TInputPro
                         {trailing_icon &&
                             React.cloneElement(trailing_icon, {
                                 className: classNames('dc-input__trailing-icon', trailing_icon.props.className),
+                                iconSize: trailing_icon.props.iconSize || 'xs',
+                                fill: trailing_icon.props.fill || 'var(--color-text-primary)',
                             })}
                         {label && (
                             <label className={classNames('dc-input__label', label_className)} htmlFor={props.id}>

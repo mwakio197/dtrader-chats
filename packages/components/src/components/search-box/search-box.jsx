@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Field as FormField, Formik, Form } from 'formik';
-import Icon from '../icon';
 import Input from '../input';
+import { LegacySearch1pxIcon, StandaloneCircleXmarkRegularIcon } from '@deriv/quill-icons';
 
 const SearchBox = ({ className, onClear, onSearch, placeholder }) => {
     const typing_timer = React.useRef(null);
@@ -56,14 +56,15 @@ const SearchBox = ({ className, onClear, onSearch, placeholder }) => {
                                     onKeyDown={() => onSearchKeyUpDown(submitForm)}
                                     onKeyUp={() => onSearchKeyUpDown(submitForm)}
                                     onFocus={submitForm}
-                                    leading_icon={<Icon className='search-box__field-icon' icon='IcSearch' />}
+                                    leading_icon={
+                                        <LegacySearch1pxIcon className='search-box__field-icon' iconSize='xs' />
+                                    }
                                     trailing_icon={
                                         search ? (
-                                            <Icon
+                                            <StandaloneCircleXmarkRegularIcon
                                                 className='search-box__cross-icon'
-                                                color='secondary'
-                                                icon='IcCloseCircle'
                                                 onClick={() => onSearchClear(setFieldValue)}
+                                                iconSize='xs'
                                             />
                                         ) : null
                                     }

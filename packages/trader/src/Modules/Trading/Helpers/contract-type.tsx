@@ -2,7 +2,13 @@ import React from 'react';
 
 import { ActiveSymbols } from '@deriv/api-types';
 import { unsupported_contract_types_list } from '@deriv/shared';
-import { localize } from '@deriv-com/translations';
+import {
+    LegacyTradeTypeAllIcon,
+    LegacyAccumulatorIcon,
+    LegacyTradeTypeOptionsIcon,
+    LegacyTradeTypeMultipliersIcon,
+    LegacyTurboIcon,
+} from '@deriv/quill-icons';
 
 import { TContractCategory, TContractType, TList } from '../Components/Form/ContractType/types';
 
@@ -20,16 +26,6 @@ type TItem = {
 export const isMajorPairsSymbol = (checked_symbol: string, active_symbols: ActiveSymbols) =>
     active_symbols.some(({ submarket, symbol }) => /major_pairs/i.test(submarket) && checked_symbol === symbol);
 
-export const contract_category_icon = {
-    [localize('Ups & Downs')]: 'IcUpsDowns',
-    [localize('Touch & No Touch')]: 'IcHighsLows',
-    [localize('Ins & Outs')]: 'IcInsOuts',
-    [localize('Look Backs')]: 'IcLookbacks',
-    [localize('Digits')]: 'IcDigits',
-    [localize('Multipliers')]: 'IcMultiplier',
-    [localize('Accumulators')]: 'IcCatAccumulator',
-} as const;
-
 export const ordered_trade_categories = [
     'Accumulators',
     'Vanillas',
@@ -40,14 +36,13 @@ export const ordered_trade_categories = [
     'Digits',
 ];
 
-export const getContractTypeCategoryIcons = () =>
-    ({
-        All: 'IcCatAll',
-        Accumulators: 'IcCatAccumulator',
-        Options: 'IcCatOptions',
-        Multipliers: 'IcCatMultiplier',
-        Turbos: 'IcCatTurbos',
-    }) as const;
+export const getContractTypeCategoryIcons = () => ({
+    All: <LegacyTradeTypeAllIcon />,
+    Accumulators: <LegacyAccumulatorIcon />,
+    Options: <LegacyTradeTypeOptionsIcon />,
+    Multipliers: <LegacyTradeTypeMultipliersIcon />,
+    Turbos: <LegacyTurboIcon />,
+});
 
 /**
  * Returns a list of contracts in the following format:
@@ -81,7 +76,6 @@ export const getAvailableContractTypes = (
                     key,
                     label: contract_name,
                     contract_types: available_contract_types,
-                    icon: contract_category_icon[contract_name],
                     component: null,
                 };
             }
@@ -91,14 +85,7 @@ export const getAvailableContractTypes = (
         key: string;
         label: string;
         contract_types: TContractType[];
-        icon:
-            | 'IcUpsDowns'
-            | 'IcHighsLows'
-            | 'IcInsOuts'
-            | 'IcLookbacks'
-            | 'IcDigits'
-            | 'IcMultiplier'
-            | 'IcCatAccumulator';
+        icon: React.ReactElement;
         component: JSX.Element | null;
     }[];
 };

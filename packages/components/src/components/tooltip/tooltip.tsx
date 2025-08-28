@@ -1,7 +1,12 @@
 import classNames from 'classnames';
 import React from 'react';
-import Icon from '../icon';
 import { useHover } from '../../hooks/use-hover';
+import {
+    LegacyInfo1pxIcon,
+    LegacyInformationIcon,
+    LabelPairedQuestionCaptionBoldIcon,
+    StandaloneCircleFillIcon,
+} from '@deriv/quill-icons';
 
 type TTooltip = {
     alignment: string;
@@ -33,17 +38,21 @@ const Tooltip = ({
         >
             {icon === 'info' && (
                 <React.Fragment>
-                    <Icon icon='IcInfoOutline' className={icon_class} ref={hover_ref} />
-                    <Icon
-                        icon='IcInfoBlue'
+                    <LegacyInfo1pxIcon className={icon_class} ref={hover_ref} fill='var(--color-text-primary)' />
+                    <LegacyInformationIcon
+                        fill='var(--color-text-info)'
                         className={classNames(`${classNameIcon}-balloon-icon`, 'dc-tooltip__balloon-icon', {
                             'dc-tooltip__balloon-icon--show': show_tooltip_balloon_icon_on_hover,
                         })}
                     />
                 </React.Fragment>
             )}
-            {icon === 'question' && <Icon icon='IcUnknown' className={icon_class} />}
-            {icon === 'dot' && <Icon icon='IcCircle' className={icon_class} size={4} />}
+            {icon === 'question' && (
+                <LabelPairedQuestionCaptionBoldIcon className={icon_class} fill='var(--color-text-primary)' />
+            )}
+            {icon === 'dot' && (
+                <StandaloneCircleFillIcon className={icon_class} width={4} height={4} fill='var(--color-text-danger)' />
+            )}
             {children}
         </span>
     );

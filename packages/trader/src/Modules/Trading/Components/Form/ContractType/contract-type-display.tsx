@@ -1,13 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-
-import { Icon } from '@deriv/components';
+import { LegacyChevronRight1pxIcon, LegacyChevronDown1pxIcon } from '@deriv/quill-icons';
 import { useDevice } from '@deriv-com/ui';
-
 import IconTradeCategory from 'Assets/Trading/Categories/icon-trade-categories';
-
 import { findContractCategory } from '../../../Helpers/contract-type';
-
 import { TContractCategory, TContractType, TList } from './types';
 
 type TDisplay = {
@@ -38,14 +34,19 @@ const Display = ({ is_open, name, list, onClick, value }: TDisplay) => {
                 {getDisplayText()}
             </span>
             {isMobile ? (
-                <Icon icon='IcChevronRight' size={20} className='contract-type-widget__select-arrow--right' />
+                <LegacyChevronRight1pxIcon
+                    iconSize='xs'
+                    className='contract-type-widget__select-arrow--right'
+                    fill='var(--color-text-primary)'
+                />
             ) : (
-                <Icon
-                    icon='IcChevronDown'
+                <LegacyChevronDown1pxIcon
+                    iconSize='xs'
                     className={classNames(
                         'contract-type-widget__select-arrow',
                         'contract-type-widget__select-arrow--left'
                     )}
+                    fill='var(--color-text-primary)'
                 />
             )}
         </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { isMobile } from '@deriv/shared';
 import Button from '../button';
-import Icon from '../icon';
 import Text from '../text';
 import './empty-state.scss';
 
@@ -14,13 +13,13 @@ type TAction = {
 };
 
 export type TProps = {
-    icon?: string;
+    icon?: React.ReactElement;
     action?: TAction;
 } & RequireAtLeastOne<{ title: React.ReactNode; description: React.ReactNode }>;
 
 const EmptyState: React.FC<TProps> = ({ icon, title, description, action }) => (
     <div className='empty-state'>
-        {icon && <Icon icon={icon} size={128} />}
+        {icon && React.cloneElement(icon, { width: 128, height: 128, fill: 'var(--color-text-disabled)' })}
         <div className='empty-state__content'>
             {title && (
                 <Text weight='bold' align='center' data-testid='dt_empty_state_title' size={isMobile() ? 'xs' : 's'}>

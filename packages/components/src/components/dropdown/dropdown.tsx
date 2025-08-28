@@ -9,7 +9,7 @@ import DisplayText from './display-text';
 import Text from '../text/text';
 import { useBlockScroll, useOnClickOutside } from '../../hooks';
 import ThemedScrollbars from '../themed-scrollbars/themed-scrollbars';
-import Icon from '../icon/icon';
+import { LegacyChevronLeft1pxIcon, LegacyChevronDown1pxIcon } from '@deriv/quill-icons';
 
 type TDropdown = {
     className?: string;
@@ -44,8 +44,8 @@ type TDropdown = {
     onClick?: () => void;
     placeholder?: string;
     should_animate_suffix_icon?: boolean;
-    suffix_icon?: string;
-    suffix_icon_size?: number;
+    suffix_icon?: React.ReactElement;
+    suffix_icon_size?: string;
     should_open_on_hover?: boolean;
     should_scroll_to_selected?: boolean;
     should_auto_close_dropdown_list?: boolean;
@@ -72,8 +72,8 @@ type TDropdownList = {
     onKeyPressed: (event: KeyboardEvent, item: TListItem) => void;
     parent_ref: React.RefObject<HTMLElement>;
     portal_id?: string;
-    suffix_icon?: string;
-    suffix_icon_size?: number;
+    suffix_icon?: React.ReactElement;
+    suffix_icon_size?: string;
     should_scroll_to_selected?: boolean;
     should_autohide?: boolean;
     value?: string | number;
@@ -98,7 +98,6 @@ const DropdownList = React.forwardRef<HTMLDivElement, TDropdownList>((props, lis
         parent_ref,
         portal_id,
         suffix_icon,
-        suffix_icon_size = 16,
         should_scroll_to_selected,
         should_autohide,
         value,
@@ -282,7 +281,7 @@ const Dropdown = ({
     placeholder,
     suffix_icon,
     should_animate_suffix_icon = false,
-    suffix_icon_size = 16,
+    suffix_icon_size = 'xs',
     should_open_on_hover = false,
     should_scroll_to_selected,
     should_auto_close_dropdown_list,
@@ -501,15 +500,14 @@ const Dropdown = ({
                         id='dropdown-display'
                         ref={dropdown_ref}
                     >
-                        {!!suffix_icon && (
-                            <Icon
-                                className={classNames('suffix-icon', {
+                        {!!suffix_icon &&
+                            React.cloneElement(suffix_icon, {
+                                className: classNames('suffix-icon', {
                                     'suffix-icon--flip': is_list_visible && should_animate_suffix_icon,
-                                })}
-                                icon={suffix_icon}
-                                size={suffix_icon_size}
-                            />
-                        )}
+                                }),
+                                iconSize: suffix_icon_size,
+                                fill: 'var(--color-text-primary)',
+                            })}
                         <DisplayText
                             className={classNames({
                                 'dc-dropdown__display--has-suffix-icon-text': suffix_icon,
@@ -522,18 +520,30 @@ const Dropdown = ({
                             list={list}
                         />
                     </div>
-                    {!(isSingleOption() || !!suffix_icon) && (
-                        <Icon
-                            icon={is_alignment_left ? 'IcChevronLeft' : 'IcChevronDown'}
-                            className={classNames('dc-dropdown__select-arrow', classNameIcon, {
-                                'dc-dropdown__select-arrow--left': is_alignment_left,
-                                'dc-dropdown__select-arrow--up': is_list_visible,
-                                'dc-dropdown__select-arrow--error': error || hint,
-                            })}
-                        />
-                    )}
+                    {!(isSingleOption() || !!suffix_icon) &&
+                        (is_alignment_left ? (
+                            <LegacyChevronLeft1pxIcon
+                                className={classNames('dc-dropdown__select-arrow', classNameIcon, {
+                                    'dc-dropdown__select-arrow--left': is_alignment_left,
+                                    'dc-dropdown__select-arrow--up': is_list_visible,
+                                    'dc-dropdown__select-arrow--error': error || hint,
+                                })}
+                                iconSize='xs'
+                                fill='var(--color-text-primary)'
+                            />
+                        ) : (
+                            <LegacyChevronDown1pxIcon
+                                className={classNames('dc-dropdown__select-arrow', classNameIcon, {
+                                    'dc-dropdown__select-arrow--left': is_alignment_left,
+                                    'dc-dropdown__select-arrow--up': is_list_visible,
+                                    'dc-dropdown__select-arrow--error': error || hint,
+                                })}
+                                iconSize='xs'
+                                fill='var(--color-text-primary)'
+                            />
+                        ))}
                     {error && (
-                        <Text as='p' size='xxs' color='loss-danger' className='dc-field--error'>
+                        <Text as='p' size='xxs' color='var(--color-status-danger)' className='dc-field--error'>
                             {error}
                         </Text>
                     )}
@@ -556,7 +566,6 @@ const Dropdown = ({
                         portal_id={list_portal_id}
                         ref={list_ref}
                         suffix_icon={suffix_icon}
-                        suffix_icon_size={suffix_icon_size}
                         should_scroll_to_selected={should_scroll_to_selected}
                         should_autohide={should_autohide}
                         value={value}
