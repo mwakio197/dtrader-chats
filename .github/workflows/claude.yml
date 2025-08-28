@@ -76,3 +76,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           allowed_bots: ""
           use_commit_signing: true
+          claude_args: |
+            --allowedTools Edit,Read,Write,Bash
