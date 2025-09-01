@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useRemoteConfig, useGrowthbookGetFeatureValue, useGrowthbookIsOn, useIntercom, useLiveChat } from '@deriv/api';
+import { useGrowthbookGetFeatureValue, useGrowthbookIsOn, useIntercom, useLiveChat, useRemoteConfig } from '@deriv/api';
 import { observer, useStore } from '@deriv/stores';
 import { ThemeProvider } from '@deriv-com/quill-ui';
 import { useTranslations } from '@deriv-com/translations';
