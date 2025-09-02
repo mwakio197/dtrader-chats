@@ -1,11 +1,13 @@
+import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+
 import { Popover } from '@deriv/components';
-import { localize } from '@deriv-com/translations';
 import { observer, useStore } from '@deriv/stores';
+import { useTranslations } from '@deriv-com/translations';
 
 const NetworkStatus = observer(({ is_mobile }) => {
+    const { localize } = useTranslations();
     const { common } = useStore();
     const { network_status: status } = common;
 

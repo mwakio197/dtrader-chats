@@ -1,12 +1,15 @@
 import React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
+
 import { Div100vhContainer, FadeWrapper, Loading, PageOverlay, SelectNative, VerticalTab } from '@deriv/components';
 import { getSelectedRoute } from '@deriv/shared';
-import { localize } from '@deriv-com/translations';
 import { observer, useStore } from '@deriv/stores';
 import { Analytics } from '@deriv-com/analytics';
+import { useTranslations } from '@deriv-com/translations';
 import { useDevice } from '@deriv-com/ui';
+
 import { TRoute } from 'Types';
+
 import 'Sass/app/modules/reports.scss';
 
 type TList = {
@@ -24,6 +27,7 @@ type TReports = {
 };
 
 const Reports = observer(({ history, location, routes }: TReports) => {
+    const { localize } = useTranslations();
     const { client, common, ui } = useStore();
 
     const { is_logged_in, is_logging_in } = client;
