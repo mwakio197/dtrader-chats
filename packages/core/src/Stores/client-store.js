@@ -374,7 +374,6 @@ export default class ClientStore extends BaseStore {
         const oneTimeToken = urlParams.get('token');
         const existingSessionToken = this.getStoredSessionToken();
 
-        // Clear token from URL immediately if present
         if (oneTimeToken) {
             this.removeTokenFromUrl();
         }
@@ -663,7 +662,6 @@ export default class ClientStore extends BaseStore {
 
             let sessionToken;
 
-            // If we have a one-time token, exchange it (takes precedence over existing session)
             if (oneTimeToken) {
                 const sessionResponse = await WS.getSessionToken(oneTimeToken);
 
@@ -679,7 +677,6 @@ export default class ClientStore extends BaseStore {
                 sessionToken = sessionResponse.get_session_token.token;
                 this.storeSessionToken(sessionToken);
             } else {
-                // Only retrieve existing session token if no oneTimeToken provided
                 sessionToken = this.getStoredSessionToken();
 
                 if (!sessionToken) {
