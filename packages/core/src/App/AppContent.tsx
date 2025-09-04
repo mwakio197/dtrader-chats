@@ -72,9 +72,13 @@ const AppContent: React.FC<{ passthrough: any }> = observer(({ passthrough }) =>
     const token = current_account?.session_token || null;
     useIntercom(token);
 
+    const html = document.documentElement;
+
     React.useEffect(() => {
         switchLanguage(current_language);
-    }, [current_language, switchLanguage]);
+        html?.setAttribute('lang', current_language.toLowerCase());
+        html?.setAttribute('dir', current_language.toLowerCase() === 'ar' ? 'rtl' : 'ltr');
+    }, [current_language, switchLanguage, html]);
 
     React.useEffect(() => {
         if (isGBLoaded && isWebPasskeysFFEnabled && isServicePasskeysFFEnabled) {
