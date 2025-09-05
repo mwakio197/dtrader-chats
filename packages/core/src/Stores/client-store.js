@@ -374,13 +374,10 @@ export default class ClientStore extends BaseStore {
         const oneTimeToken = urlParams.get('token');
         const existingSessionToken = this.getStoredSessionToken();
 
-        if (oneTimeToken) {
-            this.removeTokenFromUrl();
-        }
-
         let authorize_response;
 
         if (oneTimeToken) {
+            this.removeTokenFromUrl();
             authorize_response = await this.authenticateV2(oneTimeToken);
         } else if (existingSessionToken) {
             authorize_response = await this.authenticateV2(null);
