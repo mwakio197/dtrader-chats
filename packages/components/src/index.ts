@@ -59,7 +59,6 @@ export { default as PositionsDrawerCard } from './components/positions-drawer-ca
 export { default as Popover } from './components/popover';
 export { default as PopoverMessageCheckbox } from './components/popover-message-checkbox';
 export { default as ProgressBar } from './components/progress-bar';
-export { default as ProgressIndicator } from './components/progress-indicator';
 export { default as ProgressSlider } from './components/progress-slider';
 export { default as ProgressSliderMobile } from './components/progress-slider-mobile';
 export { default as RadioGroup } from './components/radio-group';
@@ -72,12 +71,10 @@ export { default as SwipeableNotification } from './components/swipeable-notific
 export { default as SwipeableWrapper } from './components/swipeable-wrapper';
 export { default as RelativeDatepicker } from './components/relative-datepicker';
 export { default as RemainingTime } from './components/remaining-time';
-export { default as Table } from './components/table';
 export { default as Tabs } from './components/tabs';
 export { default as Text } from './components/text';
 export { default as Toast } from './components/toast';
 export { default as ThemedScrollbars } from './components/themed-scrollbars';
-export { default as ToggleSwitch } from './components/toggle-switch';
 export * from './components/message-list';
 export { default as TickPicker } from './components/tick-picker';
 export { default as TickProgress } from './components/tick-progress';
