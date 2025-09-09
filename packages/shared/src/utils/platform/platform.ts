@@ -1,4 +1,4 @@
-import { getPlatformName, getPlatformIcon } from '../brand';
+import { getPlatformName, getPlatformLogo } from '../brand';
 import { routes } from '../routes';
 
 type TRoutingHistory = {
@@ -29,7 +29,7 @@ export const getPathname = () => {
 };
 
 export const getPlatformInformation = () => {
-    return { header: platform_name.DTrader, icon: getPlatformIcon() };
+    return { header: platform_name.DTrader, icon: getPlatformLogo() };
 };
 
 export const getActivePlatform = (routing_history: TRoutingHistory) => {
