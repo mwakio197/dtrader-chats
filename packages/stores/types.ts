@@ -460,8 +460,6 @@ export type TClientStore = {
     responseWebsiteStatus: (response: any) => void;
     setIsPasskeySupported: (value: boolean) => void;
     init: () => Promise<boolean>;
-    switch_broadcast: boolean;
-    switchEndSignal: () => void;
 };
 
 type TCommonStoreError = {
