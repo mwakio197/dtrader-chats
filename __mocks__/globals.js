@@ -27,12 +27,6 @@ Object.defineProperty(window, 'matchMedia', {
     })),
 });
 
-const mock_onfido = {
-    init: jest.fn().mockResolvedValue({}),
-};
-
-window.Onfido = mock_onfido;
-
 // Mock fetch for tests
 global.fetch = jest.fn(() =>
     Promise.resolve({
@@ -46,6 +40,24 @@ global.TextEncoder = jest.fn().mockImplementation(() => ({
     encode: jest.fn(),
 }));
 
+// Mock TextDecoder for tests
 global.TextDecoder = jest.fn().mockImplementation(() => ({
     decode: jest.fn(),
+}));
+
+// Mock IntersectionObserver for tests
+global.IntersectionObserver = jest.fn().mockImplementation(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
+    root: null,
+    rootMargin: '',
+    thresholds: [],
+}));
+
+// Mock ResizeObserver for tests
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
 }));
