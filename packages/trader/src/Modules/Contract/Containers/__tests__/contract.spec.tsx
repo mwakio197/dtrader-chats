@@ -45,8 +45,6 @@ describe('<Contract>', () => {
             error_message: '',
             error_code: '',
             removeErrorMessage: jest.fn(),
-            removeAccountSwitcherListener: jest.fn(),
-            setAccountSwitcherListener: jest.fn(),
         },
     };
 

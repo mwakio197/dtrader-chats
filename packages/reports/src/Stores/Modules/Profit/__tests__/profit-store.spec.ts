@@ -233,7 +233,7 @@ describe('ProfitTableStore', () => {
         it('should call fetchNextBatch if called with left param value that is < 1500', () => {
             const spyFetchNextBatch = jest.spyOn(mocked_profit_table_store, 'fetchNextBatch');
 
-            mocked_profit_table_store.fetchOnScroll(1100);
+            mocked_profit_table_store.fetchOnScroll(1100, false);
 
             expect(spyFetchNextBatch).toBeCalled();
         });
@@ -247,7 +247,7 @@ describe('ProfitTableStore', () => {
         it('should not call fetchNextBatch if called with left param value that is > 1500', () => {
             const spyFetchNextBatch = jest.spyOn(mocked_profit_table_store, 'fetchNextBatch');
 
-            mocked_profit_table_store.fetchOnScroll(1600);
+            mocked_profit_table_store.fetchOnScroll(1600, false);
 
             expect(spyFetchNextBatch).not.toBeCalled();
         });
@@ -331,19 +331,6 @@ describe('ProfitTableStore', () => {
             await waitFor(() => {
                 expect(mocked_profit_table_store.totals).toEqual({ profit_loss: '-2.09' });
             });
-        });
-    });
-    describe('accountSwitcherListener', () => {
-        it('should call clearTable, clearDateFilter & fetchNextBatch', () => {
-            const spyClearTable = jest.spyOn(mocked_profit_table_store, 'clearTable');
-            const spyClearDateFilter = jest.spyOn(mocked_profit_table_store, 'clearDateFilter');
-            const spyFetchNextBatch = jest.spyOn(mocked_profit_table_store, 'fetchNextBatch');
-
-            mocked_profit_table_store.accountSwitcherListener();
-
-            expect(spyClearTable).toHaveBeenCalled();
-            expect(spyClearDateFilter).toHaveBeenCalled();
-            expect(spyFetchNextBatch).toHaveBeenCalled();
         });
     });
     describe('clearTable', () => {

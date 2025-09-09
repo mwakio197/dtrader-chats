@@ -52,6 +52,7 @@ export default class ClientStore extends BaseStore {
     currencies_list = {};
     selected_currency = '';
     website_status = {};
+    switch_broadcast = false;
 
     has_cookie_account = false;
 
@@ -127,6 +128,8 @@ export default class ClientStore extends BaseStore {
             clearSessionToken: action.bound,
             removeTokenFromUrl: action.bound,
             is_crypto: action.bound,
+            switch_broadcast: observable,
+            switchEndSignal: action.bound,
         });
 
         reaction(
@@ -554,6 +557,14 @@ export default class ClientStore extends BaseStore {
 
     setIsLoggingIn(bool) {
         this.is_logging_in = bool;
+    }
+
+    broadcastAccountChangeAfterAuthorize() {
+        this.switch_broadcast = true;
+    }
+
+    switchEndSignal() {
+        this.switch_broadcast = false;
     }
 
     setBalanceActiveAccount(obj_balance) {
