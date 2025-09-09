@@ -198,10 +198,9 @@ describe('StatementStore', () => {
         expect(WS.wait).toHaveBeenCalledWith('authorize');
     });
 
-    it('should call disposeSwitchAccount and forget proposal calls on Unmount', () => {
+    it('should forget proposal calls on Unmount', () => {
         statement_store.onUnmount();
 
         expect(WS.forgetAll).toHaveBeenCalledWith('proposal');
-        expect(statement_store.switch_account_listener).toBeNull();
     });
 });

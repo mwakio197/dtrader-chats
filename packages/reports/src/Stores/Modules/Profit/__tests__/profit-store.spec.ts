@@ -315,12 +315,10 @@ describe('ProfitTableStore', () => {
         });
     });
     describe('onUnmount', () => {
-        it('should call disposeSwitchAccount and unsubscribe from proposal API', () => {
-            const spyDisposeSwitchAccount = jest.spyOn(mocked_profit_table_store, 'disposeSwitchAccount');
+        it('should unsubscribe from proposal API', () => {
             const spyWSForgetAll = jest.spyOn(WS, 'forgetAll');
             mocked_profit_table_store.onUnmount();
 
-            expect(spyDisposeSwitchAccount).toHaveBeenCalled();
             expect(spyWSForgetAll).toHaveBeenCalledWith('proposal');
         });
     });
