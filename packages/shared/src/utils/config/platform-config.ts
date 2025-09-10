@@ -36,28 +36,3 @@ export const platforms: TPlatforms = {
         url: tradershub_os_url,
     },
 };
-
-export const useOnLoadTranslation = () => {
-    const [is_loaded, setLoaded] = React.useState(false);
-
-    React.useEffect(() => {
-        if (!i18n.language) {
-            i18n.language = getInitialLanguage();
-        }
-        (async () => {
-            await initMoment(i18n.language);
-            await setLocale(i18n.language);
-        })();
-        const is_english = i18n.language === 'EN';
-        if (is_english) {
-            setLoaded(true);
-        } else {
-            i18n.store.on('added', () => {
-                setLoaded(true);
-            });
-        }
-        return () => i18n.store.off('added');
-    }, []);
-
-    return [is_loaded, setLoaded];
-};
