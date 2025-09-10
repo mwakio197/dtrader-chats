@@ -18,7 +18,6 @@ jest.mock('@deriv/shared', () => {
                 profit_table: {
                     transactions: [
                         {
-                            app_id: 16929,
                             buy_price: 11.29,
                             contract_id: 246293653348,
                             contract_type: 'MULTUP',
@@ -36,7 +35,6 @@ jest.mock('@deriv/shared', () => {
                             underlying_symbol: 'R_100',
                         },
                         {
-                            app_id: 16929,
                             buy_price: 10,
                             contract_id: 245824534328,
                             contract_type: 'CALL',
@@ -69,7 +67,6 @@ describe('ProfitTableStore', () => {
     const mocked_error = 'Test error';
     const mocked_loginid = 'test_loginid';
     const multiplier_contract = {
-        app_id: 16929,
         buy_price: 11.29,
         contract_id: 246293653348,
         contract_type: 'MULTUP',
@@ -90,7 +87,6 @@ describe('ProfitTableStore', () => {
         underlying_symbol: 'R_100',
     };
     const rise_contract = {
-        app_id: 16929,
         buy_price: 10,
         contract_id: 245824534328,
         contract_type: 'CALL',

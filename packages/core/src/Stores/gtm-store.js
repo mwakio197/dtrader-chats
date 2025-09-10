@@ -1,7 +1,7 @@
 import * as Cookies from 'js-cookie';
 import { action, computed, makeObservable } from 'mobx';
 
-import { epochToMoment, getAppId, toMoment } from '@deriv/shared';
+import { epochToMoment, getPlatformHostname, getPlatformName, toMoment } from '@deriv/shared';
 import { getInitialLanguage } from '@deriv-com/translations';
 
 import BaseStore from './base-store';
@@ -9,8 +9,7 @@ import BaseStore from './base-store';
 import BinarySocket from '_common/base/socket_base';
 
 export default class GTMStore extends BaseStore {
-    is_gtm_applicable =
-        window.location.hostname === 'deriv-app.binary.sx' || /^(16303|16929|19111|19112)$/.test(getAppId());
+    is_gtm_applicable = window.location.hostname === getPlatformHostname();
 
     constructor(root_store) {
         super({ root_store });
@@ -35,21 +34,6 @@ export default class GTMStore extends BaseStore {
      * @returns {object}
      */
     get common_variables() {
-        const platform = () => {
-            const url = new URL(window.location.href);
-            const domain = url.hostname;
-
-            // TODO: [app-link-refactor] - Remove backwards compatibility for `deriv.app`
-            if (
-                /^(deriv-app\.binary.sx|app\.deriv\.com|staging-app\.deriv\.com|deriv.app|staging.deriv.app|localhost.binary.sx)$/.test(
-                    domain
-                )
-            ) {
-                return 'DTrader';
-            }
-            return 'undefined';
-        };
-
         return {
             language: getInitialLanguage(),
             ...(this.root_store.client.is_logged_in && {
@@ -60,7 +44,7 @@ export default class GTMStore extends BaseStore {
             }),
             loggedIn: this.root_store.client.is_logged_in,
             theme: this.root_store.ui.is_dark_mode_on ? 'dark' : 'light',
-            platform: platform(),
+            platform: getPlatformName(),
         };
     }
 
