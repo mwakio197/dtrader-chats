@@ -66,23 +66,20 @@ jest.mock('../toggle-notifications.jsx', () => ({
 jest.mock('App/Components/Layout/Header/account-info.jsx', () => ({
     __esModule: true,
     default: ({
-        account_type,
         balance,
         is_virtual,
         currency,
         is_dialog_on,
         toggleDialog,
     }: {
-        account_type?: string;
         balance?: string | number;
-        is_eu?: boolean;
         is_virtual?: boolean;
         currency?: string;
         is_dialog_on?: boolean;
         toggleDialog?: () => void;
     }) => (
         <div data-testid='dt_account_info' onClick={toggleDialog} className={`${is_virtual ? 'virtual' : ''}`}>
-            Account Info: {account_type} {balance} {currency} {is_dialog_on ? 'open' : 'closed'}
+            Account Info: {balance} {currency} {is_dialog_on ? 'open' : 'closed'}
         </div>
     ),
 }));
@@ -93,24 +90,20 @@ jest.mock(
     () => ({
         __esModule: true,
         default: ({
-            account_type,
             balance,
-            is_eu,
             is_virtual,
             currency,
             is_dialog_on,
             toggleDialog,
         }: {
-            account_type?: string;
             balance?: string | number;
-            is_eu?: boolean;
             is_virtual?: boolean;
             currency?: string;
             is_dialog_on?: boolean;
             toggleDialog?: () => void;
         }) => (
             <div data-testid='dt_account_info' onClick={toggleDialog} className={`${is_virtual ? 'virtual' : ''}`}>
-                Account Info: {account_type} {balance} {currency} {is_dialog_on ? 'open' : 'closed'}
+                Account Info: {balance} {currency} {is_dialog_on ? 'open' : 'closed'}
             </div>
         ),
     }),
