@@ -6,7 +6,7 @@
     "private": true,
     "scripts": {
         "start": "npm run test && npm run serve",
-        "serve": "f() { echo \"Serving...\" && ../../node_modules/.bin/webpack serve --config \"./build/webpack.config.js\" --env open $1;}; f",
+       "serve": "echo \"Serving...\" && ../../node_modules/.bin/webpack serve --config \"./build/webpack.config.js\" --no-open",
         "build": "f () { webpack --config \"./build/webpack.config.js\" --env base=$1 --env IS_CRYPTO_APP=${IS_CRYPTO_APP:-false};}; f",
         "test:eslint": "eslint \"./src/**/*.?(js|jsx|ts|tsx)\"",
         "deploy": "npm run build && gh-pages -d dist --remove=\"js\"",
