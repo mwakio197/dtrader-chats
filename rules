@@ -1,0 +1,4 @@
+npm install
+npm install -g npm@11.6.0
+npm run serve -- trader
+npm run serve -- core
